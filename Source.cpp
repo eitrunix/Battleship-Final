@@ -1,7 +1,5 @@
 #include "Battleships.h"
 
-using namespace std;
-
 int main()
 {
 	Battleship b;
