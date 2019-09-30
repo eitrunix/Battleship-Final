@@ -7,7 +7,7 @@
 #include <ctime>
 #include <cstdlib>
 
-using namespace std;
+//using namespace std;
 const int options_row = 3;
 const int options_col = 14;
 const int title_row = 36;
@@ -19,73 +19,75 @@ private:
 	// I need 3 boards for the game to use, one to display the player ships, (player_board), One to display where the player is attacking or has attacked already, to display hits/miss/ships ect (player_atk_radar)
 	// and a 3rd board for the computer to place ships on, this one will be hidden until the player loses the game, at that point it will display and tell the player how far off of winning they were, (Comp_board) cause I
 	// wanna rub it in when you lose steve.
-	char player_atk_radar[20][22] =
+	char player_atk_radar[20][24] =
 	{
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'a', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'b', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'c', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'d', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'e', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'f', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'g', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'h', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'i', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'j', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+
 	};
 
-	char player_board[20][22] =
+	char player_board[20][24] =
 	{
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'a', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'b', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'c', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'d', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'e', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'f', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'g', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'h', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'i', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'j', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+
 	};
 
-	char Comp_board[20][22] =
+	char Comp_board[20][24] =
 	{
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
-		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
-		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'a', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'b', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'c', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'d', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'e', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'f', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'g', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'h', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'i', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'j', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 
 	};
 
@@ -159,7 +161,7 @@ private:
 	bool ac_hit = false;
 	bool BS_hit = false;
 
-	string name;				// for entering the players name
+	std::string name;				// for entering the players name
 
 public:
 	/*HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);   Used for changing the colours of text, background ect, might not be used*/
@@ -167,35 +169,35 @@ public:
 	// Prints the game title at the top-middle of the page
 	void print_game_title()
 	{
-		cout << endl; cout << endl;
+		std::cout << std::endl; std::cout << std::endl;
 		for (int i = 0; i < title_row; i++)
 		{
 
-			cout << setw(45);   // setw() sets where the title will start to draw
+			std::cout << std::setw(45);   // setw() sets where the title will start to draw
 			for (int j = 0; j < title_col; j++)
 			{
 				if (game_title[i][j] == '#')   // Changes all the # in the array to be an ASCII character					
 				{
-					cout << (char)219;
+					std::cout << (char)219;
 				}
 				else
 				{
-					cout << (char)32;
+					std::cout << (char)32;
 				}
 			}
-			cout << endl;
+			std::cout << std::endl;
 		}
 	}
 
 	void print_options() {
 		for (int i = 0; i < options_row; i++) {
-			cout << setw(56);
+			std::cout << std::setw(56);
 			for (int j = 0; j < options_col; j++) {
 				if (i == arrow_row && j == arrow_col) {
-					cout << (char)175;
+					std::cout << (char)175;
 				}
-				cout << Options[i][j];
-			}cout << endl;
+				std::cout << Options[i][j];
+			}std::cout << std::endl;
 		}
 	}
 
@@ -209,7 +211,7 @@ public:
 				{
 					system("CLS");
 					enter_playername();
-					take_comp_input();
+					//take_comp_input();
 					print_player_board_and_attack_radar();
 					take_player_input_place();
 					//tell_player_shits_about_to_get_real();
@@ -220,51 +222,51 @@ public:
 					system("CLS");
 					// Instructions go here, this is the Second (thrid in code) option
 					if (options_move == -32) {
-						system("CLS");
+					system("CLS");
 					}
 				}
 				else if (arrow_row == 3 && arrow_col == 0 && options_move == 13)
 				{
-					// should quit the program, but cant get it working with exit()
-					system("CLS");
-					//system("Color 80");
-					for (int i = 0; i < 18; i++)
-					{
-						cout << endl;
-					}cout << setw(58);
-					for (int i = 1; i <= 6; i++)
-					{
-						cout << (char)i << " ";
-					}
-					for (int i = 0; i < 18; i++)
-					{
-						cout << endl;
-					}
-					//Sleep(5000);
-					exit(0);
+				// should quit the program, but cant get it working with exit()
+				system("CLS");
+				//system("Color 80");
+				for (int i = 0; i < 18; i++)
+				{
+					std::cout << std::endl;
+				}std::cout << std::setw(58);
+				for (int i = 1; i <= 6; i++)
+				{
+					std::cout << (char)i << " ";
+				}
+				for (int i = 0; i < 18; i++)
+				{
+					std::cout << std::endl;
+				}
+				//Sleep(5000);
+				exit(0);
 				}
 				else if (options_move == 27) {
-					system("CLS");
-					print_game_title();
-					print_options();
+				system("CLS");
+				print_game_title();
+				print_options();
 				}
 				else if (options_move == -32) {
-					upordown = _getch();
-					switch (upordown) {
-					case 72:
-						if (arrow_row > 0) {
-							arrow_row--;
-						}
-						break;
-					case 80:
-						if (arrow_row < options_row - 1) {
-							arrow_row++;
-						}
-						break;
+				upordown = _getch();
+				switch (upordown) {
+				case 72:
+					if (arrow_row > 0) {
+						arrow_row--;
 					}
-					system("CLS");
-					print_game_title();
-					print_options();
+					break;
+				case 80:
+					if (arrow_row < options_row - 1) {
+						arrow_row++;
+					}
+					break;
+				}
+				system("CLS");
+				print_game_title();
+				print_options();
 				}
 			}
 		}
@@ -275,10 +277,10 @@ public:
 	{
 		for (int i = 0; i < 15; i++)
 		{
-			cout << endl;
+			std::cout << std::endl;
 		}
-		cout << setw(70) << "Enter Name: ";
-		getline(cin, name);
+		std::cout << std::setw(70) << "Enter Name: ";
+		getline(std::cin, name);
 	}
 	// Display for both game boards that the player will see or interact with. the third grid I build up top will be used after the game is done, if the player loses to show how close they were to winning.
 	void print_player_board_and_attack_radar()
@@ -286,153 +288,242 @@ public:
 		display_ship_statuses();				// Displays the ships status, Name : Hits Value
 		for (int i = 0; i < 3; i++)
 		{
-			cout << endl;					// Spacing between board and the Ship Status
+			std::cout << std::endl;					// Spacing between board and the Ship Status
 		}
-		cout << setw(70) << "0   1   2   3   4   5   6   7   8   9" << setw(59) << "0   1   2   3   4   5   6   7   8   9" << endl;
-		cout << setw(32) << (char)218 << (char)196 << (char)196 << (char)196;					// sets where the Top line will start to print
+		std::cout << std::setw(70) << "0   1   2   3   4   5   6   7   8   9" << std::setw(59) << "0   1   2   3   4   5   6   7   8   9" << std::endl;
+		std::cout << std::setw(32) << (char)218 << (char)196 << (char)196 << (char)196;					// sets where the Top line will start to print
 		for (int j = 0; j < 9; j++)
 		{
-			cout << (char)194 << (char)196 << (char)196 << (char)196;						// First boards Top line
+			std::cout << (char)194 << (char)196 << (char)196 << (char)196;						// First boards Top line
 		}
-		cout << (char)191 << setw(19) << (char)218 << (char)196 << (char)196 << (char)196;		// sets spacing between the top of the boards
+		std::cout << (char)191 << std::setw(20) << (char)218 << (char)196 << (char)196 << (char)196;		// sets spacing between the top of the boards
 
 		for (int n = 0; n < 9; n++)
 		{
-			cout << (char)194 << (char)196 << (char)196 << (char)196;						// Top line of second board
+			std::cout << (char)194 << (char)196 << (char)196 << (char)196;						// Top line of second board
 		}
-		cout << (char)191 << endl;
+		std::cout << (char)191 << std::endl;
 
 		for (int k = 0; k < 19; k++)
 		{
-			cout << setw(30) << (char)a++ << " ";		// prints out the letter A and sets spacing for the board
-			for (int l = 0; l < 21; l++)
+			std::cout << std::setw(30)/* << (char)a++*/;		// prints out the letter A and sets spacing for the board
+			for (int l = 0; l < 23; l++)
 			{
 				if (player_board[k][l] == '*')			// if theres a '*' on a board, change it to an ASCII Character
 				{
-					cout << (char)247 << " ";
+					std::cout << (char)247 << " ";
 				}
 				else if (player_board[k][l] == '#')
 				{
-					cout << (char)179 << " ";
+					std::cout << (char)179 << " ";
 				}
 				else if (player_board[k][l] == '@')
 				{
-					cout << (char)195;
+					std::cout << (char)195;
+				}
+				else if (player_board[k][l] == '_')
+				{
+					std::cout << (char)32;
 				}
 				else if (player_board[k][l] == '-')
 				{
-					cout << (char)196 << (char)196 << (char)196;
+					std::cout << (char)196 << (char)196 << (char)196;
 				}
 				else if (player_board[k][l] == '^')
 				{
-					cout << (char)197;
+					std::cout << (char)197;
 				}
 				else if (player_board[k][l] == '$')
 				{
-					cout << (char)180 << " ";
+					std::cout << (char)180 << " ";
 				}
 				else if (player_board[k][l] == 'P')
 				{
-					cout << (char)80 << " ";
+					std::cout << (char)80 << " ";
 				}
 				else if (player_board[k][l] == 'S')
 				{
-					cout << (char)83 << " ";
+					std::cout << (char)83 << " ";
 				}
 				else if (player_board[k][l] == 'C')
 				{
-					cout << (char)67 << " ";
+					std::cout << (char)67 << " ";
 				}
 				else if (player_board[k][l] == 'B')
 				{
-					cout << (char)66 << " ";
+					std::cout << (char)66 << " ";
 				}
 				else if (player_board[k][l] == 'A')
 				{
-					cout << (char)65 << " ";
+					std::cout << (char)65 << " ";
 				}
 				else if (player_board[k][l] == '!')
 				{
-					cout << (char)33 << " ";
+					std::cout << (char)33 << " ";
 				}
 				else if (player_board[k][l] == '$')
 				{
-					cout << (char)237 << " ";
+					std::cout << (char)237 << " ";
+				}
+				else if (player_board[k][l] == 'a')
+				{
+					std::cout << (char)65;
+				}
+				else if (player_board[k][l] == 'b')
+				{
+					std::cout << (char)66;
+				}
+				else if (player_board[k][l] == 'c')
+				{
+					std::cout << (char)67;
+				}
+				else if (player_board[k][l] == 'd')
+				{
+					std::cout << (char)68;
+				}
+				else if (player_board[k][l] == 'e')
+				{
+					std::cout << (char)69;
+				}
+				else if (player_board[k][l] == 'f')
+				{
+					std::cout << (char)70;
+				}
+				else if (player_board[k][l] == 'g')
+				{
+					std::cout << (char)71;
+				}
+				else if (player_board[k][l] == 'h')
+				{
+					std::cout << (char)72;
+				}
+				else if (player_board[k][l] == 'i')
+				{
+					std::cout << (char)73;
+				}
+				else if (player_board[k][l] == 'j')
+				{
+					std::cout << (char)74;
 				}
 			}
-			cout << setw(17) << (char)b++;
-			for (int m = 0; m < 21; m++) {
+			std::cout << std::setw(17); /*<< (char)b++;*/
+			for (int m = 0; m < 23; m++) {
 				if (player_atk_radar[k][m] == '*')
 				{
-					cout << (char)247 << " ";
+					std::cout << (char)247 << " ";
 				}
 				else if (player_atk_radar[k][m] == '#')
 				{
-					cout << (char)179 << " ";
+					std::cout << (char)179 << " ";
 				}
 				else if (player_atk_radar[k][m] == '@')
 				{
-					cout << (char)195;
+					std::cout << (char)195;
 				}
 				else if (player_atk_radar[k][m] == '-')
 				{
-					cout << (char)196 << (char)196 << (char)196;
+					std::cout << (char)196 << (char)196 << (char)196;
 				}
 				else if (player_atk_radar[k][m] == '^')
 				{
-					cout << (char)197;
+					std::cout << (char)197;
 				}
 				else if (player_atk_radar[k][m] == '$')
 				{
-					cout << (char)180 << " ";
+					std::cout << (char)180 << " ";
 				}
 				else if (player_atk_radar[k][m] == '!')
 				{
-					cout << (char)33 << " ";
+					std::cout << (char)33 << " ";
 				}
 				else if (player_atk_radar[k][m] == 'X')
 				{
-					cout << (char)237 << " ";
+					std::cout << (char)237 << " ";
+				}
+				else if (player_atk_radar[k][m] == '_')
+				{
+					std::cout << (char)32;
+				}
+				else if (player_atk_radar[k][m] == 'a')
+				{
+					std::cout << (char)65;
+				}
+				else if (player_atk_radar[k][m] == 'b')
+				{
+					std::cout << (char)66;
+				}
+				else if (player_atk_radar[k][m] == 'c')
+				{
+					std::cout << (char)67;
+				}
+				else if (player_atk_radar[k][m] == 'd')
+				{
+					std::cout << (char)68;
+				}
+				else if (player_atk_radar[k][m] == 'e')
+				{
+					std::cout << (char)69;
+				}
+				else if (player_atk_radar[k][m] == 'f')
+				{
+					std::cout << (char)70;
+				}
+				else if (player_atk_radar[k][m] == 'g')
+				{
+					std::cout << (char)71;
+				}
+				else if (player_atk_radar[k][m] == 'h')
+				{
+					std::cout << (char)72;
+				}
+				else if (player_atk_radar[k][m] == 'i')
+				{							 
+					std::cout << (char)73;	 
+				}							 
+				else if (player_atk_radar[k][m] == 'j')
+				{
+					std::cout << (char)74;
 				}
 			}
-			cout << endl;
+			std::cout << std::endl;
 		}
 
 		a = 65;					// a = 65 = "A"  sets the character code for the letter A, used to creat the Alphabit part of the board
 		b = 65;					// b = 65 = "A"  sets character code for the letter A, used for the second board Alphabet
 
 		// Bottom Line for both boards.
-		cout << setw(32) << (char)192 << (char)196 << (char)196 << (char)196;
+		std::cout << std::setw(32) << (char)192 << (char)196 << (char)196 << (char)196;
 		for (int o = 0; o < 9; o++)
 		{
-			cout << (char)193 << (char)196 << (char)196 << (char)196;
+			std::cout << (char)193 << (char)196 << (char)196 << (char)196;
 		}
-		cout << (char)217 << setw(19) << (char)192 << (char)196 << (char)196 << (char)196;
+		std::cout << (char)217 << std::setw(20) << (char)192 << (char)196 << (char)196 << (char)196;
 		for (int p = 0; p < 9; p++)
 		{
-			cout << (char)193 << (char)196 << (char)196 << (char)196;
+			std::cout << (char)193 << (char)196 << (char)196 << (char)196;
 		}
-		cout << (char)217 << endl << endl;
+		std::cout << (char)217 << std::endl << std::endl;
 	}
 
 	void display_ship_statuses() {
 		system("CLS");
-		cout << setw(63) << "Computer's Ship Status " << (char)179 << setw(2) << " " << name << "'s Ship Status" << endl;
-		cout << setw(43) << (char)201;
+		std::cout << std::setw(80) << "Computer's Ship Status " << (char)179 << std::setw(2) << " " << name << "'s Ship Status" << std::endl;
+		std::cout << std::setw(60) << (char)201;
 		for (int i = 0; i < 40; i++)
 		{
-			cout << (char)205;
+			std::cout << (char)205;
 		}
-		cout << (char)187 << endl;
-		cout << setw(43) << (char)186 << "Patrol Boat: " << ptrl_boat_size << setw(7) << (char)179 << setw(18) << "Patrol Boat: " << player_ptrl_boat_size << (char)186 << endl;
-		cout << setw(43) << (char)186 << "Submarine: " << sub_size << setw(9) << (char)179 << setw(18) << "Submarine: " << player_sub_size << (char)186 << endl;
-		cout << setw(43) << (char)186 << "Cruiser: " << cruise_size << setw(11) << (char)179 << setw(18) << "Crusier: " << player_cruise_size << (char)186 << endl;
-		cout << setw(43) << (char)186 << "Carrier: " << ac_size << setw(11) << (char)179 << setw(18) << "Carrier: " << player_ac_size << (char)186 << endl;
-		cout << setw(43) << (char)186 << "Battleship: " << BS_size << setw(8) << (char)179 << setw(18) << "Battleship: " << player_BS_size << (char)186 << endl;
-		cout << setw(43) << (char)200;
+		std::cout << (char)187 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Patrol Boat: " << ptrl_boat_size << std::setw(7) << (char)179 << std::setw(18) << "Patrol Boat: " << player_ptrl_boat_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Submarine: " << sub_size << std::setw(9) << (char)179 << std::setw(18) << "Submarine: " << player_sub_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Cruiser: " << cruise_size << std::setw(11) << (char)179 << std::setw(18) << "Crusier: " << player_cruise_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Carrier: " << ac_size << std::setw(11) << (char)179 << std::setw(18) << "Carrier: " << player_ac_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Battleship: " << BS_size << std::setw(8) << (char)179 << std::setw(18) << "Battleship: " << player_BS_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)200;
 		for (int i = 0; i < 40; i++) {
-			cout << (char)205;
-		}cout << (char)188 << endl;
+			std::cout << (char)205;
+		}
+		std::cout << (char)188 << std::endl;
 
 	}
 
@@ -445,26 +536,26 @@ public:
 			valid_ship_pos = true;
 			if (ship_number == 0)
 			{
-				cout << setw(90) << "Enter The Coordinate For Your Patrol Boat (2 spots): ";
+				std::cout << std::setw(109) << "Enter The Coordinate For Your Patrol Boat (2 spots): ";
 			}
 			else if (ship_number == 1)
 			{
-				cout << setw(89) << "Enter The Coordinate For Your Submarine (3 spots): ";
+				std::cout << std::setw(109) << "Enter The Coordinate For Your Submarine (3 spots): ";
 			}
 			else if (ship_number == 2)
 			{
-				cout << setw(88) << "Enter The Coordinate For Your Crusier (4 spots): ";
+				std::cout << std::setw(108) << "Enter The Coordinate For Your Crusier (4 spots): ";
 			}
 			else if (ship_number == 3)
 			{
-				cout << setw(87) << "Enter The Coordinate For Your Aircraft Carrier (4 spots): ";
+				std::cout << std::setw(107) << "Enter The Coordinate For Your Aircraft Carrier (4 spots): ";
 			}
 			else if (ship_number == 4)
 			{
-				cout << setw(90) << "Enter the Coordinate For Your Battleship (5 spots)";
+				std::cout << std::setw(100) << "Enter the Coordinate For Your Battleship (5 spots): ";
 			}
-			cin.getline(player_ship_cords, 11, '\n');
-			cout << endl << endl;
+			std::cin.getline(player_ship_cords, 11, '\n');
+			std::cout << std::endl << std::endl;
 			check_cords();
 			print_player_board_and_attack_radar();
 			if (valid_ship_pos == true)
@@ -481,8 +572,8 @@ public:
 		{
 			valid_ship_pos = false;					// sets vaild position to false
 			print_player_board_and_attack_radar();    // reprint the board
-			cout << setw(91) << "You entered incorrect Coordinates" << endl;
-			cout << setw(98) << "Make Sure The Coordinate Is An Alphabet Followed By A Number. Eg = a3" << endl;
+			std::cout << std::setw(97) << "You entered incorrect Coordinates" << std::endl;
+			std::cout << std::setw(122) << "Make Sure The Coordinate Is An Alphabet Followed By A Number. Eg = a3" << std::endl;
 			Sleep(1000);
 		}
 		else {
@@ -521,7 +612,7 @@ public:
 		{
 			// reprint the board, 
 			print_player_board_and_attack_radar();
-			cout << setw(92) << "Sorry, It Seems Like That Spot Has Already Been Occupied." << endl << endl;
+			std::cout << std::setw(92) << "Sorry, It Seems Like That Spot Has Already Been Occupied." << std::endl << std::endl;
 			Sleep(3000);
 			valid_ship_pos = false;
 		}
@@ -530,8 +621,9 @@ public:
 	void player_h_or_v()
 	{
 		print_player_board_and_attack_radar();
-		cout << setw(28) << player_ship_cords[0] << player_ship_cords[1] << " Enter (h) to set ship Horizontally Or (v) To Set It Vertically: ";
-		cin.getline(Hori_or_Vert, 20, '\n');
+		std::cout << std::setw(80) << player_ship_cords[0] << player_ship_cords[1] << std::endl << std::endl;
+		std::cout << std::setw(118) << " Enter (h) to set ship Horizontally Or (v) To Set It Vertically: ";
+		std::cin.getline(Hori_or_Vert, 20, '\n');
 		// steve this was bullshit, it took me 2 weeks to get this done. I hate it.
 
 		// if we enter h, and ship_number is '0', Ptrl_boat character is used, S for sub, C for Cruiser ect
@@ -571,7 +663,7 @@ public:
 
 			{ // if any space is occupied Not enough space to place
 				print_player_board_and_attack_radar();
-				cout << setw(85) << "Sorry, Not Enough Space To Set It Horizontally." << endl << endl;
+				std::cout << std::setw(95) << "Sorry, Not Enough Space To Set It Horizontally." << std::endl << std::endl;
 				Sleep(3000);
 				player_board[row][col] = '*';
 				valid_ship_pos = false;
@@ -610,7 +702,7 @@ public:
 			else
 			{
 				print_player_board_and_attack_radar();
-				cout << setw(85) << "Sorry, Not Enough Space To Set It Vertically." << endl << endl;
+				std::cout << std::setw(95) << "Sorry, Not Enough Space To Set It Vertically." << std::endl << std::endl;
 				Sleep(3000);
 				player_board[row][col] = '*';
 				valid_ship_pos = false;
@@ -619,7 +711,7 @@ public:
 		else
 		{		// Tell the player they're dumb... I mean to put the right stuff in
 			print_player_board_and_attack_radar();
-			cout << setw(105) << "Please Enter The Letter 'h' To Set Your Boat Horizontally Or 'v' To Set It Vertically." << endl << endl;
+			std::cout << std::setw(135) << "Please Enter The Letter 'h' To Set Your Boat Horizontally Or 'v' To Set It Vertically." << std::endl << std::endl;
 			player_board[row][col] = '*';
 			Sleep(5000);
 			valid_ship_pos = false;
@@ -642,16 +734,16 @@ public:
 		else if (player_ship_cords[0] == 'j') { row = 18; }
 
 		// Sets the rows to the proper values 
-		if (player_ship_cords[1] == '0') { col = 1; }
-		else if (player_ship_cords[1] == '1') { col = 3; }
-		else if (player_ship_cords[1] == '2') { col = 5; }
-		else if (player_ship_cords[1] == '3') { col = 7; }
-		else if (player_ship_cords[1] == '4') { col = 9; }
-		else if (player_ship_cords[1] == '5') { col = 11; }
-		else if (player_ship_cords[1] == '6') { col = 13; }
-		else if (player_ship_cords[1] == '7') { col = 15; }
-		else if (player_ship_cords[1] == '8') { col = 17; }
-		else if (player_ship_cords[1] == '9') { col = 19; }
+		if (player_ship_cords[1] == '0') { col = 3; }
+		else if (player_ship_cords[1] == '1') { col = 5; }
+		else if (player_ship_cords[1] == '2') { col = 7; }
+		else if (player_ship_cords[1] == '3') { col = 9; }
+		else if (player_ship_cords[1] == '4') { col = 11; }
+		else if (player_ship_cords[1] == '5') { col = 13; }
+		else if (player_ship_cords[1] == '6') { col = 15; }
+		else if (player_ship_cords[1] == '7') { col = 17; }
+		else if (player_ship_cords[1] == '8') { col = 19; }
+		else if (player_ship_cords[1] == '9') { col = 21; }
 	}
 
 	// assigns the values of the players inputs to code so the program can 'check' that space when called 
@@ -669,16 +761,28 @@ public:
 		else if (player_atk_cords[0] == 'j') { row = 18; }
 		// assigns the value the player entered for the second Coords input, for the second coord input.
 
-		if (player_atk_cords[0] == '0') { col = 1; }
-		else if (player_atk_cords[1] == '1') { col = 3; }
-		else if (player_atk_cords[1] == '2') { col = 5; }
-		else if (player_atk_cords[1] == '3') { col = 7; }
-		else if (player_atk_cords[1] == '4') { col = 9; }
-		else if (player_atk_cords[1] == '5') { col = 11; }
-		else if (player_atk_cords[1] == '6') { col = 13; }
-		else if (player_atk_cords[1] == '7') { col = 15; }
-		else if (player_atk_cords[1] == '8') { col = 17; }
-		else if (player_atk_cords[1] == '9') { col = 19; }
+		if (player_atk_cords[0] == '0') { col = 3; }
+		else if (player_atk_cords[1] == '1') { col = 5; }
+		else if (player_atk_cords[1] == '2') { col = 7; }
+		else if (player_atk_cords[1] == '3') { col = 9; }
+		else if (player_atk_cords[1] == '4') { col = 11; }
+		else if (player_atk_cords[1] == '5') { col = 13; }
+		else if (player_atk_cords[1] == '6') { col = 15; }
+		else if (player_atk_cords[1] == '7') { col = 17; }
+		else if (player_atk_cords[1] == '8') { col = 19; }
+		else if (player_atk_cords[1] == '9') { col = 21; }
+	}
+	void assigning_computer_coordinates_to_alphabets() {
+		if		(comp_atk_row == 0) { comp_row = 'a';}
+		else if	(comp_atk_row == 2) { comp_row = 'b';}
+		else if (comp_atk_row == 4) { comp_row = 'c';}
+		else if (comp_atk_row == 6) { comp_row = 'd';}
+		else if (comp_atk_row == 8) { comp_row = 'e';}
+		else if (comp_atk_row == 10) { comp_row = 'f';}
+		else if (comp_atk_row == 12) { comp_row = 'g';}
+		else if (comp_atk_row == 14) { comp_row = 'h';}
+		else if (comp_atk_row == 16) { comp_row = 'i';}
+		else if (comp_atk_row == 18) { comp_row = 'j';}
 	}
 
 	// Get the computer to randomly place their ships
@@ -686,15 +790,16 @@ public:
 
 		do {
 			system("CLS");
-			for (int i = 0; i < 19; i++) {
-				cout << endl;
+			for (int i = 0; i < 19; i++) 
+			{
+				std::cout << std::endl;
 			}
-			cout << setw(90) << "Waiting For Computer To Set Ships On It's Board.......";
+			std::cout << std::setw(90) << "Waiting For Computer To Set Ships On It's Board.......";
 			valid_comp_ship_pos = true;
 			srand(time(0));
-			comp_row = rand() % 11;
-			comp_col = rand() % 11;
-			is_comp_move_valid();
+			comp_row =2*rand() % 20;     // gets a Random even number
+			comp_col =1+(2*rand()) % 20; // gets a Random Odd number
+			is_comp_move_valid();			// checks if the space is a *, a * is a valid space to place a ship
 			if (valid_comp_ship_pos == true) {
 				comp_ship++;
 			}
@@ -702,9 +807,9 @@ public:
 
 		system("CLS");
 		for (int i = 0; i < 19; i++) {
-			cout << endl;
+			std::cout << std::endl;
 		}
-		cout << setw(90) << "The Computer Has Set It's Ships. Now It's Your Turn.";
+		std::cout << std::setw(90) << "The Computer Has Set It's Ships. Now It's Your Turn.";
 		Sleep(3000);
 		system("CLS");
 	}
