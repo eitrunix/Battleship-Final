@@ -19,7 +19,7 @@ private:
 	// I need 3 boards for the game to use, one to display the player ships, (player_board), One to display where the player is attacking or has attacked already, to display hits/miss/ships ect (player_atk_radar)
 	// and a 3rd board for the computer to place ships on, this one will be hidden until the player loses the game, at that point it will display and tell the player how far off of winning they were, (Comp_board) cause I
 	// wanna rub it in when you lose steve.
-	char player_atk_radar[20][24] =
+	char player_atk_radar[19][23] =
 	{
 		{'a', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
@@ -43,7 +43,7 @@ private:
 
 	};
 
-	char player_board[20][24] =
+	char player_board[19][23] =
 	{
 		{'a', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
@@ -67,7 +67,7 @@ private:
 
 	};
 
-	char Comp_board[20][24] =
+	char Comp_board[19][23] =
 	{
 		{'a', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 		{'_', '_', '@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
@@ -90,14 +90,14 @@ private:
 		{'j', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 
 	};
-
+	// Because I learned how to make an options menu with a moveable arrow, I needed to do that. So I did.
 	char Options[options_row][options_col]
 	{
 		{' ',' ', ' ', 'N', 'E', 'W', ' ', 'G', 'A', 'M', 'E', ' ', ' ',},
 		{' ',' ', 'H', 'I', 'G', 'H', ' ', 'S', 'C', 'O', 'R', 'E', ' ',},
 		{' ',' ', ' ', ' ', ' ', 'Q', 'U', 'I', 'T', ' ', ' ', ' ', ' ',},
 	};
-
+	// Fancy fancy art.
 	char game_title[title_col][title_row]
 	{
 		{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
@@ -120,8 +120,8 @@ private:
 	// sets a and b to be char A in the making of the boards
 	int a = 65, b = 65;
 	//total number of spaces the ships will take up during the game
-	int comp_piece_on_board = 14;
-	int player_piece_on_board = 14;
+	int comp_piece_on_board = 17;
+	int player_piece_on_board = 17;
 	// Arrow for my menu
 	int arrow_row = 0, arrow_col = 0;
 
@@ -182,7 +182,7 @@ public:
 				}
 				else
 				{
-					std::cout << (char)32;
+					std::cout << (char)32;  // If its not a hashtag, change it to a "space"
 				}
 			}
 			std::cout << std::endl;
@@ -211,11 +211,11 @@ public:
 				{
 					system("CLS");
 					enter_playername();
-					//take_comp_input();
+					take_comp_input();
 					print_player_board_and_attack_radar();
-					take_player_input_place();
-					//tell_player_shits_about_to_get_real();
-					//player_sets_attack();
+					player_place_ships();
+					tell_player_shits_about_to_get_real();
+					player_sets_atk();
 				}
 				else if (arrow_row == 2 && arrow_col == 0 && options_move == 13)
 				{
@@ -527,7 +527,7 @@ public:
 
 	}
 
-	void take_player_input_place()
+	void player_place_ships()
 	{
 		do
 		{
@@ -567,7 +567,7 @@ public:
 
 	void check_cords()
 	{
-		// function to check if the player entered in the correct information or not. should only let letter+number combo eg "A4, 6A" or "2435234vkj", should come back with please enter valid input
+		// function to check if the player entered in the correct information or not. should only let letter+number combo eg "A4. While 6A" or "2435234vkj", should come back with please enter valid input
 		if (player_ship_cords[0] < 'a' || player_ship_cords[0] > 'j' || player_ship_cords[1] < '0' || player_ship_cords[1] > '9')
 		{
 			valid_ship_pos = false;					// sets vaild position to false
@@ -750,27 +750,27 @@ public:
 	void values_of_attack_row_col()
 	{
 		if (player_atk_cords[0] == 'a') { row = 0; }
-		else if (player_atk_cords[0] == 'b') { row = 2; }
-		else if (player_atk_cords[0] == 'c') { row = 4; }
-		else if (player_atk_cords[0] == 'd') { row = 6; }
-		else if (player_atk_cords[0] == 'e') { row = 8; }
-		else if (player_atk_cords[0] == 'f') { row = 10; }
-		else if (player_atk_cords[0] == 'g') { row = 12; }
-		else if (player_atk_cords[0] == 'h') { row = 14; }
-		else if (player_atk_cords[0] == 'i') { row = 16; }
-		else if (player_atk_cords[0] == 'j') { row = 18; }
+		else if (player_atk_cords[0] == 'b') { atk_row = 2; }
+		else if (player_atk_cords[0] == 'c') { atk_row = 4; }
+		else if (player_atk_cords[0] == 'd') { atk_row = 6; }
+		else if (player_atk_cords[0] == 'e') { atk_row = 8; }
+		else if (player_atk_cords[0] == 'f') { atk_row = 10; }
+		else if (player_atk_cords[0] == 'g') { atk_row = 12; }
+		else if (player_atk_cords[0] == 'h') { atk_row = 14; }
+		else if (player_atk_cords[0] == 'i') { atk_row = 16; }
+		else if (player_atk_cords[0] == 'j') { atk_row = 18; }
 		// assigns the value the player entered for the second Coords input, for the second coord input.
 
-		if (player_atk_cords[0] == '0') { col = 3; }
-		else if (player_atk_cords[1] == '1') { col = 5; }
-		else if (player_atk_cords[1] == '2') { col = 7; }
-		else if (player_atk_cords[1] == '3') { col = 9; }
-		else if (player_atk_cords[1] == '4') { col = 11; }
-		else if (player_atk_cords[1] == '5') { col = 13; }
-		else if (player_atk_cords[1] == '6') { col = 15; }
-		else if (player_atk_cords[1] == '7') { col = 17; }
-		else if (player_atk_cords[1] == '8') { col = 19; }
-		else if (player_atk_cords[1] == '9') { col = 21; }
+		if		(player_atk_cords[1] == '0') { atk_col = 3; }
+		else if (player_atk_cords[1] == '1') { atk_col = 5; }
+		else if (player_atk_cords[1] == '2') { atk_col = 7; }
+		else if (player_atk_cords[1] == '3') { atk_col = 9; }
+		else if (player_atk_cords[1] == '4') { atk_col = 11; }
+		else if (player_atk_cords[1] == '5') { atk_col = 13; }
+		else if (player_atk_cords[1] == '6') { atk_col = 15; }
+		else if (player_atk_cords[1] == '7') { atk_col = 17; }
+		else if (player_atk_cords[1] == '8') { atk_col = 19; }
+		else if (player_atk_cords[1] == '9') { atk_col = 21; }
 	}
 	void assigning_computer_coordinates_to_alphabets() {
 		if		(comp_atk_row == 0) { comp_row = 'a';}
@@ -812,6 +812,18 @@ public:
 		std::cout << std::setw(90) << "The Computer Has Set It's Ships. Now It's Your Turn.";
 		Sleep(3000);
 		system("CLS");
+	}
+
+	void tell_player_shits_about_to_get_real() {
+		for (int i = 0; i < 4; i++) {
+			system("CLS");
+			system("Color 0C");
+			for (int i = 0; i < 18; i++) {
+				std::cout << std::endl;
+			}   Sleep(500);
+			std::cout << std::setw(74) << "Get Ready For Battle....";
+			Sleep(500);
+		}
 	}
 
 	// We need to check if the comps position is valid
@@ -923,6 +935,106 @@ public:
 			}
 		}
 		system("CLS");
+	}
+	void player_sets_atk() 
+	{
+		do 
+		{
+			valid_atk_cord = true;
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(76) << "Enter Attack Coordinates: ";
+			std::cin.getline(player_atk_cords, 11, '\n');
+
+			check_correct_atk_cords();
+			if (comp_piece_on_board == 0) 
+			{
+				for (int i = 0; i < 6; i++) 
+				{
+					system("CLS");
+					for (int i = 0; i < 19; i++) 
+					{
+						std::cout << std::endl;
+					}
+					Sleep(500);
+					std::cout << std::setw(60) << name << " ,You Won!!!" << std::endl;
+					Sleep(500);
+				}
+			}
+			else if (valid_atk_cord == true) 
+			{
+				Sleep(3000);
+				print_player_board_and_attack_radar();
+				//computer_sets_attack();
+			}
+		} while (!valid_atk_cord || comp_piece_on_board > 0);
+	}
+
+	void check_correct_atk_cords() 
+	{
+		if (player_atk_cords[0] < 'a' || player_atk_cords[0] > 'j' || player_atk_cords[1] < '0' || player_atk_cords[1] > '9') 
+		{
+			valid_atk_cord = false;
+			system("CLS");
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(91) << "Sorry. It Seams Like You Have Entered Invalid Coordinates." << std::endl;
+			std::cout << std::setw(98) << "Make Sure The Coordinate Is An Alphabet Followed By A Number. E.g = a3" << std::endl;
+			Sleep(3000);
+		}
+		else 
+		{
+			values_of_attack_row_col();
+			player_sets_atk_on_board();
+		}
+	}
+
+	void player_sets_atk_on_board() 
+	{
+		if (player_atk_radar[atk_row][atk_col] == '!' || player_atk_radar[atk_row][atk_col] == '$') 
+		{
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(82) << "You Have Already Attacked That Position.";
+			Sleep(3000);
+			valid_atk_cord = false;
+		}
+		else if (Comp_board[atk_row][atk_col] == 'P') 
+		{
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(84) << "You Hit Their Patrol Boat.";
+			player_atk_radar[atk_row][atk_col] = '!';
+			ptrl_boat_size--;
+			comp_piece_on_board--;
+		}
+		else if (Comp_board[atk_row][atk_col] == 'S') 
+		{
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(84) << "You Hit Their Submarine.";
+			player_atk_radar[atk_row][atk_col] = '!';
+			sub_size--;
+			comp_piece_on_board--;
+		}
+		else if (Comp_board[atk_row][atk_col] == 'C') 
+		{
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(84) << "You Hit Their Cruiser.";
+			player_atk_radar[atk_row][atk_col] = '!';
+			cruise_size--;
+			comp_piece_on_board--;
+		}
+		else if (Comp_board[atk_row][atk_col] == 'A') 
+		{
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(84) << "You Hit Their Aircraft Carrier.";
+			player_atk_radar[atk_row][atk_col] = '!';
+			BS_size--;
+			comp_piece_on_board--;
+		}
+		else 
+		{
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(71) << "Nope. You Missed." << std::endl << std::endl;
+			player_atk_radar[atk_row][atk_col] = '$';
+		}
+
 	}
 	// Clears the status of ships after the game is done, to play again.
 	void clear_hit()
