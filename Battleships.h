@@ -16,46 +16,76 @@ const int title_col = 36;
 class Battleship
 {
 private:
-	char Player_atk_radar[12][14] =
+	// I need 3 boards for the game to use, one to display the player ships, (player_board), One to display where the player is attacking or has attacked already, to display hits/miss/ships ect (player_atk_radar)
+	// and a 3rd board for the computer to place ships on, this one will be hidden until the player loses the game, at that point it will display and tell the player how far off of winning they were, (Comp_board) cause I
+	// wanna rub it in when you lose steve.
+	char player_atk_radar[20][22] =
 	{
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 	};
 
-	char player_board[12][14] =
+	char player_board[20][22] =
 	{
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 	};
 
-	char Comp_board[12][14] =
+	char Comp_board[20][22] =
 	{
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
-		{'#', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '#',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
+		{'@', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '^', '-', '$',},
+		{'#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 
 	};
 
@@ -79,17 +109,21 @@ private:
 
 	};
 
+	// player ship Horizontal or Verticle
+	char Hori_or_Vert[20];
 
-	char Hori_or_Vert[10];						// player ship Horizontal or Verticle				
-	char player_ship_cords[10];		// variables for "attacking" other pieces
+	// variables for "attacking" other pieces
+	char player_ship_cords[10];
 	char player_atk_cords[10];
+	// sets a and b to be char A in the making of the boards
 	int a = 65, b = 65;
+	//total number of spaces the ships will take up during the game
 	int comp_piece_on_board = 14;
 	int player_piece_on_board = 14;
+	// Arrow for my menu
 	int arrow_row = 0, arrow_col = 0;
 
 	// Sizes of Ships, also hit point values
-
 	int ptrl_boat_size = 2, player_ptrl_boat_size = 2;
 	int sub_size = 3, player_sub_size = 3;
 	int cruise_size = 3, player_cruise_size = 3;
@@ -102,39 +136,41 @@ private:
 	int comp_row, comp_col;
 	int comp_atk_row, comp_atk_col;
 
-	int comp_hv;			// computer ships hoz or vert
+	int comp_hv;				// computer ships hoz or vert
 
 	char options_move;
-	char upordown;			// for Using the menu, to go up or down
-	char first_comp_cord;	// to check the first part of the computers "firing" cords
+	char upordown;				// for Using the menu, to go up or down
+	char first_comp_cord;		// to check the first part of the computers "firing" cords
 
-	int ship_number = 0;	// Number of ships left in the game
-	int comp_ship = 0;		// Number of computer  ships left in the game
+	int ship_number = 0;		// Number of ships left in the game
+	int comp_ship = 0;			// Number of computer  ships left in the game
 
 	bool valid_ship_pos;		// to check if the position of the ship is valid while placing it/firing on it
 	bool valid_comp_ship_pos;	// same as above but for computer
 	bool valid_atk_cord;		// checks if the place was fired upon already or not
 	bool valid_comp_atk_cord;	// same but for computer
 
-	bool hit = false;		// variable for if something is hit or not.
+	bool hit = false;			// variable for if something is hit or not.
 
 	// Variables for each individual ship to check for hits and misses
 	bool ptrl_boat_hit = false;
 	bool sub_hit = false;
-	bool cruse_hit = false;
+	bool cruise_hit = false;
 	bool ac_hit = false;
 	bool BS_hit = false;
 
-	string name;   // for entering the players name
+	string name;				// for entering the players name
 
 public:
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	/*HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);   Used for changing the colours of text, background ect, might not be used*/
 
 	// Prints the game title at the top-middle of the page
 	void print_game_title()
 	{
+		cout << endl; cout << endl;
 		for (int i = 0; i < title_row; i++)
 		{
+
 			cout << setw(45);   // setw() sets where the title will start to draw
 			for (int j = 0; j < title_col; j++)
 			{
@@ -166,30 +202,30 @@ public:
 	void player_choose_options()
 	{
 		while (1) {
-			if (_kbhit()) {  //_kbhit() just checks if there is something in the input buffer. it does not do anything else. Used by my "menu" to have the player move up and down in my menu
+			if (_kbhit()) {  //_kbhit() just checks if there is something in the input buffer. it does not do anything else. Used in my "menu" to have the player move the arrow up and down
 				options_move = _getch();
 				if (arrow_row == 0 && arrow_col == 0 && options_move == 13)			// first option, plays the game, starts by asking the player name, computer places ships on the board, then prompts the player to place ships,
 																					// then will tell the player to get ready to play (tell_player_shits_about_to_get_real function) and print the boards, then asks for the attack cords.
 				{
 					system("CLS");
 					enter_playername();
-					//take_computer_input();
+					take_comp_input();
 					print_player_board_and_attack_radar();
-					take_player_input();
+					take_player_input_place();
 					//tell_player_shits_about_to_get_real();
 					//player_sets_attack();
 				}
 				else if (arrow_row == 2 && arrow_col == 0 && options_move == 13)
 				{
 					system("CLS");
-															// Instructions go here, this is the Second (thrid in code) option
+					// Instructions go here, this is the Second (thrid in code) option
 					if (options_move == -32) {
 						system("CLS");
 					}
 				}
 				else if (arrow_row == 3 && arrow_col == 0 && options_move == 13)
 				{
-															// should quit the program, but cant get it working with exit()
+					// should quit the program, but cant get it working with exit()
 					system("CLS");
 					//system("Color 80");
 					for (int i = 0; i < 18; i++)
@@ -252,32 +288,48 @@ public:
 		{
 			cout << endl;					// Spacing between board and the Ship Status
 		}
-		cout << setw(52) << "0 1 2 3 4 5 6 7 8 9" << setw(41) << "0 1 2 3 4 5 6 7 8 9" << endl;
-		cout << setw(32) << (char)218;					// sets where the Top line will start to print
-		for (int j = 0; j < 21; j++)
+		cout << setw(70) << "0   1   2   3   4   5   6   7   8   9" << setw(59) << "0   1   2   3   4   5   6   7   8   9" << endl;
+		cout << setw(32) << (char)218 << (char)196 << (char)196 << (char)196;					// sets where the Top line will start to print
+		for (int j = 0; j < 9; j++)
 		{
-			cout << (char)196;						// First boards Top line
+			cout << (char)194 << (char)196 << (char)196 << (char)196;						// First boards Top line
 		}
-		cout << (char)191 << setw(19) << (char)218;		// sets spacing between the top of the boards
+		cout << (char)191 << setw(19) << (char)218 << (char)196 << (char)196 << (char)196;		// sets spacing between the top of the boards
 
-		for (int n = 0; n < 21; n++)
+		for (int n = 0; n < 9; n++)
 		{
-			cout << (char)196;						// Top line of second board
+			cout << (char)194 << (char)196 << (char)196 << (char)196;						// Top line of second board
 		}
 		cout << (char)191 << endl;
 
-		for (int k = 0; k < 10; k++)
+		for (int k = 0; k < 19; k++)
 		{
 			cout << setw(30) << (char)a++ << " ";		// prints out the letter A and sets spacing for the board
-			for (int l = 0; l < 12; l++)
+			for (int l = 0; l < 21; l++)
 			{
 				if (player_board[k][l] == '*')			// if theres a '*' on a board, change it to an ASCII Character
 				{
-					cout << (char)248 << " ";
+					cout << (char)247 << " ";
 				}
 				else if (player_board[k][l] == '#')
 				{
 					cout << (char)179 << " ";
+				}
+				else if (player_board[k][l] == '@')
+				{
+					cout << (char)195;
+				}
+				else if (player_board[k][l] == '-')
+				{
+					cout << (char)196 << (char)196 << (char)196;
+				}
+				else if (player_board[k][l] == '^')
+				{
+					cout << (char)197;
+				}
+				else if (player_board[k][l] == '$')
+				{
+					cout << (char)180 << " ";
 				}
 				else if (player_board[k][l] == 'P')
 				{
@@ -309,20 +361,36 @@ public:
 				}
 			}
 			cout << setw(17) << (char)b++;
-			for (int m = 0; m < 12; m++) {
-				if (Player_atk_radar[k][m] == '*')
+			for (int m = 0; m < 21; m++) {
+				if (player_atk_radar[k][m] == '*')
 				{
-					cout << (char)248 << " ";
+					cout << (char)247 << " ";
 				}
-				else if (Player_atk_radar[k][m] == '#')
+				else if (player_atk_radar[k][m] == '#')
 				{
 					cout << (char)179 << " ";
 				}
-				else if (Player_atk_radar[k][m] == '!')
+				else if (player_atk_radar[k][m] == '@')
+				{
+					cout << (char)195;
+				}
+				else if (player_atk_radar[k][m] == '-')
+				{
+					cout << (char)196 << (char)196 << (char)196;
+				}
+				else if (player_atk_radar[k][m] == '^')
+				{
+					cout << (char)197;
+				}
+				else if (player_atk_radar[k][m] == '$')
+				{
+					cout << (char)180 << " ";
+				}
+				else if (player_atk_radar[k][m] == '!')
 				{
 					cout << (char)33 << " ";
 				}
-				else if (Player_atk_radar[k][m] == '$')
+				else if (player_atk_radar[k][m] == 'X')
 				{
 					cout << (char)237 << " ";
 				}
@@ -333,15 +401,16 @@ public:
 		a = 65;					// a = 65 = "A"  sets the character code for the letter A, used to creat the Alphabit part of the board
 		b = 65;					// b = 65 = "A"  sets character code for the letter A, used for the second board Alphabet
 
-		cout << setw(32) << (char)192;
-		for (int o = 0; o < 21; o++)
+		// Bottom Line for both boards.
+		cout << setw(32) << (char)192 << (char)196 << (char)196 << (char)196;
+		for (int o = 0; o < 9; o++)
 		{
-			cout << (char)196;
+			cout << (char)193 << (char)196 << (char)196 << (char)196;
 		}
-		cout << (char)217 << setw(19) << (char)192;
-		for (int p = 0; p < 21; p++)
+		cout << (char)217 << setw(19) << (char)192 << (char)196 << (char)196 << (char)196;
+		for (int p = 0; p < 9; p++)
 		{
-			cout << (char)196;
+			cout << (char)193 << (char)196 << (char)196 << (char)196;
 		}
 		cout << (char)217 << endl << endl;
 	}
@@ -367,10 +436,12 @@ public:
 
 	}
 
-	void take_player_input()
+	void take_player_input_place()
 	{
 		do
 		{
+			// we will go through the 'list' of ships to place, 0-4 (5 ships total) and checks if the placement is okay, 'places' the ship on the board, increments ship_number by 1, then checks the next statement
+			// we leave the loop if ship_number is 5 of greater
 			valid_ship_pos = true;
 			if (ship_number == 0)
 			{
@@ -403,10 +474,7 @@ public:
 		} while (!valid_ship_pos || ship_number < 5);
 	}
 
-
-
-
-	void check_cords() 
+	void check_cords()
 	{
 		// function to check if the player entered in the correct information or not. should only let letter+number combo eg "A4, 6A" or "2435234vkj", should come back with please enter valid input
 		if (player_ship_cords[0] < 'a' || player_ship_cords[0] > 'j' || player_ship_cords[1] < '0' || player_ship_cords[1] > '9')
@@ -418,11 +486,11 @@ public:
 			Sleep(1000);
 		}
 		else {
-			assign_values_of_row_column();
+			values_of_row_col();
 			check_for_valid_cell();
 		}
 	}
-
+	// Check if the cell or cord entered is the * char in the array, if it is then the space is "empty" and we can place a ship, it will then replace the * char with the cooresponding Letter.
 	void check_for_valid_cell()
 	{
 		if (player_board[row][col] == '*')
@@ -447,10 +515,11 @@ public:
 			{
 				player_board[row][col] = 'B';
 			}
-			ask_player_for_horizontal_or_vertical();
+			player_h_or_v();
 		}
-		else 
+		else
 		{
+			// reprint the board, 
 			print_player_board_and_attack_radar();
 			cout << setw(92) << "Sorry, It Seems Like That Spot Has Already Been Occupied." << endl << endl;
 			Sleep(3000);
@@ -458,45 +527,45 @@ public:
 		}
 	}
 
-	void ask_player_for_horizontal_or_vertical()
+	void player_h_or_v()
 	{
 		print_player_board_and_attack_radar();
 		cout << setw(28) << player_ship_cords[0] << player_ship_cords[1] << " Enter (h) to set ship Horizontally Or (v) To Set It Vertically: ";
-		cin.getline(Hori_or_Vert, 10,'\n');
+		cin.getline(Hori_or_Vert, 20, '\n');
 		// steve this was bullshit, it took me 2 weeks to get this done. I hate it.
 
 		// if we enter h, and ship_number is '0', Ptrl_boat character is used, S for sub, C for Cruiser ect
 		if (Hori_or_Vert[0] == 'h')
 		{
-			if (ship_number == 0 && player_board[row][col + 1] == '*')
+			if (ship_number == 0 && player_board[row][col + 2] == '*')
 			{
-				player_board[row][col + 1] = 'P';  // Sets the ship at the position entered and will print to the right to fill the spaces the ship takes up
+				player_board[row][col + 2] = 'P';  // Sets the ship at the position entered and will print to the right to fill the spaces the ship takes up
 			}
 			// if its ship_number 1 and the next 2 col spaces are free, prints out the 3 spaces for the Sub
-			else if (ship_number == 1 && player_board[row][col + 1] == '*' && player_board[row][col + 2] == '*')
+			else if (ship_number == 1 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*')
 			{
-				player_board[row][col + 1] = 'S';
 				player_board[row][col + 2] = 'S';
+				player_board[row][col + 4] = 'S';
 			}
 			// if its ship_number 1 and the next 3 col spaces are free, prints out the 4 spaces for the Cruiser
-			else if (ship_number == 2 && player_board[row][col + 1] == '*' && player_board[row][col + 2] == '*')
+			else if (ship_number == 2 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*')
 			{
-				player_board[row][col + 1] = 'C';
 				player_board[row][col + 2] = 'C';
+				player_board[row][col + 4] = 'C';
 			}
 			// I dont think I need to keep commenting these, I know what they do.
-			else if (ship_number == 3 && player_board[row][col + 1] == '*' && player_board[row][col + 2] == '*' && player_board[row][col + 3] == '*')
+			else if (ship_number == 3 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*' && player_board[row][col + 6] == '*')
 			{
-				player_board[row][col + 1] = 'A';
 				player_board[row][col + 2] = 'A';
-				player_board[row][col + 3] = 'A';
+				player_board[row][col + 4] = 'A';
+				player_board[row][col + 6] = 'A';
 			}
-			else if (ship_number == 4 && player_board[row][col + 1] == '*' && player_board[row][col + 2] == '*' && player_board[row][col + 3] == '*' && player_board[row][col + 4] == '*')
+			else if (ship_number == 4 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*' && player_board[row][col + 6] == '*' && player_board[row][col + 8] == '*')
 			{
-				player_board[row][col + 1] = 'B';
 				player_board[row][col + 2] = 'B';
-				player_board[row][col + 3] = 'B';
 				player_board[row][col + 4] = 'B';
+				player_board[row][col + 6] = 'B';
+				player_board[row][col + 8] = 'B';
 			}
 			else
 
@@ -511,32 +580,32 @@ public:
 		else if (Hori_or_Vert[0] == 'v')
 		{
 			// Same comments as the previous, this is just for the vert seting
-			if (ship_number == 0 && player_board[row + 1][col] == '*')
+			if (ship_number == 0 && player_board[row + 2][col] == '*')
 			{
-				player_board[row + 1][col] = 'P';
+				player_board[row + 2][col] = 'P';
 			}
-			else if (ship_number == 1 && player_board[row + 1][col] == '*' && player_board[row + 2][col] == '*')
+			else if (ship_number == 1 && player_board[row + 2][col] == '*' && player_board[row + 4][col] == '*')
 			{
-				player_board[row + 1][col] = 'S';
 				player_board[row + 2][col] = 'S';
+				player_board[row + 4][col] = 'S';
 			}
-			else if (ship_number == 2 && player_board[row + 1][col] == '*' && player_board[row + 2][col] == '*')
+			else if (ship_number == 2 && player_board[row + 2][col] == '*' && player_board[row + 4][col] == '*')
 			{
-				player_board[row + 1][col] = 'C';
 				player_board[row + 2][col] = 'C';
+				player_board[row + 4][col] = 'C';
 			}
-			else if (ship_number == 3 && player_board[row + 1][col] == '*' && player_board[row + 2][col] == '*' && player_board[row + 3][col] == '*')
+			else if (ship_number == 3 && player_board[row + 2][col] == '*' && player_board[row + 4][col] == '*' && player_board[row + 6][col] == '*')
 			{
-				player_board[row + 1][col] = 'A';
 				player_board[row + 2][col] = 'A';
-				player_board[row + 3][col] = 'A';
+				player_board[row + 4][col] = 'A';
+				player_board[row + 6][col] = 'A';
 			}
-			else if (ship_number == 4 && player_board[row + 1][col] == '*' && player_board[row + 2][col] == '*' && player_board[row + 3][col] == '*' && player_board[row + 4][col] == '*')
+			else if (ship_number == 4 && player_board[row + 2][col] == '*' && player_board[row + 4][col] == '*' && player_board[row + 6][col] == '*' && player_board[row + 8][col] == '*')
 			{
-				player_board[row][col + 1] = 'B';
-				player_board[row][col + 2] = 'B';
-				player_board[row][col + 3] = 'B';
-				player_board[row][col + 4] = 'B';
+				player_board[row + 2][col] = 'B';
+				player_board[row + 4][col] = 'B';
+				player_board[row + 6][col] = 'B';
+				player_board[row + 8][col] = 'B';
 			}
 			else
 			{
@@ -557,195 +626,260 @@ public:
 		}
 	}
 
+	// The code below is formatted as such so I can read the damn thing easier
 	// Assign the vales of the colums to the letters, so the computer knows what cords are where
-	void assign_values_of_row_column()
+	void values_of_row_col()
 	{
-		if (player_ship_cords[0] == 'a')
-		{
-			row = 0;
-		}
-		else if (player_ship_cords[0] == 'b')
-		{
-			row = 1;
-		}
-		else if (player_ship_cords[0] == 'c')
-		{
-			row = 2;
-		}
-		else if (player_ship_cords[0] == 'd')
-		{
-			row = 3;
-		}
-		else if (player_ship_cords[0] == 'e')
-		{
-			row = 4;
-		}
-		else if (player_ship_cords[0] == 'f')
-		{
-			row = 5;
-		}
-		else if (player_ship_cords[0] == 'g')
-		{
-			row = 6;
-		}
-		else if (player_ship_cords[0] == 'h')
-		{
-			row = 7;
-		}
-		else if (player_ship_cords[0] == 'i')
-		{
-			row = 8;
-		}
-		else if (player_ship_cords[0] == 'j')
-		{
-			row = 9;
-		}
+		if (player_ship_cords[0] == 'a') { row = 0; }
+		else if (player_ship_cords[0] == 'b') { row = 2; }
+		else if (player_ship_cords[0] == 'c') { row = 4; }
+		else if (player_ship_cords[0] == 'd') { row = 6; }
+		else if (player_ship_cords[0] == 'e') { row = 8; }
+		else if (player_ship_cords[0] == 'f') { row = 10; }
+		else if (player_ship_cords[0] == 'g') { row = 12; }
+		else if (player_ship_cords[0] == 'h') { row = 14; }
+		else if (player_ship_cords[0] == 'i') { row = 16; }
+		else if (player_ship_cords[0] == 'j') { row = 18; }
+
 		// Sets the rows to the proper values 
-		if (player_ship_cords[1] == '0')
-		{
-			col = 1;
-		}
-		else if (player_ship_cords[1] == '1')
-		{
-			col = 2;
-		}
-		else if (player_ship_cords[1] == '2')
-		{
-			col = 3;
-		}
-		else if (player_ship_cords[1] == '3')
-		{
-			col = 4;
-		}
-		else if (player_ship_cords[1] == '4')
-		{
-			col = 5;
-		}
-		else if (player_ship_cords[1] == '5')
-		{
-			col = 6;
-		}
-		else if (player_ship_cords[1] == '6')
-		{
-			col = 7;
-		}
-		else if (player_ship_cords[1] == '7')
-		{
-			col = 8;
-		}
-		else if (player_ship_cords[1] == '8')
-		{
-			col = 9;
-		}
-		else if (player_ship_cords[1] == '9')
-		{
-			col = 10;
-		}
-
-
+		if (player_ship_cords[1] == '0') { col = 1; }
+		else if (player_ship_cords[1] == '1') { col = 3; }
+		else if (player_ship_cords[1] == '2') { col = 5; }
+		else if (player_ship_cords[1] == '3') { col = 7; }
+		else if (player_ship_cords[1] == '4') { col = 9; }
+		else if (player_ship_cords[1] == '5') { col = 11; }
+		else if (player_ship_cords[1] == '6') { col = 13; }
+		else if (player_ship_cords[1] == '7') { col = 15; }
+		else if (player_ship_cords[1] == '8') { col = 17; }
+		else if (player_ship_cords[1] == '9') { col = 19; }
 	}
+
 	// assigns the values of the players inputs to code so the program can 'check' that space when called 
-	void assign_values_of_attack_row_column()
+	void values_of_attack_row_col()
 	{
-		if (player_atk_cords[0] == 'a')
-		{
-			row = 0;
-		}
-		else if (player_atk_cords[0] == 'b')
-		{
-			row = 1;
-		}
-		else if (player_atk_cords[0] == 'c')
-		{
-			row = 2;
-		}
-		else if (player_atk_cords[0] == 'd')
-		{
-			row = 3;
-		}
-		else if (player_atk_cords[0] == 'e')
-		{
-			row = 4;
-		}
-		else if (player_atk_cords[0] == 'f')
-		{
-			row = 5;
-		}
-		else if (player_atk_cords[0] == 'g')
-		{
-			row = 6;
-		}
-		else if (player_atk_cords[0] == 'h')
-		{
-			row = 7;
-		}
-		else if (player_atk_cords[0] == 'i')
-		{
-			row = 8;
-		}
-		else if (player_atk_cords[0] == 'j')
-		{
-			row = 9;
-		}
+		if (player_atk_cords[0] == 'a') { row = 0; }
+		else if (player_atk_cords[0] == 'b') { row = 2; }
+		else if (player_atk_cords[0] == 'c') { row = 4; }
+		else if (player_atk_cords[0] == 'd') { row = 6; }
+		else if (player_atk_cords[0] == 'e') { row = 8; }
+		else if (player_atk_cords[0] == 'f') { row = 10; }
+		else if (player_atk_cords[0] == 'g') { row = 12; }
+		else if (player_atk_cords[0] == 'h') { row = 14; }
+		else if (player_atk_cords[0] == 'i') { row = 16; }
+		else if (player_atk_cords[0] == 'j') { row = 18; }
 		// assigns the value the player entered for the second Coords input, for the second coord input.
 
-		if(player_atk_cords[0] == '0')
-		{
-			col = 1;
+		if (player_atk_cords[0] == '0') { col = 1; }
+		else if (player_atk_cords[1] == '1') { col = 3; }
+		else if (player_atk_cords[1] == '2') { col = 5; }
+		else if (player_atk_cords[1] == '3') { col = 7; }
+		else if (player_atk_cords[1] == '4') { col = 9; }
+		else if (player_atk_cords[1] == '5') { col = 11; }
+		else if (player_atk_cords[1] == '6') { col = 13; }
+		else if (player_atk_cords[1] == '7') { col = 15; }
+		else if (player_atk_cords[1] == '8') { col = 17; }
+		else if (player_atk_cords[1] == '9') { col = 19; }
+	}
+
+	// Get the computer to randomly place their ships
+	void take_comp_input() {
+
+		do {
+			system("CLS");
+			for (int i = 0; i < 19; i++) {
+				cout << endl;
+			}
+			cout << setw(90) << "Waiting For Computer To Set Ships On It's Board.......";
+			valid_comp_ship_pos = true;
+			srand(time(0));
+			comp_row = rand() % 11;
+			comp_col = rand() % 11;
+			is_comp_move_valid();
+			if (valid_comp_ship_pos == true) {
+				comp_ship++;
+			}
+		} while (comp_ship < 5 || !valid_comp_ship_pos);
+
+		system("CLS");
+		for (int i = 0; i < 19; i++) {
+			cout << endl;
 		}
-		else if (player_atk_cords[1] == '1')
+		cout << setw(90) << "The Computer Has Set It's Ships. Now It's Your Turn.";
+		Sleep(3000);
+		system("CLS");
+	}
+
+	// We need to check if the comps position is valid
+	void is_comp_move_valid() {
+		// Same code as placing player ships, except this is hidden until the very end
+		if (Comp_board[comp_row][comp_col] == '*')
 		{
-			col = 2;
+			if (comp_ship == 0)
+			{
+				Comp_board[comp_row][comp_col] = 'P';
+			}
+			else if (comp_ship == 1)
+			{
+				Comp_board[comp_row][comp_col] = 'S';
+			}
+			else if (comp_ship == 2)
+			{
+				Comp_board[comp_row][comp_col] = 'C';
+			}
+			else if (comp_ship == 3)
+			{
+				Comp_board[comp_row][comp_col] = 'A';
+			}
+			else if (comp_ship == 4)
+			{
+				Comp_board[comp_row][comp_col] = 'B';
+			}
+			comp_h_or_v();
 		}
-		else if (player_atk_cords[1] == '2')
-		{
-			col = 3;
-		}
-		else if (player_atk_cords[1] == '3')
-		{
-			col = 4;
-		}
-		else if (player_atk_cords[1] == '4')
-		{
-			col = 5;
-		}
-		else if (player_atk_cords[1] == '5')
-		{
-			col = 6;
-		}
-		else if (player_atk_cords[1] == '6')
-		{
-			col = 7;
-		}
-		else if (player_atk_cords[1] == '7')
-		{
-			col = 8;
-		}
-		else if (player_atk_cords[1] == '8')
-		{
-			col = 9;
-		}
-		else if (player_atk_cords[1] == '9')
-		{
-			col = 10;
+		else {
+			valid_comp_ship_pos = false;
 		}
 	}
 
+	void comp_h_or_v()
+	{
+		comp_hv = 1 + rand() % 2; // Computer will randomly choose hori or vert
+		if (comp_hv == 1)
+		{
+			if (comp_ship == 0 && Comp_board[comp_row][comp_col + 2] == '*')
+			{
+				Comp_board[comp_row][comp_col + 2] = 'P';
+			}
+			else if (comp_ship == 1 && Comp_board[comp_row][comp_col + 2] == '*' && Comp_board[comp_row][comp_col + 4] == '*')
+			{
+				Comp_board[comp_row][comp_col + 2] = 'S';
+				Comp_board[comp_row][comp_col + 4] = 'S';
+			}
+			else if (comp_ship == 2 && Comp_board[comp_row][comp_col + 2] == '*' && Comp_board[comp_row][comp_col + 4] == '*' && Comp_board[comp_row][comp_col + 6] == '*')
+			{
+				Comp_board[comp_row][comp_col + 2] = 'C';
+				Comp_board[comp_row][comp_col + 4] = 'C';
+				Comp_board[comp_row][comp_col + 6] = 'C';
+			}
+			else if (comp_ship == 3 && Comp_board[comp_row][comp_col + 2] == '*' && Comp_board[comp_row][comp_col + 4] == '*' && Comp_board[comp_row][comp_col + 6] == '*')
+			{
+				Comp_board[comp_row][comp_col + 2] = 'A';
+				Comp_board[comp_row][comp_col + 4] = 'A';
+				Comp_board[comp_row][comp_col + 6] = 'A';
+			}
+			else if (comp_ship == 4 && Comp_board[comp_row][comp_col + 2] == '*' && Comp_board[comp_row][comp_col + 4] == '*' && Comp_board[comp_row][comp_col + 6] == '*' && Comp_board[comp_row][comp_col + 8] == '*')
+			{
+				Comp_board[comp_row][comp_col = 2] = 'B';
+				Comp_board[comp_row][comp_col + 4] = 'B';
+				Comp_board[comp_row][comp_col + 6] = 'B';
+				Comp_board[comp_row][comp_col + 8] = 'B';
+			}
+			else
+			{
+				Comp_board[comp_row][comp_col] = '*';
+				valid_comp_ship_pos = false;
+			}
+		}
+		else if (comp_hv == 2)
+		{
+			if (comp_ship == 0 && Comp_board[comp_row + 1][comp_col] == '*')
+			{
+				Comp_board[comp_row + 1][comp_col] = 'P';
+			}
+			else if (comp_ship == 1 && Comp_board[comp_row + 1][comp_col] == '*' && Comp_board[comp_row + 3][comp_col] == '*')
+			{
+				Comp_board[comp_row + 1][comp_col] = 'S';
+				Comp_board[comp_row + 3][comp_col] = 'S';
+			}
+			else if (comp_ship == 2 && Comp_board[comp_row + 1][comp_col] == '*' && Comp_board[comp_row + 3][comp_col] == '*' && Comp_board[comp_row + 5][comp_col] == '*')
+			{
+				Comp_board[comp_row + 1][comp_col] = 'C';
+				Comp_board[comp_row + 3][comp_col] = 'C';
+				Comp_board[comp_row + 5][comp_col] = 'C';
+			}
+			else if (comp_ship == 3 && Comp_board[comp_row + 1][comp_col] == '*' && Comp_board[comp_row + 3][comp_col] == '*' && Comp_board[comp_row + 5][comp_col] == '*')
+			{
+				Comp_board[comp_row + 1][comp_col] = 'A';
+				Comp_board[comp_row + 3][comp_col] = 'A';
+				Comp_board[comp_row + 5][comp_col] = 'A';
 
-			// reminder ptrl_boat_hit, sub_hit, cruse_hit, ac_hit, BS_hit 
-			// Clears the board after the game is done, to play again.
+			}
+			else if (comp_ship == 4 && Comp_board[comp_row + 1][comp_col] == '*' && Comp_board[comp_row + 3][comp_col] == '*' && Comp_board[comp_row + 5][comp_col] == '*' && Comp_board[comp_row + 7][comp_col] == '*')
+			{
+				Comp_board[comp_row + 1][comp_col] = 'B';
+				Comp_board[comp_row + 3][comp_col] = 'B';
+				Comp_board[comp_row + 5][comp_col] = 'B';
+				Comp_board[comp_row + 7][comp_col] = 'B';
+
+			}
+			else {
+				Comp_board[comp_row][comp_col] = '*';
+				valid_comp_ship_pos = false;
+			}
+		}
+		system("CLS");
+	}
+	// Clears the status of ships after the game is done, to play again.
 	void clear_hit()
 	{
-		if (player_BS_size == 0) {
+		if (player_BS_size == 0)
+		{
 			BS_hit = false;
-		}if (player_sub_size == 0) {
+		}
+		if (player_sub_size == 0)
+		{
 			sub_hit = false;
-		}if (player_ptrl_boat_size == 0) {
+		}
+		if (player_ptrl_boat_size == 0)
+		{
 			ptrl_boat_hit = false;
-		}if (player_ac_size == 0) {
+		}
+		if (player_ac_size == 0)
+		{
 			ac_hit = false;
 		}
+		if (player_cruise_size == 0)
+		{
+			cruise_hit = false;
+		}
 
+	}
+	// 'clears' the board
+	void board_clearer()
+	{
+		for (int i = 0; i < 39; i++)
+		{
+			for (int j = 0; j < 39; j++) 
+			{		// checks for all symbols used on the map, to change them back to '*'
+				if (player_board[i][j] == 'P' || Comp_board[i][j] == 'P' ||
+				player_board[i][j] == 'S' || Comp_board[i][j] == 'S' ||
+				player_board[i][j] == 'C' || Comp_board[i][j] == 'C' ||
+				player_board[i][j] == 'A' || Comp_board[i][j] == 'A' ||
+				player_board[i][j] == 'B' || Comp_board[i][j] == 'B' ||
+				player_board[i][j] == '!' || player_atk_radar[i][j] == '!' ||
+				player_board[i][j] == 'X' || player_atk_radar[i][j] == 'X') 
+				{
+					player_board[i][j] = '*';
+					Comp_board[i][j] = '*';
+					player_atk_radar[i][j] = '*';
+				}
+			}
+		}
+		//reset variables to origional numbers
+		comp_ship = 0;
+		ship_number = 0;
+		comp_piece_on_board = 14;
+		player_piece_on_board = 14;
+		ptrl_boat_size = 2;
+		player_ptrl_boat_size = 2;
+		sub_size = 3;
+		player_sub_size = 3;
+		cruise_size = 3;
+		player_cruise_size = 3;
+		ac_size = 4;
+		player_ac_size = 4;
+		BS_size = 5;
+		player_BS_size = 5;
 	}
 	
 };
