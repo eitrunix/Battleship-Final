@@ -117,8 +117,6 @@ private:
 	// variables for "attacking" other pieces
 	char player_ship_cords[10];
 	char player_atk_cords[10];
-	// sets a and b to be char A in the making of the boards
-	int a = 65, b = 65;
 	//total number of spaces the ships will take up during the game
 	int comp_piece_on_board = 17;
 	int player_piece_on_board = 17;
@@ -222,51 +220,50 @@ public:
 					system("CLS");
 					// Instructions go here, this is the Second (thrid in code) option
 					if (options_move == -32) {
-					system("CLS");
+						system("CLS");
 					}
 				}
 				else if (arrow_row == 3 && arrow_col == 0 && options_move == 13)
 				{
-				// should quit the program, but cant get it working with exit()
-				system("CLS");
-				//system("Color 80");
-				for (int i = 0; i < 18; i++)
-				{
-					std::cout << std::endl;
-				}std::cout << std::setw(58);
-				for (int i = 1; i <= 6; i++)
-				{
-					std::cout << (char)i << " ";
-				}
-				for (int i = 0; i < 18; i++)
-				{
-					std::cout << std::endl;
-				}
-				//Sleep(5000);
-				exit(0);
+					// should quit the program, but cant get it working with exit()
+					system("CLS");
+					for (int i = 0; i < 18; i++)
+					{
+						std::cout << std::endl;
+					}std::cout << std::setw(58);
+					for (int i = 1; i <= 6; i++)
+					{
+						std::cout << (char)i << " ";
+					}
+					for (int i = 0; i < 18; i++)
+					{
+						std::cout << std::endl;
+					}
+					//Sleep(5000);
+					exit(0);
 				}
 				else if (options_move == 27) {
-				system("CLS");
-				print_game_title();
-				print_options();
+					system("CLS");
+					print_game_title();
+					print_options();
 				}
 				else if (options_move == -32) {
-				upordown = _getch();
-				switch (upordown) {
-				case 72:
-					if (arrow_row > 0) {
-						arrow_row--;
+					upordown = _getch();
+					switch (upordown) {
+					case 72:
+						if (arrow_row > 0) {
+							arrow_row--;
+						}
+						break;
+					case 80:
+						if (arrow_row < options_row - 1) {
+							arrow_row++;
+						}
+						break;
 					}
-					break;
-				case 80:
-					if (arrow_row < options_row - 1) {
-						arrow_row++;
-					}
-					break;
-				}
-				system("CLS");
-				print_game_title();
-				print_options();
+					system("CLS");
+					print_game_title();
+					print_options();
 				}
 			}
 		}
@@ -306,190 +303,58 @@ public:
 
 		for (int k = 0; k < 19; k++)
 		{
-			std::cout << std::setw(30)/* << (char)a++*/;		// prints out the letter A and sets spacing for the board
+			std::cout << std::setw(30);		// sets the spacing for the board, where it will start to print. changing the number in setw will break everything on the board
 			for (int l = 0; l < 23; l++)
-			{
-				if (player_board[k][l] == '*')			// if theres a '*' on a board, change it to an ASCII Character
-				{
-					std::cout << (char)247 << " ";
-				}
-				else if (player_board[k][l] == '#')
-				{
-					std::cout << (char)179 << " ";
-				}
-				else if (player_board[k][l] == '@')
-				{
-					std::cout << (char)195;
-				}
-				else if (player_board[k][l] == '_')
-				{
-					std::cout << (char)32;
-				}
-				else if (player_board[k][l] == '-')
-				{
-					std::cout << (char)196 << (char)196 << (char)196;
-				}
-				else if (player_board[k][l] == '^')
-				{
-					std::cout << (char)197;
-				}
-				else if (player_board[k][l] == '$')
-				{
-					std::cout << (char)180 << " ";
-				}
-				else if (player_board[k][l] == 'P')
-				{
-					std::cout << (char)80 << " ";
-				}
-				else if (player_board[k][l] == 'S')
-				{
-					std::cout << (char)83 << " ";
-				}
-				else if (player_board[k][l] == 'C')
-				{
-					std::cout << (char)67 << " ";
-				}
-				else if (player_board[k][l] == 'B')
-				{
-					std::cout << (char)66 << " ";
-				}
-				else if (player_board[k][l] == 'A')
-				{
-					std::cout << (char)65 << " ";
-				}
-				else if (player_board[k][l] == '!')
-				{
-					std::cout << (char)33 << " ";
-				}
-				else if (player_board[k][l] == '$')
-				{
-					std::cout << (char)237 << " ";
-				}
-				else if (player_board[k][l] == 'a')
-				{
-					std::cout << (char)65;
-				}
-				else if (player_board[k][l] == 'b')
-				{
-					std::cout << (char)66;
-				}
-				else if (player_board[k][l] == 'c')
-				{
-					std::cout << (char)67;
-				}
-				else if (player_board[k][l] == 'd')
-				{
-					std::cout << (char)68;
-				}
-				else if (player_board[k][l] == 'e')
-				{
-					std::cout << (char)69;
-				}
-				else if (player_board[k][l] == 'f')
-				{
-					std::cout << (char)70;
-				}
-				else if (player_board[k][l] == 'g')
-				{
-					std::cout << (char)71;
-				}
-				else if (player_board[k][l] == 'h')
-				{
-					std::cout << (char)72;
-				}
-				else if (player_board[k][l] == 'i')
-				{
-					std::cout << (char)73;
-				}
-				else if (player_board[k][l] == 'j')
-				{
-					std::cout << (char)74;
-				}
+			{	// if theres a character set on a board, we will change it to an ASCII Character
+				if (player_board[k][l] == '*') { std::cout << (char)247 << " "; }
+				else if (player_board[k][l] == '#') { std::cout << (char)179 << " "; }
+				else if (player_board[k][l] == '@') { std::cout << (char)195; }
+				else if (player_board[k][l] == '_') { std::cout << (char)32; }
+				else if (player_board[k][l] == '-') { std::cout << (char)196 << (char)196 << (char)196; }
+				else if (player_board[k][l] == '^') { std::cout << (char)197; }
+				else if (player_board[k][l] == '$') { std::cout << (char)180 << " "; }
+				else if (player_board[k][l] == 'P') { std::cout << (char)80 << " "; }
+				else if (player_board[k][l] == 'S') { std::cout << (char)83 << " "; }
+				else if (player_board[k][l] == 'C') { std::cout << (char)67 << " "; }
+				else if (player_board[k][l] == 'B') { std::cout << (char)66 << " "; }
+				else if (player_board[k][l] == 'A') { std::cout << (char)65 << " "; }
+				else if (player_board[k][l] == '!') { std::cout << (char)33 << " "; }
+				else if (player_board[k][l] == '$') { std::cout << (char)237 << " "; }
+				else if (player_board[k][l] == 'a') { std::cout << (char)65; }
+				else if (player_board[k][l] == 'b') { std::cout << (char)66; }
+				else if (player_board[k][l] == 'c') { std::cout << (char)67; }
+				else if (player_board[k][l] == 'd') { std::cout << (char)68; }
+				else if (player_board[k][l] == 'e') { std::cout << (char)69; }
+				else if (player_board[k][l] == 'f') { std::cout << (char)70; }
+				else if (player_board[k][l] == 'g') { std::cout << (char)71; }
+				else if (player_board[k][l] == 'h') { std::cout << (char)72; }
+				else if (player_board[k][l] == 'i') { std::cout << (char)73; }
+				else if (player_board[k][l] == 'j') { std::cout << (char)74; }
 			}
-			std::cout << std::setw(17); /*<< (char)b++;*/
+			std::cout << std::setw(17);
 			for (int m = 0; m < 23; m++) {
-				if (player_atk_radar[k][m] == '*')
-				{
-					std::cout << (char)247 << " ";
-				}
-				else if (player_atk_radar[k][m] == '#')
-				{
-					std::cout << (char)179 << " ";
-				}
-				else if (player_atk_radar[k][m] == '@')
-				{
-					std::cout << (char)195;
-				}
-				else if (player_atk_radar[k][m] == '-')
-				{
-					std::cout << (char)196 << (char)196 << (char)196;
-				}
-				else if (player_atk_radar[k][m] == '^')
-				{
-					std::cout << (char)197;
-				}
-				else if (player_atk_radar[k][m] == '$')
-				{
-					std::cout << (char)180 << " ";
-				}
-				else if (player_atk_radar[k][m] == '!')
-				{
-					std::cout << (char)33 << " ";
-				}
-				else if (player_atk_radar[k][m] == 'X')
-				{
-					std::cout << (char)237 << " ";
-				}
-				else if (player_atk_radar[k][m] == '_')
-				{
-					std::cout << (char)32;
-				}
-				else if (player_atk_radar[k][m] == 'a')
-				{
-					std::cout << (char)65;
-				}
-				else if (player_atk_radar[k][m] == 'b')
-				{
-					std::cout << (char)66;
-				}
-				else if (player_atk_radar[k][m] == 'c')
-				{
-					std::cout << (char)67;
-				}
-				else if (player_atk_radar[k][m] == 'd')
-				{
-					std::cout << (char)68;
-				}
-				else if (player_atk_radar[k][m] == 'e')
-				{
-					std::cout << (char)69;
-				}
-				else if (player_atk_radar[k][m] == 'f')
-				{
-					std::cout << (char)70;
-				}
-				else if (player_atk_radar[k][m] == 'g')
-				{
-					std::cout << (char)71;
-				}
-				else if (player_atk_radar[k][m] == 'h')
-				{
-					std::cout << (char)72;
-				}
-				else if (player_atk_radar[k][m] == 'i')
-				{							 
-					std::cout << (char)73;	 
-				}							 
-				else if (player_atk_radar[k][m] == 'j')
-				{
-					std::cout << (char)74;
-				}
+				if (player_atk_radar[k][m] == '*') { std::cout << (char)247 << " "; }
+				else if (player_atk_radar[k][m] == '#') { std::cout << (char)179 << " "; }
+				else if (player_atk_radar[k][m] == '@') { std::cout << (char)195; }
+				else if (player_atk_radar[k][m] == '-') { std::cout << (char)196 << (char)196 << (char)196; }
+				else if (player_atk_radar[k][m] == '^') { std::cout << (char)197; }
+				else if (player_atk_radar[k][m] == '$') { std::cout << (char)180 << " "; }
+				else if (player_atk_radar[k][m] == '!') { std::cout << (char)33 << " "; }
+				else if (player_atk_radar[k][m] == 'X') { std::cout << (char)237 << " "; }
+				else if (player_atk_radar[k][m] == '_') { std::cout << (char)32; }
+				else if (player_atk_radar[k][m] == 'a') { std::cout << (char)65; }
+				else if (player_atk_radar[k][m] == 'b') { std::cout << (char)66; }
+				else if (player_atk_radar[k][m] == 'c') { std::cout << (char)67; }
+				else if (player_atk_radar[k][m] == 'd') { std::cout << (char)68; }
+				else if (player_atk_radar[k][m] == 'e') { std::cout << (char)69; }
+				else if (player_atk_radar[k][m] == 'f') { std::cout << (char)70; }
+				else if (player_atk_radar[k][m] == 'g') { std::cout << (char)71; }
+				else if (player_atk_radar[k][m] == 'h') { std::cout << (char)72; }
+				else if (player_atk_radar[k][m] == 'i') { std::cout << (char)73; }
+				else if (player_atk_radar[k][m] == 'j') { std::cout << (char)74; }
 			}
 			std::cout << std::endl;
 		}
-
-		a = 65;					// a = 65 = "A"  sets the character code for the letter A, used to creat the Alphabit part of the board
-		b = 65;					// b = 65 = "A"  sets character code for the letter A, used for the second board Alphabet
 
 		// Bottom Line for both boards.
 		std::cout << std::setw(32) << (char)192 << (char)196 << (char)196 << (char)196;
@@ -514,11 +379,11 @@ public:
 			std::cout << (char)205;
 		}
 		std::cout << (char)187 << std::endl;
-		std::cout << std::setw(60) << (char)186 << "Patrol Boat: " << ptrl_boat_size << std::setw(7) << (char)179 << std::setw(18) << "Patrol Boat: " << player_ptrl_boat_size << (char)186 << std::endl;
-		std::cout << std::setw(60) << (char)186 << "Submarine: " << sub_size << std::setw(9) << (char)179 << std::setw(18) << "Submarine: " << player_sub_size << (char)186 << std::endl;
-		std::cout << std::setw(60) << (char)186 << "Cruiser: " << cruise_size << std::setw(11) << (char)179 << std::setw(18) << "Crusier: " << player_cruise_size << (char)186 << std::endl;
-		std::cout << std::setw(60) << (char)186 << "Carrier: " << ac_size << std::setw(11) << (char)179 << std::setw(18) << "Carrier: " << player_ac_size << (char)186 << std::endl;
-		std::cout << std::setw(60) << (char)186 << "Battleship: " << BS_size << std::setw(8) << (char)179 << std::setw(18) << "Battleship: " << player_BS_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Patrol Boat: " << player_ptrl_boat_size << std::setw(7) << (char)179 << std::setw(18) << "Patrol Boat: " << ptrl_boat_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Submarine: " << player_sub_size << std::setw(9) << (char)179 << std::setw(18) << "Submarine: " << sub_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Cruiser: " << player_cruise_size << std::setw(11) << (char)179 << std::setw(18) << "Crusier: " << cruise_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Carrier: " << player_ac_size << std::setw(11) << (char)179 << std::setw(18) << "Carrier: " << ac_size << (char)186 << std::endl;
+		std::cout << std::setw(60) << (char)186 << "Battleship: " << player_BS_size << std::setw(8) << (char)179 << std::setw(18) << "Battleship: " << BS_size << (char)186 << std::endl;
 		std::cout << std::setw(60) << (char)200;
 		for (int i = 0; i < 40; i++) {
 			std::cout << (char)205;
@@ -749,7 +614,7 @@ public:
 	// assigns the values of the players inputs to code so the program can 'check' that space when called 
 	void values_of_attack_row_col()
 	{
-		if (player_atk_cords[0] == 'a') { row = 0; }
+		if (player_atk_cords[0] == 'a') { atk_row = 0; }
 		else if (player_atk_cords[0] == 'b') { atk_row = 2; }
 		else if (player_atk_cords[0] == 'c') { atk_row = 4; }
 		else if (player_atk_cords[0] == 'd') { atk_row = 6; }
@@ -761,7 +626,7 @@ public:
 		else if (player_atk_cords[0] == 'j') { atk_row = 18; }
 		// assigns the value the player entered for the second Coords input, for the second coord input.
 
-		if		(player_atk_cords[1] == '0') { atk_col = 3; }
+		if (player_atk_cords[1] == '0') { atk_col = 3; }
 		else if (player_atk_cords[1] == '1') { atk_col = 5; }
 		else if (player_atk_cords[1] == '2') { atk_col = 7; }
 		else if (player_atk_cords[1] == '3') { atk_col = 9; }
@@ -772,17 +637,18 @@ public:
 		else if (player_atk_cords[1] == '8') { atk_col = 19; }
 		else if (player_atk_cords[1] == '9') { atk_col = 21; }
 	}
-	void assigning_computer_coordinates_to_alphabets() {
-		if		(comp_atk_row == 0) { comp_row = 'a';}
-		else if	(comp_atk_row == 2) { comp_row = 'b';}
-		else if (comp_atk_row == 4) { comp_row = 'c';}
-		else if (comp_atk_row == 6) { comp_row = 'd';}
-		else if (comp_atk_row == 8) { comp_row = 'e';}
-		else if (comp_atk_row == 10) { comp_row = 'f';}
-		else if (comp_atk_row == 12) { comp_row = 'g';}
-		else if (comp_atk_row == 14) { comp_row = 'h';}
-		else if (comp_atk_row == 16) { comp_row = 'i';}
-		else if (comp_atk_row == 18) { comp_row = 'j';}
+	// assigns the computers attack to cords to a letter
+	void comp_cords_to_alpha() {
+		if (first_comp_cord == 0) { comp_row = 'a'; }
+		else if (first_comp_cord == 2) { comp_row = 'b'; }
+		else if (first_comp_cord == 4) { comp_row = 'c'; }
+		else if (first_comp_cord == 6) { comp_row = 'd'; }
+		else if (first_comp_cord == 8) { comp_row = 'e'; }
+		else if (first_comp_cord == 10) { comp_row = 'f'; }
+		else if (first_comp_cord == 12) { comp_row = 'g'; }
+		else if (first_comp_cord == 14) { comp_row = 'h'; }
+		else if (first_comp_cord == 16) { comp_row = 'i'; }
+		else if (first_comp_cord == 18) { comp_row = 'j'; }
 	}
 
 	// Get the computer to randomly place their ships
@@ -790,15 +656,15 @@ public:
 
 		do {
 			system("CLS");
-			for (int i = 0; i < 19; i++) 
+			for (int i = 0; i < 19; i++)
 			{
 				std::cout << std::endl;
 			}
 			std::cout << std::setw(90) << "Waiting For Computer To Set Ships On It's Board.......";
 			valid_comp_ship_pos = true;
 			srand(time(0));
-			comp_row =2*rand() % 20;     // gets a Random even number
-			comp_col =1+(2*rand()) % 20; // gets a Random Odd number
+			comp_row = 2 * rand() % 11;     // gets a Random even number
+			comp_col = 1 + (2 * rand()) % 11; // gets a Random Odd number
 			is_comp_move_valid();			// checks if the space is a *, a * is a valid space to place a ship
 			if (valid_comp_ship_pos == true) {
 				comp_ship++;
@@ -823,11 +689,13 @@ public:
 			}   Sleep(500);
 			std::cout << std::setw(74) << "Get Ready For Battle....";
 			Sleep(500);
+			system("Color 08");
 		}
 	}
 
 	// We need to check if the comps position is valid
-	void is_comp_move_valid() {
+	void is_comp_move_valid() 
+	{
 		// Same code as placing player ships, except this is hidden until the very end
 		if (Comp_board[comp_row][comp_col] == '*')
 		{
@@ -860,7 +728,7 @@ public:
 
 	void comp_h_or_v()
 	{
-		comp_hv = 1 + rand() % 2; // Computer will randomly choose hori or vert
+		comp_hv = rand() % 1 + 1; // Computer will randomly choose hori or vert
 		if (comp_hv == 1)
 		{
 			if (comp_ship == 0 && Comp_board[comp_row][comp_col + 2] == '*')
@@ -872,11 +740,10 @@ public:
 				Comp_board[comp_row][comp_col + 2] = 'S';
 				Comp_board[comp_row][comp_col + 4] = 'S';
 			}
-			else if (comp_ship == 2 && Comp_board[comp_row][comp_col + 2] == '*' && Comp_board[comp_row][comp_col + 4] == '*' && Comp_board[comp_row][comp_col + 6] == '*')
+			else if (comp_ship == 2 && Comp_board[comp_row][comp_col + 2] == '*' && Comp_board[comp_row][comp_col + 4] == '*')
 			{
 				Comp_board[comp_row][comp_col + 2] = 'C';
 				Comp_board[comp_row][comp_col + 4] = 'C';
-				Comp_board[comp_row][comp_col + 6] = 'C';
 			}
 			else if (comp_ship == 3 && Comp_board[comp_row][comp_col + 2] == '*' && Comp_board[comp_row][comp_col + 4] == '*' && Comp_board[comp_row][comp_col + 6] == '*')
 			{
@@ -908,11 +775,10 @@ public:
 				Comp_board[comp_row + 1][comp_col] = 'S';
 				Comp_board[comp_row + 3][comp_col] = 'S';
 			}
-			else if (comp_ship == 2 && Comp_board[comp_row + 1][comp_col] == '*' && Comp_board[comp_row + 3][comp_col] == '*' && Comp_board[comp_row + 5][comp_col] == '*')
+			else if (comp_ship == 2 && Comp_board[comp_row + 1][comp_col] == '*' && Comp_board[comp_row + 3][comp_col] == '*')
 			{
 				Comp_board[comp_row + 1][comp_col] = 'C';
 				Comp_board[comp_row + 3][comp_col] = 'C';
-				Comp_board[comp_row + 5][comp_col] = 'C';
 			}
 			else if (comp_ship == 3 && Comp_board[comp_row + 1][comp_col] == '*' && Comp_board[comp_row + 3][comp_col] == '*' && Comp_board[comp_row + 5][comp_col] == '*')
 			{
@@ -936,9 +802,9 @@ public:
 		}
 		system("CLS");
 	}
-	void player_sets_atk() 
+	void player_sets_atk()
 	{
-		do 
+		do
 		{
 			valid_atk_cord = true;
 			print_player_board_and_attack_radar();
@@ -946,12 +812,12 @@ public:
 			std::cin.getline(player_atk_cords, 11, '\n');
 
 			check_correct_atk_cords();
-			if (comp_piece_on_board == 0) 
+			if (comp_piece_on_board == 0)
 			{
-				for (int i = 0; i < 6; i++) 
+				for (int i = 0; i < 6; i++)
 				{
 					system("CLS");
-					for (int i = 0; i < 19; i++) 
+					for (int i = 0; i < 19; i++)
 					{
 						std::cout << std::endl;
 					}
@@ -960,18 +826,18 @@ public:
 					Sleep(500);
 				}
 			}
-			else if (valid_atk_cord == true) 
+			else if (valid_atk_cord == true)
 			{
 				Sleep(3000);
 				print_player_board_and_attack_radar();
-				//computer_sets_attack();
+				comp_sets_atk();
 			}
 		} while (!valid_atk_cord || comp_piece_on_board > 0);
 	}
 
-	void check_correct_atk_cords() 
+	void check_correct_atk_cords()
 	{
-		if (player_atk_cords[0] < 'a' || player_atk_cords[0] > 'j' || player_atk_cords[1] < '0' || player_atk_cords[1] > '9') 
+		if (player_atk_cords[0] < 'a' || player_atk_cords[0] > 'j' || player_atk_cords[1] < '0' || player_atk_cords[1] > '9')
 		{
 			valid_atk_cord = false;
 			system("CLS");
@@ -980,23 +846,23 @@ public:
 			std::cout << std::setw(98) << "Make Sure The Coordinate Is An Alphabet Followed By A Number. E.g = a3" << std::endl;
 			Sleep(3000);
 		}
-		else 
+		else
 		{
 			values_of_attack_row_col();
 			player_sets_atk_on_board();
 		}
 	}
 
-	void player_sets_atk_on_board() 
+	void player_sets_atk_on_board()
 	{
-		if (player_atk_radar[atk_row][atk_col] == '!' || player_atk_radar[atk_row][atk_col] == '$') 
+		if (player_atk_radar[atk_row][atk_col] == '!' || player_atk_radar[atk_row][atk_col] == '$')
 		{
 			print_player_board_and_attack_radar();
 			std::cout << std::setw(82) << "You Have Already Attacked That Position.";
 			Sleep(3000);
 			valid_atk_cord = false;
 		}
-		else if (Comp_board[atk_row][atk_col] == 'P') 
+		else if (Comp_board[atk_row][atk_col] == 'P')
 		{
 			print_player_board_and_attack_radar();
 			std::cout << std::setw(84) << "You Hit Their Patrol Boat.";
@@ -1004,7 +870,7 @@ public:
 			ptrl_boat_size--;
 			comp_piece_on_board--;
 		}
-		else if (Comp_board[atk_row][atk_col] == 'S') 
+		else if (Comp_board[atk_row][atk_col] == 'S')
 		{
 			print_player_board_and_attack_radar();
 			std::cout << std::setw(84) << "You Hit Their Submarine.";
@@ -1012,7 +878,7 @@ public:
 			sub_size--;
 			comp_piece_on_board--;
 		}
-		else if (Comp_board[atk_row][atk_col] == 'C') 
+		else if (Comp_board[atk_row][atk_col] == 'C')
 		{
 			print_player_board_and_attack_radar();
 			std::cout << std::setw(84) << "You Hit Their Cruiser.";
@@ -1020,15 +886,23 @@ public:
 			cruise_size--;
 			comp_piece_on_board--;
 		}
-		else if (Comp_board[atk_row][atk_col] == 'A') 
+		else if (Comp_board[atk_row][atk_col] == 'A')
 		{
 			print_player_board_and_attack_radar();
 			std::cout << std::setw(84) << "You Hit Their Aircraft Carrier.";
 			player_atk_radar[atk_row][atk_col] = '!';
+			ac_size--;
+			comp_piece_on_board--;
+		}
+		else if (Comp_board[atk_row][atk_col] == 'B')
+		{
+			print_player_board_and_attack_radar();
+			std::cout << std::setw(84) << " You Hit Their Battleship";
+			player_atk_radar[atk_row][atk_col] = '!';
 			BS_size--;
 			comp_piece_on_board--;
 		}
-		else 
+		else
 		{
 			print_player_board_and_attack_radar();
 			std::cout << std::setw(71) << "Nope. You Missed." << std::endl << std::endl;
@@ -1036,26 +910,177 @@ public:
 		}
 
 	}
+
+	void comp_sets_atk()
+	{
+		do
+		{
+			valid_comp_atk_cord = true;
+			comp_atk_row = 2 * rand() % 10;    // Need to change this to get a random even number only
+			comp_atk_col = 2*rand() % 11 +1;	// Need to change this to get an Odd Number only, if the computer fucks up here, it just breaks, I need to add something that will check for an odd number and and even number combo only, else it will say nope and try again
+
+			is_comp_move_valid_on_atk();
+			if (player_piece_on_board == 0)
+			{
+				for (int i = 0; i < 6; i++)
+				{
+					system("CLS");
+					for (int i = 0; i < 19; i++)
+					{
+						std::cout << std::endl;
+					}
+					std::cout << std::setw(60) << name << ", You lost..";
+					Sleep(600);
+				}
+			}
+			else if (valid_comp_atk_cord == true)
+			{
+				Sleep(3000);
+				print_player_board_and_attack_radar();
+				player_sets_atk();
+			}
+		} while (!valid_comp_atk_cord || player_piece_on_board > 0);
+	
+	}
+
+
+	void is_comp_move_valid_on_atk()
+	{
+		do
+		{
+			valid_comp_atk_cord = true;
+
+			if (ptrl_boat_hit == true)
+			{
+				if (player_board[comp_atk_row][comp_atk_col] == 'P') 
+				{ 
+					comp_sets_atk_on_board(); 
+				}
+				else { valid_comp_atk_cord = false; }
+			}			
+			else if (sub_hit == true) {
+				if (player_board[comp_atk_row][comp_atk_col] == 'S') { comp_sets_atk_on_board(); }
+				else { valid_comp_atk_cord = false; }
+			}
+			else if (cruise_hit == true) {
+				if (player_board[comp_atk_row][comp_atk_col] == 'C') { comp_sets_atk_on_board(); }
+				else { valid_comp_atk_cord = false; }
+			}
+			else if (ac_hit == true)
+			{
+				if (player_board[comp_atk_row][comp_atk_col] == 'A') { comp_sets_atk_on_board(); }
+				else { valid_comp_atk_cord = false; }
+			}
+			else if (BS_hit == true)
+			{
+				if (player_board[comp_atk_row][comp_atk_col] == 'B') { comp_sets_atk_on_board(); }
+				else { valid_comp_atk_cord = false; }
+			}
+			if (ptrl_boat_hit == false && sub_hit == false && cruise_hit == false && ac_hit == false && BS_hit == false)
+			{
+				comp_sets_atk_on_board();
+			}
+
+		} while (!valid_comp_atk_cord || player_piece_on_board > 0);
+
+	}
+	void comp_sets_atk_on_board() 
+	{
+		comp_cords_to_alpha();
+		if (player_board[comp_atk_row][comp_atk_col] == 'P')
+		{
+			std::cout << std::setw(82) << "The Computer Has Hit Your Patrol Boat: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			ptrl_boat_hit = true;
+			player_board[comp_atk_row][comp_atk_col] = '!';
+			player_piece_on_board--;
+			player_ptrl_boat_size--;
+		}
+		else if (player_board[comp_atk_row][comp_atk_col] == 'S') 
+		{
+			std::cout << std::setw(81) << "The Computer Has Hit Your Submarine: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			sub_hit = true;
+			player_board[comp_atk_row][comp_atk_col] = '!';
+			player_piece_on_board--;
+			player_sub_size--;
+		}
+		else if (player_board[comp_atk_row][comp_atk_col] == 'C')
+		{
+			std::cout << std::setw(81) << "The Computer Has Hit Your Cruiser: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			cruise_hit = true;
+			player_board[comp_atk_row][comp_atk_col] = '!';
+			player_piece_on_board--;
+			player_cruise_size--;
+		}
+		else if (player_board[comp_atk_row][comp_atk_col] == 'A')
+		{
+			std::cout << std::setw(81) << "The Computer Has Hit Your Aircraft Carrier: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			ac_hit = true;
+			player_board[comp_atk_row][comp_atk_col] = '!';
+			player_piece_on_board--;
+			player_ac_size--;
+		}
+		else if (player_board[comp_atk_row][comp_atk_col] == 'B')
+		{
+			std::cout << std::setw(81) << "The Computer Has Hit Your Battleship: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			BS_hit = true;
+			player_board[comp_atk_row][comp_atk_col] = '!';
+			player_piece_on_board--;
+			player_BS_size--;
+		}
+		else if (player_board[comp_atk_row][comp_atk_col] == '*')
+		{
+			std::cout << std::setw(73) << "The Computer Missed: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			player_board[comp_atk_row][comp_atk_col] = '$';
+		}
+		else 
+		{
+			valid_comp_atk_cord = false;
+		}
+		clear_hit();
+		if (player_piece_on_board == 0) 
+		{
+			for (int i = 0; i < 6; i++) {
+				system("CLS");
+				system("Color 2E");
+				for (int i = 0; i < 19; i++) 
+				{
+					std::cout << std::endl;
+				}
+				Sleep(500);
+				std::cout << std::setw(72) << "The Computer Wins!!!" << std::endl;
+				Sleep(500);
+			}
+			//print_computer_board();
+		}
+		else if (valid_comp_atk_cord == true) 
+		{
+			clear_hit();
+			Sleep(3000);
+			player_sets_atk();
+		}
+	}
+
+
 	// Clears the status of ships after the game is done, to play again.
 	void clear_hit()
 	{
-		if (player_BS_size == 0)
+		if (BS_size == 0)
 		{
 			BS_hit = false;
 		}
-		if (player_sub_size == 0)
+		if (sub_size == 0)
 		{
 			sub_hit = false;
 		}
-		if (player_ptrl_boat_size == 0)
+		if (ptrl_boat_size == 0)
 		{
 			ptrl_boat_hit = false;
 		}
-		if (player_ac_size == 0)
+		if (ac_size == 0)
 		{
 			ac_hit = false;
 		}
-		if (player_cruise_size == 0)
+		if (cruise_size == 0)
 		{
 			cruise_hit = false;
 		}
@@ -1074,7 +1099,7 @@ public:
 				player_board[i][j] == 'A' || Comp_board[i][j] == 'A' ||
 				player_board[i][j] == 'B' || Comp_board[i][j] == 'B' ||
 				player_board[i][j] == '!' || player_atk_radar[i][j] == '!' ||
-				player_board[i][j] == 'X' || player_atk_radar[i][j] == 'X') 
+				player_board[i][j] == '$' || player_atk_radar[i][j] == '$') 
 				{
 					player_board[i][j] = '*';
 					Comp_board[i][j] = '*';
