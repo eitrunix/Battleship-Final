@@ -140,7 +140,7 @@ private:
 
 	char options_move;
 	char upordown;				// for Using the menu, to go up or down
-	char first_comp_cord;		// to check the first part of the computers "firing" cords
+	char aplha_comp_atk;		// to check the first part of the computers "firing" cords, used to change the number we generate to a letter...its not working wtf???
 
 	int ship_number = 0;		// Number of ships left in the game
 	int comp_ship = 0;			// Number of computer  ships left in the game
@@ -162,6 +162,8 @@ private:
 	std::string name;				// for entering the players name
 
 public:
+
+	
 	/*HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);   Used for changing the colours of text, background ect, might not be used*/
 
 	// Prints the game title at the top-middle of the page
@@ -331,7 +333,7 @@ public:
 				else if (player_board[k][l] == 'i') { std::cout << (char)73; }
 				else if (player_board[k][l] == 'j') { std::cout << (char)74; }
 			}
-			std::cout << std::setw(17);
+			std::cout << std::setw(17); // Adds spaces betweeen the boards
 			for (int m = 0; m < 23; m++) {
 				if (player_atk_radar[k][m] == '*') { std::cout << (char)247 << " "; }
 				else if (player_atk_radar[k][m] == '#') { std::cout << (char)179 << " "; }
@@ -356,7 +358,7 @@ public:
 			std::cout << std::endl;
 		}
 
-		// Bottom Line for both boards.
+		// Bottom Line for both boards. 
 		std::cout << std::setw(32) << (char)192 << (char)196 << (char)196 << (char)196;
 		for (int o = 0; o < 9; o++)
 		{
@@ -369,15 +371,16 @@ public:
 		}
 		std::cout << (char)217 << std::endl << std::endl;
 	}
-
+	// Print the name of each ship, in a list, then the ammount of "hits" left on each ship, so the player can keep track easily
 	void display_ship_statuses() {
 		system("CLS");
-		std::cout << std::setw(80) << "Computer's Ship Status " << (char)179 << std::setw(2) << " " << name << "'s Ship Status" << std::endl;
+		std::cout << std::setw(80) << name << "'s Ship Status"  << (char)179 << std::setw(2) << " " << "Computer's Ship Status " << std::endl;
 		std::cout << std::setw(60) << (char)201;
 		for (int i = 0; i < 40; i++)
 		{
-			std::cout << (char)205;
+			std::cout << (char)205;			// Create a top line to box in the Status "screen"
 		}
+		// X_size is the number of hits on each ship, so it should print out "| Patrol Boat: 2      |        Patrol Boat: 2 |" for each ship and line respectively
 		std::cout << (char)187 << std::endl;
 		std::cout << std::setw(60) << (char)186 << "Patrol Boat: " << player_ptrl_boat_size << std::setw(7) << (char)179 << std::setw(18) << "Patrol Boat: " << ptrl_boat_size << (char)186 << std::endl;
 		std::cout << std::setw(60) << (char)186 << "Submarine: " << player_sub_size << std::setw(9) << (char)179 << std::setw(18) << "Submarine: " << sub_size << (char)186 << std::endl;
@@ -386,7 +389,7 @@ public:
 		std::cout << std::setw(60) << (char)186 << "Battleship: " << player_BS_size << std::setw(8) << (char)179 << std::setw(18) << "Battleship: " << BS_size << (char)186 << std::endl;
 		std::cout << std::setw(60) << (char)200;
 		for (int i = 0; i < 40; i++) {
-			std::cout << (char)205;
+			std::cout << (char)205;			// Bottom line, looping so I dont need to hit (char)205 40 times.
 		}
 		std::cout << (char)188 << std::endl;
 
@@ -400,7 +403,7 @@ public:
 			// we leave the loop if ship_number is 5 of greater
 			valid_ship_pos = true;
 			if (ship_number == 0)
-			{
+			{		// do... do I need to comment these?
 				std::cout << std::setw(109) << "Enter The Coordinate For Your Patrol Boat (2 spots): ";
 			}
 			else if (ship_number == 1)
@@ -419,15 +422,15 @@ public:
 			{
 				std::cout << std::setw(100) << "Enter the Coordinate For Your Battleship (5 spots): ";
 			}
-			std::cin.getline(player_ship_cords, 11, '\n');
+			std::cin.getline(player_ship_cords, 11, '\n');  // Ask for the players input in cords,
 			std::cout << std::endl << std::endl;
-			check_cords();
-			print_player_board_and_attack_radar();
+			check_cords();									// Check if its a valid placement
+			print_player_board_and_attack_radar();			// Reprint the new board with the new piece on it.
 			if (valid_ship_pos == true)
 			{
-				ship_number++;
+				ship_number++;								// If we did place a ship, we add to the ship number, so we dont end up placing more ships than we need (0-4)
 			}
-		} while (!valid_ship_pos || ship_number < 5);
+		} while (!valid_ship_pos || ship_number < 5); //do this while valid_ship_pos is false and the ship number is less than 5
 	}
 
 	void check_cords()
@@ -442,7 +445,9 @@ public:
 			Sleep(1000);
 		}
 		else {
+			// Check the values of the rows and colums to match with the input.
 			values_of_row_col();
+			// check if the position specified is empty or not
 			check_for_valid_cell();
 		}
 	}
@@ -475,14 +480,14 @@ public:
 		}
 		else
 		{
-			// reprint the board, 
+			// reprint the board, tell the player they stupid and already did that.
 			print_player_board_and_attack_radar();
 			std::cout << std::setw(92) << "Sorry, It Seems Like That Spot Has Already Been Occupied." << std::endl << std::endl;
 			Sleep(3000);
 			valid_ship_pos = false;
 		}
 	}
-
+	// Placing the Ships Horizontally or Vertically
 	void player_h_or_v()
 	{
 		print_player_board_and_attack_radar();
@@ -510,7 +515,7 @@ public:
 				player_board[row][col + 2] = 'C';
 				player_board[row][col + 4] = 'C';
 			}
-			// I dont think I need to keep commenting these, I know what they do.
+			// I dont think I need to keep commenting these, We know what they do.
 			else if (ship_number == 3 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*' && player_board[row][col + 6] == '*')
 			{
 				player_board[row][col + 2] = 'A';
@@ -527,11 +532,11 @@ public:
 			else
 
 			{ // if any space is occupied Not enough space to place
-				print_player_board_and_attack_radar();
-				std::cout << std::setw(95) << "Sorry, Not Enough Space To Set It Horizontally." << std::endl << std::endl;
-				Sleep(3000);
-				player_board[row][col] = '*';
-				valid_ship_pos = false;
+				print_player_board_and_attack_radar();		//reprint board
+				std::cout << std::setw(95) << "Sorry, Not Enough Space To Set It Horizontally." << std::endl << std::endl; //yell at player
+				Sleep(3000);	//pause to make the game look fancy... it doesnt but whateve
+				player_board[row][col] = '*'; // make sure the space is a * still
+				valid_ship_pos = false;				// set valid_ship_pos to false so we run through the loop again
 			}
 		}
 		else if (Hori_or_Vert[0] == 'v')
@@ -587,8 +592,8 @@ public:
 	// Assign the vales of the colums to the letters, so the computer knows what cords are where
 	void values_of_row_col()
 	{
-		if (player_ship_cords[0] == 'a') { row = 0; }
-		else if (player_ship_cords[0] == 'b') { row = 2; }
+		if (player_ship_cords[0] == 'a') { row = 0; }				// If the player enters 'a' as the first coords, the computer will know its actually position 0 in the array, repeat for each
+		else if (player_ship_cords[0] == 'b') { row = 2; }			// rows are 
 		else if (player_ship_cords[0] == 'c') { row = 4; }
 		else if (player_ship_cords[0] == 'd') { row = 6; }
 		else if (player_ship_cords[0] == 'e') { row = 8; }
@@ -637,40 +642,46 @@ public:
 		else if (player_atk_cords[1] == '8') { atk_col = 19; }
 		else if (player_atk_cords[1] == '9') { atk_col = 21; }
 	}
-	// assigns the computers attack to cords to a letter
-	void comp_cords_to_alpha() {
-		if (first_comp_cord == 0) { comp_row = 'a'; }
-		else if (first_comp_cord == 2) { comp_row = 'b'; }
-		else if (first_comp_cord == 4) { comp_row = 'c'; }
-		else if (first_comp_cord == 6) { comp_row = 'd'; }
-		else if (first_comp_cord == 8) { comp_row = 'e'; }
-		else if (first_comp_cord == 10) { comp_row = 'f'; }
-		else if (first_comp_cord == 12) { comp_row = 'g'; }
-		else if (first_comp_cord == 14) { comp_row = 'h'; }
-		else if (first_comp_cord == 16) { comp_row = 'i'; }
-		else if (first_comp_cord == 18) { comp_row = 'j'; }
+	// assigns the computers first coord seclection to cords to a letter
+	// just looks better for the player
+	void comp_cords_to_alpha() 
+	{
+		if		(comp_atk_row == 0) { comp_row = 'a'; }
+		else if (comp_atk_row == 2) { comp_row = 'b'; }
+		else if (comp_atk_row == 4) { comp_row = 'c'; }
+		else if (comp_atk_row == 6) { comp_row = 'd'; }
+		else if (comp_atk_row == 8) { comp_row = 'e'; }
+		else if (comp_atk_row == 10) { comp_row = 'f'; }
+		else if (comp_atk_row == 12) { comp_row = 'g'; }
+		else if (comp_atk_row == 14) { comp_row = 'h'; }
+		else if (comp_atk_row == 16) { comp_row = 'i'; }
+		else if (comp_atk_row == 18) { comp_row = 'j'; }
 	}
 
 	// Get the computer to randomly place their ships
 	void take_comp_input() {
 
 		do {
+
+			// clear the screen, makes it look like a 'loading screen' a bit... Probably shouldnt do it this way tbh but it works
 			system("CLS");
 			for (int i = 0; i < 19; i++)
 			{
 				std::cout << std::endl;
 			}
 			std::cout << std::setw(90) << "Waiting For Computer To Set Ships On It's Board.......";
-			valid_comp_ship_pos = true;
+
+			valid_comp_ship_pos = true;			// sets to true at start, in is_comp_move_valid we may change it back to run this again but the numbers generated suck
 			srand(time(0));
-			comp_row = 2 * rand() % 11;     // gets a Random even number
-			comp_col = 1 + (2 * rand()) % 11; // gets a Random Odd number
-			is_comp_move_valid();			// checks if the space is a *, a * is a valid space to place a ship
+			comp_row = 2 * rand() % 11;			// gets a Random even number
+			comp_col = 1 + (2 * rand()) % 11;	// gets a Random Odd number
+			is_comp_move_valid();				// checks if the space is a *, a * is a valid space to place a ship
 			if (valid_comp_ship_pos == true) {
 				comp_ship++;
 			}
 		} while (comp_ship < 5 || !valid_comp_ship_pos);
 
+		// Tell the player the computer is done and ready, and its their turn to place ships
 		system("CLS");
 		for (int i = 0; i < 19; i++) {
 			std::cout << std::endl;
@@ -679,7 +690,7 @@ public:
 		Sleep(3000);
 		system("CLS");
 	}
-
+	// Tell the player to get ready, change the colour to red for flashy effect then back to white .. or grey cause I dont know what white is and it looks good enough for me
 	void tell_player_shits_about_to_get_real() {
 		for (int i = 0; i < 4; i++) {
 			system("CLS");
@@ -696,7 +707,7 @@ public:
 	// We need to check if the comps position is valid
 	void is_comp_move_valid() 
 	{
-		// Same code as placing player ships, except this is hidden until the very end
+		// checks the array for an empty space '*' to place ships in, its empty we can place the current ships character at the position, this is for the cvomputer so we dont see this
 		if (Comp_board[comp_row][comp_col] == '*')
 		{
 			if (comp_ship == 0)
@@ -719,10 +730,10 @@ public:
 			{
 				Comp_board[comp_row][comp_col] = 'B';
 			}
-			comp_h_or_v();
+			comp_h_or_v(); // same a player. let them place horizontally or vertically
 		}
 		else {
-			valid_comp_ship_pos = false;
+			valid_comp_ship_pos = false; // if the space isnt empty, try again
 		}
 	}
 
@@ -730,7 +741,7 @@ public:
 	{
 		comp_hv = rand() % 1 + 1; // Computer will randomly choose hori or vert
 		if (comp_hv == 1)
-		{
+		{		// this is the same as the players h_or_v but for the Compter.
 			if (comp_ship == 0 && Comp_board[comp_row][comp_col + 2] == '*')
 			{
 				Comp_board[comp_row][comp_col + 2] = 'P';
@@ -802,6 +813,7 @@ public:
 		}
 		system("CLS");
 	}
+
 	void player_sets_atk()
 	{
 		do
@@ -911,85 +923,69 @@ public:
 
 	}
 
+
+	void computer_move_is_valid() {
+		if (Comp_board[comp_row][comp_col] == '*')
+		{
+			if (comp_ship == 0) { Comp_board[comp_row][comp_col] = 'P'; }
+			else if (comp_ship == 1) { Comp_board[comp_row][comp_col] = 'S'; }
+			else if (comp_ship == 2) { Comp_board[comp_row][comp_col] = 'C'; }
+			else if (comp_ship == 3) { Comp_board[comp_row][comp_col] = 'A'; }
+			else if (comp_ship == 4) { Comp_board[comp_row][comp_col] = 'B'; }
+			comp_h_or_v();
+		}
+		else {
+			valid_comp_ship_pos = false;
+		}
+	}
 	void comp_sets_atk()
 	{
 		do
 		{
+			// Sets valid_comp_atk_cord to true
 			valid_comp_atk_cord = true;
-			comp_atk_row = 2 * rand() % 10;    // Need to change this to get a random even number only
-			comp_atk_col = 2*rand() % 11 +1;	// Need to change this to get an Odd Number only, if the computer fucks up here, it just breaks, I need to add something that will check for an odd number and and even number combo only, else it will say nope and try again
+			comp_atk_row = (rand() % 10) * 2;		// Generates a Random even number between 0-8
+			comp_atk_col = ((rand() % 10) * 2) + 1;  // Generates a Random ODD number between 1-9
 
-			is_comp_move_valid_on_atk();
-			if (player_piece_on_board == 0)
-			{
-				for (int i = 0; i < 6; i++)
-				{
-					system("CLS");
-					for (int i = 0; i < 19; i++)
-					{
-						std::cout << std::endl;
-					}
-					std::cout << std::setw(60) << name << ", You lost..";
-					Sleep(600);
-				}
-			}
-			else if (valid_comp_atk_cord == true)
-			{
-				Sleep(3000);
-				print_player_board_and_attack_radar();
-				player_sets_atk();
-			}
-		} while (!valid_comp_atk_cord || player_piece_on_board > 0);
-	
-	}
-
-
-	void is_comp_move_valid_on_atk()
-	{
-		do
-		{
-			valid_comp_atk_cord = true;
-
+			// If the location targeted is P, S, C, A or B. The we know it hit a ship and can move to changing the board
 			if (ptrl_boat_hit == true)
 			{
-				if (player_board[comp_atk_row][comp_atk_col] == 'P') 
-				{ 
-					comp_sets_atk_on_board(); 
-				}
-				else { valid_comp_atk_cord = false; }
-			}			
-			else if (sub_hit == true) {
-				if (player_board[comp_atk_row][comp_atk_col] == 'S') { comp_sets_atk_on_board(); }
+				if (player_board[comp_atk_row][comp_atk_col] == 'P') { comp_sets_atk_onboard(); }
 				else { valid_comp_atk_cord = false; }
 			}
-			else if (cruise_hit == true) {
-				if (player_board[comp_atk_row][comp_atk_col] == 'C') { comp_sets_atk_on_board(); }
+			else if (sub_hit == true)
+			{
+				if (player_board[comp_atk_row][comp_atk_col] == 'S') { comp_sets_atk_onboard(); }
+				else { valid_comp_atk_cord = false; }
+			}
+			else if (cruise_hit == true)
+			{
+				if (player_board[comp_atk_row][comp_atk_col] == 'C') { comp_sets_atk_onboard(); }
 				else { valid_comp_atk_cord = false; }
 			}
 			else if (ac_hit == true)
 			{
-				if (player_board[comp_atk_row][comp_atk_col] == 'A') { comp_sets_atk_on_board(); }
+				if (player_board[comp_atk_row][comp_atk_col] == 'A') { comp_sets_atk_onboard(); }
 				else { valid_comp_atk_cord = false; }
 			}
 			else if (BS_hit == true)
 			{
-				if (player_board[comp_atk_row][comp_atk_col] == 'B') { comp_sets_atk_on_board(); }
+				if (player_board[comp_atk_row][comp_atk_col] == 'B') { comp_sets_atk_onboard(); }
 				else { valid_comp_atk_cord = false; }
 			}
 			if (ptrl_boat_hit == false && sub_hit == false && cruise_hit == false && ac_hit == false && BS_hit == false)
 			{
-				comp_sets_atk_on_board();
+				comp_sets_atk_onboard();
 			}
-
 		} while (!valid_comp_atk_cord || player_piece_on_board > 0);
-
 	}
-	void comp_sets_atk_on_board() 
+
+	void comp_sets_atk_onboard() 
 	{
 		comp_cords_to_alpha();
 		if (player_board[comp_atk_row][comp_atk_col] == 'P')
 		{
-			std::cout << std::setw(82) << "The Computer Has Hit Your Patrol Boat: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			std::cout << std::setw(82) << "The Computer Has Hit Your Patrol Boat: " << aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
 			ptrl_boat_hit = true;
 			player_board[comp_atk_row][comp_atk_col] = '!';
 			player_piece_on_board--;
@@ -997,7 +993,7 @@ public:
 		}
 		else if (player_board[comp_atk_row][comp_atk_col] == 'S') 
 		{
-			std::cout << std::setw(81) << "The Computer Has Hit Your Submarine: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			std::cout << std::setw(81) << "The Computer Has Hit Your Submarine: " << aplha_comp_atk << (comp_atk_col/2)  << std::endl << std::endl;
 			sub_hit = true;
 			player_board[comp_atk_row][comp_atk_col] = '!';
 			player_piece_on_board--;
@@ -1005,7 +1001,7 @@ public:
 		}
 		else if (player_board[comp_atk_row][comp_atk_col] == 'C')
 		{
-			std::cout << std::setw(81) << "The Computer Has Hit Your Cruiser: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			std::cout << std::setw(81) << "The Computer Has Hit Your Cruiser: " << aplha_comp_atk << (comp_atk_col/2)  << std::endl << std::endl;
 			cruise_hit = true;
 			player_board[comp_atk_row][comp_atk_col] = '!';
 			player_piece_on_board--;
@@ -1013,7 +1009,7 @@ public:
 		}
 		else if (player_board[comp_atk_row][comp_atk_col] == 'A')
 		{
-			std::cout << std::setw(81) << "The Computer Has Hit Your Aircraft Carrier: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			std::cout << std::setw(81) << "The Computer Has Hit Your Aircraft Carrier: " << aplha_comp_atk << (comp_atk_col/2)  << std::endl << std::endl;
 			ac_hit = true;
 			player_board[comp_atk_row][comp_atk_col] = '!';
 			player_piece_on_board--;
@@ -1021,7 +1017,7 @@ public:
 		}
 		else if (player_board[comp_atk_row][comp_atk_col] == 'B')
 		{
-			std::cout << std::setw(81) << "The Computer Has Hit Your Battleship: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			std::cout << std::setw(81) << "The Computer Has Hit Your Battleship: " << aplha_comp_atk << (comp_atk_col/2)  << std::endl << std::endl;
 			BS_hit = true;
 			player_board[comp_atk_row][comp_atk_col] = '!';
 			player_piece_on_board--;
@@ -1029,19 +1025,20 @@ public:
 		}
 		else if (player_board[comp_atk_row][comp_atk_col] == '*')
 		{
-			std::cout << std::setw(73) << "The Computer Missed: " << comp_atk_row << comp_atk_col - 1 << std::endl << std::endl;
+			std::cout << std::setw(73) << "The Computer Missed: " << aplha_comp_atk << (comp_atk_row/2) << std::endl << std::endl;
 			player_board[comp_atk_row][comp_atk_col] = '$';
 		}
 		else 
 		{
 			valid_comp_atk_cord = false;
 		}
+
 		clear_hit();
+
 		if (player_piece_on_board == 0) 
 		{
 			for (int i = 0; i < 6; i++) {
 				system("CLS");
-				system("Color 2E");
 				for (int i = 0; i < 19; i++) 
 				{
 					std::cout << std::endl;
@@ -1054,36 +1051,20 @@ public:
 		}
 		else if (valid_comp_atk_cord == true) 
 		{
-			clear_hit();
 			Sleep(3000);
 			player_sets_atk();
 		}
 	}
 
 
-	// Clears the status of ships after the game is done, to play again.
+	// Clears the status of ships after the ship is destroyed, so we can contine through the loop
 	void clear_hit()
 	{
-		if (BS_size == 0)
-		{
-			BS_hit = false;
-		}
-		if (sub_size == 0)
-		{
-			sub_hit = false;
-		}
-		if (ptrl_boat_size == 0)
-		{
-			ptrl_boat_hit = false;
-		}
-		if (ac_size == 0)
-		{
-			ac_hit = false;
-		}
-		if (cruise_size == 0)
-		{
-			cruise_hit = false;
-		}
+		if (player_ptrl_boat_size == 0) { ptrl_boat_hit = false; }
+		if (player_sub_size == 0) { sub_hit = false; }
+		if (player_cruise_size == 0) { cruise_hit = false; }
+		if (player_ac_size == 0) { ac_hit = false; }
+		if (player_BS_size == 0) { BS_hit = false; }
 
 	}
 	// 'clears' the board
