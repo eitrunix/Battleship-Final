@@ -1,10 +1,17 @@
 #include "Battleships.h"
+#include "Board.h"
+#include "TitleSceen.h"
+#include "Player.h"
+#include "AI.h"
 
+
+TitleScreen t;
+Board b;
 int main()
 {
-	Battleship b;
-	b.print_game_title();
-	b.print_options();
-	b.player_choose_options();
-
+	t.print_game_title();
+	t.print_options();
+	t.player_choose_options();
+	
 }
+
