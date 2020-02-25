@@ -405,6 +405,7 @@ void Board::PlayerPlaceShips()
 			std::cin.getline(player->playerShipCords, 11, '\n');  // Ask for the players input in cords,
 			std::cout << std::endl << std::endl;
 			CheckCords();									// Check if its a valid placement
+			system("CLS");
 			PrintBoards();			// Reprint the new board with the new piece on it.
 			if (player->validShipPos == true)
 			{
