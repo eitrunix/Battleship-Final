@@ -1,23 +1,28 @@
 #include "Piece.h"
 // Sizes of Ships, also hit point values
-void init()
-{
-	Piece::ptrl_boat_size = 2;
-	Piece::player_ptrl_boat_size = 2;
-	Piece::sub_size = 3;
-	Piece::player_sub_size = 3;
-	Piece::cruise_size = 3;
-	Piece::player_cruise_size = 3;
-	Piece::ac_size = 4;
-	Piece::player_ac_size = 4;
-	Piece::BS_size = 5;
-	Piece::player_BS_size = 5;
-	// Variables for each individual ship to check for hits and misses
-	Piece::ptrl_boat_hit = false;
-	Piece::sub_hit = false;
-	Piece::cruise_hit = false;
-	Piece::ac_hit = false;
-	Piece::BS_hit = false;
 
-	Piece::hit = false;			// variable for if something is hit or not.
+Piece::Piece()
+{
+	ptrl_boat_size = 2;
+	player_ptrl_boat_size = 2;
+	sub_size = 3;
+	player_sub_size = 3;
+	cruise_size = 3;
+	player_cruise_size = 3;
+	ac_size = 4;
+	player_ac_size = 4;
+	BS_size = 5;
+	player_BS_size = 5;
+	// Variables for each individual ship to check for hits and misses
+	ptrl_boat_hit = false;
+	sub_hit = false;
+	cruise_hit = false;
+	ac_hit = false;
+	BS_hit = false;
+
+	hit = false;			// variable for if something is hit or not.
+}
+
+Piece::~Piece()
+{
 }

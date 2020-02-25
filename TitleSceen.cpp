@@ -1,15 +1,23 @@
 #include "TitleSceen.h"
-#include"Board.h"
-#include "AI.h"
-#include "Player.h"
-#include <string>
+#include "Board.h"
+#include <iostream>
+#include <iomanip>
 #include <conio.h>
+
+Board* b;
 
 void TitleScreen::BuildTitle() 
 {
 	Options[options_row][options_col];
 	game_title[title_row][title_col];
 	// Fancy fancy art.
+}
+TitleScreen::TitleScreen()
+{
+	b = new Board();
+}
+TitleScreen::~TitleScreen()
+{
 }
 void TitleScreen::print_game_title()
 {
@@ -114,24 +122,17 @@ void TitleScreen::player_choose_options()
 	}
 }
 // Used to get players Name, the loop is used for spacing to try to get the text in the "center" of the screen
-void TitleScreen::enter_playername()
-{
-	for (int i = 0; i < 15; i++)
-	{
-		std::cout << std::endl;
-	}
-	std::cout << std::setw(70) << "Enter Name: ";
-	getline(std::cin, name);
-}
 
 
 void TitleScreen::PlayGame()
 {
 	system("CLS");
-	enter_playername();
-	AI::take_comp_input();
-	Board::print_player_board_and_attack_radar();
-	Player::player_place_ships();
-	Board::tell_player_shits_about_to_get_real();
-	Player::player_sets_atk();
+	b->EnterName();
+	b->DisplayScoreboard();
+	b->FakeLoadingScreeen();
+	b->take_comp_input();
+	b->PrintBoards();
+	b->PlayerPlaceShips();		
+	b->FakeLoadingScreeen();
+	b->PlayerSetAttack();
 }

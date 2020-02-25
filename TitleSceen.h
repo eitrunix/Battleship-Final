@@ -16,13 +16,12 @@ public:
 
 	char options_move;
 	char upordown;				// for Using the menu, to go up or down
-	static std::string name;				// for entering the players name
 	void print_game_title();
 	void print_options();
 	void player_choose_options();
-	void enter_playername();
 	void BuildTitle();
 	void PlayGame();
+
 	char Options[3][14]
 	{
 		{' ', ' ', ' ', 'N', 'E', 'W', ' ', 'G', 'A', 'M', 'E', ' ', ' ', },
