@@ -80,31 +80,6 @@ char Comp_board[19][23] =
 	{'j', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 
 };
-// Display for both game boards that the player will see or interact with. the third grid I build up top will be used after the game is done, if the player loses to show how close they were to winning.
-
-// Check if the cell or cord entered is the * char in the array, if it is then the space is "empty" and we can place a ship, it will then replace the * char with the cooresponding Letter.
-
-
-// The code below is formatted as such so I can read the damn thing easier
-// Assign the vales of the colums to the letters, so the computer knows what cords are where
-
-
-// assigns the values of the players inputs to code so the program can 'check' that space when called 
-
-// assigns the computers first coord seclection to cords to a letter
-// just looks better for the player
-
-// Get the computer to randomly place their ships
-// this is fucked up, its looking for a spot then attacking that position instead of placing the part. 
-
-
-
-// We need to check if the comps position is valid
-
-
-
-
-
 
 Board::Board()
 {
@@ -738,7 +713,7 @@ void Board::PlayerAttack()
 		{
 			Sleep(3000);
 			PrintBoards();
-			AiAttackOnBoard();
+			AIAttack();
 		}
 	} while (!player->validAtkCord || Ai->comp_ship > 0);
 }
