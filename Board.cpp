@@ -80,7 +80,115 @@ char Comp_board[19][23] =
 	{'j', '_', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#', '*', '#',},
 
 };
+// Display for both game boards that the player will see or interact with. the third grid I build up top will be used after the game is done, if the player loses to show how close they were to winning.
+void Board::PrintBoards()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		std::cout << std::endl;					// Spacing between board and the Ship Status
+	}
+	std::cout << std::setw(70) << "0   1   2   3   4   5   6   7   8   9" << std::setw(59) << "0   1   2   3   4   5   6   7   8   9" << std::endl;
+	std::cout << std::setw(32) << (char)218 << (char)196 << (char)196 << (char)196;					// sets where the Top line will start to print
+	for (int j = 0; j < 9; j++)
+	{
+		std::cout << (char)194 << (char)196 << (char)196 << (char)196;						// First boards Top line
+	}
+	std::cout << (char)191 << std::setw(20) << (char)218 << (char)196 << (char)196 << (char)196;		// sets spacing between the top of the boards
 
+	for (int n = 0; n < 9; n++)
+	{
+		std::cout << (char)194 << (char)196 << (char)196 << (char)196;						// Top line of second board
+	}
+	std::cout << (char)191 << std::endl;
+
+	for (int k = 0; k < 19; k++)
+	{
+		std::cout << std::setw(30);		// sets the spacing for the board, where it will start to print. changing the number in setw will break everything on the board
+		for (int l = 0; l < 23; l++)
+		{	// if theres a character set on a board, we will change it to an ASCII Character
+			if (player_board[k][l] == '*') { std::cout << (char)247 << " "; }
+			else if (player_board[k][l] == '#') { std::cout << (char)179 << " "; }
+			else if (player_board[k][l] == '@') { std::cout << (char)195; }
+			else if (player_board[k][l] == '_') { std::cout << (char)32; }
+			else if (player_board[k][l] == '-') { std::cout << (char)196 << (char)196 << (char)196; }
+			else if (player_board[k][l] == '^') { std::cout << (char)197; }
+			else if (player_board[k][l] == '$') { std::cout << (char)180 << " "; }
+			else if (player_board[k][l] == 'P') { std::cout << (char)80 << " "; }
+			else if (player_board[k][l] == 'S') { std::cout << (char)83 << " "; }
+			else if (player_board[k][l] == 'C') { std::cout << (char)67 << " "; }
+			else if (player_board[k][l] == 'B') { std::cout << (char)66 << " "; }
+			else if (player_board[k][l] == 'A') { std::cout << (char)65 << " "; }
+			else if (player_board[k][l] == '!') { std::cout << (char)33 << " "; }
+			else if (player_board[k][l] == '$') { std::cout << (char)237 << " "; }
+			else if (player_board[k][l] == 'a') { std::cout << (char)65; }
+			else if (player_board[k][l] == 'b') { std::cout << (char)66; }
+			else if (player_board[k][l] == 'c') { std::cout << (char)67; }
+			else if (player_board[k][l] == 'd') { std::cout << (char)68; }
+			else if (player_board[k][l] == 'e') { std::cout << (char)69; }
+			else if (player_board[k][l] == 'f') { std::cout << (char)70; }
+			else if (player_board[k][l] == 'g') { std::cout << (char)71; }
+			else if (player_board[k][l] == 'h') { std::cout << (char)72; }
+			else if (player_board[k][l] == 'i') { std::cout << (char)73; }
+			else if (player_board[k][l] == 'j') { std::cout << (char)74; }
+		}
+		std::cout << std::setw(17); // Adds spaces betweeen the boards
+		for (int m = 0; m < 23; m++) {
+			if (player_atk_radar[k][m] == '*') { std::cout << (char)247 << " "; }
+			else if (player_atk_radar[k][m] == '#') { std::cout << (char)179 << " "; }
+			else if (player_atk_radar[k][m] == '@') { std::cout << (char)195; }
+			else if (player_atk_radar[k][m] == '-') { std::cout << (char)196 << (char)196 << (char)196; }
+			else if (player_atk_radar[k][m] == '^') { std::cout << (char)197; }
+			else if (player_atk_radar[k][m] == '$') { std::cout << (char)180 << " "; }
+			else if (player_atk_radar[k][m] == '!') { std::cout << (char)33 << " "; }
+			else if (player_atk_radar[k][m] == 'X') { std::cout << (char)237 << " "; }
+			else if (player_atk_radar[k][m] == '_') { std::cout << (char)32; }
+			else if (player_atk_radar[k][m] == 'a') { std::cout << (char)65; }
+			else if (player_atk_radar[k][m] == 'b') { std::cout << (char)66; }
+			else if (player_atk_radar[k][m] == 'c') { std::cout << (char)67; }
+			else if (player_atk_radar[k][m] == 'd') { std::cout << (char)68; }
+			else if (player_atk_radar[k][m] == 'e') { std::cout << (char)69; }
+			else if (player_atk_radar[k][m] == 'f') { std::cout << (char)70; }
+			else if (player_atk_radar[k][m] == 'g') { std::cout << (char)71; }
+			else if (player_atk_radar[k][m] == 'h') { std::cout << (char)72; }
+			else if (player_atk_radar[k][m] == 'i') { std::cout << (char)73; }
+			else if (player_atk_radar[k][m] == 'j') { std::cout << (char)74; }
+		}
+		std::cout << std::endl;
+	}
+
+	// Bottom Line for both boards. 
+	std::cout << std::setw(32) << (char)192 << (char)196 << (char)196 << (char)196;
+	for (int o = 0; o < 9; o++)
+	{
+		std::cout << (char)193 << (char)196 << (char)196 << (char)196;
+	}
+	std::cout << (char)217 << std::setw(20) << (char)192 << (char)196 << (char)196 << (char)196;
+	for (int p = 0; p < 9; p++)
+	{
+		std::cout << (char)193 << (char)196 << (char)196 << (char)196;
+	}
+	std::cout << (char)217 << std::endl << std::endl;
+}
+void Board::CheckCords()
+{
+	// function to check if the player entered in the correct information or not. should only let letter+number combo eg "A4. While 6A" or "2435234vkj", should come back with please enter valid input
+	if (player->playerShipCords[0] < 'a' || player->playerShipCords[0] > 'j' || player->playerShipCords[1] < '0' || player->playerShipCords[1] > '9')
+	{
+		player->validShipPos = false;					// sets vaild position to false
+		PrintBoards();    // reprint the board
+		std::cout << std::setw(97) << "You entered incorrect Coordinates" << std::endl;
+		std::cout << std::setw(122) << "Make Sure The Coordinate Is An Alphabet Followed By A Number. Eg = a3" << std::endl;
+		Sleep(1000);
+	}
+	else {
+		// Check the values of the rows and colums to match with the input.
+		RowColVals();
+		// check if the position specified is empty or not
+		CheckValidCell();
+	}
+}
+
+// Check if the cell or cord entered is the * char in the array, if it is then the space is "empty" and we can place a ship, it will then replace the * char with the cooresponding Letter.
 void Board::CheckValidCell()
 {
 	if (player_board[row][col] == '*')
@@ -124,7 +232,6 @@ void Board::PlayerHoV()
 	std::cout << std::setw(80) << player->playerShipCords[0] << player->playerShipCords[1] << std::endl << std::endl;
 	std::cout << std::setw(118) << " Enter (h) to set ship Horizontally Or (v) To Set It Vertically: ";
 	std::cin.getline(player->HoV, 20, '\n');
-	// steve this was bullshit, it took me 2 weeks to get this done. I hate it.
 
 	// if we enter h, and ship_number is '0', Ptrl_boat character is used, S for sub, C for Cruiser ect
 	if (player->HoV[0] == 'h')
@@ -220,6 +327,9 @@ void Board::PlayerHoV()
 
 }
 
+// The code below is formatted as such so I can read the damn thing easier
+// Assign the vales of the colums to the letters, so the computer knows what cords are where
+
 void Board::RowColVals()
 {
 	if (player->playerShipCords[0] == 'a') { row = 0; }				// If the player enters 'a' as the first coords, the computer will know its actually position 0 in the array, repeat for each
@@ -246,6 +356,7 @@ void Board::RowColVals()
 	else if (player->playerShipCords[1] == '9') { col = 21; }
 }
 
+// assigns the values of the players inputs to code so the program can 'check' that space when called 
 void Board::RowColAtkVals()
 {
 	if (player->playerAtkCords[0] == 'a') { atkRow = 0; }
@@ -270,6 +381,241 @@ void Board::RowColAtkVals()
 	else if (player->playerAtkCords[1] == '7') { atkCol = 17; }
 	else if (player->playerAtkCords[1] == '8') { atkCol = 19; }
 	else if (player->playerAtkCords[1] == '9') { atkCol = 21; }
+}
+
+// assigns the computers first coord seclection to cords to a letter
+// just looks better for the player
+void Board::AICoordsConvert()
+{
+	if (Ai->comp_atk_row == 0) { compRow = 'a'; }
+	else if (Ai->comp_atk_row == 2) { compRow = 'b'; }
+	else if (Ai->comp_atk_row == 4) { compRow = 'c'; }
+	else if (Ai->comp_atk_row == 6) { compRow = 'd'; }
+	else if (Ai->comp_atk_row == 8) { compRow = 'e'; }
+	else if (Ai->comp_atk_row == 10) { compRow = 'f'; }
+	else if (Ai->comp_atk_row == 12) { compRow = 'g'; }
+	else if (Ai->comp_atk_row == 14) { compRow = 'h'; }
+	else if (Ai->comp_atk_row == 16) { compRow = 'i'; }
+	else if (Ai->comp_atk_row == 18) { compRow = 'j'; }
+}
+
+// Get the computer to randomly place their ships
+// this is fucked up, its looking for a spot then attacking that position instead of placing the part. 
+
+
+void Board::AIInput()
+{
+	do
+	{
+		// Sets valid_comp_atk_cord to true
+		Ai->valid_comp_atk_cord = true;
+		Ai->comp_atk_row = (rand() % 10) * 2;		// Generates a Random even number between 0-8
+		Ai->comp_atk_col = ((rand() % 10) * 2) + 1;  // Generates a Random ODD number between 1-9
+
+		// If the location targeted is P, S, C, A or B. The we know it hit a ship and can move to changing the board
+		if (p->ptrl_boat_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'P')
+			{
+				CompAttack();
+			}
+			else
+			{
+				Ai->valid_comp_atk_cord = false;
+			}
+		}
+		else if (p->sub_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'S')
+			{
+				CompAttack();
+			}
+			else
+			{
+				Ai->valid_comp_atk_cord = false;
+			}
+		}
+		else if (p->cruise_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'C')
+			{
+				CompAttack();
+			}
+			else
+			{
+				Ai->valid_comp_atk_cord = false;
+			}
+		}
+		else if (p->ac_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'A')
+			{
+				CompAttack();
+			}
+			else
+			{
+				Ai->valid_comp_atk_cord = false;
+			}
+		}
+		else if (p->BS_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'B')
+			{
+				CompAttack();
+			}
+			else
+			{
+				Ai->valid_comp_atk_cord = false;
+			}
+		}
+		if (p->ptrl_boat_hit == false && (p->sub_hit == false && (p->cruise_hit == false && (p->ac_hit == false && (p->BS_hit == false)))))
+		{
+			CompAttack();
+		}
+	} while (!Ai->valid_comp_atk_cord || PieceOnBoard_Player > 0);
+}
+
+// We need to check if the comps position is valid
+void Board::CheckValidMoveAI()
+{
+	// checks the array for an empty space '*' to place ships in, its empty we can place the current ships character at the position, this is for the cvomputer so we dont see this
+	if (Comp_board[compRow][compCol] == '*')
+	{
+		if (Ai->comp_ship == 0)
+		{
+			Comp_board[compRow][compCol] = 'P';
+		}
+		else if (Ai->comp_ship == 1)
+		{
+			Comp_board[compRow][compCol] = 'S';
+		}
+		else if (Ai->comp_ship == 2)
+		{
+			Comp_board[compRow][compCol] = 'C';
+		}
+		else if (Ai->comp_ship == 3)
+		{
+			Comp_board[compRow][compCol] = 'A';
+		}
+		else if (Ai->comp_ship == 4)
+		{
+			Comp_board[compRow][compCol] = 'B';
+		}
+		AIHoV(); // same a player. let them place horizontally or vertically
+	}
+	else {
+		Ai->valid_comp_ship_pos = false; // if the space isnt empty, try again
+	}
+}
+
+void Board::AIHoV()
+{
+	Ai->comp_hv = rand() % 1 + 1; // Computer will randomly choose hori or vert
+	if (Ai->comp_hv == 1)
+	{		// this is the same as the players h_or_v but for the Compter.
+		if (Ai->comp_ship == 0 && Comp_board[compRow][compCol + 2] == '*')
+		{
+			Comp_board[compRow][compCol + 2] = 'P';
+		}
+		else if (Ai->comp_ship == 1 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*')
+		{
+			Comp_board[compRow][compCol + 2] = 'S';
+			Comp_board[compRow][compCol + 4] = 'S';
+		}
+		else if (Ai->comp_ship == 2 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*')
+		{
+			Comp_board[compRow][compCol + 2] = 'C';
+			Comp_board[compRow][compCol + 4] = 'C';
+		}
+		else if (Ai->comp_ship == 3 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*' && Comp_board[compRow][compCol + 6] == '*')
+		{
+			Comp_board[compRow][compCol + 2] = 'A';
+			Comp_board[compRow][compCol + 4] = 'A';
+			Comp_board[compRow][compCol + 6] = 'A';
+		}
+		else if (Ai->comp_ship == 4 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*' && Comp_board[compRow][compCol + 6] == '*' && Comp_board[compRow][compCol + 8] == '*')
+		{
+			Comp_board[compRow][compCol = 2] = 'B';
+			Comp_board[compRow][compCol + 4] = 'B';
+			Comp_board[compRow][compCol + 6] = 'B';
+			Comp_board[compRow][compCol + 8] = 'B';
+		}
+		else
+		{
+			Comp_board[compRow][compCol] = '*';
+			Ai->valid_comp_ship_pos = false;
+		}
+	}
+	else if (Ai->comp_hv == 2)
+	{
+		if (Ai->comp_ship == 0 && Comp_board[compRow + 1][compCol] == '*')
+		{
+			Comp_board[compRow + 1][compCol] = 'P';
+		}
+		else if (Ai->comp_ship == 1 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*')
+		{
+			Comp_board[compRow + 1][compCol] = 'S';
+			Comp_board[compRow + 3][compCol] = 'S';
+		}
+		else if (Ai->comp_ship == 2 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*')
+		{
+			Comp_board[compRow + 1][compCol] = 'C';
+			Comp_board[compRow + 3][compCol] = 'C';
+		}
+		else if (Ai->comp_ship == 3 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*' && Comp_board[compRow + 5][compCol] == '*')
+		{
+			Comp_board[compRow + 1][compCol] = 'A';
+			Comp_board[compRow + 3][compCol] = 'A';
+			Comp_board[compRow + 5][compCol] = 'A';
+
+		}
+		else if (Ai->comp_ship == 4 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*' && Comp_board[compRow + 5][compCol] == '*' && Comp_board[compRow + 7][compCol] == '*')
+		{
+			Comp_board[compRow + 1][compCol] = 'B';
+			Comp_board[compRow + 3][compCol] = 'B';
+			Comp_board[compRow + 5][compCol] = 'B';
+			Comp_board[compRow + 7][compCol] = 'B';
+
+		}
+		else {
+			Comp_board[compRow][compCol] = '*';
+			Ai->valid_comp_ship_pos = false;
+		}
+	}
+	system("CLS");
+}
+
+void Board::PlayerSetAttack()
+{
+	do
+	{
+		player->validAtkCord = true;
+		PrintBoards();
+		std::cout << std::setw(76) << "Enter Attack Coordinates: ";
+		std::cin.getline(player->playerAtkCords, 11, '\n');
+
+		CheckPlayerAttack();
+		if (PieceOnBoard_Comp == 0)
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				system("CLS");
+				for (int i = 0; i < 19; i++)
+				{
+					std::cout << std::endl;
+				}
+				Sleep(500);
+				std::cout << std::setw(60) << name << " ,You Won!!!" << std::endl;
+				Sleep(500);
+			}
+		}
+		else if (player->validAtkCord == true)
+		{
+			Sleep(3000);
+			PrintBoards();
+			CompAttack();
+		}
+	} while (!player->validAtkCord || Ai->comp_ship > 0);
 }
 
 void Board::PlayerAttack()
@@ -326,39 +672,6 @@ void Board::PlayerAttack()
 		PrintBoards();
 		std::cout << std::setw(71) << "Nope. You Missed." << std::endl << std::endl;
 		player_atk_radar[atkRow][atkCol] = '$';
-	}
-}
-
-
-void Board::CheckValidMoveAI()
-{
-	// checks the array for an empty space '*' to place ships in, its empty we can place the current ships character at the position, this is for the cvomputer so we dont see this
-	if (Comp_board[compRow][compCol] == '*')
-	{
-		if (Ai->comp_ship == 0)
-		{
-			Comp_board[compRow][compCol] = 'P';
-		}
-		else if (Ai->comp_ship == 1)
-		{
-			Comp_board[compRow][compCol] = 'S';
-		}
-		else if (Ai->comp_ship == 2)
-		{
-			Comp_board[compRow][compCol] = 'C';
-		}
-		else if (Ai->comp_ship == 3)
-		{
-			Comp_board[compRow][compCol] = 'A';
-		}
-		else if (Ai->comp_ship == 4)
-		{
-			Comp_board[compRow][compCol] = 'B';
-		}
-		AIHoV(); // same a player. let them place horizontally or vertically
-	}
-	else {
-		Ai->valid_comp_ship_pos = false; // if the space isnt empty, try again
 	}
 }
 
@@ -450,94 +763,6 @@ void Board::DisplayScoreboard()
 
 }
 
-void Board::PrintBoards()
-{
-	for (int i = 0; i < 3; i++)
-	{
-		std::cout << std::endl;					// Spacing between board and the Ship Status
-	}
-	std::cout << std::setw(70) << "0   1   2   3   4   5   6   7   8   9" << std::setw(59) << "0   1   2   3   4   5   6   7   8   9" << std::endl;
-	std::cout << std::setw(32) << (char)218 << (char)196 << (char)196 << (char)196;					// sets where the Top line will start to print
-	for (int j = 0; j < 9; j++)
-	{
-		std::cout << (char)194 << (char)196 << (char)196 << (char)196;						// First boards Top line
-	}
-	std::cout << (char)191 << std::setw(20) << (char)218 << (char)196 << (char)196 << (char)196;		// sets spacing between the top of the boards
-
-	for (int n = 0; n < 9; n++)
-	{
-		std::cout << (char)194 << (char)196 << (char)196 << (char)196;						// Top line of second board
-	}
-	std::cout << (char)191 << std::endl;
-
-	for (int k = 0; k < 19; k++)
-	{
-		std::cout << std::setw(30);		// sets the spacing for the board, where it will start to print. changing the number in setw will break everything on the board
-		for (int l = 0; l < 23; l++)
-		{	// if theres a character set on a board, we will change it to an ASCII Character
-			if (player_board[k][l] == '*') { std::cout << (char)247 << " "; }
-			else if (player_board[k][l] == '#') { std::cout << (char)179 << " "; }
-			else if (player_board[k][l] == '@') { std::cout << (char)195; }
-			else if (player_board[k][l] == '_') { std::cout << (char)32; }
-			else if (player_board[k][l] == '-') { std::cout << (char)196 << (char)196 << (char)196; }
-			else if (player_board[k][l] == '^') { std::cout << (char)197; }
-			else if (player_board[k][l] == '$') { std::cout << (char)180 << " "; }
-			else if (player_board[k][l] == 'P') { std::cout << (char)80 << " "; }
-			else if (player_board[k][l] == 'S') { std::cout << (char)83 << " "; }
-			else if (player_board[k][l] == 'C') { std::cout << (char)67 << " "; }
-			else if (player_board[k][l] == 'B') { std::cout << (char)66 << " "; }
-			else if (player_board[k][l] == 'A') { std::cout << (char)65 << " "; }
-			else if (player_board[k][l] == '!') { std::cout << (char)33 << " "; }
-			else if (player_board[k][l] == '$') { std::cout << (char)237 << " "; }
-			else if (player_board[k][l] == 'a') { std::cout << (char)65; }
-			else if (player_board[k][l] == 'b') { std::cout << (char)66; }
-			else if (player_board[k][l] == 'c') { std::cout << (char)67; }
-			else if (player_board[k][l] == 'd') { std::cout << (char)68; }
-			else if (player_board[k][l] == 'e') { std::cout << (char)69; }
-			else if (player_board[k][l] == 'f') { std::cout << (char)70; }
-			else if (player_board[k][l] == 'g') { std::cout << (char)71; }
-			else if (player_board[k][l] == 'h') { std::cout << (char)72; }
-			else if (player_board[k][l] == 'i') { std::cout << (char)73; }
-			else if (player_board[k][l] == 'j') { std::cout << (char)74; }
-		}
-		std::cout << std::setw(17); // Adds spaces betweeen the boards
-		for (int m = 0; m < 23; m++) {
-			if (player_atk_radar[k][m] == '*') { std::cout << (char)247 << " "; }
-			else if (player_atk_radar[k][m] == '#') { std::cout << (char)179 << " "; }
-			else if (player_atk_radar[k][m] == '@') { std::cout << (char)195; }
-			else if (player_atk_radar[k][m] == '-') { std::cout << (char)196 << (char)196 << (char)196; }
-			else if (player_atk_radar[k][m] == '^') { std::cout << (char)197; }
-			else if (player_atk_radar[k][m] == '$') { std::cout << (char)180 << " "; }
-			else if (player_atk_radar[k][m] == '!') { std::cout << (char)33 << " "; }
-			else if (player_atk_radar[k][m] == 'X') { std::cout << (char)237 << " "; }
-			else if (player_atk_radar[k][m] == '_') { std::cout << (char)32; }
-			else if (player_atk_radar[k][m] == 'a') { std::cout << (char)65; }
-			else if (player_atk_radar[k][m] == 'b') { std::cout << (char)66; }
-			else if (player_atk_radar[k][m] == 'c') { std::cout << (char)67; }
-			else if (player_atk_radar[k][m] == 'd') { std::cout << (char)68; }
-			else if (player_atk_radar[k][m] == 'e') { std::cout << (char)69; }
-			else if (player_atk_radar[k][m] == 'f') { std::cout << (char)70; }
-			else if (player_atk_radar[k][m] == 'g') { std::cout << (char)71; }
-			else if (player_atk_radar[k][m] == 'h') { std::cout << (char)72; }
-			else if (player_atk_radar[k][m] == 'i') { std::cout << (char)73; }
-			else if (player_atk_radar[k][m] == 'j') { std::cout << (char)74; }
-		}
-		std::cout << std::endl;
-	}
-
-	// Bottom Line for both boards. 
-	std::cout << std::setw(32) << (char)192 << (char)196 << (char)196 << (char)196;
-	for (int o = 0; o < 9; o++)
-	{
-		std::cout << (char)193 << (char)196 << (char)196 << (char)196;
-	}
-	std::cout << (char)217 << std::setw(20) << (char)192 << (char)196 << (char)196 << (char)196;
-	for (int p = 0; p < 9; p++)
-	{
-		std::cout << (char)193 << (char)196 << (char)196 << (char)196;
-	}
-	std::cout << (char)217 << std::endl << std::endl;
-}
 
 // Clears the status of ships after the ship is destroyed, so we can contine through the loop
 void Board::ClearHits()
@@ -605,57 +830,7 @@ void Board::FakeLoadingScreeen()
 	}
 }
 
-void Board::CheckCords()
-{
-	// function to check if the player entered in the correct information or not. should only let letter+number combo eg "A4. While 6A" or "2435234vkj", should come back with please enter valid input
-	if (player->playerShipCords[0] < 'a' || player->playerShipCords[0] > 'j' || player->playerShipCords[1] < '0' || player->playerShipCords[1] > '9')
-	{
-		player->validShipPos = false;					// sets vaild position to false
-		PrintBoards();    // reprint the board
-		std::cout << std::setw(97) << "You entered incorrect Coordinates" << std::endl;
-		std::cout << std::setw(122) << "Make Sure The Coordinate Is An Alphabet Followed By A Number. Eg = a3" << std::endl;
-		Sleep(1000);
-	}
-	else {
-		// Check the values of the rows and colums to match with the input.
-		RowColVals();
-		// check if the position specified is empty or not
-		CheckValidCell();
-	}
-}
 
-void Board::PlayerSetAttack()
-{
-	do
-	{
-		player->validAtkCord = true;
-		PrintBoards();
-		std::cout << std::setw(76) << "Enter Attack Coordinates: ";
-		std::cin.getline(player->playerAtkCords, 11, '\n');
-
-		CheckPlayerAttack();
-		if (PieceOnBoard_Comp == 0)
-		{
-			for (int i = 0; i < 6; i++)
-			{
-				system("CLS");
-				for (int i = 0; i < 19; i++)
-				{
-					std::cout << std::endl;
-				}
-				Sleep(500);
-				std::cout << std::setw(60) << name << " ,You Won!!!" << std::endl;
-				Sleep(500);
-			}
-		}
-		else if (player->validAtkCord == true)
-		{
-			Sleep(3000);
-			PrintBoards();
-			CompAttack();
-		}
-	} while (!player->validAtkCord || Ai->comp_ship > 0);
-}
 
 void Board::CheckPlayerAttack()
 {
@@ -671,158 +846,11 @@ void Board::CheckPlayerAttack()
 	else
 	{
 		RowColAtkVals();
-		PlayerSetAttack();
+		PlayerAttack();
 	}
 }
-void Board::AIHoV()
-{
-	Ai->comp_hv = rand() % 1 + 1; // Computer will randomly choose hori or vert
-	if (Ai->comp_hv == 1)
-	{		// this is the same as the players h_or_v but for the Compter.
-		if (Ai->comp_ship == 0 && Comp_board[compRow][compCol + 2] == '*')
-		{
-			Comp_board[compRow][compCol + 2] = 'P';
-		}
-		else if (Ai->comp_ship == 1 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*')
-		{
-			Comp_board[compRow][compCol + 2] = 'S';
-			Comp_board[compRow][compCol + 4] = 'S';
-		}
-		else if (Ai->comp_ship == 2 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*')
-		{
-			Comp_board[compRow][compCol + 2] = 'C';
-			Comp_board[compRow][compCol + 4] = 'C';
-		}
-		else if (Ai->comp_ship == 3 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*' && Comp_board[compRow][compCol + 6] == '*')
-		{
-			Comp_board[compRow][compCol + 2] = 'A';
-			Comp_board[compRow][compCol + 4] = 'A';
-			Comp_board[compRow][compCol + 6] = 'A';
-		}
-		else if (Ai->comp_ship == 4 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*' && Comp_board[compRow][compCol + 6] == '*' && Comp_board[compRow][compCol + 8] == '*')
-		{
-			Comp_board[compRow][compCol = 2] = 'B';
-			Comp_board[compRow][compCol + 4] = 'B';
-			Comp_board[compRow][compCol + 6] = 'B';
-			Comp_board[compRow][compCol + 8] = 'B';
-		}
-		else
-		{
-			Comp_board[compRow][compCol] = '*';
-			Ai->valid_comp_ship_pos = false;
-		}
-	}
-	else if (Ai->comp_hv == 2)
-	{
-		if (Ai->comp_ship == 0 && Comp_board[compRow + 1][compCol] == '*')
-		{
-			Comp_board[compRow + 1][compCol] = 'P';
-		}
-		else if (Ai->comp_ship == 1 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*')
-		{
-			Comp_board[compRow + 1][compCol] = 'S';
-			Comp_board[compRow + 3][compCol] = 'S';
-		}
-		else if (Ai->comp_ship == 2 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*')
-		{
-			Comp_board[compRow + 1][compCol] = 'C';
-			Comp_board[compRow + 3][compCol] = 'C';
-		}
-		else if (Ai->comp_ship == 3 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*' && Comp_board[compRow + 5][compCol] == '*')
-		{
-			Comp_board[compRow + 1][compCol] = 'A';
-			Comp_board[compRow + 3][compCol] = 'A';
-			Comp_board[compRow + 5][compCol] = 'A';
-
-		}
-		else if (Ai->comp_ship == 4 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*' && Comp_board[compRow + 5][compCol] == '*' && Comp_board[compRow + 7][compCol] == '*')
-		{
-			Comp_board[compRow + 1][compCol] = 'B';
-			Comp_board[compRow + 3][compCol] = 'B';
-			Comp_board[compRow + 5][compCol] = 'B';
-			Comp_board[compRow + 7][compCol] = 'B';
-
-		}
-		else {
-			Comp_board[compRow][compCol] = '*';
-			Ai->valid_comp_ship_pos = false;
-		}
-	}
-	system("CLS");
-}
 
 
-void Board::AIInput()
-{
-	do
-	{
-		// Sets valid_comp_atk_cord to true
-		Ai->valid_comp_atk_cord = true;
-		int comp_atk_row = Ai->comp_atk_row = (rand() % 10) * 2;		// Generates a Random even number between 0-8
-		int comp_atk_col = Ai->comp_atk_col = ((rand() % 10) * 2) + 1;  // Generates a Random ODD number between 1-9
-
-		// If the location targeted is P, S, C, A or B. The we know it hit a ship and can move to changing the board
-		if (p->ptrl_boat_hit == true)
-		{
-			if (player_board[comp_atk_row][comp_atk_col] == 'P') 
-			{ 
-				CompAttack(); 
-			}
-			else 
-			{ 
-				Ai->valid_comp_atk_cord = false; 
-			}
-		}
-		else if (p->sub_hit == true)
-		{
-			if (player_board[comp_atk_row][comp_atk_col] == 'S') 
-			{ 
-				CompAttack(); 
-			}
-			else 
-			{ 
-				Ai->valid_comp_atk_cord = false;
-			}
-		}
-		else if (p->cruise_hit == true)
-		{
-			if (player_board[comp_atk_row][comp_atk_col] == 'C') 
-			{ 
-				CompAttack(); 
-			}
-			else 
-			{ 
-				Ai->valid_comp_atk_cord = false; 
-			}
-		}
-		else if (p->ac_hit == true)
-		{
-			if (player_board[comp_atk_row][comp_atk_col] == 'A') 
-			{
-				CompAttack(); 
-			}
-			else
-			{
-				Ai->valid_comp_atk_cord = false; 
-			}
-		}
-		else if (p->BS_hit == true)
-		{
-			if (player_board[comp_atk_row][comp_atk_col] == 'B')
-			{ 
-				CompAttack(); 
-			}
-			else 
-			{
-				Ai->valid_comp_atk_cord = false; 
-			}
-		}
-		if (p->ptrl_boat_hit == false && (p->sub_hit == false && (p->cruise_hit == false && (p->ac_hit == false && (p->BS_hit == false)))))
-		{
-			CompAttack();
-		}
-	} while (!Ai->valid_comp_atk_cord || PieceOnBoard_Player > 0);
-}
 
 void Board::take_comp_input()
 {
@@ -859,70 +887,55 @@ void Board::take_comp_input()
 }
 
 
-void Board::AICoordsConvert()
-{
-	if (Ai->comp_atk_row == 0) { compRow = 'a'; }
-	else if (Ai->comp_atk_row == 2) { compRow = 'b'; }
-	else if (Ai->comp_atk_row == 4) { compRow = 'c'; }
-	else if (Ai->comp_atk_row == 6) { compRow = 'd'; }
-	else if (Ai->comp_atk_row == 8) { compRow = 'e'; }
-	else if (Ai->comp_atk_row == 10) { compRow = 'f'; }
-	else if (Ai->comp_atk_row == 12) { compRow = 'g'; }
-	else if (Ai->comp_atk_row == 14) { compRow = 'h'; }
-	else if (Ai->comp_atk_row == 16) { compRow = 'i'; }
-	else if (Ai->comp_atk_row == 18) { compRow = 'j'; }
-}
 
 
 void Board::CompAttack()
 {
-	int comp_atk_row = Ai->comp_atk_row;
-	int comp_atk_col = Ai->comp_atk_col;
 	AICoordsConvert();
-	if (player_board[comp_atk_row][comp_atk_col] == 'P')
+	if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'P')
 	{
-		std::cout << std::setw(82) << "The Computer Has Hit Your Patrol Boat: " << Ai->aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
+		std::cout << std::setw(82) << "The Computer Has Hit Your Patrol Boat: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
 		p->ptrl_boat_hit = true;
-		player_board[comp_atk_row][comp_atk_col] = '!';
+		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
 		p->player_ptrl_boat_size--;
 	}
-	else if (player_board[comp_atk_row][comp_atk_col] == 'S')
+	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'S')
 	{
-		std::cout << std::setw(81) << "The Computer Has Hit Your Submarine: " << Ai->aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
+		std::cout << std::setw(81) << "The Computer Has Hit Your Submarine: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
 		p->sub_hit = true;
-		player_board[comp_atk_row][comp_atk_col] = '!';
+		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
 		p->player_sub_size--;
 	}
-	else if (player_board[comp_atk_row][comp_atk_col] == 'C')
+	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'C')
 	{
-		std::cout << std::setw(81) << "The Computer Has Hit Your Cruiser: " << Ai->aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
+		std::cout << std::setw(81) << "The Computer Has Hit Your Cruiser: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
 		p->cruise_hit = true;
-		player_board[comp_atk_row][comp_atk_col] = '!';
+		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
 		p->player_cruise_size--;
 	}
-	else if (player_board[comp_atk_row][comp_atk_col] == 'A')
+	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'A')
 	{
-		std::cout << std::setw(81) << "The Computer Has Hit Your Aircraft Carrier: " << Ai->aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
+		std::cout << std::setw(81) << "The Computer Has Hit Your Aircraft Carrier: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
 		p->ac_hit = true;
-		player_board[comp_atk_row][comp_atk_col] = '!';
+		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
 		p->player_ac_size--;
 	}
-	else if (player_board[comp_atk_row][comp_atk_col] == 'B')
+	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'B')
 	{
-		std::cout << std::setw(81) << "The Computer Has Hit Your Battleship: " << Ai->aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
+		std::cout << std::setw(81) << "The Computer Has Hit Your Battleship: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
 		p->BS_hit = true;
-		player_board[comp_atk_row][comp_atk_col] = '!';
+		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
 		p->player_BS_size--;
 	}
-	else if (player_board[comp_atk_row][comp_atk_col] == '*')
+	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == '*')
 	{
-		std::cout << std::setw(73) << "The Computer Missed: " << Ai->aplha_comp_atk << (comp_atk_row / 2) << std::endl << std::endl;
-		player_board[comp_atk_row][comp_atk_col] = '$';
+		std::cout << std::setw(73) << "The Computer Missed: " << Ai->aplha_comp_atk << (Ai->comp_atk_row / 2) << std::endl << std::endl;
+		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '$';
 	}
 	else
 	{

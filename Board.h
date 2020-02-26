@@ -31,7 +31,7 @@ public:
 	void EnterName();
 	void PlayerPlaceShips();
 	void CheckCords();
-
+	// I can breakt this up more later I just wanna get it working atm.
 	void PlayerHoV();
 	void RowColVals();
 	void RowColAtkVals();
