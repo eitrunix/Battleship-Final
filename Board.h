@@ -23,11 +23,9 @@ public:
 
 	void CheckValidMoveAI();
 	void AIHoV();
-	void AIInput();
-	void AICoordsConvert();
-	void CompAttack();
-	void take_comp_input();
-
+	void AISetShips();
+	void AICordsToAlpha();
+	void AiAttackOnBoard();
 	void EnterName();
 	void PlayerPlaceShips();
 	void CheckCords();
@@ -35,11 +33,11 @@ public:
 	void PlayerHoV();
 	void RowColVals();
 	void RowColAtkVals();
-	void PlayerSetAttack();
-	void CheckPlayerAttack();
 	void PlayerAttack();
+	void CheckPlayerAttack();
+	void PlayerAttackSet();
 	void CheckValidCell();
-
+	void AIAttack();
 };
 
 #endif

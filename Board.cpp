@@ -81,6 +81,99 @@ char Comp_board[19][23] =
 
 };
 // Display for both game boards that the player will see or interact with. the third grid I build up top will be used after the game is done, if the player loses to show how close they were to winning.
+
+// Check if the cell or cord entered is the * char in the array, if it is then the space is "empty" and we can place a ship, it will then replace the * char with the cooresponding Letter.
+
+
+// The code below is formatted as such so I can read the damn thing easier
+// Assign the vales of the colums to the letters, so the computer knows what cords are where
+
+
+// assigns the values of the players inputs to code so the program can 'check' that space when called 
+
+// assigns the computers first coord seclection to cords to a letter
+// just looks better for the player
+
+// Get the computer to randomly place their ships
+// this is fucked up, its looking for a spot then attacking that position instead of placing the part. 
+
+
+
+// We need to check if the comps position is valid
+
+
+
+
+
+
+Board::Board()
+{
+	p = new Piece();
+	player = new Player();
+	Ai = new AI();
+}
+
+Board::~Board()
+{
+}
+
+
+
+// Clears the status of ships after the ship is destroyed, so we can contine through the loop
+void Board::ClearHits()
+{
+	if (p->player_ptrl_boat_size == 0) { p->ptrl_boat_hit = false; }
+	if (p->player_sub_size == 0) { p->sub_hit = false; }
+	if (p->player_cruise_size == 0) { p->cruise_hit = false; }
+	if (p->player_ac_size == 0) { p->ac_hit = false; }
+	if (p->player_BS_size == 0) { p->BS_hit = false; }
+
+}
+
+void Board::ClearBoard()
+{
+	for (int i = 0; i < 39; i++)
+	{
+		for (int j = 0; j < 39; j++)
+		{		// checks for all symbols used on the map, to change them back to '*'
+			if (player_board[i][j] == 'P' || Comp_board[i][j] == 'P' ||
+				player_board[i][j] == 'S' || Comp_board[i][j] == 'S' ||
+				player_board[i][j] == 'C' || Comp_board[i][j] == 'C' ||
+				player_board[i][j] == 'A' || Comp_board[i][j] == 'A' ||
+				player_board[i][j] == 'B' || Comp_board[i][j] == 'B' ||
+				player_board[i][j] == '!' || player_atk_radar[i][j] == '!' ||
+				player_board[i][j] == '$' || player_atk_radar[i][j] == '$')
+			{
+				player_board[i][j] = '*';
+				Comp_board[i][j] = '*';
+				player_atk_radar[i][j] = '*';
+			}
+		}
+	}
+	//reset variables to origional numbers
+	Ai->comp_ship = 0;
+	player->shipNumber = 0;
+	PieceOnBoard_Comp = 14;
+	PieceOnBoard_Player = 14;
+	p->ptrl_boat_size = 2;
+	p->player_ptrl_boat_size = 2;
+	p->sub_size = 3;
+	p->player_sub_size = 3;
+	p->cruise_size = 3;
+	p->player_cruise_size = 3;
+	p->ac_size = 4;
+	p->player_ac_size = 4;
+	p->BS_size = 5;
+	p->player_BS_size = 5;
+}
+
+
+
+
+
+
+
+
 void Board::PrintBoards()
 {
 	for (int i = 0; i < 3; i++)
@@ -169,6 +262,79 @@ void Board::PrintBoards()
 	}
 	std::cout << (char)217 << std::endl << std::endl;
 }
+void Board::EnterName()
+{
+	for (int i = 0; i < 15; i++)
+	{
+		std::cout << std::endl;
+	}
+	std::cout << std::setw(70) << "Enter Name: ";
+	getline(std::cin, name);
+
+}
+void Board::DisplayScoreboard()
+{
+	system("CLS");
+	std::cout << std::setw(80) << name << "'s Ship Status" << (char)179 << std::setw(2) << " " << "Computer's Ship Status " << std::endl;
+	std::cout << std::setw(60) << (char)201;
+	for (int i = 0; i < 40; i++)
+	{
+		std::cout << (char)205;			// Create a top line to box in the Status "screen"
+	}
+	// X_size is the number of hits on each ship, so it should print out "| Patrol Boat: 2      |        Patrol Boat: 2 |" for each ship and line respectively
+	std::cout << (char)187 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Patrol Boat: " << p->player_ptrl_boat_size << std::setw(7) << (char)179 << std::setw(18) << "Patrol Boat: " << p->ptrl_boat_size << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Submarine: " << p->player_sub_size << std::setw(9) << (char)179 << std::setw(18) << "Submarine: " << p->sub_size << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Cruiser: " << p->player_cruise_size << std::setw(11) << (char)179 << std::setw(18) << "Crusier: " << p->cruise_size << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Carrier: " << p->player_ac_size << std::setw(11) << (char)179 << std::setw(18) << "Carrier: " << p->ac_size << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Battleship: " << p->player_BS_size << std::setw(8) << (char)179 << std::setw(18) << "Battleship: " << p->BS_size << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)200;
+	for (int i = 0; i < 40; i++) {
+		std::cout << (char)205;			// Bottom line, looping so I dont need to hit (char)205 40 times.
+	}
+	std::cout << (char)188 << std::endl;
+
+}
+void Board::PlayerPlaceShips()
+{
+	{
+		do
+		{
+			// we will go through the 'list' of ships to place, 0-4 (5 ships total) and checks if the placement is okay, 'places' the ship on the board, increments ship_number by 1, then checks the next statement
+			// we leave the loop if ship_number is 5 of greater
+			player->validShipPos = true;
+			if (player->shipNumber == 0)
+			{
+				std::cout << std::setw(109) << "Enter The Coordinate For Your Patrol Boat (2 spots): ";
+			}
+			else if (player->shipNumber == 1)
+			{
+				std::cout << std::setw(109) << "Enter The Coordinate For Your Submarine (3 spots): ";
+			}
+			else if (player->shipNumber == 2)
+			{
+				std::cout << std::setw(108) << "Enter The Coordinate For Your Crusier (4 spots): ";
+			}
+			else if (player->shipNumber == 3)
+			{
+				std::cout << std::setw(107) << "Enter The Coordinate For Your Aircraft Carrier (4 spots): ";
+			}
+			else if (player->shipNumber == 4)
+			{
+				std::cout << std::setw(100) << "Enter the Coordinate For Your Battleship (5 spots): ";
+			}
+			std::cin.getline(player->playerShipCords, 11, '\n');  // Ask for the players input in cords,
+			std::cout << std::endl << std::endl;
+			CheckCords();									// Check if its a valid placement
+			system("CLS");
+			PrintBoards();			// Reprint the new board with the new piece on it.
+			if (player->validShipPos == true)
+			{
+				player->shipNumber++;								// If we did place a ship, we add to the ship number, so we dont end up placing more ships than we need (0-4)
+			}
+		} while (!player->validShipPos || player->shipNumber < 5); //do this while valid_ship_pos is false and the ship number is less than 5
+	}
+}
 void Board::CheckCords()
 {
 	// function to check if the player entered in the correct information or not. should only let letter+number combo eg "A4. While 6A" or "2435234vkj", should come back with please enter valid input
@@ -187,8 +353,6 @@ void Board::CheckCords()
 		CheckValidCell();
 	}
 }
-
-// Check if the cell or cord entered is the * char in the array, if it is then the space is "empty" and we can place a ship, it will then replace the * char with the cooresponding Letter.
 void Board::CheckValidCell()
 {
 	if (player_board[row][col] == '*')
@@ -213,7 +377,7 @@ void Board::CheckValidCell()
 		{
 			player_board[row][col] = 'B';
 		}
-		player->HoV;
+		PlayerHoV();
 	}
 	else
 	{
@@ -225,7 +389,6 @@ void Board::CheckValidCell()
 	}
 
 }
-
 void Board::PlayerHoV()
 {
 	PrintBoards();
@@ -326,10 +489,6 @@ void Board::PlayerHoV()
 
 
 }
-
-// The code below is formatted as such so I can read the damn thing easier
-// Assign the vales of the colums to the letters, so the computer knows what cords are where
-
 void Board::RowColVals()
 {
 	if (player->playerShipCords[0] == 'a') { row = 0; }				// If the player enters 'a' as the first coords, the computer will know its actually position 0 in the array, repeat for each
@@ -355,8 +514,6 @@ void Board::RowColVals()
 	else if (player->playerShipCords[1] == '8') { col = 19; }
 	else if (player->playerShipCords[1] == '9') { col = 21; }
 }
-
-// assigns the values of the players inputs to code so the program can 'check' that space when called 
 void Board::RowColAtkVals()
 {
 	if (player->playerAtkCords[0] == 'a') { atkRow = 0; }
@@ -383,9 +540,7 @@ void Board::RowColAtkVals()
 	else if (player->playerAtkCords[1] == '9') { atkCol = 21; }
 }
 
-// assigns the computers first coord seclection to cords to a letter
-// just looks better for the player
-void Board::AICoordsConvert()
+void Board::AICordsToAlpha()
 {
 	if (Ai->comp_atk_row == 0) { compRow = 'a'; }
 	else if (Ai->comp_atk_row == 2) { compRow = 'b'; }
@@ -398,84 +553,56 @@ void Board::AICoordsConvert()
 	else if (Ai->comp_atk_row == 16) { compRow = 'i'; }
 	else if (Ai->comp_atk_row == 18) { compRow = 'j'; }
 }
-
-// Get the computer to randomly place their ships
-// this is fucked up, its looking for a spot then attacking that position instead of placing the part. 
-
-
-void Board::AIInput()
+void Board::AISetShips()
 {
-	do
-	{
-		// Sets valid_comp_atk_cord to true
-		Ai->valid_comp_atk_cord = true;
-		Ai->comp_atk_row = (rand() % 10) * 2;		// Generates a Random even number between 0-8
-		Ai->comp_atk_col = ((rand() % 10) * 2) + 1;  // Generates a Random ODD number between 1-9
 
-		// If the location targeted is P, S, C, A or B. The we know it hit a ship and can move to changing the board
-		if (p->ptrl_boat_hit == true)
+	do {
+
+		// clear the screen, makes it look like a 'loading screen' a bit... Probably shouldnt do it this way tbh but it works
+		system("CLS");
+		for (int i = 0; i < 19; i++)
 		{
-			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'P')
-			{
-				CompAttack();
-			}
-			else
-			{
-				Ai->valid_comp_atk_cord = false;
-			}
+			std::cout << std::endl;
 		}
-		else if (p->sub_hit == true)
-		{
-			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'S')
-			{
-				CompAttack();
-			}
-			else
-			{
-				Ai->valid_comp_atk_cord = false;
-			}
+		std::cout << std::setw(90) << "Waiting For Computer To Set Ships On It's Board.......";
+
+		Ai->valid_comp_ship_pos = true;			// sets to true at start, in is_comp_move_valid we may change it back to run this again but the numbers generated suck
+		srand(time(0));
+		compRow = 2 * rand() % 11;			// gets a Random even number
+		compCol = 1 + (2 * rand()) % 11;	// gets a Random Odd number
+		CheckValidMoveAI();				// checks if the space is a *, a * is a valid space to place a ship
+		if (Ai->valid_comp_ship_pos == true) {
+			Ai->comp_ship++;
 		}
-		else if (p->cruise_hit == true)
-		{
-			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'C')
-			{
-				CompAttack();
-			}
-			else
-			{
-				Ai->valid_comp_atk_cord = false;
-			}
-		}
-		else if (p->ac_hit == true)
-		{
-			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'A')
-			{
-				CompAttack();
-			}
-			else
-			{
-				Ai->valid_comp_atk_cord = false;
-			}
-		}
-		else if (p->BS_hit == true)
-		{
-			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'B')
-			{
-				CompAttack();
-			}
-			else
-			{
-				Ai->valid_comp_atk_cord = false;
-			}
-		}
-		if (p->ptrl_boat_hit == false && (p->sub_hit == false && (p->cruise_hit == false && (p->ac_hit == false && (p->BS_hit == false)))))
-		{
-			CompAttack();
-		}
-	} while (!Ai->valid_comp_atk_cord || PieceOnBoard_Player > 0);
+	} while (Ai->comp_ship < 5 || !Ai->valid_comp_ship_pos);
+
+	// Tell the player the computer is done and ready, and its their turn to place ships
+	system("CLS");
+	for (int i = 0; i < 19; i++) {
+		std::cout << std::endl;
+	}
+	std::cout << std::setw(90) << "The Computer Has Set It's Ships. Now It's Your Turn.";
+	Sleep(3000);
+	system("CLS");
+
 }
+void Board::FakeLoadingScreeen()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		system("CLS");
+		system("Color 0C");
+		for (int i = 0; i < 18; i++)
+		{
+			std::cout << std::endl;
+		}
 
-// We need to check if the comps position is valid
+		Sleep(500);
+		std::cout << std::setw(74) << "Get Ready For Battle....";
+		Sleep(500);
+		system("Color 08");
+	}
+}
 void Board::CheckValidMoveAI()
 {
 	// checks the array for an empty space '*' to place ships in, its empty we can place the current ships character at the position, this is for the cvomputer so we dont see this
@@ -507,7 +634,6 @@ void Board::CheckValidMoveAI()
 		Ai->valid_comp_ship_pos = false; // if the space isnt empty, try again
 	}
 }
-
 void Board::AIHoV()
 {
 	Ai->comp_hv = rand() % 1 + 1; // Computer will randomly choose hori or vert
@@ -584,8 +710,7 @@ void Board::AIHoV()
 	}
 	system("CLS");
 }
-
-void Board::PlayerSetAttack()
+void Board::PlayerAttack()
 {
 	do
 	{
@@ -613,12 +738,28 @@ void Board::PlayerSetAttack()
 		{
 			Sleep(3000);
 			PrintBoards();
-			CompAttack();
+			AiAttackOnBoard();
 		}
 	} while (!player->validAtkCord || Ai->comp_ship > 0);
 }
-
-void Board::PlayerAttack()
+void Board::CheckPlayerAttack()
+{
+	if (player->playerAtkCords[0] < 'a' || player->playerAtkCords[0] > 'j' || player->playerAtkCords[1] < '0' || player->playerAtkCords[1] > '9')
+	{
+		player->validAtkCord = false;
+		system("CLS");
+		PrintBoards();
+		std::cout << std::setw(91) << "Sorry. It Seams Like You Have Entered Invalid Coordinates." << std::endl;
+		std::cout << std::setw(98) << "Make Sure The Coordinate Is An Alphabet Followed By A Number. E.g = a3" << std::endl;
+		Sleep(3000);
+	}
+	else
+	{
+		RowColAtkVals();
+		PlayerAttackSet();
+	}
+}
+void Board::PlayerAttackSet()
 {
 	if (player_atk_radar[atkRow][atkCol] == '!' || player_atk_radar[atkRow][atkCol] == '$')
 	{
@@ -674,224 +815,9 @@ void Board::PlayerAttack()
 		player_atk_radar[atkRow][atkCol] = '$';
 	}
 }
-
-
-void Board::EnterName()
+void Board::AiAttackOnBoard()
 {
-	for (int i = 0; i < 15; i++)
-	{
-		std::cout << std::endl;
-	}
-	std::cout << std::setw(70) << "Enter Name: ";
-	getline(std::cin, name);
-
-}
-
-void Board::PlayerPlaceShips()
-{
-	{
-		do
-		{
-			// we will go through the 'list' of ships to place, 0-4 (5 ships total) and checks if the placement is okay, 'places' the ship on the board, increments ship_number by 1, then checks the next statement
-			// we leave the loop if ship_number is 5 of greater
-			player->validShipPos = true;
-			if (player->shipNumber == 0)
-			{		// do... do I need to comment these?
-				std::cout << std::setw(109) << "Enter The Coordinate For Your Patrol Boat (2 spots): ";
-			}
-			else if (player->shipNumber == 1)
-			{
-				std::cout << std::setw(109) << "Enter The Coordinate For Your Submarine (3 spots): ";
-			}
-			else if (player->shipNumber == 2)
-			{
-				std::cout << std::setw(108) << "Enter The Coordinate For Your Crusier (4 spots): ";
-			}
-			else if (player->shipNumber == 3)
-			{
-				std::cout << std::setw(107) << "Enter The Coordinate For Your Aircraft Carrier (4 spots): ";
-			}
-			else if (player->shipNumber == 4)
-			{
-				std::cout << std::setw(100) << "Enter the Coordinate For Your Battleship (5 spots): ";
-			}
-			std::cin.getline(player->playerShipCords, 11, '\n');  // Ask for the players input in cords,
-			std::cout << std::endl << std::endl;
-			CheckCords();									// Check if its a valid placement
-			system("CLS");
-			PrintBoards();			// Reprint the new board with the new piece on it.
-			if (player->validShipPos == true)
-			{
-				player->shipNumber++;								// If we did place a ship, we add to the ship number, so we dont end up placing more ships than we need (0-4)
-			}
-		} while (!player->validShipPos || player->shipNumber < 5); //do this while valid_ship_pos is false and the ship number is less than 5
-	}
-}
-
-Board::Board()
-{
-	p = new Piece();
-	player = new Player();
-	Ai = new AI();
-}
-
-Board::~Board()
-{
-}
-
-void Board::DisplayScoreboard()
-{
-	system("CLS");
-	std::cout << std::setw(80) << name << "'s Ship Status" << (char)179 << std::setw(2) << " " << "Computer's Ship Status " << std::endl;
-	std::cout << std::setw(60) << (char)201;
-	for (int i = 0; i < 40; i++)
-	{
-		std::cout << (char)205;			// Create a top line to box in the Status "screen"
-	}
-	// X_size is the number of hits on each ship, so it should print out "| Patrol Boat: 2      |        Patrol Boat: 2 |" for each ship and line respectively
-	std::cout << (char)187 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Patrol Boat: " << p->player_ptrl_boat_size << std::setw(7) << (char)179 << std::setw(18) << "Patrol Boat: " << p->ptrl_boat_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Submarine: " << p->player_sub_size << std::setw(9) << (char)179 << std::setw(18) << "Submarine: " << p->sub_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Cruiser: " << p->player_cruise_size << std::setw(11) << (char)179 << std::setw(18) << "Crusier: " << p->cruise_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Carrier: " << p->player_ac_size << std::setw(11) << (char)179 << std::setw(18) << "Carrier: " << p->ac_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Battleship: " << p->player_BS_size << std::setw(8) << (char)179 << std::setw(18) << "Battleship: " << p->BS_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)200;
-	for (int i = 0; i < 40; i++) {
-		std::cout << (char)205;			// Bottom line, looping so I dont need to hit (char)205 40 times.
-	}
-	std::cout << (char)188 << std::endl;
-
-}
-
-
-// Clears the status of ships after the ship is destroyed, so we can contine through the loop
-void Board::ClearHits()
-{
-	if (p->player_ptrl_boat_size == 0) { p->ptrl_boat_hit = false; }
-	if (p->player_sub_size == 0) { p->sub_hit = false; }
-	if (p->player_cruise_size == 0) { p->cruise_hit = false; }
-	if (p->player_ac_size == 0) { p->ac_hit = false; }
-	if (p->player_BS_size == 0) { p->BS_hit = false; }
-
-}
-
-void Board::ClearBoard()
-{
-	for (int i = 0; i < 39; i++)
-	{
-		for (int j = 0; j < 39; j++)
-		{		// checks for all symbols used on the map, to change them back to '*'
-			if (player_board[i][j] == 'P' || Comp_board[i][j] == 'P' ||
-				player_board[i][j] == 'S' || Comp_board[i][j] == 'S' ||
-				player_board[i][j] == 'C' || Comp_board[i][j] == 'C' ||
-				player_board[i][j] == 'A' || Comp_board[i][j] == 'A' ||
-				player_board[i][j] == 'B' || Comp_board[i][j] == 'B' ||
-				player_board[i][j] == '!' || player_atk_radar[i][j] == '!' ||
-				player_board[i][j] == '$' || player_atk_radar[i][j] == '$')
-			{
-				player_board[i][j] = '*';
-				Comp_board[i][j] = '*';
-				player_atk_radar[i][j] = '*';
-			}
-		}
-	}
-	//reset variables to origional numbers
-	Ai->comp_ship = 0;
-	player->shipNumber = 0;
-	PieceOnBoard_Comp = 14;
-	PieceOnBoard_Player = 14;
-	p->ptrl_boat_size = 2;
-	p->player_ptrl_boat_size = 2;
-	p->sub_size = 3;
-	p->player_sub_size = 3;
-	p->cruise_size = 3;
-	p->player_cruise_size = 3;
-	p->ac_size = 4;
-	p->player_ac_size = 4;
-	p->BS_size = 5;
-	p->player_BS_size = 5;
-}
-
-void Board::FakeLoadingScreeen()
-{
-	for (int i = 0; i < 4; i++) 
-	{
-		system("CLS");
-		system("Color 0C");
-		for (int i = 0; i < 18; i++) 
-		{
-			std::cout << std::endl;
-		}   
-		
-		Sleep(500);
-		std::cout << std::setw(74) << "Get Ready For Battle....";
-		Sleep(500);
-		system("Color 08");
-	}
-}
-
-
-
-void Board::CheckPlayerAttack()
-{
-	if (player->playerAtkCords[0] < 'a' || player->playerAtkCords[0] > 'j' || player->playerAtkCords[1] < '0' || player->playerAtkCords[1] > '9')
-	{
-		player->validAtkCord = false;
-		system("CLS");
-		PrintBoards();
-		std::cout << std::setw(91) << "Sorry. It Seams Like You Have Entered Invalid Coordinates." << std::endl;
-		std::cout << std::setw(98) << "Make Sure The Coordinate Is An Alphabet Followed By A Number. E.g = a3" << std::endl;
-		Sleep(3000);
-	}
-	else
-	{
-		RowColAtkVals();
-		PlayerAttack();
-	}
-}
-
-
-
-void Board::take_comp_input()
-{
-
-	do {
-
-		// clear the screen, makes it look like a 'loading screen' a bit... Probably shouldnt do it this way tbh but it works
-		system("CLS");
-		for (int i = 0; i < 19; i++)
-		{
-			std::cout << std::endl;
-		}
-		std::cout << std::setw(90) << "Waiting For Computer To Set Ships On It's Board.......";
-
-		Ai->valid_comp_ship_pos = true;			// sets to true at start, in is_comp_move_valid we may change it back to run this again but the numbers generated suck
-		srand(time(0));
-		compRow = 2 * rand() % 11;			// gets a Random even number
-		compCol = 1 + (2 * rand()) % 11;	// gets a Random Odd number
-		CheckValidMoveAI();				// checks if the space is a *, a * is a valid space to place a ship
-		if (Ai->valid_comp_ship_pos == true) {
-			Ai->comp_ship++;
-		}
-	} while (Ai->comp_ship < 5 || !Ai->valid_comp_ship_pos);
-
-	// Tell the player the computer is done and ready, and its their turn to place ships
-	system("CLS");
-	for (int i = 0; i < 19; i++) {
-		std::cout << std::endl;
-	}
-	std::cout << std::setw(90) << "The Computer Has Set It's Ships. Now It's Your Turn.";
-	Sleep(3000);
-	system("CLS");
-
-}
-
-
-
-
-void Board::CompAttack()
-{
-	AICoordsConvert();
+	AICordsToAlpha();
 	if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'P')
 	{
 		std::cout << std::setw(82) << "The Computer Has Hit Your Patrol Boat: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
@@ -961,8 +887,48 @@ void Board::CompAttack()
 	else if (Ai->valid_comp_atk_cord == true)
 	{
 		Sleep(3000);
-		PlayerSetAttack();
+		PlayerAttack();
 	}
 
 }
+void Board::AIAttack()
+{
+	do
+	{
+		// Sets valid_comp_atk_cord to true
+		Ai->valid_comp_atk_cord = true;
+		Ai->comp_atk_row = (rand() % 10) * 2;		// Generates a Random even number between 0-8
+		Ai->comp_atk_col = ((rand() % 10) * 2) + 1;  // Generates a Random ODD number between 1-9
 
+		// If the location targeted is P, S, C, A or B. The we know it hit a ship and can move to changing the board
+		if (p->ptrl_boat_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'P') { AiAttackOnBoard(); }
+			else { Ai->valid_comp_atk_cord = false; }
+		}
+		else if (p->sub_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'S') { AiAttackOnBoard(); }
+			else { Ai->valid_comp_atk_cord = false; }
+		}
+		else if (p->cruise_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'C') { AiAttackOnBoard(); }
+			else { Ai->valid_comp_atk_cord = false; }
+		}
+		else if (p->ac_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'A') { AiAttackOnBoard(); }
+			else { Ai->valid_comp_atk_cord = false; }
+		}
+		else if (p->BS_hit == true)
+		{
+			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'B') { AiAttackOnBoard(); }
+			else { Ai->valid_comp_atk_cord = false; }
+		}
+		if (p->ptrl_boat_hit == false && p->sub_hit == false && p->cruise_hit == false && p->ac_hit == false && p->BS_hit == false)
+		{
+			AiAttackOnBoard();
+		}
+	} while (!Ai->valid_comp_atk_cord || PieceOnBoard_Player > 0);
+}

@@ -130,9 +130,9 @@ void TitleScreen::PlayGame()
 	b->EnterName();
 	b->DisplayScoreboard();
 	b->FakeLoadingScreeen();
-	b->take_comp_input();
+	b->AISetShips();
 	b->PrintBoards();
 	b->PlayerPlaceShips();		
 	b->FakeLoadingScreeen();
-	b->PlayerSetAttack();
+	b->PlayerAttack();
 }
