@@ -15,6 +15,17 @@ public:
 	int comp_hv;				// computer ships hoz or vert
 
 	char aplha_comp_atk;		// to check the first part of the computers "firing" cords, used to change the number we generate to a letter...its not working wtf???
+private:
+	int	PatrolBoatHealth;
+	int	SubmarineHealth;
+	int	CruiserHealth;
+	int AircraftCarrierHealth;
+	int BattleshipHealth;
 
+	bool PatrolBoatHit;
+	bool SubmarineHit;
+	bool CruiserHit;
+	bool AircraftCarrierHit;
+	bool BattleshipHit;
 };
 

@@ -6,7 +6,6 @@
 #include <iomanip>
 #include <Windows.h>
 
-Piece* p;
 Player* player;
 AI* Ai;
 
@@ -83,28 +82,23 @@ char Comp_board[19][23] =
 
 Board::Board()
 {
-	p = new Piece();
 	player = new Player();
 	Ai = new AI();
-}
 
+}
 Board::~Board()
 {
 }
-
-
-
 // Clears the status of ships after the ship is destroyed, so we can contine through the loop
 void Board::ClearHits()
 {
-	if (p->player_ptrl_boat_size == 0) { p->ptrl_boat_hit = false; }
-	if (p->player_sub_size == 0) { p->sub_hit = false; }
-	if (p->player_cruise_size == 0) { p->cruise_hit = false; }
-	if (p->player_ac_size == 0) { p->ac_hit = false; }
-	if (p->player_BS_size == 0) { p->BS_hit = false; }
+	if (PlayerPiece.PatrolBoatHealth == 0) { PlayerPiece.PatrolBoatHit = false; }
+	if (PlayerPiece.SubmarineHealth == 0) { PlayerPiece.SubmarineHit = false; }
+	if (PlayerPiece.CruiserHealth == 0) { PlayerPiece.CruiserHit = false; }
+	if (PlayerPiece.AircraftCarrierHealth == 0) { PlayerPiece.AircraftCarrierHit = false; }
+	if (PlayerPiece.BattleshipHealth == 0) { PlayerPiece.BattleshipHit = false; }
 
 }
-
 void Board::ClearBoard()
 {
 	for (int i = 0; i < 39; i++)
@@ -130,27 +124,24 @@ void Board::ClearBoard()
 	player->shipNumber = 0;
 	PieceOnBoard_Comp = 14;
 	PieceOnBoard_Player = 14;
-	p->ptrl_boat_size = 2;
-	p->player_ptrl_boat_size = 2;
-	p->sub_size = 3;
-	p->player_sub_size = 3;
-	p->cruise_size = 3;
-	p->player_cruise_size = 3;
-	p->ac_size = 4;
-	p->player_ac_size = 4;
-	p->BS_size = 5;
-	p->player_BS_size = 5;
+
+	PlayerPiece.PatrolBoatHealth = 2;
+	PlayerPiece.SubmarineHealth = 3;
+	PlayerPiece.CruiserHealth = 3;
+	PlayerPiece.AircraftCarrierHealth = 4;
+	PlayerPiece.BattleshipHealth = 5;
+
+	AiPiece.PatrolBoatHealth = 2;
+	AiPiece.SubmarineHealth = 3;
+	AiPiece.CruiserHealth = 3;
+	AiPiece.AircraftCarrierHealth = 4;
+	AiPiece.BattleshipHealth = 5;
+
+	
 }
-
-
-
-
-
-
-
-
 void Board::PrintBoards()
 {
+	DisplayScoreboard();
 	for (int i = 0; i < 3; i++)
 	{
 		std::cout << std::endl;					// Spacing between board and the Ship Status
@@ -258,11 +249,11 @@ void Board::DisplayScoreboard()
 	}
 	// X_size is the number of hits on each ship, so it should print out "| Patrol Boat: 2      |        Patrol Boat: 2 |" for each ship and line respectively
 	std::cout << (char)187 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Patrol Boat: " << p->player_ptrl_boat_size << std::setw(7) << (char)179 << std::setw(18) << "Patrol Boat: " << p->ptrl_boat_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Submarine: " << p->player_sub_size << std::setw(9) << (char)179 << std::setw(18) << "Submarine: " << p->sub_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Cruiser: " << p->player_cruise_size << std::setw(11) << (char)179 << std::setw(18) << "Crusier: " << p->cruise_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Carrier: " << p->player_ac_size << std::setw(11) << (char)179 << std::setw(18) << "Carrier: " << p->ac_size << (char)186 << std::endl;
-	std::cout << std::setw(60) << (char)186 << "Battleship: " << p->player_BS_size << std::setw(8) << (char)179 << std::setw(18) << "Battleship: " << p->BS_size << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Patrol Boat: " << PlayerPiece.PatrolBoatHealth << std::setw(7) << (char)179 << std::setw(18) << "Patrol Boat: " << AiPiece.PatrolBoatHealth << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Submarine: " << PlayerPiece.SubmarineHealth << std::setw(9) << (char)179 << std::setw(18) << "Submarine: " << AiPiece.SubmarineHealth << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Cruiser: " << PlayerPiece.CruiserHealth << std::setw(11) << (char)179 << std::setw(18) << "Crusier: " << AiPiece.CruiserHealth << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Carrier: " << PlayerPiece.AircraftCarrierHealth << std::setw(11) << (char)179 << std::setw(18) << "Carrier: " << AiPiece.AircraftCarrierHealth << (char)186 << std::endl;
+	std::cout << std::setw(60) << (char)186 << "Battleship: " << PlayerPiece.BattleshipHealth << std::setw(8) << (char)179 << std::setw(18) << "Battleship: " << AiPiece.BattleshipHealth << (char)186 << std::endl;
 	std::cout << std::setw(60) << (char)200;
 	for (int i = 0; i < 40; i++) {
 		std::cout << (char)205;			// Bottom line, looping so I dont need to hit (char)205 40 times.
@@ -514,7 +505,6 @@ void Board::RowColAtkVals()
 	else if (player->playerAtkCords[1] == '8') { atkCol = 19; }
 	else if (player->playerAtkCords[1] == '9') { atkCol = 21; }
 }
-
 void Board::AICordsToAlpha()
 {
 	if (Ai->comp_atk_row == 0) { compRow = 'a'; }
@@ -748,7 +738,7 @@ void Board::PlayerAttackSet()
 		PrintBoards();
 		std::cout << std::setw(84) << "You Hit Their Patrol Boat.";
 		player_atk_radar[atkRow][atkCol] = '!';
-		p->ptrl_boat_size--;
+		AiPiece.PatrolBoatHealth--;
 		PieceOnBoard_Comp--;
 	}
 	else if (Comp_board[atkRow][atkCol] == 'S')
@@ -756,7 +746,7 @@ void Board::PlayerAttackSet()
 		PrintBoards();
 		std::cout << std::setw(84) << "You Hit Their Submarine.";
 		player_atk_radar[atkRow][atkCol] = '!';
-		p->sub_size--;
+		AiPiece.SubmarineHealth--;
 		PieceOnBoard_Comp--;
 	}
 	else if (Comp_board[atkRow][atkCol] == 'C')
@@ -764,7 +754,7 @@ void Board::PlayerAttackSet()
 		PrintBoards();
 		std::cout << std::setw(84) << "You Hit Their Cruiser.";
 		player_atk_radar[atkRow][atkCol] = '!';
-		p->cruise_size--;
+		AiPiece.CruiserHealth--;
 		PieceOnBoard_Comp--;
 	}
 	else if (Comp_board[atkRow][atkCol] == 'A')
@@ -772,7 +762,7 @@ void Board::PlayerAttackSet()
 		PrintBoards();
 		std::cout << std::setw(84) << "You Hit Their Aircraft Carrier.";
 		player_atk_radar[atkRow][atkCol] = '!';
-		p->ac_size--;
+		AiPiece.AircraftCarrierHealth--;
 		PieceOnBoard_Comp--;
 	}
 	else if (Comp_board[atkRow][atkCol] == 'B')
@@ -780,7 +770,7 @@ void Board::PlayerAttackSet()
 		PrintBoards();
 		std::cout << std::setw(84) << " You Hit Their Battleship";
 		player_atk_radar[atkRow][atkCol] = '!';
-		p->BS_size--;
+		AiPiece.BattleshipHealth--;
 		PieceOnBoard_Comp--;
 	}
 	else
@@ -796,42 +786,42 @@ void Board::AiAttackOnBoard()
 	if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'P')
 	{
 		std::cout << std::setw(82) << "The Computer Has Hit Your Patrol Boat: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
-		p->ptrl_boat_hit = true;
+		PlayerPiece.PatrolBoatHit = true;
 		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
-		p->player_ptrl_boat_size--;
+		PlayerPiece.PatrolBoatHealth--;
 	}
 	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'S')
 	{
 		std::cout << std::setw(81) << "The Computer Has Hit Your Submarine: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
-		p->sub_hit = true;
+		PlayerPiece.SubmarineHit = true;
 		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
-		p->player_sub_size--;
+		PlayerPiece.SubmarineHealth--;
 	}
 	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'C')
 	{
 		std::cout << std::setw(81) << "The Computer Has Hit Your Cruiser: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
-		p->cruise_hit = true;
+		PlayerPiece.CruiserHit = true;
 		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
-		p->player_cruise_size--;
+		PlayerPiece.CruiserHealth--;
 	}
 	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'A')
 	{
 		std::cout << std::setw(81) << "The Computer Has Hit Your Aircraft Carrier: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
-		p->ac_hit = true;
+		PlayerPiece.AircraftCarrierHit = true;
 		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
-		p->player_ac_size--;
+		PlayerPiece.AircraftCarrierHealth--;
 	}
 	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'B')
 	{
 		std::cout << std::setw(81) << "The Computer Has Hit Your Battleship: " << Ai->aplha_comp_atk << (Ai->comp_atk_col / 2) << std::endl << std::endl;
-		p->BS_hit = true;
+		PlayerPiece.BattleshipHit = true;
 		player_board[Ai->comp_atk_row][Ai->comp_atk_col] = '!';
 		PieceOnBoard_Player--;
-		p->player_BS_size--;
+		PlayerPiece.BattleshipHealth--;
 	}
 	else if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == '*')
 	{
@@ -876,32 +866,32 @@ void Board::AIAttack()
 		Ai->comp_atk_col = ((rand() % 10) * 2) + 1;  // Generates a Random ODD number between 1-9
 
 		// If the location targeted is P, S, C, A or B. The we know it hit a ship and can move to changing the board
-		if (p->ptrl_boat_hit == true)
+		if (PlayerPiece.PatrolBoatHit == true)
 		{
 			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'P') { AiAttackOnBoard(); }
 			else { Ai->valid_comp_atk_cord = false; }
 		}
-		else if (p->sub_hit == true)
+		else if (PlayerPiece.SubmarineHit == true)
 		{
 			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'S') { AiAttackOnBoard(); }
 			else { Ai->valid_comp_atk_cord = false; }
 		}
-		else if (p->cruise_hit == true)
+		else if (PlayerPiece.CruiserHit == true)
 		{
 			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'C') { AiAttackOnBoard(); }
 			else { Ai->valid_comp_atk_cord = false; }
 		}
-		else if (p->ac_hit == true)
+		else if (PlayerPiece.AircraftCarrierHit == true)
 		{
 			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'A') { AiAttackOnBoard(); }
 			else { Ai->valid_comp_atk_cord = false; }
 		}
-		else if (p->BS_hit == true)
+		else if (PlayerPiece.BattleshipHit == true)
 		{
 			if (player_board[Ai->comp_atk_row][Ai->comp_atk_col] == 'B') { AiAttackOnBoard(); }
 			else { Ai->valid_comp_atk_cord = false; }
 		}
-		if (p->ptrl_boat_hit == false && p->sub_hit == false && p->cruise_hit == false && p->ac_hit == false && p->BS_hit == false)
+		if (PlayerPiece.PatrolBoatHit == false && PlayerPiece.SubmarineHit == false && PlayerPiece.CruiserHit == false && PlayerPiece.AircraftCarrierHit == false && PlayerPiece.BattleshipHit == false)
 		{
 			AiAttackOnBoard();
 		}

@@ -4,6 +4,7 @@
 
 Player::Player()
 {
+
 	validShipPos;
 	validAtkCord; // For checking if the location is a a Valid attack
 	shipNumber = 0;					// Number of ships the player has left in the game
