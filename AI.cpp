@@ -1,7 +1,10 @@
 #include "AI.h"
 
+
+
 AI::AI()
 {
+
 	comp_ship = 0;			// Number of computer  ships left in the game
 
 	comp_atk_row, comp_atk_col;

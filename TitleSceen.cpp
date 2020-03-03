@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <conio.h>
+#include "Scoreboard.h"
 
 Board* b;
 
@@ -127,12 +128,13 @@ void TitleScreen::player_choose_options()
 void TitleScreen::PlayGame()
 {
 	system("CLS");
+	//b->FakeLoadingScreeen();
 	b->EnterName();
-	b->DisplayScoreboard();
-	b->FakeLoadingScreeen();
 	b->AISetShips();
 	b->PrintBoards();
 	b->PlayerPlaceShips();		
 	b->FakeLoadingScreeen();
-	b->PlayerAttack();
+	b->PlayerAttack();	
+	b->PrintBoards();
+
 }

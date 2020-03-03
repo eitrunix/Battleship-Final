@@ -33,6 +33,9 @@
     <ClCompile Include="AI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battleships.h">
@@ -52,6 +55,12 @@
     </ClInclude>
     <ClInclude Include="AI.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scoreboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkList.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

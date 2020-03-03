@@ -1,4 +1,7 @@
 #include <string>
+#include "Piece.h"
+#include "LinkList.h"
+
 #ifndef BOARD__H
 #define BOARD__H
 
@@ -38,6 +41,19 @@ public:
 	void PlayerAttackSet();
 	void CheckValidCell();
 	void AIAttack();
+
+	int playerPBhealth;
+	int playerSubHealth;
+	int playerCrusHealth;
+	int playerACHealth;
+	int playerBSHealth;
+
+	int aiPBhealth;
+	int aiSubHealth;
+	int aiCrusHealth;
+	int aiACHealth;
+	int aiBSHealth;
+
 };
 
 #endif
