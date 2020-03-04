@@ -127,14 +127,6 @@ void TitleScreen::player_choose_options()
 
 void TitleScreen::PlayGame()
 {
-	system("CLS");
-	//b->FakeLoadingScreeen();
-	b->EnterName();
-	b->AISetShips();
 	b->PrintBoards();
-	b->PlayerPlaceShips();		
-	b->FakeLoadingScreeen();
-	b->PlayerAttack();	
-	b->PrintBoards();
-
+	b->GameLoop();
 }

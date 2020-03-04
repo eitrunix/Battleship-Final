@@ -8,13 +8,11 @@ LinkList<Piece*>::Iterator scoreboardItr2;
 LinkList<Piece*>::Iterator scoreboardItr3;
 LinkList<Piece*>::Iterator scoreboardItr4;
 
-Scoreboard::Scoreboard(LinkList<Piece* > &p1ll, LinkList<Piece* > &p2ll, std::string name)
+Scoreboard::Scoreboard(LinkList<Piece* > &p1ll, LinkList<Piece* > &p2ll)
 {
-	playerName = name;
 	player1ll = &p1ll;
 	player2ll = &p2ll;
 	resetIter();
-	GetScore();
 }
 
 Scoreboard::~Scoreboard()
@@ -23,7 +21,6 @@ Scoreboard::~Scoreboard()
 
 void Scoreboard::PrintBoard()
 {
-	GetScore();
 	system("CLS");
 	std::cout << std::setw(80) << playerName << "'s Ship Status" << (char)179 << std::setw(2) << " " << "Computer's Ship Status " << std::endl;
 	std::cout << std::setw(60) << (char)201;

@@ -9,7 +9,7 @@ class Scoreboard
 {
 	public:
 
-	Scoreboard(LinkList<Piece* > &p1ll, LinkList<Piece*> &p2ll, std::string name);
+	Scoreboard(LinkList<Piece* > &p1ll, LinkList<Piece*> &p2ll);
 	~Scoreboard();
 
 	LinkList<Piece* >* player1ll;
