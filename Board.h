@@ -11,25 +11,12 @@ public:
 	Board();
 	~Board();
 
-	void DisplayScoreboard();
-	void PrintBoards();
-	void ClearBoard();
+	void PrintBoards(Player *player);
+	void ClearBoard(Player* player);
 	void FakeLoadingScreeen();
-	void PlayerAttackSet();
-	void GameLoop();
 	// Board Variables
 
-	int playerPBhealth;
-	int playerSubHealth;
-	int playerCrusHealth;
-	int playerACHealth;
-	int playerBSHealth;
 
-	int aiPBhealth;
-	int aiSubHealth;
-	int aiCrusHealth;
-	int aiACHealth;
-	int aiBSHealth;
 
 };
 

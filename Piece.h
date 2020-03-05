@@ -19,10 +19,15 @@
 class Piece
 {
 public:
+
 	int health;
+	int ID;
 	bool hit = false;
 	int scoreBoardMargin = 11;
 	std::string name;
+	std::string icon;
+	std::string PiecePlaceText;
+	std::string PieceHitText;
 	virtual void OnHit();
 
 	Piece();
@@ -33,7 +38,6 @@ class PatrolBoat : public Piece
 public:
 	PatrolBoat();
 	~PatrolBoat();
-	
 	void OnHit() override;
 };
 class Submarine : public Piece

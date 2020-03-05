@@ -1,21 +1,21 @@
 #include "TitleSceen.h"
-#include "Board.h"
 #include <iostream>
 #include <iomanip>
 #include <conio.h>
-#include "Scoreboard.h"
+#include "BattleshipGame.h"
 
-Board* b;
+BattleshipGame* game;
 
 void TitleScreen::BuildTitle() 
 {
-	Options[options_row][options_col];
-	game_title[title_row][title_col];
 	// Fancy fancy art.
+	print_game_title();
+	print_options();
+	player_choose_options();
 }
 TitleScreen::TitleScreen()
 {
-	b = new Board();
+	BuildTitle();
 }
 TitleScreen::~TitleScreen()
 {
@@ -67,7 +67,8 @@ void TitleScreen::player_choose_options()
 			if (arrow_row == 0 && arrow_col == 0 && options_move == 13)			// first option, plays the game, starts by asking the player name, computer places ships on the board, then prompts the player to place ships,
 																				// then will tell the player to get ready to play (tell_player_shits_about_to_get_real function) and print the boards, then asks for the attack cords.
 			{
-				PlayGame();
+				BattleshipGame* game = new BattleshipGame(1, true);
+				
 			}
 			else if (arrow_row == 2 && arrow_col == 0 && options_move == 13)
 			{
@@ -118,15 +119,10 @@ void TitleScreen::player_choose_options()
 				system("CLS");
 				print_game_title();
 				print_options();
+
 			}
 		}
 	}
 }
 // Used to get players Name, the loop is used for spacing to try to get the text in the "center" of the screen
 
-
-void TitleScreen::PlayGame()
-{
-	b->PrintBoards();
-	b->GameLoop();
-}

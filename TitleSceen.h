@@ -20,7 +20,8 @@ public:
 	void print_options();
 	void player_choose_options();
 	void BuildTitle();
-	void PlayGame();
+
+	bool titleRunning = true;
 
 	char Options[3][14]
 	{

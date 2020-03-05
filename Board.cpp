@@ -7,24 +7,16 @@
 
 using namespace DataStructuresAndAI;
 
-Player* player;
-AI* Ai;
-Scoreboard* scoreboard;
-
-
 Board::Board()
 {
-	player = new Player();
-	Ai = new AI(*player);
-	scoreboard = new Scoreboard(player->pieces, Ai->Aipieces);
+	
 }
 Board::~Board()
 {
 }
 // Board Stuff
-void Board::PrintBoards()
+void Board::PrintBoards(Player *player)
 {
-	DisplayScoreboard();
 	for (int i = 0; i < 3; i++)
 	{
 		std::cout << std::endl;					// Spacing between board and the Ship Status
@@ -111,26 +103,22 @@ void Board::PrintBoards()
 	}
 	std::cout << (char)217 << std::endl << std::endl;
 }
-void Board::DisplayScoreboard()
-{
-	scoreboard->PrintBoard();
-}
-void Board::ClearBoard()
+void Board::ClearBoard(Player *player)
 {
 	for (int i = 0; i < 39; i++)
 	{
 		for (int j = 0; j < 39; j++)
 		{		// checks for all symbols used on the map, to change them back to '*'
-			if (player->player_board[i][j] == 'P' || Ai->Comp_board[i][j] == 'P' ||
-				player->player_board[i][j] == 'S' || Ai->Comp_board[i][j] == 'S' ||
-				player->player_board[i][j] == 'C' || Ai->Comp_board[i][j] == 'C' ||
-				player->player_board[i][j] == 'A' || Ai->Comp_board[i][j] == 'A' ||
-				player->player_board[i][j] == 'B' || Ai->Comp_board[i][j] == 'B' ||
+			if (player->player_board[i][j] == 'P' || player->Comp_board[i][j] == 'P' ||
+				player->player_board[i][j] == 'S' || player->Comp_board[i][j] == 'S' ||
+				player->player_board[i][j] == 'C' || player->Comp_board[i][j] == 'C' ||
+				player->player_board[i][j] == 'A' || player->Comp_board[i][j] == 'A' ||
+				player->player_board[i][j] == 'B' || player->Comp_board[i][j] == 'B' ||
 				player->player_board[i][j] == '!' || player->player_atk_radar[i][j] == '!' ||
 				player->player_board[i][j] == '$' || player->player_atk_radar[i][j] == '$')
 			{
 				player->player_board[i][j] = '*';
-				Ai->Comp_board[i][j] = '*';
+				player->Comp_board[i][j] = '*';
 				player->player_atk_radar[i][j] = '*';
 			}
 		}
@@ -158,68 +146,5 @@ void Board::FakeLoadingScreeen()
 		system("Color 08");
 	}
 }
-void Board::PlayerAttackSet()
-{
-	if (player->player_atk_radar[player->atkRow][player->atkCol] == '!' || player->player_atk_radar[player->atkRow][player->atkCol] == '$')
-	{
-		PrintBoards();
-		std::cout << std::setw(82) << "You Have Already Attacked That Position.";
-		Sleep(3000);
-		player->validAtkCord = false;
-	}
-	else if (Ai->Comp_board[player->atkRow][player->atkCol] == 'P')
-	{
-		PrintBoards();
-		std::cout << std::setw(84) << "You Hit Their Patrol Boat.";
-		player->player_atk_radar[player->atkRow][player->atkCol] = '!';
-		aiPBhealth--;
-		player->PieceOnBoard_Comp--;
-	}
-	else if (Ai->Comp_board[player->atkRow][player->atkCol] == 'S')
-	{
-		PrintBoards();
-		std::cout << std::setw(84) << "You Hit Their Submarine.";
-		player->player_atk_radar[player->atkRow][player->atkCol] = '!';
-		aiSubHealth--;
-		player->PieceOnBoard_Comp--;
-	}
-	else if (Ai->Comp_board[player->atkRow][player->atkCol] == 'C')
-	{
-		PrintBoards();
-		std::cout << std::setw(84) << "You Hit Their Cruiser.";
-		player->player_atk_radar[player->atkRow][player->atkCol] = '!';
-		aiCrusHealth--;
-		player->PieceOnBoard_Comp--;
-	}
-	else if (Ai->Comp_board[player->atkRow][player->atkCol] == 'A')
-	{
-		PrintBoards();
-		std::cout << std::setw(84) << "You Hit Their Aircraft Carrier.";
-		player->player_atk_radar[player->atkRow][player->atkCol] = '!';
-		aiACHealth--;
-		player->PieceOnBoard_Comp--;
-	}
-	else if (Ai->Comp_board[player->atkRow][player->atkCol] == 'B')
-	{
-		PrintBoards();
-		std::cout << std::setw(84) << " You Hit Their Battleship";
-		player->player_atk_radar[player->atkRow][player->atkCol] = '!';
-		aiBSHealth--;
-		player->PieceOnBoard_Comp--;
-	}
-	else
-	{
-		PrintBoards();
-		std::cout << std::setw(71) << "Nope. You Missed." << std::endl << std::endl;
-		player->player_atk_radar[player->atkRow][player->atkCol] = '$';
-	}
-}
 
-void Board::GameLoop()
-{
-	FakeLoadingScreeen();
-	player->EnterName();
-	Ai->AISetShips();
-
-}
 

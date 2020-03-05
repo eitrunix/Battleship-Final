@@ -1,12 +1,9 @@
 #include "TitleSceen.h"
 
+TitleScreen* title = new TitleScreen();
 
-TitleScreen t;
 int main()
 {
-	t.print_game_title();
-	t.print_options();
-	t.player_choose_options();
-	
+	title->BuildTitle();
 }
 

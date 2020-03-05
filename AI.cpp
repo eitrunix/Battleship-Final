@@ -51,7 +51,7 @@ void AI::AIAttack()
 {
 
 	Piece* p = *Aiitr;
-	Aiitr = player->pieces.end();
+	Aiitr = player->pieces.begin();
 	{
 		// Sets valid_comp_atk_cord to true
 		valid_comp_atk_cord = true;
@@ -97,27 +97,27 @@ void AI::AIAttack()
 void AI::CheckValidMoveAI()
 {
 	// checks the array for an empty space '*' to place ships in, its empty we can place the current ships character at the position, this is for the cvomputer so we dont see this
-	if (Comp_board[compRow][compCol] == '*')
+	if (player->Comp_board[compRow][compCol] == '*')
 	{
 		if (player->comp_ship == 0)
 		{
-			Comp_board[compRow][compCol] = 'P';
+			player->Comp_board[compRow][compCol] = 'P';
 		}
 		else if (player->comp_ship == 1)
 		{
-			Comp_board[compRow][compCol] = 'S';
+			player->Comp_board[compRow][compCol] = 'S';
 		}
 		else if (player->comp_ship == 2)
 		{
-			Comp_board[compRow][compCol] = 'C';
+			player->Comp_board[compRow][compCol] = 'C';
 		}
 		else if (player->comp_ship == 3)
 		{
-			Comp_board[compRow][compCol] = 'A';
+			player->Comp_board[compRow][compCol] = 'A';
 		}
 		else if (player->comp_ship == 4)
 		{
-			Comp_board[compRow][compCol] = 'B';
+			player->Comp_board[compRow][compCol] = 'B';
 		}
 		AIHoV(); // same a player. let them place horizontally or vertically
 	}
@@ -190,72 +190,72 @@ void AI::AIHoV()
 	comp_hv = rand() % 2 + 1; // Computer will randomly choose hori or vert
 	if (comp_hv == 1)
 	{		// this is the same as the players h_or_v but for the Compter.
-		if (player->comp_ship == 0 && Comp_board[compRow][compCol + 2] == '*')
+		if (player->comp_ship == 0 && player->Comp_board[compRow][compCol + 2] == '*')
 		{
-			Comp_board[compRow][compCol + 2] = 'P';
+			player->Comp_board[compRow][compCol + 2] = 'P';
 		}
-		else if (player->comp_ship == 1 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*')
+		else if (player->comp_ship == 1 && player->Comp_board[compRow][compCol + 2] == '*' && player->Comp_board[compRow][compCol + 4] == '*')
 		{
-			Comp_board[compRow][compCol + 2] = 'S';
-			Comp_board[compRow][compCol + 4] = 'S';
+			player->Comp_board[compRow][compCol + 2] = 'S';
+			player->Comp_board[compRow][compCol + 4] = 'S';
 		}
-		else if (player->comp_ship == 2 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*')
+		else if (player->comp_ship == 2 && player->Comp_board[compRow][compCol + 2] == '*' && player->Comp_board[compRow][compCol + 4] == '*')
 		{
-			Comp_board[compRow][compCol + 2] = 'C';
-			Comp_board[compRow][compCol + 4] = 'C';
+			player->Comp_board[compRow][compCol + 2] = 'C';
+			player->Comp_board[compRow][compCol + 4] = 'C';
 		}
-		else if (player->comp_ship == 3 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*' && Comp_board[compRow][compCol + 6] == '*')
+		else if (player->comp_ship == 3 && player->Comp_board[compRow][compCol + 2] == '*' && player->Comp_board[compRow][compCol + 4] == '*' && player->Comp_board[compRow][compCol + 6] == '*')
 		{
-			Comp_board[compRow][compCol + 2] = 'A';
-			Comp_board[compRow][compCol + 4] = 'A';
-			Comp_board[compRow][compCol + 6] = 'A';
+			player->Comp_board[compRow][compCol + 2] = 'A';
+			player->Comp_board[compRow][compCol + 4] = 'A';
+			player->Comp_board[compRow][compCol + 6] = 'A';
 		}
-		else if (player->comp_ship == 4 && Comp_board[compRow][compCol + 2] == '*' && Comp_board[compRow][compCol + 4] == '*' && Comp_board[compRow][compCol + 6] == '*' && Comp_board[compRow][compCol + 8] == '*')
+		else if (player->comp_ship == 4 && player->Comp_board[compRow][compCol + 2] == '*' && player->Comp_board[compRow][compCol + 4] == '*' && player->Comp_board[compRow][compCol + 6] == '*' && player->Comp_board[compRow][compCol + 8] == '*')
 		{
-			Comp_board[compRow][compCol = 2] = 'B';
-			Comp_board[compRow][compCol + 4] = 'B';
-			Comp_board[compRow][compCol + 6] = 'B';
-			Comp_board[compRow][compCol + 8] = 'B';
+			player->Comp_board[compRow][compCol = 2] = 'B';
+			player->Comp_board[compRow][compCol + 4] = 'B';
+			player->Comp_board[compRow][compCol + 6] = 'B';
+			player->Comp_board[compRow][compCol + 8] = 'B';
 		}
 		else
 		{
-			Comp_board[compRow][compCol] = '*';
+			player->Comp_board[compRow][compCol] = '*';
 			valid_comp_ship_pos = false;
 		}
 	}
 	else if (comp_hv == 2)
 	{
-		if (player->comp_ship == 0 && Comp_board[compRow + 1][compCol] == '*')
+		if (player->comp_ship == 0 && player->Comp_board[compRow + 1][compCol] == '*')
 		{
-			Comp_board[compRow + 1][compCol] = 'P';
+			player->Comp_board[compRow + 1][compCol] = 'P';
 		}
-		else if (player->comp_ship == 1 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*')
+		else if (player->comp_ship == 1 && player->Comp_board[compRow + 1][compCol] == '*' && player->Comp_board[compRow + 3][compCol] == '*')
 		{
-			Comp_board[compRow + 1][compCol] = 'S';
-			Comp_board[compRow + 3][compCol] = 'S';
+			player->Comp_board[compRow + 1][compCol] = 'S';
+			player->Comp_board[compRow + 3][compCol] = 'S';
 		}
-		else if (player->comp_ship == 2 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*')
+		else if (player->comp_ship == 2 && player->Comp_board[compRow + 1][compCol] == '*' && player->Comp_board[compRow + 3][compCol] == '*')
 		{
-			Comp_board[compRow + 1][compCol] = 'C';
-			Comp_board[compRow + 3][compCol] = 'C';
+			player->Comp_board[compRow + 1][compCol] = 'C';
+			player->Comp_board[compRow + 3][compCol] = 'C';
 		}
-		else if (player->comp_ship == 3 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*' && Comp_board[compRow + 5][compCol] == '*')
+		else if (player->comp_ship == 3 && player->Comp_board[compRow + 1][compCol] == '*' && player->Comp_board[compRow + 3][compCol] == '*' && player->Comp_board[compRow + 5][compCol] == '*')
 		{
-			Comp_board[compRow + 1][compCol] = 'A';
-			Comp_board[compRow + 3][compCol] = 'A';
-			Comp_board[compRow + 5][compCol] = 'A';
+			player->Comp_board[compRow + 1][compCol] = 'A';
+			player->Comp_board[compRow + 3][compCol] = 'A';
+			player->Comp_board[compRow + 5][compCol] = 'A';
 
 		}
-		else if (player->comp_ship == 4 && Comp_board[compRow + 1][compCol] == '*' && Comp_board[compRow + 3][compCol] == '*' && Comp_board[compRow + 5][compCol] == '*' && Comp_board[compRow + 7][compCol] == '*')
+		else if (player->comp_ship == 4 && player->Comp_board[compRow + 1][compCol] == '*' && player->Comp_board[compRow + 3][compCol] == '*' && player->Comp_board[compRow + 5][compCol] == '*' && player->Comp_board[compRow + 7][compCol] == '*')
 		{
-			Comp_board[compRow + 1][compCol] = 'B';
-			Comp_board[compRow + 3][compCol] = 'B';
-			Comp_board[compRow + 5][compCol] = 'B';
-			Comp_board[compRow + 7][compCol] = 'B';
+			player->Comp_board[compRow + 1][compCol] = 'B';
+			player->Comp_board[compRow + 3][compCol] = 'B';
+			player->Comp_board[compRow + 5][compCol] = 'B';
+			player->Comp_board[compRow + 7][compCol] = 'B';
 
 		}
 		else {
-			Comp_board[compRow][compCol] = '*';
+			player->Comp_board[compRow][compCol] = '*';
 			valid_comp_ship_pos = false;
 		}
 	}

@@ -124,7 +124,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
+    <ClCompile Include="BattleshipGame.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="HealthManager.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
@@ -133,8 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h" />
-    <ClInclude Include="Battleships.h" />
+    <ClInclude Include="BattleshipGame.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="HealthManager.h" />
     <ClInclude Include="LinkList.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="Player.h" />
