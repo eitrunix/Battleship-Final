@@ -15,7 +15,8 @@ public:
 
 	enum class GameMode {
 		SinglePlayerGame,
-		MultiPlayerGame
+		MultiPlayerGame,
+		Finished
 	};
 
 	enum class GameState {
@@ -23,22 +24,30 @@ public:
 		Player2Turn,
 		AITurn,
 		PlacingShips,
-		CheckWinCon,
+		GameDone,
 		Loading,
-		Title
 	};
+
 	AI* ai;
 	Player* player;
 	Player* player2;
 	Player* mpPlayer1;
 	GameState state; 
+	GameState nextState;
+	GameState tempState;
 	GameMode mode;
+
+	int P2PiecesAmt;
+	int P1PiecesAmt;
 
 	int numOfPlayers;
 	bool vsAI;
 	bool gameFinished;
 	void SetupGame();
+	void CheckWinCon();
 	void StateCheck();
+	void PrintGame();
+
 	BattleshipGame* instance(int _players, bool _vsai) {
 		if (!s_instance)
 		{
@@ -46,21 +55,19 @@ public:
 			return s_instance;
 		}
 	}
-
-
 };
 
 // The Game Loop for Battleship, hopefuly writing this will help me logic the thing I bult then ripped apart and rebuilt and yeah..
-// TitleScreen
-// Player Picks Play
-// Ask for Name
-// Computer Places Ships
-// Player Places Ships
-// Loading Screen
-// Player 1 Inputs Attack
-// Check Player 2 board for hit or miss
-// Display Hit or Miss
-// Player 2 Turn
-// Player 2 Input Attack
-// Check Player 1 board for Hit or Miss
-// Display Hit or Miss
+// TitleScreen --
+// Player Picks Play --
+// Ask for Name --
+// Computer Places Ships -x
+// Player Places Ships --
+// Loading Screen --
+// Player 1 Inputs Attack -x
+// Check Player 2 board for hit or miss -x
+// Display Hit or Miss -x
+// Player 2 Turn -x
+// Player 2 Input Attack -x
+// Check Player 1 board for Hit or Miss -x
+// Display Hit or Miss -x

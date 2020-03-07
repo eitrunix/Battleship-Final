@@ -1,5 +1,3 @@
-#include "Player.h"
-#include "AI.h"
 #include <iostream>
 #include <iomanip>
 #include <Windows.h>
@@ -124,10 +122,7 @@ void Board::ClearBoard(Player *player)
 		}
 	}
 	//reset variables to origional numbers
-	player->comp_ship = 0;
-	player->shipNumber = 0;
-	player->PieceOnBoard_Comp = 14;
-	player->PieceOnBoard_Player = 14;
+	player->ResetBoard();
 }
 void Board::FakeLoadingScreeen()
 {

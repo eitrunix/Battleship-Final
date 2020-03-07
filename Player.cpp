@@ -29,6 +29,7 @@ Player::Player()
 	pieces.push_back(patrolBoat);
 
 	itr = pieces.begin();
+	PlayerPieceOnBoard = battleship->health + aircraftCarrier->health + cruiser->health + submarine->health + patrolBoat->health;
 
 }
 
@@ -102,45 +103,43 @@ void Player::PlayerHoV()
 	// if we enter h, and ship_number is '0', Ptrl_boat character is used, S for sub, C for Cruiser ect
 	if (HoV[0] == 'h')
 	{
-		for (itr; itr != nullptr; itr++) {
-			if (shipNumber == 0 && player_board[row][col + 2] == '*')
-			{
-				player_board[row][col + 2] = 'P';  // Sets the ship at the position entered and will print to the right to fill the spaces the ship takes up
-			}
-			// if its ship_number 1 and the next 2 col spaces are free, prints out the 3 spaces for the Sub
-			else if (shipNumber == 1 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*')
-			{
-				player_board[row][col + 2] = 'S';
-				player_board[row][col + 4] = 'S';
-			}
-			// if its ship_number 1 and the next 3 col spaces are free, prints out the 4 spaces for the Cruiser
-			else if (shipNumber == 2 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*')
-			{
-				player_board[row][col + 2] = 'C';
-				player_board[row][col + 4] = 'C';
-			}
-			// I dont think I need to keep commenting these, We know what they do.
-			else if (shipNumber == 3 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*' && player_board[row][col + 6] == '*')
-			{
-				player_board[row][col + 2] = 'A';
-				player_board[row][col + 4] = 'A';
-				player_board[row][col + 6] = 'A';
-			}
-			else if (shipNumber == 4 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*' && player_board[row][col + 6] == '*' && player_board[row][col + 8] == '*')
-			{
-				player_board[row][col + 2] = 'B';
-				player_board[row][col + 4] = 'B';
-				player_board[row][col + 6] = 'B';
-				player_board[row][col + 8] = 'B';
-			}
-			else
+		if (shipNumber == 0 && player_board[row][col + 2] == '*')
+		{
+			player_board[row][col + 2] = 'P';  // Sets the ship at the position entered and will print to the right to fill the spaces the ship takes up
+		}
+		// if its ship_number 1 and the next 2 col spaces are free, prints out the 3 spaces for the Sub
+		else if (shipNumber == 1 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*')
+		{
+			player_board[row][col + 2] = 'S';
+			player_board[row][col + 4] = 'S';
+		}
+		// if its ship_number 1 and the next 3 col spaces are free, prints out the 4 spaces for the Cruiser
+		else if (shipNumber == 2 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*')
+		{
+			player_board[row][col + 2] = 'C';
+			player_board[row][col + 4] = 'C';
+		}
+		// I dont think I need to keep commenting these, We know what they do.
+		else if (shipNumber == 3 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*' && player_board[row][col + 6] == '*')
+		{
+			player_board[row][col + 2] = 'A';
+			player_board[row][col + 4] = 'A';
+			player_board[row][col + 6] = 'A';
+		}
+		else if (shipNumber == 4 && player_board[row][col + 2] == '*' && player_board[row][col + 4] == '*' && player_board[row][col + 6] == '*' && player_board[row][col + 8] == '*')
+		{
+			player_board[row][col + 2] = 'B';
+			player_board[row][col + 4] = 'B';
+			player_board[row][col + 6] = 'B';
+			player_board[row][col + 8] = 'B';
+		}
+		else
 
-			{ // if any space is occupied Not enough space to place
-				std::cout << std::setw(95) << "Sorry, Not Enough Space To Set It Horizontally." << std::endl << std::endl; //yell at player
-				Sleep(3000);	//pause to make the game look fancy... it doesnt but whateve
-				player_board[row][col] = '*'; // make sure the space is a * still
-				validShipPos = false;				// set valid_ship_pos to false so we run through the loop again
-			}
+		{ // if any space is occupied Not enough space to place
+			std::cout << std::setw(95) << "Sorry, Not Enough Space To Set It Horizontally." << std::endl << std::endl; //yell at player
+			Sleep(3000);	//pause to make the game look fancy... it doesnt but whateve
+			player_board[row][col] = '*'; // make sure the space is a * still
+			validShipPos = false;				// set valid_ship_pos to false so we run through the loop again
 		}
 
 	}
@@ -238,21 +237,7 @@ void Player::PlayerAttack()
 		std::cin.getline(playerAtkCords, 11, '\n');
 
 		CheckPlayerAttack();
-		if (PieceOnBoard_Comp == 0)
-		{
-			for (int i = 0; i < 6; i++)
-			{
-				system("CLS");
-				for (int i = 0; i < 19; i++)
-				{
-					std::cout << std::endl;
-				}
-				Sleep(500);
-				std::cout << std::setw(60) << name << " ,You Won!!!" << std::endl;
-				Sleep(500);
-			}
-		}
-		else if (validAtkCord == true)
+		if (validAtkCord == true)
 		{
 			Sleep(3000);
 		}
@@ -276,8 +261,35 @@ void Player::CheckPlayerAttack()
 	PlayerAttackSet();
 }
 
+void Player::RowColAtkVals()
+{
+	if (playerAtkCords[0] == 'a') { atkRow = 0; }
+	else if (playerAtkCords[0] == 'b') { atkRow = 2; }
+	else if (playerAtkCords[0] == 'c') { atkRow = 4; }
+	else if (playerAtkCords[0] == 'd') { atkRow = 6; }
+	else if (playerAtkCords[0] == 'e') { atkRow = 8; }
+	else if (playerAtkCords[0] == 'f') { atkRow = 10; }
+	else if (playerAtkCords[0] == 'g') { atkRow = 12; }
+	else if (playerAtkCords[0] == 'h') { atkRow = 14; }
+	else if (playerAtkCords[0] == 'i') { atkRow = 16; }
+	else if (playerAtkCords[0] == 'j') { atkRow = 18; }
+	// assigns the value the player entered for the second Coords input, for the second coord input.
+
+	if (playerAtkCords[1] == '0') { atkCol = 3; }
+	else if (playerAtkCords[1] == '1') { atkCol = 5; }
+	else if (playerAtkCords[1] == '2') { atkCol = 7; }
+	else if (playerAtkCords[1] == '3') { atkCol = 9; }
+	else if (playerAtkCords[1] == '4') { atkCol = 11; }
+	else if (playerAtkCords[1] == '5') { atkCol = 13; }
+	else if (playerAtkCords[1] == '6') { atkCol = 15; }
+	else if (playerAtkCords[1] == '7') { atkCol = 17; }
+	else if (playerAtkCords[1] == '8') { atkCol = 19; }
+	else if (playerAtkCords[1] == '9') { atkCol = 21; }
+}
+
 void Player::PlayerAttackSet()
 {
+	Piece *p = *itr;
 	if (player_atk_radar[atkRow][atkCol] == '!' || player_atk_radar[atkRow][atkCol] == '$')
 	{
 		std::cout << std::setw(82) << "You Have Already Attacked That Position.";
@@ -289,35 +301,69 @@ void Player::PlayerAttackSet()
 		std::cout << std::setw(84) << "You Hit Their Patrol Boat.";
 		player_atk_radar[atkRow][atkCol] = '!';
 		aiPBhealth--;
-		PieceOnBoard_Comp--;
+		for (itr; itr != nullptr; itr++)
+		{
+			if (p->ID == 1)
+			{
+				p->health -= 1;
+			}
+		}
 	}
 	else if (Comp_board[atkRow][atkCol] == 'S')
 	{
 		std::cout << std::setw(84) << "You Hit Their Submarine.";
 		player_atk_radar[atkRow][atkCol] = '!';
 		aiSubHealth--;
-		PieceOnBoard_Comp--;
+		for (itr; itr != nullptr; itr++)
+		{
+			if (p->ID == 1)
+			{
+				p->health -= 1;
+			}
+		}
+
 	}
 	else if (Comp_board[atkRow][atkCol] == 'C')
 	{
 		std::cout << std::setw(84) << "You Hit Their Cruiser.";
 		player_atk_radar[atkRow][atkCol] = '!';
 		aiCrusHealth--;
-		PieceOnBoard_Comp--;
+		for (itr; itr != nullptr; itr++)
+		{
+			if (p->ID == 1)
+			{
+				p->health -= 1;
+			}
+		}
+
 	}
 	else if (Comp_board[atkRow][atkCol] == 'A')
 	{
 		std::cout << std::setw(84) << "You Hit Their Aircraft Carrier.";
 		player_atk_radar[atkRow][atkCol] = '!';
 		aiACHealth--;
-		PieceOnBoard_Comp--;
+		for (itr; itr != nullptr; itr++)
+		{
+			if (p->ID == 1)
+			{
+				p->health -= 1;
+			}
+		}
+
 	}
 	else if (Comp_board[atkRow][atkCol] == 'B')
 	{
 		std::cout << std::setw(84) << " You Hit Their Battleship";
 		player_atk_radar[atkRow][atkCol] = '!';
 		aiBSHealth--;
-		PieceOnBoard_Comp--;
+		for (itr; itr != nullptr; itr++)
+		{
+			if (p->ID == 1)
+			{
+				p->health -= 1;
+			}
+		}
+
 	}
 	else
 	{
@@ -352,31 +398,6 @@ void Player::RowColVals()
 	else if (playerShipCords[1] == '9') { col = 21; }
 }
 
-void Player::RowColAtkVals()
-{
-	if (playerAtkCords[0] == 'a') { atkRow = 0; }
-	else if (playerAtkCords[0] == 'b') { atkRow = 2; }
-	else if (playerAtkCords[0] == 'c') { atkRow = 4; }
-	else if (playerAtkCords[0] == 'd') { atkRow = 6; }
-	else if (playerAtkCords[0] == 'e') { atkRow = 8; }
-	else if (playerAtkCords[0] == 'f') { atkRow = 10; }
-	else if (playerAtkCords[0] == 'g') { atkRow = 12; }
-	else if (playerAtkCords[0] == 'h') { atkRow = 14; }
-	else if (playerAtkCords[0] == 'i') { atkRow = 16; }
-	else if (playerAtkCords[0] == 'j') { atkRow = 18; }
-	// assigns the value the player entered for the second Coords input, for the second coord input.
-
-	if (playerAtkCords[1] == '0') { atkCol = 3; }
-	else if (playerAtkCords[1] == '1') { atkCol = 5; }
-	else if (playerAtkCords[1] == '2') { atkCol = 7; }
-	else if (playerAtkCords[1] == '3') { atkCol = 9; }
-	else if (playerAtkCords[1] == '4') { atkCol = 11; }
-	else if (playerAtkCords[1] == '5') { atkCol = 13; }
-	else if (playerAtkCords[1] == '6') { atkCol = 15; }
-	else if (playerAtkCords[1] == '7') { atkCol = 17; }
-	else if (playerAtkCords[1] == '8') { atkCol = 19; }
-	else if (playerAtkCords[1] == '9') { atkCol = 21; }
-}
 
 void Player::ClearHits()
 {
@@ -397,9 +418,10 @@ void Player::EnterName()
 	std::cout << std::setw(70) << "Enter Name: ";
 	getline(std::cin, name);
 
-	
+}
 
-
+void Player::ResetBoard()
+{
 }
 
 Player::~Player()

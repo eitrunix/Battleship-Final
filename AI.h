@@ -11,8 +11,9 @@ public:
 	AI(Player Player);
 	~AI();
 	Player* player;
-	int comp_atk_row, comp_atk_col;
-
+	int comp_atk_row;
+	int comp_atk_col;
+	int CompPiecesOnBoard;
 	bool valid_comp_ship_pos;	// same as above but for computer
 	bool valid_comp_atk_cord;	// same but for computer
 	//AI Attacking

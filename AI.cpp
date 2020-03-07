@@ -31,6 +31,7 @@ AI::AI(Player Player)
 
 	Aiitr = Aipieces.begin();
 
+	CompPiecesOnBoard = aibattleship->health + aiaircraftCarrier->health + aicruiser->health + aisubmarine->health + aipatrolBoat->health;
 }
 
 AI::~AI()
@@ -91,9 +92,61 @@ void AI::AIAttack()
 				AiAttackOnBoard();
 			}
 		}
-	} while (!valid_comp_atk_cord || player->PieceOnBoard_Player > 0);
+	} while (!valid_comp_atk_cord || player->PlayerPieceOnBoard > 0);
 }
 
+
+void AI::AICordsToAlpha()
+{
+	if (comp_atk_row == 0) { compRow = 'a'; }
+	else if (comp_atk_row == 2) { compRow = 'b'; }
+	else if (comp_atk_row == 4) { compRow = 'c'; }
+	else if (comp_atk_row == 6) { compRow = 'd'; }
+	else if (comp_atk_row == 8) { compRow = 'e'; }
+	else if (comp_atk_row == 10) { compRow = 'f'; }
+	else if (comp_atk_row == 12) { compRow = 'g'; }
+	else if (comp_atk_row == 14) { compRow = 'h'; }
+	else if (comp_atk_row == 16) { compRow = 'i'; }
+	else if (comp_atk_row == 18) { compRow = 'j'; }
+}
+
+void AI::AISetShips()
+{
+	// Runs this Function while the valid position is true
+	do {
+		// clear the screen, makes it look like a 'loading screen' a bit... Probably shouldnt do it this way tbh but it works
+		system("CLS");
+		for (int i = 0; i < 19; i++)
+		{
+			std::cout << std::endl;
+		}
+		std::cout << std::setw(90) << "Waiting For Computer To Set Ships On It's Board......." << player->comp_ship << " " << valid_comp_ship_pos;
+
+		valid_comp_ship_pos = true;			// sets to true at start, in is_comp_move_valid we may change it back to run this again but the numbers generated suck
+		srand(time(0));
+
+			compRow = 2 * rand() % 11;			// gets a Random even number
+			compCol = 1 + (2 * rand()) % 11;	// gets a Random Odd number
+		
+
+			CheckValidMoveAI();				// checks if the space is a *, a * is a valid space to place a ship
+
+		if (valid_comp_ship_pos == true) 
+		{
+			player->comp_ship++;
+		}
+	} while (player->comp_ship < 5 || !valid_comp_ship_pos);
+
+	// Tell the player the computer is done and ready, and its their turn to place ships
+	system("CLS");
+	for (int i = 0; i < 19; i++) {
+		std::cout << std::endl;
+	}
+	std::cout << std::setw(90) << "The Computer Has Set It's Ships. Now It's Your Turn.";
+	Sleep(3000);
+	system("CLS");
+
+}
 void AI::CheckValidMoveAI()
 {
 	// checks the array for an empty space '*' to place ships in, its empty we can place the current ships character at the position, this is for the cvomputer so we dont see this
@@ -126,65 +179,6 @@ void AI::CheckValidMoveAI()
 	}
 }
 
-void AI::AICordsToAlpha()
-{
-	if (comp_atk_row == 0) { compRow = 'a'; }
-	else if (comp_atk_row == 2) { compRow = 'b'; }
-	else if (comp_atk_row == 4) { compRow = 'c'; }
-	else if (comp_atk_row == 6) { compRow = 'd'; }
-	else if (comp_atk_row == 8) { compRow = 'e'; }
-	else if (comp_atk_row == 10) { compRow = 'f'; }
-	else if (comp_atk_row == 12) { compRow = 'g'; }
-	else if (comp_atk_row == 14) { compRow = 'h'; }
-	else if (comp_atk_row == 16) { compRow = 'i'; }
-	else if (comp_atk_row == 18) { compRow = 'j'; }
-}
-
-void AI::AISetShips()
-{
-
-	do {
-		bool success = true;
-		// clear the screen, makes it look like a 'loading screen' a bit... Probably shouldnt do it this way tbh but it works
-		system("CLS");
-		for (int i = 0; i < 19; i++)
-		{
-			std::cout << std::endl;
-		}
-		std::cout << std::setw(90) << "Waiting For Computer To Set Ships On It's Board.......";
-
-		valid_comp_ship_pos = true;			// sets to true at start, in is_comp_move_valid we may change it back to run this again but the numbers generated suck
-		srand(time(0));
-		if (success)
-		{
-			compRow = 2 * rand() % 11;			// gets a Random even number
-			compCol = 1 + (2 * rand()) % 11;	// gets a Random Odd number
-		}
-		CheckValidMoveAI();				// checks if the space is a *, a * is a valid space to place a ship
-		if (valid_comp_ship_pos == true) {
-			player->comp_ship++;
-		}
-		else
-		{
-			success = false;
-			compCol++;
-			if (compCol >= 23 || compRow >= 19)
-			{
-				success = true;
-			}
-		}
-	} while (player->comp_ship < 5 || !valid_comp_ship_pos);
-
-	// Tell the player the computer is done and ready, and its their turn to place ships
-	system("CLS");
-	for (int i = 0; i < 19; i++) {
-		std::cout << std::endl;
-	}
-	std::cout << std::setw(90) << "The Computer Has Set It's Ships. Now It's Your Turn.";
-	Sleep(3000);
-	system("CLS");
-
-}
 void AI::AIHoV()
 {
 	comp_hv = rand() % 2 + 1; // Computer will randomly choose hori or vert
@@ -261,6 +255,7 @@ void AI::AIHoV()
 	}
 	system("CLS");
 }
+
 void AI::AiAttackOnBoard()
 {
 	player->itr = player->pieces.begin();
@@ -276,7 +271,7 @@ void AI::AiAttackOnBoard()
 
 				p->hit = true;
 				player->player_board[comp_atk_row][comp_atk_col] = '!';
-				player->PieceOnBoard_Player--;
+				player->PlayerPieceOnBoard--;
 				p->health--;
 			}
 
@@ -289,7 +284,7 @@ void AI::AiAttackOnBoard()
 					std::cout << std::setw(81) << "The Computer Has Hit Your Submarine: " << aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
 					p->hit = true;
 					player->player_board[comp_atk_row][comp_atk_col] = '!';
-					player->PieceOnBoard_Player--;
+					player->PlayerPieceOnBoard--;
 					p->health--;
 				}
 
@@ -302,7 +297,7 @@ void AI::AiAttackOnBoard()
 					std::cout << std::setw(81) << "The Computer Has Hit Your Cruiser: " << aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
 					p->hit = true;
 					player->player_board[comp_atk_row][comp_atk_col] = '!';
-					player->PieceOnBoard_Player--;
+					player->PlayerPieceOnBoard--;
 					p->health--;
 				}
 
@@ -315,7 +310,7 @@ void AI::AiAttackOnBoard()
 					std::cout << std::setw(81) << "The Computer Has Hit Your Aircraft Carrier: " << aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
 					p->hit = true;
 					player->player_board[comp_atk_row][comp_atk_col] = '!';
-					player->PieceOnBoard_Player--;
+					player->PlayerPieceOnBoard--;
 					p->health--;
 				}
 
@@ -329,7 +324,7 @@ void AI::AiAttackOnBoard()
 					std::cout << std::setw(81) << "The Computer Has Hit Your Battleship: " << aplha_comp_atk << (comp_atk_col / 2) << std::endl << std::endl;
 					p->hit = true;
 					player->player_board[comp_atk_row][comp_atk_col] = '!';
-					player->PieceOnBoard_Player--;
+					player->PlayerPieceOnBoard--;
 					p->health--;
 				}
 
@@ -350,7 +345,7 @@ void AI::AiAttackOnBoard()
 	player->ClearHits();
 	ClearHits();
 
-	if (player->PieceOnBoard_Player == 0)
+	if (player->PlayerPieceOnBoard == 0)
 	{
 		for (int i = 0; i < 6; i++) {
 			system("CLS");

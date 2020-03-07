@@ -15,7 +15,9 @@ void TitleScreen::BuildTitle()
 }
 TitleScreen::TitleScreen()
 {
-	BuildTitle();
+	do {
+		BuildTitle();
+	} while (!game->gameFinished);
 }
 TitleScreen::~TitleScreen()
 {
@@ -116,12 +118,12 @@ void TitleScreen::player_choose_options()
 					}
 					break;
 				}
-				system("CLS");
-				print_game_title();
-				print_options();
-
 			}
-		}
+			system("CLS");
+			print_game_title();
+			print_options();
+
+		}				
 	}
 }
 // Used to get players Name, the loop is used for spacing to try to get the text in the "center" of the screen
