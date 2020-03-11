@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{360d1eee-6548-4cc7-a1b0-9c4a1d8b05a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{9703ed08-f0ef-49ec-bfb6-42306630b343}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -24,9 +30,6 @@
     <ClCompile Include="Piece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TitleSceen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -36,11 +39,17 @@
     <ClCompile Include="Scoreboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HealthManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="BattleshipGame.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="HealthManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayableManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleSceen.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,9 +57,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Piece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleSceen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -65,11 +71,17 @@
     <ClInclude Include="LinkList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HealthManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="BattleshipGame.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="HealthManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayableManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleSceen.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

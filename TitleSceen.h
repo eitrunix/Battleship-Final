@@ -4,7 +4,7 @@
 class TitleScreen
 {
 public:
-	TitleScreen();
+	TitleScreen(GameStateManager *gm);
 	~TitleScreen();
 
 	int options_row = 3;
@@ -16,9 +16,9 @@ public:
 
 	char options_move;
 	char upordown;				// for Using the menu, to go up or down
-	void print_game_title();
-	void print_options();
-	void player_choose_options();
+	void PrintTitle();
+	void OptionsMenu();
+	void SelectMenuItem();
 	void BuildTitle();
 
 	bool titleRunning = true;

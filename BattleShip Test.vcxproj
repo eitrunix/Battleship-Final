@@ -124,10 +124,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
-    <ClCompile Include="BattleshipGame.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="HealthManager.cpp" />
     <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="PlayableManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -135,11 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h" />
-    <ClInclude Include="BattleshipGame.h" />
+    <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="HealthManager.h" />
     <ClInclude Include="LinkList.h" />
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="PlayableManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="TitleSceen.h" />

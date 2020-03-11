@@ -1,6 +1,4 @@
 #include <string>
-#include "Piece.h"
-#include "LinkList.h"
 
 #ifndef BOARD__H
 #define BOARD__H
@@ -13,10 +11,10 @@ public:
 
 	void PrintBoards(Player *player);
 	void ClearBoard(Player* player);
-	void FakeLoadingScreeen();
+	void FakeLoadingScreeen();	
+	void ResetBoard();
+
 	// Board Variables
-
-
 
 };
 

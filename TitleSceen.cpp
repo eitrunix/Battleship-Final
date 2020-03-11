@@ -1,28 +1,29 @@
 #include "TitleSceen.h"
+
 #include <iostream>
 #include <iomanip>
 #include <conio.h>
-#include "BattleshipGame.h"
 
-BattleshipGame* game;
 
 void TitleScreen::BuildTitle() 
 {
 	// Fancy fancy art.
-	print_game_title();
-	print_options();
-	player_choose_options();
+	PrintTitle();
+	OptionsMenu();
+	SelectMenuItem();
 }
-TitleScreen::TitleScreen()
+TitleScreen::TitleScreen(GameStateManager* gm)
 {
+	gm = new GameStateManager(1, true);
 	do {
 		BuildTitle();
-	} while (!game->gameFinished);
+	} while (!gm->gameFinished);
 }
+
 TitleScreen::~TitleScreen()
 {
 }
-void TitleScreen::print_game_title()
+void TitleScreen::PrintTitle()
 {
 	std::cout << std::endl; std::cout << std::endl;
 	for (int i = 0; i < title_row; i++)
@@ -44,7 +45,7 @@ void TitleScreen::print_game_title()
 	}
 }
 
-void TitleScreen::print_options()
+void TitleScreen::OptionsMenu()
 {
 	for (int i = 0; i < options_row; i++) 
 	{
@@ -61,7 +62,7 @@ void TitleScreen::print_options()
 	}
 }
 
-void TitleScreen::player_choose_options()
+void TitleScreen::SelectMenuItem()
 {
 	while (1) {
 		if (_kbhit()) {  //_kbhit() just checks if there is something in the input buffer. it does not do anything else. Used in my "menu" to have the player move the arrow up and down
@@ -69,8 +70,7 @@ void TitleScreen::player_choose_options()
 			if (arrow_row == 0 && arrow_col == 0 && options_move == 13)			// first option, plays the game, starts by asking the player name, computer places ships on the board, then prompts the player to place ships,
 																				// then will tell the player to get ready to play (tell_player_shits_about_to_get_real function) and print the boards, then asks for the attack cords.
 			{
-				BattleshipGame* game = new BattleshipGame(1, true);
-				
+				// Play the Game
 			}
 			else if (arrow_row == 2 && arrow_col == 0 && options_move == 13)
 			{
@@ -101,8 +101,8 @@ void TitleScreen::player_choose_options()
 			}
 			else if (options_move == 27) {
 				system("CLS");
-				print_game_title();
-				print_options();
+				PrintTitle();
+				OptionsMenu();
 			}
 			else if (options_move == -32) {
 				upordown = _getch();
@@ -120,8 +120,8 @@ void TitleScreen::player_choose_options()
 				}
 			}
 			system("CLS");
-			print_game_title();
-			print_options();
+			PrintTitle();
+			OptionsMenu();
 
 		}				
 	}

@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
-#include "Player.h"
-#include "Ai.h"
-#include "Board.h"
+
 using namespace DataStructuresAndAI;
 
 class Scoreboard

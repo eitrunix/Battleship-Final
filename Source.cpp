@@ -1,6 +1,8 @@
 #include "TitleSceen.h"
 
-TitleScreen* title = new TitleScreen();
+GameStateManager* game = new GameStateManager(1, true);
+
+TitleScreen* title = new TitleScreen(game);
 
 int main()
 {

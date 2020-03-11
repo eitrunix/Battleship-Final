@@ -1,16 +1,13 @@
 #pragma once
 #ifndef AI__H
 #define AI__H
-#include "Piece.h"
-#include "Player.h"
-#include "LinkList.h"
-using namespace DataStructuresAndAI;
+
 class AI
 {
 public:
-	AI(Player Player);
+	AI();
 	~AI();
-	Player* player;
+
 	int comp_atk_row;
 	int comp_atk_col;
 	int CompPiecesOnBoard;
@@ -18,8 +15,6 @@ public:
 	bool valid_comp_atk_cord;	// same but for computer
 	//AI Attacking
 	int comp_hv;				// computer ships hoz or vert
-	LinkList<Piece*> Aipieces;
-	LinkList<Piece*>::Iterator Aiitr;
 	void ClearHits();
 
 	void AIAttack();

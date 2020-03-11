@@ -1,0 +1,125 @@
+Battleship
+
+My General Layout for my Rebulding of Battleship using my Old Game
+Throw everything into Managers that hold the information, that can then pass that information around
+Build the game and have that all running that fire off information
+The UI will listen for the information and display depending on what it catches
+
+Im trying to have the Game run in full, without interacting with the UI, and have the UI on work when it gets the information it wants
+
+
+Classes
+
+Pieces - Sets up the pieces Health, name, ID
+
+Scoreboard - Printing the Scoreboard, getting refrence to the HealthManager to track the current hitpoints
+
+Board - Functions that Print a Board
+
+Player - Takes in an input, that is sent to the Board Manager that will refrence the opponents board and the attack Radar to indicate an attack
+
+AI - Holds all the functions to make an AI Attack
+
+
+HealthManager - Gets Health Values and sets them for the game, then use this to change values in game
+	\\ Knows the total number of ships pieces to check for the win con, as well as if pieces are destroyed or not
+	\\ keeps track of the current health of each ship a player has
+
+BoardManager - Sets up A Player Board and Attack Board and a Radar for attacking
+	\\ Builds a Default board that can then be given to players
+	\\ Creates an attack Radar that is used to show where a player has attaked
+
+PlayerManager - Sets up Players for the game to use
+	\\ Sets up a Player with their Ships and a Name
+
+GameStateManager - Tells the Game what it can do during a state
+	\\ GameMode type - SinglePlayer, Multiplayer, GameFinished
+	\\ GameState type - Player1Turn, Player2Turn, AiTurn, PlacingShips, GameDone, Loading,
+InputManager
+	\\ Grabs the players input to either set ships on the board or attack the opponents board
+
+GameManager
+	\\ Tells the GameStateManager what stat to change to and when
+	\\ Generally this should "Run" the game
+
+// SDL_Rebuild Stuff
+GameEntity 
+	\\ Scoreboard_Bar
+		\\ 5 Boats(Pieces) = 5 Images
+		\\ Text to Display Health numbers(from HealthManager)
+	\\ GameBoard_Bar
+		\\ PlayerBoard 
+		\\ AIBoard
+			\\ The AIBoard will be "Under" teh attack radar, when a player hits a space, the radar will remove a tile, and reveal the computers "space"
+		\\ AttackRadar
+			\\10x10 Grids (From Board)
+			\\ Array of Tiles for each "Space" in the grid that will loop through to assign each cell to a "Space"
+				\\ Tiles hold bools for isOccupied and can hold a Piece that tells that cell what its holding
+				\\ Pieces will hold what image is used, and the Vertical or Horizontal variants of each
+	\\ Input Area
+		\\ Input will Send the players input to the BoardManager, which will check the board for an occupied Space, and 
+		\\-- will do the corresponding functions onHit or onMiss
+		
+GameManager 
+	\\ Turns State
+		\\ Player1Turn
+			\\ Check WinCon
+			\\ PlayerAttack
+				\\Send Input to BoardManager
+			\\StateChange to Player2Turn
+		\\ Player2Turn
+			\\ Check WinCon
+			\\ if 2player Game, run PlayerTurn again
+			\\ if aiPlayer game, run AiTurn
+PlayerManager
+	\\ Construct a Player and AI
+		\\ Player has a Function to Send coordinates that a function will take in depending on the current game state
+			\\ During Setup, this will be sent to the InputManager to allow the player to place their ships on their board
+			\\ During 1PlayerGame this will be sent to the InputManager to attack the opposite board
+		\\ AI Randomly picks a spaace on the board, then will continue to attak that ship until it is destroyed
+
+BoardManager 
+	\\ Constructs 3 boards, PlayerBoard, AIBoard and RadarBoard
+		\\ Playerboard will have the info for the players placed ships that the AI will attack
+		\\ AIBoard has the info for the Opponents board for the player to Attack
+		\\ Attack Radad also has the AI boards info, but will reveal spaces attacked	
+
+InputManager
+	\\ Listens for the players input, which will then run a function depending on the currents game state
+		\\ If Setup State, The players input will be used to setup the players board and place the first part of the piece, then ask for horizontal or vertical, and place hte rest of the piece respectively
+		\\ If 1PlayerGame state, the Players input will be used to attack the AIBoard and RadarBoard and will check if there is an opponents piece on the AI board, tell the player if there is a hit
+			\\ and Change the tile to an explosion or something, also remove a tile from the Radar to show the player pretty things
+
+GameStateManager
+	\\ The Meat of it all, This tells the game what functions to run and what to access during each state in the game
+		\\ Currently, Im using A GameMode state, for chaning the mode (1PlayerGame, 2PlayerGame(Not working), and TitleScreen)
+		\\ and GameState state for the Sequence of play (Setup, Loading, 1PlayerTurn, OpponentTurn, WinCheck, GameOver)
+			\\ GameMode::1PlayerGame will play a game of Battleship vs the AI
+
+		\\GameMode::TitleScreen
+			\\ PlayerSelectOption();
+		\\GameMode::1PlayerGame
+		 	\\ GameState::Setup
+				\\ AskforName();
+				\\ LoadingScreen();
+				\\ PlayerSetShips();
+					\\ListenShipPlace();
+				\\ AISetShips();
+			\\ GameState::Loading
+				\\ GetReady();
+			\\ GameState::1PlayerTurn
+				\\ PlayerAttack();
+					\\ ListenPlayerAttack();
+			\\ GameState::WinCheck
+					\\CheckWinCon();
+				\\ If Win = True
+		\\ <------------\\ GameState = GameOver
+		\\	\\ GameState::OpponentTurn
+		\\		\\ AIAttack();
+		\\	\\ GameState::1PlayerTurn
+		\\
+		\\----->\\ GameState::GameOver
+				DisplayWinner();
+				CleanUpGame();
+				SetTitleScreen();
+					\\ GameMode == TitleScreen
