@@ -15,64 +15,54 @@ Cruiser* aicruiser = new Cruiser();
 Submarine* aisubmarine = new Submarine();
 PatrolBoat* aipatrolBoat = new PatrolBoat();
 
-//LinkList<Piece*> pieces;
-//LinkList<Piece*> Aipieces;
-//LinkList<Piece*>::Iterator itr;
-
-
 HealthManager::HealthManager(Player player1, AI player2)
 {
 	GameOver = false;
-	//pieces.begin();
-	//
-	//pieces.push_back(battleship);
-	//pieces.push_back(aircraftCarrier);
-	//pieces.push_back(cruiser);
-	//pieces.push_back(submarine);
-	//pieces.push_back(patrolBoat);
-
-	//Aipieces.begin();
-	//ResetItr_AI();
-	//Aipieces.push_back(aibattleship);
-	//Aipieces.push_back(aiaircraftCarrier);
-	//Aipieces.push_back(aicruiser);
-	//Aipieces.push_back(aisubmarine);
-	//Aipieces.push_back(aipatrolBoat);
-
 }
 
 HealthManager::~HealthManager()
 {
+	pieces.push_back(battleship);
+	pieces.push_back(aircraftCarrier);
+	pieces.push_back(cruiser);
+	pieces.push_back(submarine);
+	pieces.push_back(patrolBoat);
+
+	Aipieces.push_back(aibattleship);
+	Aipieces.push_back(aiaircraftCarrier);
+	Aipieces.push_back(aicruiser);
+	Aipieces.push_back(aisubmarine);
+	Aipieces.push_back(aipatrolBoat);
 
 }
 void HealthManager::GetHealth()
 {
-	//ResetItr_Player();
-	//Piece* p = *itr;
-	//for (itr; itr != nullptr; itr++)
-	//{
-	//	if (p->ID == 1) 
-	//	{
-	//		playerPBhealth = p->health;
-	//	}
-	//	else if (p->ID == 2) 
-	//	{
-	//		playerSubHealth = p->health;
-	//	}
-	//	else if (p->ID == 3) 
-	//	{
-	//		playerCrusHealth = p->health;
-	//	}
-	//	else if (p->ID == 41) 
-	//	{
-	//		playerACHealth = p->health;
-	//	}
-	//	else if (p->ID == 5) 
-	//	{
-	//		playerBSHealth = p->health;
-	//	}
-	//	std::cout << " PB: " << playerPBhealth << "  Sub: " << playerSubHealth << "  Crus: " << playerCrusHealth << "  AC: " << playerACHealth << "   BS: " << playerBSHealth << std::endl;
-	/*}
+	ResetItr_Player();
+	Piece* p = *itr;
+	for (itr; itr != nullptr; itr++)
+	{
+		if (p->ID == 1) 
+		{
+			playerPBhealth = p->health;
+		}
+		else if (p->ID == 2) 
+		{
+			playerSubHealth = p->health;
+		}
+		else if (p->ID == 3) 
+		{
+			playerCrusHealth = p->health;
+		}
+		else if (p->ID == 41) 
+		{
+			playerACHealth = p->health;
+		}
+		else if (p->ID == 5) 
+		{
+			playerBSHealth = p->health;
+		}
+		std::cout << " PB: " << playerPBhealth << "  Sub: " << playerSubHealth << "  Crus: " << playerCrusHealth << "  AC: " << playerACHealth << "   BS: " << playerBSHealth << std::endl;
+	}
 
 	ResetItr_AI();
 	Piece* p2 = *itr;
@@ -100,7 +90,7 @@ void HealthManager::GetHealth()
 		}
 		std::cout << " PB: " << aiPBhealth << "  Sub: " << aiSubHealth << "  Crus: " << aiCrusHealth << "  AC: " << aiACHealth << "   BS: " << aiBSHealth << std::endl;
 
-	}*/
+	}
 
 }
 int HealthManager::TakeHit(int _value, int _target)
@@ -109,11 +99,11 @@ int HealthManager::TakeHit(int _value, int _target)
 }
 void HealthManager::ResetItr_Player()
 {
-	//itr = pieces.begin();
+	itr = pieces.begin();
 }
 void HealthManager::ResetItr_AI()
 {
-	//itr = Aipieces.begin();
+	itr = Aipieces.begin();
 }
 bool HealthManager::CheckWinCon()
 {		// For the WinConCheck

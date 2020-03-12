@@ -1,8 +1,5 @@
 #pragma once
-#include "GameManager.h"
-//GameStateManager - Tells the Game what it can do during a state
-// GameMode type - SinglePlayer, Multiplayer, GameFinished
-// GameState type - Player1Turn, Player2Turn, AiTurn, PlacingShips, GameDone, Loading,
+
 
 class GameStateManager
 {
@@ -16,7 +13,6 @@ public:
 	enum class GameMode {
 		SinglePlayerGame,
 		MultiPlayerGame,
-		Title,
 		GameFinished
 	};
 
@@ -27,11 +23,10 @@ public:
 		PlacingShips,
 		GameDone,
 		Loading,
-		NoGameState,
 	};
 
 	GameState state; 
-	GameMode mode = GameMode::Title;
+	GameMode mode;
 
 	int numOfPlayers;
 	bool vsAI;

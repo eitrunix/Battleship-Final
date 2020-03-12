@@ -93,5 +93,4 @@ void Piece::OnHit()
 
 Piece::Piece()
 {
-	health = 0;
 }

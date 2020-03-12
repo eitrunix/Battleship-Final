@@ -3,6 +3,6 @@
 
 PlayableManager::PlayableManager()
 {
-	m_Player = new Player();
+	m_Player - new Player();
 	m_Ai = new AI();
 }

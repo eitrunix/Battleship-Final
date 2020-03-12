@@ -6,9 +6,6 @@ TitleScreen* title = new TitleScreen(game);
 
 int main()
 {
-	bool gameOn = true;
-	do {
-		title->BuildTitle();
-	} while (gameOn);
+	title->BuildTitle();
 }
 

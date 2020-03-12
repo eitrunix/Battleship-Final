@@ -41,9 +41,7 @@ InputManager
 GameManager
 	\\ Tells the GameStateManager what stat to change to and when
 	\\ Generally this should "Run" the game
-TitleScreen
-	\\ Creates a Title Screen, displays it, Lets the player choose Play Game, Insctuctions and Quit
- 
+
 // SDL_Rebuild Stuff
 GameEntity 
 	\\ Scoreboard_Bar

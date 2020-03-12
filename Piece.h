@@ -5,8 +5,8 @@ class Piece
 {
 public:
 
-	int health = 0;
-	int ID = 0;
+	int health;
+	int ID;
 	bool hit = false;
 	int scoreBoardMargin = 11;
 	std::string name;
