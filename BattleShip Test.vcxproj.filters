@@ -13,75 +13,105 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Managers">
+    <Filter Include="Source Files\BattleShip">
+      <UniqueIdentifier>{24a22555-27fb-4833-af2b-84c54f36610c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Battleship">
+      <UniqueIdentifier>{c0012bb1-ae46-4fa4-a42f-cfe7784c84c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BattleShip\Managers">
       <UniqueIdentifier>{360d1eee-6548-4cc7-a1b0-9c4a1d8b05a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Managers">
+    <Filter Include="Header Files\Battleship\Managers">
       <UniqueIdentifier>{9703ed08-f0ef-49ec-bfb6-42306630b343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDL">
+      <UniqueIdentifier>{a2af8440-5a4d-4eb1-a609-68c662fa9ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDL">
+      <UniqueIdentifier>{25196986-c86b-41ad-afc2-9e8a7094c5be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Piece.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Scoreboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameStateManager.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\BattleShip\Managers</Filter>
     </ClCompile>
     <ClCompile Include="HealthManager.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\BattleShip\Managers</Filter>
     </ClCompile>
     <ClCompile Include="PlayableManager.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\BattleShip\Managers</Filter>
     </ClCompile>
     <ClCompile Include="TitleSceen.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardManager.cpp">
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
+    <ClCompile Include="Piece.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
+    <ClCompile Include="Scoreboard.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files\BattleShip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Board.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Piece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Scoreboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameStateManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Battleship\Managers</Filter>
     </ClInclude>
     <ClInclude Include="HealthManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Battleship\Managers</Filter>
     </ClInclude>
     <ClInclude Include="PlayableManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Battleship\Managers</Filter>
     </ClInclude>
     <ClInclude Include="TitleSceen.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Battleship\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Battleship\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardManager.h">
+      <Filter>Header Files\Battleship\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\Battleship\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files\Battleship</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Header Files\Battleship</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkList.h">
+      <Filter>Header Files\Battleship</Filter>
+    </ClInclude>
+    <ClInclude Include="Piece.h">
+      <Filter>Header Files\Battleship</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Battleship</Filter>
+    </ClInclude>
+    <ClInclude Include="Scoreboard.h">
+      <Filter>Header Files\Battleship</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

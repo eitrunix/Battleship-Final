@@ -1,6 +1,8 @@
 #pragma once
-#include "AI.h"
-#include "Player.h"
+#include "HealthManager.h"
+// PlayerManager - Sets up Players for the game to use
+//  Sets up a Player with their Shipsand a Name
+
 
 class PlayableManager
 {
