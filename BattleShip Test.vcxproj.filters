@@ -31,6 +31,24 @@
     <Filter Include="Source Files\SDL">
       <UniqueIdentifier>{25196986-c86b-41ad-afc2-9e8a7094c5be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SDL\Entities">
+      <UniqueIdentifier>{ee289efc-da9b-44f3-92cb-0836f42d0ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDL\GameEntity">
+      <UniqueIdentifier>{dc75100a-7979-4841-b517-50ffc8ef8782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDL\SDL_Manager">
+      <UniqueIdentifier>{f5b1a65b-7292-4e9d-86d2-8141a0b11c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDL\SDL_Managers">
+      <UniqueIdentifier>{53c61b73-f939-4f36-af0b-8620f54a843e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SDL\Texture">
+      <UniqueIdentifier>{f6eacaaf-0852-4438-93f5-08e749211b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SDL\Texture">
+      <UniqueIdentifier>{825d1399-ebb8-4a91-8279-4f1facbf9f9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameStateManager.cpp">
@@ -72,6 +90,24 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files\BattleShip</Filter>
     </ClCompile>
+    <ClCompile Include="GameEntity.cpp">
+      <Filter>Source Files\SDL\GameEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\SDL\GameEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files\SDL\SDL_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Source Files\SDL\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedTexture.cpp">
+      <Filter>Source Files\SDL\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>Source Files\SDL\SDL_Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStateManager.h">
@@ -112,6 +148,27 @@
     </ClInclude>
     <ClInclude Include="Scoreboard.h">
       <Filter>Header Files\Battleship</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEntity.h">
+      <Filter>Header Files\SDL\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="mathhelper.h">
+      <Filter>Header Files\SDL\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\SDL\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Header Files\SDL\SDL_Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\SDL\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedTexture.h">
+      <Filter>Header Files\SDL\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsManager.h">
+      <Filter>Header Files\SDL\SDL_Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

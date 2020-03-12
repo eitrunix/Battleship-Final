@@ -140,10 +140,14 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AI.cpp" />
+    <ClCompile Include="AnimatedTexture.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="BoardManager.cpp" />
+    <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="HealthManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Piece.cpp" />
@@ -151,21 +155,30 @@ xcopy "$(ProjectDir)\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleSceen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AI.h" />
+    <ClInclude Include="AnimatedTexture.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="BoardManager.h" />
+    <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="HealthManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LinkList.h" />
+    <ClInclude Include="mathhelper.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="PlayableManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scoreboard.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleSceen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
