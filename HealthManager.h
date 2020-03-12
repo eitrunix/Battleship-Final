@@ -1,10 +1,21 @@
 #pragma once
+#include "Piece.h"
+#include "Player.h"
+#include "AI.h"
+#include "LinkList.h"
+
+using namespace DataStructuresAndAI;
+// HealthManager - Gets Health Values and sets them for the game, then use this to change values in game
+ // Knows the total number of ships pieces to check for the win con, as well as if pieces are destroyed or not
+ // keeps track of the current health of each ship a player has 
+
 
 class HealthManager
 {
 public:
 	HealthManager(Player player1, AI player2);
 	~HealthManager();
+
 
 	int P2PiecesAmt;
 	int P1PiecesAmt;
@@ -24,10 +35,6 @@ public:
 	int playerACHealth;
 	int playerBSHealth;
 
-	LinkList<Piece*> pieces;
-	LinkList<Piece*>::Iterator itr;
-
-	LinkList<Piece*> Aipieces;
 
 	void ResetItr_Player();
 	void ResetItr_AI();

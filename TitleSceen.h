@@ -1,5 +1,10 @@
 #pragma once
 #include <string>
+#include "GameStateManager.h"
+
+//TitleScreen
+// Creates a Title Screen, displays it, Lets the player choose Play Game, Insctuctions and Quit
+// 
 
 class TitleScreen
 {

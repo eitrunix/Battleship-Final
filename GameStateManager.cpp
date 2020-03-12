@@ -3,16 +3,17 @@
 #include <iostream>
 #include <Windows.h>
 #include <iomanip>
+GameManager* gM = new GameManager();
 
-Board* board = new Board();
-PlayableManager* players = new PlayableManager();
 
 GameStateManager::GameStateManager(int _players, bool _vsAI)
 {
+	
 	numOfPlayers = _players;
 	vsAI = _vsAI;
-	InitialLoading();
-	StateCheck();
+	GameMode::Title;
+	//InitialLoading();
+	//StateCheck();
 	do
 	{
 		StateCheckPlaying();
@@ -28,12 +29,14 @@ void GameStateManager::StateCheckPlaying()
 {
 	switch (state)
 	{
+	case GameState::NoGameState:
+		break;
 	case GameState::Player1Turn:
 
 		// For the WinConCheck
 		// Player 1 Turn Start -> Print Board -> Player Attack -> Check Attack -> Place Attack On Board -> Check Win or not -> Next Players Turn;
 		PrintGame();
-		players->m_Player->PlayerAttack();
+		//players->m_Player->PlayerAttack();
 
 		if (mode == GameMode::SinglePlayerGame)
 		{
@@ -58,21 +61,21 @@ void GameStateManager::StateCheckPlaying()
 
 
 		PrintGame();
-		players->m_Ai->AIAttack();
+		//players->m_Ai->AIAttack();
 		break;
 
 	case GameState::PlacingShips:
 
 		PrintGame();
-		players->m_Player->PlayerPlaceShips();
-		board->FakeLoadingScreeen();
-		players->m_Ai->AISetShips();
+		//players->m_Player->PlayerPlaceShips();
+		gM->boards->FakeLoadingScreeen();
+		//players->m_Ai->AISetShips();
 		state = GameState::Player1Turn;
 		break;
 
 	case GameState::Loading:
 
-		board->FakeLoadingScreeen();
+		gM->boards->FakeLoadingScreeen();
 		state = GameState::PlacingShips;
 		break;
 
@@ -87,7 +90,8 @@ void GameStateManager::StateCheckPlaying()
 
 }
 void GameStateManager::StateCheck() 
-{		board->PrintBoards(players->m_Player);
+{
+	gM->boards->PrintBoards();
 
 	
 	switch (mode)
@@ -103,6 +107,8 @@ void GameStateManager::StateCheck()
 
 		break;
 
+	case GameMode::Title:
+		
 	case GameMode::GameFinished:
 		gameFinished = true;
 		CleanUp();
@@ -116,7 +122,7 @@ void GameStateManager::StateCheck()
 void GameStateManager::PrintGame()
 {
 	//sb->PrintBoard();
-	board->PrintBoards(players->m_Player);
+	gM->boards->PrintBoards();
 
 }
 void GameStateManager::InitialLoading()
@@ -133,12 +139,12 @@ void GameStateManager::InitialLoading()
 
 void GameStateManager::CleanUp()
 {
-	delete  players->m_Player;
-	players->m_Player = NULL;
-	delete players->m_Ai;
-	players->m_Ai = NULL;
-	delete board;
-	board = NULL;
+	delete  gM->players->m_Player;
+	gM->players->m_Player = NULL;
+	delete gM->players->m_Ai;
+	gM->players->m_Ai = NULL;
+	delete gM->boards;
+	gM->boards = NULL;
 
 }
 
