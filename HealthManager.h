@@ -12,10 +12,15 @@ using namespace DataStructuresAndAI;
 
 class HealthManager
 {
+private:
+	static HealthManager* sInstance;
+
 public:
 	HealthManager(Player player1, AI player2);
 	~HealthManager();
 
+	static HealthManager* Instance();
+	static void Release();
 
 	int P2PiecesAmt;
 	int P1PiecesAmt;

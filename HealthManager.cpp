@@ -45,6 +45,21 @@ HealthManager::~HealthManager()
 {
 
 }
+HealthManager* HealthManager::Instance()
+{
+	if (sInstance == nullptr)
+	{
+		sInstance = new HealthManager();
+	}
+	return sInstance;
+
+}
+void HealthManager::Release()
+{
+	delete sInstance;
+	sInstance = nullptr;
+
+}
 void HealthManager::GetHealth()
 {
 	//ResetItr_Player();

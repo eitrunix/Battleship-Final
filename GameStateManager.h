@@ -1,17 +1,19 @@
 #pragma once
-#include "GameManager.h"
 //GameStateManager - Tells the Game what it can do during a state
 // GameMode type - SinglePlayer, Multiplayer, GameFinished
 // GameState type - Player1Turn, Player2Turn, AiTurn, PlacingShips, GameDone, Loading,
 
 class GameStateManager
 {
-	static GameStateManager* s_instance;
+private:
+
+	static GameStateManager* s_Instance;
 public:
 
 	GameStateManager(int _players, bool _vsai);
 	~GameStateManager();
-
+	static GameStateManager* Instance();
+	static void Release();
 
 	enum class GameMode {
 		SinglePlayerGame,
@@ -33,8 +35,8 @@ public:
 	GameState state; 
 	GameMode mode = GameMode::Title;
 
-	int numOfPlayers;
-	bool vsAI;
+	static int numOfPlayers;
+	static bool vsAI;
 	bool gameFinished;
 
 	void CleanUp();
@@ -43,12 +45,5 @@ public:
 	void StateCheckPlaying();
 	void PrintGame();
 	void SetUp1PGame();
-	GameStateManager* instance(int _players, bool _vsai) {
-		if (!s_instance)
-		{
-			s_instance = new GameStateManager(_players, _vsai);
-			return s_instance;
-		}
-	}
 };
 

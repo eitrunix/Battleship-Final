@@ -20,6 +20,7 @@ Player - Takes in an input, that is sent to the Board Manager that will refrence
 
 AI - Holds all the functions to make an AI Attack
 
+///////// Managers build off GameEntity so we can run Updates, and are done on LateUpdate /////////////////////////
 
 HealthManager - Gets Health Values and sets them for the game, then use this to change values in game
 	\\ Knows the total number of ships pieces to check for the win con, as well as if pieces are destroyed or not
@@ -41,9 +42,9 @@ InputManager
 GameManager
 	\\ Tells the GameStateManager what stat to change to and when
 	\\ Generally this should "Run" the game
-TitleScreen
-	\\ Creates a Title Screen, displays it, Lets the player choose Play Game, Insctuctions and Quit
- 
+GameScreen
+	\\ Holds all the "GameBars" that show all the Information for the UI to Render
+
 // SDL_Rebuild Stuff
 GameEntity 
 	\\ Scoreboard_Bar
@@ -125,3 +126,103 @@ GameStateManager
 				CleanUpGame();
 				SetTitleScreen();
 					\\ GameMode == TitleScreen
+
+====================================================================================================================================================
+
+Ai------>{										
+	 {  PlayerManager } ---->\  	 {InputManager}
+player-->{		         \		|
+				 \		|
+Board--->{  BoardManager  } -------> { GameStateManager }--- {GameManager}
+				 |
+Pieces-->{  HealthManager } ---->/
+
+
+
+
+
+=====================================================================================================================================================
+
+---
+Instance() - Create a single instance of the class
+Release() - Destroy the instance
+---
+
+How I Understand this SDL setup works, and how I will use it
+
+AssetManager
+
+		static AssetManager* sInstance;			-- Instance of the AssetManager for refrence								//instance of the AssetManager so we dont make more than one
+		TTF_Font* GetFont(std::string filename, int size);								//Getting the Font
+		SDL_Texture* GetText(std::string text, std::string filename, int size, SDL_Color color, bool managed = false); 	//Setting Text to be displayed
+
+		static AssetManager* Instance();
+		static void Release();												//Destroying the AsssetManager when not needed
+		SDL_Texture* GetTexture(std::string filename, bool managed = false);    					//Gets a Texture from a file for use on an Entity
+		void DestroyTexture(SDL_Texture* texture);
+
+		Mix_Music* GetMusic(std::string filename, bool managed = false);						//Getting Music to be played
+		Mix_Chunk* GetSFX(std::string filename, bool managed = false);							//Getting SFX to be played
+		void DestroyMusic(Mix_Music* music);
+		void DestroySFX(Mix_Chunk* sfx);
+
+AudioManager
+
+		static AudioManager* sInstance;
+		AssetManager* mAssetManager;
+
+		static AudioManager* Instance();
+		static void Release();
+
+		void PlayMusic(std::string filename, int loops = -1);			// Playing Music
+		void PlayMusic(Mix_Music* music, int loops = -1);			// ????
+		void PauseMusic();							// Pause Current Music Playing
+		void ResumeMusic();							// Resume the Paused Track
+		void PlaySFX(std::string filename, int loops = 0, int channel = -1);	// Play a Sound
+		void PlaySFX(Mix_Chunk* sfx, int loops = 0, int channel = -1);		// ????
+
+		AudioManager();
+		~AudioManager();
+
+GameManager
+		// I need to use this as a base for my other managers I believe, if I follow this it should all be solid
+
+	public:
+		GameManager();
+		~GameManager();
+		static GameManager* Instance();
+		static void Release();
+
+		void Run();			// Run, Update, LateUpdae, Render 
+		void Update();			// Run starts theMain Game Loop, and Runs the Update, LateUpdate and Render Functions
+		void LateUpdate();		// per frame, in the order listed
+		void Render();			// Update to Pass around information, LateUpdate to use that information, Render to Display that new information
+
+	private:
+		// singleton
+		static GameManager* sInstance;
+		// loop control
+		bool mQuit;
+		// modules
+		GraphicsManager* mGraphics;
+		SDL_Event mEvent;
+		// timer variables
+		const int FRAME_RATE = 60;
+		Timer* mTimer;
+// Include all the Managers we need to run the game
+		// Asset/textures
+		AssetManager* mAssetManager;
+		InputManager* mInputManager;
+		AudioManager* mAudioManager;
+
+		GameStateManager* mGameStateManager;
+
+		AnimatedTexture* mTex;
+		Texture* mTexTwo;
+		Texture* mFontTexture;
+
+		const float scaleIncrement = 2.0f;
+		void PlayerOneInputUpdate();
+		void PlayerTwoInputUpdate();
+
+		ScreenManager* mScreenManager;
