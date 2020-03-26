@@ -19,6 +19,18 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{20b5ac2d-b7af-4ceb-85ce-9cee16a6fee2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\BattleShip">
+      <UniqueIdentifier>{fa0cfb2e-a4b0-4144-b9b9-b9b8b916d6d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BattleShip">
+      <UniqueIdentifier>{bccd90ab-7abb-4f65-8ab9-1ca4a7b698f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BattleShip\Managers">
+      <UniqueIdentifier>{6925a636-4fbc-4840-ba9a-e081ddeedd31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BattleShip\Managers">
+      <UniqueIdentifier>{3485e476-85bb-4d04-afd9-8306ef496bcf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -54,6 +66,18 @@
     <ClCompile Include="AudioManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BoardManager.cpp">
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthManager.cpp">
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -85,6 +109,18 @@
     </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardManager.h">
+      <Filter>Header Files\BattleShip\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Header Files\BattleShip\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthManager.h">
+      <Filter>Header Files\BattleShip\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Header Files\BattleShip\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

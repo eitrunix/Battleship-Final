@@ -154,12 +154,16 @@ xcopy "$(ProjectDir)..\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClCompile Include="AnimatedTexture.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="BoardManager.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="HealthManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MathHelper.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
@@ -167,11 +171,15 @@ xcopy "$(ProjectDir)..\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClInclude Include="AnimatedTexture.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="BoardManager.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="HealthManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MathHelper.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
