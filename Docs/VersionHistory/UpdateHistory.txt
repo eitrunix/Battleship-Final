@@ -1,2 +1,0 @@
-V1 -- 03/11/2020 - Initial info dump
-V2 -- 03/12/2020 - File Structure, Initial SDL Setup, Managers Build off GameEntity to get the Update, and LateUpdate functions
