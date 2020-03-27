@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
-#include "AnimatedTexture.h"
+#include "Piece.h"
+
 
 using namespace SDLFramework;
 
@@ -41,6 +42,8 @@ public:
 
 	TileType type;
 	bool isOccupied;
-
+	
+	int tileRow = 0;
+	int tileCol = 0;
 };
 

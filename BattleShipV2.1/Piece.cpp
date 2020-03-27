@@ -1,17 +1,34 @@
 #include "Piece.h"
+#include "AnimatedTexture.h"
 
 #include <iomanip>
 #include <iostream>
 
+using namespace SDLFramework;
+
+//// !!!!!!!!!!! Sprites/Images are not set up, I dont have the asset yet, right now each hitpoint texture is an entire sprite sheet for placeholder stuff !!!!!!!!!!!
 PatrolBoat::PatrolBoat()
 {
-	ID = 1;
 	health = 2;
 	hit = false;
-	name = "PatrolBoat";
-	icon = "P";
+
+	
+	hp1Texture = new Texture("SpriteSheet.png");
+	hp2Texture = new Texture("SpriteSheet.png");
+
 	PiecePlaceText = "Enter The Coordinate For Your Patrol Boat(2 spots) : ";
-	scoreBoardMargin = 7;
+
+	name = "PatrolBoat";
+
+}
+
+PatrolBoat::~PatrolBoat()
+{
+	hp1Texture = nullptr;
+	delete hp1Texture;
+	hp2Texture = nullptr;
+	delete hp2Texture;
+
 }
 
 void PatrolBoat::OnHit()
@@ -21,13 +38,28 @@ void PatrolBoat::OnHit()
 
 Submarine::Submarine()
 {
-	ID = 2;
 	health = 3;
 	hit = false;
-	name = "Submarine";
-	icon = "S";
+
+	hp1Texture = new Texture("SpriteSheet.png");
+	hp2Texture = new Texture("SpriteSheet.png");
+	hp3Texture = new Texture("SpriteSheet.png");
+
 	PiecePlaceText = "Enter The Coordinate For Your Submarine (3 spots): ";
-	scoreBoardMargin = 9;
+
+	name = "Submarine";
+
+}
+
+Submarine::~Submarine()
+{
+	hp1Texture = nullptr;
+	delete hp1Texture;
+	hp2Texture = nullptr;
+	delete hp2Texture;
+	hp3Texture = nullptr;
+	delete hp3Texture;
+
 }
 
 void Submarine::OnHit()
@@ -37,12 +69,27 @@ void Submarine::OnHit()
 
 Cruiser::Cruiser()
 {
-	ID = 3;
 	health = 3;
 	hit = false;
-	icon = "C";
+
+	hp1Texture = new Texture("SpriteSheet.png");
+	hp2Texture = new Texture("SpriteSheet.png");
+	hp3Texture = new Texture("SpriteSheet.png");
+
 	PiecePlaceText = "Enter The Coordinate For Your Crusier (3 spots): ";
+
 	name = "Cruiser";
+
+}
+
+Cruiser::~Cruiser()
+{
+	hp1Texture = nullptr;
+	delete hp1Texture;	
+	hp2Texture = nullptr;
+	delete hp2Texture;
+	hp3Texture = nullptr;
+	delete hp3Texture;
 
 }
 
@@ -54,12 +101,30 @@ void Cruiser::OnHit()
 
 AircraftCarrier::AircraftCarrier()
 {
-	ID = 4;
 	health = 4;
 	hit = false;
-	icon = "A";
+
+	hp1Texture = new Texture("SpriteSheet.png");
+	hp2Texture = new Texture("SpriteSheet.png");
+	hp3Texture = new Texture("SpriteSheet.png");
+	hp4Texture = new Texture("SpriteSheet.png");
+
 	PiecePlaceText = "Enter The Coordinate For Your Aircraft Carrier (4 spots): ";
+
 	name = "AircraftCarrier";
+
+}
+
+AircraftCarrier::~AircraftCarrier()
+{
+	hp1Texture = nullptr;
+	delete hp1Texture;
+	hp2Texture = nullptr;
+	delete hp2Texture;
+	hp3Texture = nullptr;
+	delete hp3Texture;
+	hp4Texture = nullptr;
+	delete hp4Texture;
 
 }
 
@@ -71,14 +136,33 @@ void AircraftCarrier::OnHit()
 
 Battleship::Battleship()
 {
-	ID = 5;
 	health = 5;
 	hit = false;
-	icon = "B";
-	PiecePlaceText = "Enter The Coordinate For Your Battleship (5 spots): ";
-	name = "Battleship";
-	scoreBoardMargin = 8;
 
+	hp1Texture = new Texture("SpriteSheet.png");
+	hp2Texture = new Texture("SpriteSheet.png");
+	hp3Texture = new Texture("SpriteSheet.png");
+	hp4Texture = new Texture("SpriteSheet.png");
+	hp5Texture = new Texture("SpriteSheet.png");
+
+	PiecePlaceText = "Enter The Coordinate For Your Battleship (5 spots): ";
+
+	name = "Battleship";
+
+}
+
+Battleship::~Battleship()
+{
+	hp1Texture = nullptr;
+	delete hp1Texture;
+	hp2Texture = nullptr;
+	delete hp2Texture;
+	hp3Texture = nullptr;
+	delete hp3Texture;
+	hp4Texture = nullptr;
+	delete hp4Texture;
+	hp5Texture = nullptr;
+	delete hp5Texture;
 }
 
 void Battleship::OnHit()
@@ -89,6 +173,7 @@ void Battleship::OnHit()
 
 void Piece::OnHit()
 {
+
 }
 
 Piece::Piece()

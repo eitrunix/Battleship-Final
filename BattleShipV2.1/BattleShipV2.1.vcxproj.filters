@@ -78,6 +78,9 @@
     <ClCompile Include="PlayerManager.cpp">
       <Filter>Source Files\BattleShip\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Piece.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>Header Files\BattleShip\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Piece.h">
+      <Filter>Header Files\BattleShip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
