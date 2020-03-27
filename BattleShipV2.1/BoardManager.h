@@ -40,8 +40,7 @@ public:
 	void UpdateTile(Board board[10][10]);
 
 	TileType type;
+	bool isOccupied;
 
-	int tileCol;
-	int tileRow;
 };
 
