@@ -1,5 +1,4 @@
 #include "Piece.h"
-#include "AnimatedTexture.h"
 
 #include <iomanip>
 #include <iostream>
@@ -7,16 +6,15 @@
 using namespace SDLFramework;
 
 //// !!!!!!!!!!! Sprites/Images are not set up, I dont have the asset yet, right now each hitpoint texture is an entire sprite sheet for placeholder stuff !!!!!!!!!!!
+
+
 PatrolBoat::PatrolBoat()
 {
 	health = 2;
 	hit = false;
 
-	
-	hp1Texture = new Texture("SpriteSheet.png");
-	hp2Texture = new Texture("SpriteSheet.png");
-
 	PiecePlaceText = "Enter The Coordinate For Your Patrol Boat(2 spots) : ";
+	PatrolBoatImage = new Texture("PatrolBoat.png");
 
 	name = "PatrolBoat";
 
@@ -24,10 +22,6 @@ PatrolBoat::PatrolBoat()
 
 PatrolBoat::~PatrolBoat()
 {
-	hp1Texture = nullptr;
-	delete hp1Texture;
-	hp2Texture = nullptr;
-	delete hp2Texture;
 
 }
 
@@ -41,11 +35,8 @@ Submarine::Submarine()
 	health = 3;
 	hit = false;
 
-	hp1Texture = new Texture("SpriteSheet.png");
-	hp2Texture = new Texture("SpriteSheet.png");
-	hp3Texture = new Texture("SpriteSheet.png");
-
 	PiecePlaceText = "Enter The Coordinate For Your Submarine (3 spots): ";
+	SubmarineImage = new Texture("Submarine.png");
 
 	name = "Submarine";
 
@@ -53,12 +44,6 @@ Submarine::Submarine()
 
 Submarine::~Submarine()
 {
-	hp1Texture = nullptr;
-	delete hp1Texture;
-	hp2Texture = nullptr;
-	delete hp2Texture;
-	hp3Texture = nullptr;
-	delete hp3Texture;
 
 }
 
@@ -72,11 +57,8 @@ Cruiser::Cruiser()
 	health = 3;
 	hit = false;
 
-	hp1Texture = new Texture("SpriteSheet.png");
-	hp2Texture = new Texture("SpriteSheet.png");
-	hp3Texture = new Texture("SpriteSheet.png");
-
 	PiecePlaceText = "Enter The Coordinate For Your Crusier (3 spots): ";
+	CruiserImage = new Texture("Cruiser.png");
 
 	name = "Cruiser";
 
@@ -84,12 +66,6 @@ Cruiser::Cruiser()
 
 Cruiser::~Cruiser()
 {
-	hp1Texture = nullptr;
-	delete hp1Texture;	
-	hp2Texture = nullptr;
-	delete hp2Texture;
-	hp3Texture = nullptr;
-	delete hp3Texture;
 
 }
 
@@ -104,12 +80,8 @@ AircraftCarrier::AircraftCarrier()
 	health = 4;
 	hit = false;
 
-	hp1Texture = new Texture("SpriteSheet.png");
-	hp2Texture = new Texture("SpriteSheet.png");
-	hp3Texture = new Texture("SpriteSheet.png");
-	hp4Texture = new Texture("SpriteSheet.png");
-
 	PiecePlaceText = "Enter The Coordinate For Your Aircraft Carrier (4 spots): ";
+	CarrierImage = new Texture("AircraftCarrier.png");
 
 	name = "AircraftCarrier";
 
@@ -117,14 +89,6 @@ AircraftCarrier::AircraftCarrier()
 
 AircraftCarrier::~AircraftCarrier()
 {
-	hp1Texture = nullptr;
-	delete hp1Texture;
-	hp2Texture = nullptr;
-	delete hp2Texture;
-	hp3Texture = nullptr;
-	delete hp3Texture;
-	hp4Texture = nullptr;
-	delete hp4Texture;
 
 }
 
@@ -139,13 +103,8 @@ Battleship::Battleship()
 	health = 5;
 	hit = false;
 
-	hp1Texture = new Texture("SpriteSheet.png");
-	hp2Texture = new Texture("SpriteSheet.png");
-	hp3Texture = new Texture("SpriteSheet.png");
-	hp4Texture = new Texture("SpriteSheet.png");
-	hp5Texture = new Texture("SpriteSheet.png");
-
 	PiecePlaceText = "Enter The Coordinate For Your Battleship (5 spots): ";
+	BattleshipImage = new Texture("Battleship.png");
 
 	name = "Battleship";
 
@@ -153,16 +112,6 @@ Battleship::Battleship()
 
 Battleship::~Battleship()
 {
-	hp1Texture = nullptr;
-	delete hp1Texture;
-	hp2Texture = nullptr;
-	delete hp2Texture;
-	hp3Texture = nullptr;
-	delete hp3Texture;
-	hp4Texture = nullptr;
-	delete hp4Texture;
-	hp5Texture = nullptr;
-	delete hp5Texture;
 }
 
 void Battleship::OnHit()
@@ -179,4 +128,10 @@ void Piece::OnHit()
 Piece::Piece()
 {
 	health = 0;
+
+}
+
+Piece::~Piece()
+{
+
 }
