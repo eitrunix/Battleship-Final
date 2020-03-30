@@ -1,6 +1,6 @@
 #pragma once
-#include <SDL.h>
 #include "Piece.h"
+#include "HealthManager.h"
 
 
 using namespace SDLFramework;
@@ -15,19 +15,22 @@ enum class TileType
 
 class BoardManager
 {
+private:
+	static BoardManager* bmInstance;
+	BoardManager* mBoardManager;
 public:
 	BoardManager();
 	~BoardManager();
+
 	static BoardManager* Instance();
+
 	void Update();
 	void LateUpdate();
 	void Render();
-	static void ClearBoard();
+	static void Release();
 
 
 
-private:
-	static BoardManager* bmInstance;
 
 };
 

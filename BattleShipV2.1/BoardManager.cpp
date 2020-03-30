@@ -1,5 +1,4 @@
 #include "BoardManager.h"
-#include <SDL.h>
 #include <iostream>
 
 BoardManager* BoardManager::bmInstance = nullptr;
@@ -111,7 +110,7 @@ BoardManager::~BoardManager()
 }
 
 
-void BoardManager::ClearBoard()
+void BoardManager::Release()
 {
 	delete bmInstance;
 	bmInstance = nullptr;

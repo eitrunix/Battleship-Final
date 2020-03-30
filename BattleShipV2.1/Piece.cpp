@@ -104,7 +104,7 @@ Battleship::Battleship()
 	hit = false;
 
 	PiecePlaceText = "Enter The Coordinate For Your Battleship (5 spots): ";
-	BattleshipImage = new Texture("Battleship.png");
+	BattleshipImage = new Texture("BattleShip.png");
 
 	name = "Battleship";
 

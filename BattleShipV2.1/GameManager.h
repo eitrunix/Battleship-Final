@@ -1,12 +1,12 @@
 #ifndef __GAMEMANAGER_H
 #define __GAMEMANAGER_H
 #include <SDL.h>
-// MacOS using XCode
-// #include <SDL2/SDL.h>
-#include "AnimatedTexture.h"
+//#include "AnimatedTexture.h"
 #include "Timer.h"
 #include "InputManager.h"
 #include "AudioManager.h" 
+#include "BoardManager.h"
+#include "GameStateManager.h"
 
 namespace SDLFramework {
 
@@ -21,6 +21,11 @@ namespace SDLFramework {
 		AssetManager * mAssetManager;
 		InputManager * mInputManager;
 		AudioManager* mAudioManager;
+		BoardManager* mBoardManager;
+		GameStateManager* mGameStateManager;
+		HealthManager* mHealthManager;
+		PlayerManager* mPlayerManager;
+
 		Timer * mTimer;
 		SDL_Event mEvent;
 		AnimatedTexture * mTex;
