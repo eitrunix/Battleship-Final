@@ -1,9 +1,7 @@
 #pragma once
 #include "Piece.h"
-#include "HealthManager.h"
-
-
 using namespace SDLFramework;
+
 
 enum class TileType
 {
@@ -18,6 +16,7 @@ class BoardManager
 private:
 	static BoardManager* bmInstance;
 	BoardManager* mBoardManager;
+
 public:
 	BoardManager();
 	~BoardManager();
@@ -29,8 +28,13 @@ public:
 	void Render();
 	static void Release();
 
+	AnimatedTexture* waterTileTex;
+	AnimatedTexture* hitTileTex;
+	AnimatedTexture* missTileTex;
 
-
+	Texture* PlayerBoardTex;
+	Texture* RadarBoardTex;
+	Texture* AiBoardTex;
 
 };
 
@@ -40,13 +44,15 @@ private:
 
 public:
 	void SetTileType(TileType tiletype);
-	AnimatedTexture* defTileTex;
 	void UpdateTile(Board board[10][10]);
+	
+	AnimatedTexture* TileTex;
 
 	TileType type;
 	bool isOccupied;
 	
 	int tileRow = 0;
 	int tileCol = 0;
+
 };
 

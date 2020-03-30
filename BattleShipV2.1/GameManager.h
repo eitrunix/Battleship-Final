@@ -5,8 +5,10 @@
 #include "Timer.h"
 #include "InputManager.h"
 #include "AudioManager.h" 
-#include "BoardManager.h"
 #include "GameStateManager.h"
+#include "BoardManager.h"
+#include "PlayerManager.h"
+#include "HealthManager.h"
 
 namespace SDLFramework {
 
@@ -16,7 +18,7 @@ namespace SDLFramework {
 		const int FRAME_RATE = 60;
 		bool mQuit;
 		static GameManager* sInstance;
-		Texture* mFontTex;
+
 		Graphics * mGraphics;
 		AssetManager * mAssetManager;
 		InputManager * mInputManager;
@@ -28,9 +30,9 @@ namespace SDLFramework {
 
 		Timer * mTimer;
 		SDL_Event mEvent;
-		AnimatedTexture * mTex;
 
 	public:
+
 		static GameManager * Instance();
 		static void Release();
 
@@ -42,6 +44,7 @@ namespace SDLFramework {
 		void Render();
 
 		GameManager();
+		void UpdateTile(Board board[10][10]);
 		~GameManager();
 	};
 }

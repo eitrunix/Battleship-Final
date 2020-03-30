@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include "AnimatedTexture.h"
-
 using namespace SDLFramework;
 
 class Piece

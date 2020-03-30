@@ -1,5 +1,4 @@
 #pragma once
-#include "BoardManager.h"
 
 //GameStateManager - Tells the Game what it can do during a state
 // GameMode type - SinglePlayer, Multiplayer, GameFinished

@@ -78,10 +78,35 @@ namespace SDLFramework {
 		/////
 		mTimer = Timer::Instance();
 
+		mBoardManager->waterTileTex = new AnimatedTexture("Water.png", 0, 0, 0, 0, 0, 0, AnimatedTexture::Horizontal);
+		mBoardManager->hitTileTex = new AnimatedTexture("Water.png", 0, 0, 0, 0, 0, 0, AnimatedTexture::Horizontal);
+		mBoardManager->missTileTex = new AnimatedTexture("Water.png", 0, 0, 0, 0, 0, 0, AnimatedTexture::Horizontal);
+
 		 //Textures and stuff
-		
-		mFontTex = new Texture("Space Shooty Game", "ARCADE.TTF", 72, { 255, 0, 0 });
-		mFontTex->Position(Vector2(400, 200));
+	}
+	void GameManager::UpdateTile(Board board[10][10])
+	{
+		int tempRow = sizeof board / sizeof board[0];
+		int tempCol = sizeof board[0] / sizeof board[0][0];
+
+		for (int row = 0; row < tempRow; row++)
+		{
+			for (int col = 0; col < tempCol; col++)
+			{
+				if (board[row][col].type == TileType::Water)
+				{
+					board[row][col].TileTex = mBoardManager->waterTileTex;
+				}
+				if (board[row][col].type == TileType::Hit)
+				{
+					board[row][col].TileTex = mBoardManager->hitTileTex;
+				}
+				if (board[row][col].type == TileType::Miss)
+				{
+					board[row][col].TileTex = mBoardManager->missTileTex;
+				}
+			}
+		}
 	}
 
 	GameManager::~GameManager() 
