@@ -21,6 +21,7 @@ public:
 	BoardManager();
 	~BoardManager();
 
+
 	static BoardManager* Instance();
 
 	void Update();
@@ -28,13 +29,10 @@ public:
 	void Render();
 	static void Release();
 
-	AnimatedTexture* waterTileTex;
-	AnimatedTexture* hitTileTex;
-	AnimatedTexture* missTileTex;
-
-	Texture* PlayerBoardTex;
-	Texture* RadarBoardTex;
-	Texture* AiBoardTex;
+	int playerRadarRow;
+	int playerRadarCol;
+	int compRow;
+	int compCol;
 
 };
 
@@ -43,16 +41,32 @@ class Board
 private:
 
 public:
-	void SetTileType(TileType tiletype);
-	void UpdateTile(Board board[10][10]);
-	
-	AnimatedTexture* TileTex;
+	Board();
+	~Board();
 
-	TileType type;
-	bool isOccupied;
+	static void Release();
+	int Row;
+	int Col;
+	Texture* boardTex;
+};
+
+class Tile
+{
+private:
+	Board* Player;
+
+public:
 	
+	Texture* TileTex;
+	TileType type = TileType::Water;
+	bool isOccupied = false;
+
 	int tileRow = 0;
 	int tileCol = 0;
 
+	TileType SetTileType(TileType tiletype);
+	void SetRow(int i);
+	void SetCol(int i);
+	
 };
 

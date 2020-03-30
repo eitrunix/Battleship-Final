@@ -78,13 +78,9 @@ namespace SDLFramework {
 		/////
 		mTimer = Timer::Instance();
 
-		mBoardManager->waterTileTex = new AnimatedTexture("Water.png", 0, 0, 0, 0, 0, 0, AnimatedTexture::Horizontal);
-		mBoardManager->hitTileTex = new AnimatedTexture("Water.png", 0, 0, 0, 0, 0, 0, AnimatedTexture::Horizontal);
-		mBoardManager->missTileTex = new AnimatedTexture("Water.png", 0, 0, 0, 0, 0, 0, AnimatedTexture::Horizontal);
-
 		 //Textures and stuff
 	}
-	void GameManager::UpdateTile(Board board[10][10])
+	void GameManager::UpdateTile(Tile board[10][10])
 	{
 		int tempRow = sizeof board / sizeof board[0];
 		int tempCol = sizeof board[0] / sizeof board[0][0];
@@ -95,15 +91,15 @@ namespace SDLFramework {
 			{
 				if (board[row][col].type == TileType::Water)
 				{
-					board[row][col].TileTex = mBoardManager->waterTileTex;
+					board[row][col].TileTex = new Texture("Water.png");
 				}
 				if (board[row][col].type == TileType::Hit)
 				{
-					board[row][col].TileTex = mBoardManager->hitTileTex;
+					board[row][col].TileTex = new Texture("Hit.png");
 				}
 				if (board[row][col].type == TileType::Miss)
 				{
-					board[row][col].TileTex = mBoardManager->missTileTex;
+					board[row][col].TileTex = new Texture("Miss.png");
 				}
 			}
 		}

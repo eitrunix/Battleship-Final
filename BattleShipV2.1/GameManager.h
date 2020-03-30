@@ -44,7 +44,7 @@ namespace SDLFramework {
 		void Render();
 
 		GameManager();
-		void UpdateTile(Board board[10][10]);
+		void UpdateTile(Tile board[10][10]);
 		~GameManager();
 	};
 }
