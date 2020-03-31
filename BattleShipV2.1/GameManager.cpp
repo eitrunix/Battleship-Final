@@ -1,5 +1,4 @@
 #include "GameManager.h"
-
 namespace SDLFramework {
 
 	GameManager * GameManager::sInstance = nullptr;
@@ -47,16 +46,19 @@ namespace SDLFramework {
 
 	void GameManager::Update() 
 	{
-
+		mInputManager->Update();
+		mScreenManager->Update();
 	}
 
 	void GameManager::LateUpdate() 
 	{
+		mInputManager->UpdatePrevInput(); 
 	}
 
 	void GameManager::Render() 
 	{
 		mGraphics->ClearBackBuffer();
+		mScreenManager->Render();
 		mGraphics->Render();
 	}
 
@@ -69,6 +71,7 @@ namespace SDLFramework {
 			mQuit = true;
 		}
 		mAudioManager = AudioManager::Instance();
+		mInputManager = InputManager::Instance();
 		mAssetManager = AssetManager::Instance();
 		//////
 		mGameStateManager = GameStateManager::Instance();
@@ -77,36 +80,39 @@ namespace SDLFramework {
 		mHealthManager = HealthManager::Instance();
 		/////
 		mTimer = Timer::Instance();
+		mScreenManager = ScreenManager::Instance();
 
 		 //Textures and stuff
 	}
-	void GameManager::UpdateTile(Tile board[10][10])
-	{
-		int tempRow = sizeof board / sizeof board[0];
-		int tempCol = sizeof board[0] / sizeof board[0][0];
+	//void GameManager::UpdateTile(Tile board[10][10])
+	//{
+	//	int tempRow = sizeof board / sizeof board[0];
+	//	int tempCol = sizeof board[0] / sizeof board[0][0];
 
-		for (int row = 0; row < tempRow; row++)
-		{
-			for (int col = 0; col < tempCol; col++)
-			{
-				if (board[row][col].type == TileType::Water)
-				{
-					board[row][col].TileTex = new Texture("Water.png");
-				}
-				if (board[row][col].type == TileType::Hit)
-				{
-					board[row][col].TileTex = new Texture("Hit.png");
-				}
-				if (board[row][col].type == TileType::Miss)
-				{
-					board[row][col].TileTex = new Texture("Miss.png");
-				}
-			}
-		}
-	}
+	//	for (int row = 0; row < tempRow; row++)
+	//	{
+	//		for (int col = 0; col < tempCol; col++)
+	//		{
+	//			if (board[row][col].type == TileType::Water)
+	//			{
+	//				board[row][col].TileTex = new Texture("Water.png");
+	//			}
+	//			if (board[row][col].type == TileType::Hit)
+	//			{
+	//				board[row][col].TileTex = new Texture("Hit.png");
+	//			}
+	//			if (board[row][col].type == TileType::Miss)
+	//			{
+	//				board[row][col].TileTex = new Texture("Miss.png");
+	//			}
+	//		}
+	//	}
+	//}
 
 	GameManager::~GameManager() 
 	{
+		ScreenManager::Release();
+		mScreenManager = nullptr;
 
 		Timer::Release();
 		mTimer = nullptr;

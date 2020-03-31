@@ -81,6 +81,9 @@
     <ClCompile Include="Piece.cpp">
       <Filter>Source Files\BattleShip</Filter>
     </ClCompile>
+    <ClCompile Include="ScreenManager.cpp">
+      <Filter>Source Files\BattleShip\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -127,6 +130,12 @@
     </ClInclude>
     <ClInclude Include="Piece.h">
       <Filter>Header Files\BattleShip</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenManager.h">
+      <Filter>Header Files\BattleShip\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScreen.h">
+      <Filter>Header Files\BattleShip\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

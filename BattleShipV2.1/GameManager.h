@@ -3,12 +3,12 @@
 #include <SDL.h>
 //#include "AnimatedTexture.h"
 #include "Timer.h"
-#include "InputManager.h"
 #include "AudioManager.h" 
 #include "GameStateManager.h"
 #include "BoardManager.h"
 #include "PlayerManager.h"
 #include "HealthManager.h"
+#include "ScreenManager.h"
 
 namespace SDLFramework {
 
@@ -27,6 +27,7 @@ namespace SDLFramework {
 		GameStateManager* mGameStateManager;
 		HealthManager* mHealthManager;
 		PlayerManager* mPlayerManager;
+		ScreenManager* mScreenManager;
 
 		Timer * mTimer;
 		SDL_Event mEvent;

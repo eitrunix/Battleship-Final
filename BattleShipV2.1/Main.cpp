@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "ScreenManager.h"
 
 using SDLFramework::GameManager;
 
