@@ -47,7 +47,8 @@ namespace SDLFramework {
 	void GameManager::Update() 
 	{
 		mInputManager->Update();
-		mScreenManager->Update();
+		//mScreenManager->Update();
+		mGameScreen->Update();
 	}
 
 	void GameManager::LateUpdate() 
@@ -58,7 +59,8 @@ namespace SDLFramework {
 	void GameManager::Render() 
 	{
 		mGraphics->ClearBackBuffer();
-		mScreenManager->Render();
+		//mScreenManager->Render();
+		mGameScreen->Render();
 		mGraphics->Render();
 	}
 
@@ -70,6 +72,7 @@ namespace SDLFramework {
 		{
 			mQuit = true;
 		}
+
 		mAudioManager = AudioManager::Instance();
 		mInputManager = InputManager::Instance();
 		mAssetManager = AssetManager::Instance();
@@ -80,39 +83,19 @@ namespace SDLFramework {
 		mHealthManager = HealthManager::Instance();
 		/////
 		mTimer = Timer::Instance();
-		mScreenManager = ScreenManager::Instance();
+		//mScreenManager = ScreenManager::Instance();
 
-		 //Textures and stuff
+		//Textures, Screens, Audio ect
+		mGameScreen = new GameScreen();
 	}
-	//void GameManager::UpdateTile(Tile board[10][10])
-	//{
-	//	int tempRow = sizeof board / sizeof board[0];
-	//	int tempCol = sizeof board[0] / sizeof board[0][0];
-
-	//	for (int row = 0; row < tempRow; row++)
-	//	{
-	//		for (int col = 0; col < tempCol; col++)
-	//		{
-	//			if (board[row][col].type == TileType::Water)
-	//			{
-	//				board[row][col].TileTex = new Texture("Water.png");
-	//			}
-	//			if (board[row][col].type == TileType::Hit)
-	//			{
-	//				board[row][col].TileTex = new Texture("Hit.png");
-	//			}
-	//			if (board[row][col].type == TileType::Miss)
-	//			{
-	//				board[row][col].TileTex = new Texture("Miss.png");
-	//			}
-	//		}
-	//	}
-	//}
 
 	GameManager::~GameManager() 
 	{
-		ScreenManager::Release();
-		mScreenManager = nullptr;
+		//ScreenManager::Release();
+		//mScreenManager = nullptr;
+		delete mGameScreen;
+		mGameScreen = nullptr;
+
 
 		Timer::Release();
 		mTimer = nullptr;

@@ -157,6 +157,7 @@ xcopy "$(ProjectDir)..\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClCompile Include="BoardManager.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="HealthManager.cpp" />
@@ -166,6 +167,7 @@ xcopy "$(ProjectDir)..\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
+    <ClCompile Include="StartScreen.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
@@ -185,6 +187,7 @@ xcopy "$(ProjectDir)..\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClInclude Include="Piece.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="ScreenManager.h" />
+    <ClInclude Include="StartScreen.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

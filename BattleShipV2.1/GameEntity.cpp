@@ -15,6 +15,10 @@ namespace SDLFramework {
 		mPosition = pos;
 	}
 
+	void GameEntity::Position(float x, float y) {
+		mPosition = Vector2(x, y);
+	}
+
 	Vector2 GameEntity::Position(Space space) {
 		if (space == Local || mParent == nullptr) {
 			return mPosition;

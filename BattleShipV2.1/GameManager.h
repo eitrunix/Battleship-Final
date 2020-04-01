@@ -2,13 +2,15 @@
 #define __GAMEMANAGER_H
 #include <SDL.h>
 //#include "AnimatedTexture.h"
-#include "Timer.h"
-#include "AudioManager.h" 
+//#include "ScreenManager.h"
 #include "GameStateManager.h"
-#include "BoardManager.h"
 #include "PlayerManager.h"
 #include "HealthManager.h"
-#include "ScreenManager.h"
+#include "BoardManager.h"
+
+#include "GameScreen.h"
+
+#include "AudioManager.h" 
 
 namespace SDLFramework {
 
@@ -23,14 +25,18 @@ namespace SDLFramework {
 		AssetManager * mAssetManager;
 		InputManager * mInputManager;
 		AudioManager* mAudioManager;
+
 		BoardManager* mBoardManager;
 		GameStateManager* mGameStateManager;
 		HealthManager* mHealthManager;
 		PlayerManager* mPlayerManager;
-		ScreenManager* mScreenManager;
+
+		//ScreenManager* mScreenManager;
 
 		Timer * mTimer;
 		SDL_Event mEvent;
+
+		GameScreen* mGameScreen;
 
 	public:
 
@@ -45,7 +51,6 @@ namespace SDLFramework {
 		void Render();
 
 		GameManager();
-		void UpdateTile(Tile board[10][10]);
 		~GameManager();
 	};
 }

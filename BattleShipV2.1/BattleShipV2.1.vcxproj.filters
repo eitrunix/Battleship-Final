@@ -31,6 +31,12 @@
     <Filter Include="Source Files\BattleShip\Managers">
       <UniqueIdentifier>{3485e476-85bb-4d04-afd9-8306ef496bcf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BattleShip\Screens">
+      <UniqueIdentifier>{a804b328-d1f9-4770-a8d7-76987f9f3b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BattleShip\Screen">
+      <UniqueIdentifier>{91cdd44e-021a-43fd-8fc3-b81082c3dbbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -84,6 +90,12 @@
     <ClCompile Include="ScreenManager.cpp">
       <Filter>Source Files\BattleShip\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="StartScreen.cpp">
+      <Filter>Source Files\BattleShip\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScreen.cpp">
+      <Filter>Source Files\BattleShip\Screen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -135,7 +147,10 @@
       <Filter>Header Files\BattleShip\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameScreen.h">
-      <Filter>Header Files\BattleShip\Managers</Filter>
+      <Filter>Header Files\BattleShip\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScreen.h">
+      <Filter>Header Files\BattleShip\Screens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

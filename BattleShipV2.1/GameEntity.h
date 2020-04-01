@@ -22,9 +22,10 @@ namespace SDLFramework {
 		GameEntity(float x = 0.0f, float y = 0.0f);
 		~GameEntity();
 
-		void Position(const Vector2 & pos);
 		Vector2 Position(Space space = World);
-
+		void Position(const Vector2 & pos);
+		
+		void Position(float x, float y);
 		void Rotation(float rot);
 		float Rotation(Space space = World);
 
