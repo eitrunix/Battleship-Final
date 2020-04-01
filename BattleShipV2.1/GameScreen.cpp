@@ -100,30 +100,30 @@ GameScreen::GameScreen()
 
 	// Scoreboard Parts Positioning (Width, Height) Relative to Parent
 	//// Images 
-	sbPatrolBoat->Position(-48.7f, 0.0f);
-	sbSubmarine->Position(-34.0f, 40);
-	sbCruiser->Position(-34.0f, 80);
-	sbACCarrier->Position(-0.5f, 120);
-	sbBattleShip->Position(-16.6f, 160);
+	sbPatrolBoat->Position(0.0f, 0.0f);
+	sbSubmarine->Position(0.0f, 40);
+	sbCruiser->Position(0.0f, 80);
+	sbACCarrier->Position(0.0f, 120);
+	sbBattleShip->Position(0.0f, 160);
 
-	sbP2PatrolBoat->Position(48.7f, 0.0f);
-	sbP2Submarine->Position(34.0f, 40);
-	sbP2Cruiser->Position(34.0f, 80);
-	sbP2ACCarrier->Position(0.5f, 120);
-	sbP2BattleShip->Position(16.6f, 160);
+	sbP2PatrolBoat->Position(0.0f, 0.0f);
+	sbP2Submarine->Position(0.0f, 40);
+	sbP2Cruiser->Position(0.0f, 80);
+	sbP2ACCarrier->Position(0.0f, 120);
+	sbP2BattleShip->Position(0.0f, 160);
 
 	// Score Text 
-	tPatrolBoathealth->Position(199.0f, 5);
-	tSubhealth->Position(184.0f, 5);
-	tCruiserhealth->Position(184.0f, 5);
+	tPatrolBoathealth->Position(150.0f, 5);
+	tSubhealth->Position(150.0f, 5);
+	tCruiserhealth->Position(150.0f, 5);
 	tACCarrierhealth->Position(150.0f, 5);
-	tBattleshiphealth->Position(167.0f, 5);
+	tBattleshiphealth->Position(150.0f, 5);
 
-	tP2PatrolBoathealth->Position(-199.0f, 5);
-	tP2Subhealth->Position(-184.0f, 5);
-	tP2Cruiserhealth->Position(-184.0f, 5);
+	tP2PatrolBoathealth->Position(-150.0f, 5);
+	tP2Subhealth->Position(-150.0f, 5);
+	tP2Cruiserhealth->Position(-150.0f, 5);
 	tP2ACCarrierhealth->Position(-150.0f, 5);
-	tP2Battleshiphealth->Position(-167.0f, 5);
+	tP2Battleshiphealth->Position(-150.0f, 5);
 
 }
 
