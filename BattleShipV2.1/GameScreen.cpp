@@ -6,21 +6,33 @@ GameScreen::GameScreen()
 	mInputManager = InputManager::Instance();
 
 	/// Play Area ///
-	mPlayerOneArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.2, Graphics::SCREEN_HEIGHT * 0.5);
-	mPlayerTwoArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.8, Graphics::SCREEN_HEIGHT * 0.5);
+	mPlayerOneArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
+	mPlayerTwoArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
 	Board = new Texture("BShipGrid.jpg");
 	Radar = new Texture("BShipGrid.jpg");
+
+	// Player Boards
 
 	mPlayerOneArea->Parent(this);
 	mPlayerTwoArea->Parent(this);
 	Board->Parent(mPlayerOneArea);
 	Radar->Parent(mPlayerTwoArea);
 
+	// Positions 
+
+	Board->Position(-230.0f, 40.0f);
+	Radar->Position(230.0f, 40.0f);
+
 	/// Scoreboard ///
 
-	mScoreBoard = new GameEntity(Graphics::SCREEN_WIDTH * 0.8, 80.0f);
-	mP1Score = new GameEntity(Graphics::SCREEN_WIDTH * 0.2, Graphics::SCREEN_HEIGHT * 0.5);
-	mP2Score = new GameEntity(Graphics::SCREEN_WIDTH * 0.8, Graphics::SCREEN_HEIGHT * 0.5);
+	mScoreBoard = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, 80.0f);
+	mP1Score = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
+	mP2Score = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
+
+	P1Name = new Texture("Player 1", "ARCADE.ttf", 32, { 200, 0, 0 });
+	P2Name = new Texture("AI", "ARCADE.ttf", 32, { 200, 0, 0 });
+
+	//scBackground = new Texture("");
 
 	sbPatrolBoat = new Texture("PatrolBoat.png");
 	sbCruiser = new Texture("Cruiser.png");
@@ -51,17 +63,14 @@ GameScreen::GameScreen()
 	mP1Score->Parent(mScoreBoard);
 	mP2Score->Parent(mScoreBoard);
 
+	P1Name->Parent(mP1Score);
+	P2Name->Parent(mP2Score);
+
 	sbPatrolBoat->Parent(mP1Score);
 	sbCruiser->Parent(mP1Score);
 	sbSubmarine->Parent(mP1Score);
 	sbACCarrier->Parent(mP1Score);
 	sbBattleShip->Parent(mP1Score);
-
-	sbPatrolBoat->Position(0, 0);
-	sbCruiser->Position(0, 10);
-	sbSubmarine->Position(0, 20);
-	sbACCarrier->Position(0, 30);
-	sbBattleShip->Position(0, 40);
 
 	sbP2PatrolBoat->Parent(mP2Score);
 	sbP2Cruiser->Parent(mP2Score);
@@ -69,35 +78,52 @@ GameScreen::GameScreen()
 	sbP2ACCarrier->Parent(mP2Score);
 	sbP2BattleShip->Parent(mP2Score);
 
-	sbP2PatrolBoat->Position(0, 0);
-	sbP2Cruiser->Position(0, 10);
-	sbP2Submarine->Position(0, 20);
-	sbP2ACCarrier->Position(0, 30);
-	sbP2BattleShip->Position(0, 40);
+	tPatrolBoathealth->Parent(sbPatrolBoat);
+	tSubhealth->Parent(sbSubmarine);
+	tCruiserhealth->Parent(sbCruiser);
+	tACCarrierhealth->Parent(sbACCarrier);
+	tBattleshiphealth->Parent(sbBattleShip);
 
-	tPatrolBoathealth->Parent(mP1Score);
-	tSubhealth->Parent(mP1Score);
-	tCruiserhealth->Parent(mP1Score);
-	tACCarrierhealth->Parent(mP1Score);
-	tBattleshiphealth->Parent(mP1Score);
+	tP2PatrolBoathealth->Parent(sbP2PatrolBoat);
+	tP2Subhealth->Parent(sbP2Submarine); 
+	tP2Cruiserhealth->Parent(sbP2Cruiser);
+	tP2ACCarrierhealth->Parent(sbP2ACCarrier);
+	tP2Battleshiphealth->Parent(sbP2BattleShip);
 
-	tPatrolBoathealth->Position(10, 0);
-	tSubhealth->Position(10, 10);
-	tCruiserhealth->Position(10, 20);
-	tACCarrierhealth->Position(10, 30);
-	tBattleshiphealth->Position(10, 40);
+	//Scoreboard Section Positions
+	mScoreBoard->Position(200.0f, 20.0f);
+	mP1Score->Position(60.0f, 30.0f);
+	mP2Score->Position(570.0f, 30.0f);
 
-	tP2PatrolBoathealth->Parent(mP2Score);
-	tP2Subhealth->Parent(mP2Score);
-	tP2Cruiserhealth->Parent(mP2Score);
-	tP2ACCarrierhealth->Parent(mP2Score);
-	tP2Battleshiphealth->Parent(mP2Score);
-	
-	tP2PatrolBoathealth->Position(10, 0);
-	tP2Subhealth->Position(10, 10);
-	tP2Cruiserhealth->Position(10, 20);
-	tP2ACCarrierhealth->Position(10, 30);
-	tP2Battleshiphealth->Position(10, 40);
+	P1Name->Position(10.0f, -30.0f);
+	P2Name->Position(0.0f, -30.0f);
+
+	// Scoreboard Parts Positioning (Width, Height) Relative to Parent
+	//// Images 
+	sbPatrolBoat->Position(-48.7f, 0.0f);
+	sbSubmarine->Position(-34.0f, 40);
+	sbCruiser->Position(-34.0f, 80);
+	sbACCarrier->Position(-0.5f, 120);
+	sbBattleShip->Position(-16.6f, 160);
+
+	sbP2PatrolBoat->Position(48.7f, 0.0f);
+	sbP2Submarine->Position(34.0f, 40);
+	sbP2Cruiser->Position(34.0f, 80);
+	sbP2ACCarrier->Position(0.5f, 120);
+	sbP2BattleShip->Position(16.6f, 160);
+
+	// Score Text 
+	tPatrolBoathealth->Position(199.0f, 5);
+	tSubhealth->Position(184.0f, 5);
+	tCruiserhealth->Position(184.0f, 5);
+	tACCarrierhealth->Position(150.0f, 5);
+	tBattleshiphealth->Position(167.0f, 5);
+
+	tP2PatrolBoathealth->Position(-199.0f, 5);
+	tP2Subhealth->Position(-184.0f, 5);
+	tP2Cruiserhealth->Position(-184.0f, 5);
+	tP2ACCarrierhealth->Position(-150.0f, 5);
+	tP2Battleshiphealth->Position(-167.0f, 5);
 
 }
 
@@ -137,6 +163,11 @@ GameScreen::~GameScreen()
 	delete tP2ACCarrierhealth;
 	delete tP2Battleshiphealth;
 
+	delete P1Name;
+	delete P2Name;
+
+	P1Name = nullptr;
+	P2Name = nullptr;
 
 	mPlayerOneArea = nullptr;
 	mPlayerTwoArea = nullptr;
@@ -178,6 +209,8 @@ void GameScreen::Update()
 
 void GameScreen::Render()
 {
+	P1Name->Render();
+	P2Name->Render();
 	mPlayerOneArea->Render();
 	mPlayerTwoArea->Render();
 	Board->Render();

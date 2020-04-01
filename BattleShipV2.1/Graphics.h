@@ -10,8 +10,8 @@ namespace SDLFramework {
 
 	class Graphics {
 	public:
-		static const short SCREEN_WIDTH = 800;
-		static const short SCREEN_HEIGHT = 600;
+		static const short SCREEN_WIDTH = 1024;
+		static const short SCREEN_HEIGHT = 896;
 
 	private:
 		static Graphics * sInstance;
