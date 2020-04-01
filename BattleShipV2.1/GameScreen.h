@@ -56,6 +56,8 @@ private:
 	Texture* tP2Cruiserhealth;
 	Texture* tP2ACCarrierhealth;
 	Texture* tP2Battleshiphealth;
+
+
 public:
 	GameScreen();
 	~GameScreen();

@@ -1,10 +1,13 @@
 #include "BoardManager.h"
+#include "Tile.h"
 #include <iostream>
 
 Board* Player;
 Board* AI;
 Board* Radar;
-Tile* board[10][10];
+
+Tile* PlayerBoard[10][10];
+Tile* AiBoard[10][10];
 
 BoardManager* BoardManager::bmInstance = nullptr;
 
@@ -44,7 +47,7 @@ void BoardManager::LateUpdate()
 
 void BoardManager::Render()
 {
-
+	PlayerBoard[10][10]->Render();
 }
 
 void BoardManager::Release()
@@ -55,41 +58,51 @@ void BoardManager::Release()
 
 Board::Board()
 {
-	board[10][10] = new Tile;
+	PlayerBoard[10][10] = new Tile;
+	AiBoard[10][10] = new Tile;
 	boardTex = new Texture("BShipGrid.jpg");
 
-	Row = sizeof board / sizeof board[0];
-	Col = sizeof board[0] / sizeof board[0][0];
+	Row = sizeof PlayerBoard / sizeof PlayerBoard[0];
+	Col = sizeof PlayerBoard[0] / sizeof PlayerBoard[0][0];
 
 	//PlayerBoard
-	for (int row = 0; row < Row; row++)
-	{
-		for (int col = 0; col < Col; col++)
-		{
 
-			//board[row][col]->SetTileType(TileType::Water);
-			//board[row][col]->SetRow(row);
-		}
-		for (int row = 0; row < Row; row++)
-		{
-			for (int col = 0; col < Col; col++)
-			{
-				//board[row][col]->SetCol(col);;
-			}
-		}
-	}
+	//for (int row = 0; row < Row; row++)
+	//{
+	//	for (int col = 0; col < Col; col++)
+	//	{
+	//	}
+	//	for (int row = 0; row < Row; row++)
+	//	{
+	//		for (int col = 0; col < Col; col++)
+	//		{
+
+	//		}
+	//	}
+	//}
+
+	Row = sizeof AiBoard / sizeof AiBoard[0];
+	Col = sizeof AiBoard[0] / sizeof AiBoard[0][0];
+
+	//AIBoard
+
+	//for (int row = 0; row < Row; row++)
+	//{
+	//	for (int col = 0; col < Col; col++)
+	//	{
+	//	}
+	//	for (int row = 0; row < Row; row++)
+	//	{
+	//		for (int col = 0; col < Col; col++)
+	//		{
+
+	//		}
+	//	}
+	//}
 }
 
 
-void Tile::SetRow(int i)
-{
-	i = tileRow;
-}
 
-void Tile::SetCol(int i)
-{
-	i = tileCol;
-}
 
 
 Board::~Board()
@@ -102,11 +115,6 @@ void Board::Release()
 	
 }
 
-TileType Tile::SetTileType(TileType tiletype)
-{
-	type = tiletype;
-	return type;
-}
 
 //
 //Row = sizeof board / sizeof board[0];

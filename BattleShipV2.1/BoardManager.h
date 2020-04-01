@@ -1,15 +1,8 @@
 #pragma once
+#ifndef __BOARDMANAGER_H 
+#define __BOARDMANAGER_H
 #include "Piece.h"
 using namespace SDLFramework;
-
-
-enum class TileType
-{
-	Water,
-	Hit,
-	Miss,
-	Ship,
-};
 
 class BoardManager
 {
@@ -50,23 +43,5 @@ public:
 	Texture* boardTex;
 };
 
-class Tile
-{
-private:
-	Board* Player;
 
-public:
-	
-	Texture* TileTex;
-	TileType type = TileType::Water;
-	bool isOccupied = false;
-
-	int tileRow = 0;
-	int tileCol = 0;
-
-	TileType SetTileType(TileType tiletype);
-	void SetRow(int i);
-	void SetCol(int i);
-	
-};
-
+#endif __BOARDMANAGER_H

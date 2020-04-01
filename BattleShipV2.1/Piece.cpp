@@ -14,7 +14,7 @@ PatrolBoat::PatrolBoat()
 	hit = false;
 
 	PiecePlaceText = "Enter The Coordinate For Your Patrol Boat(2 spots) : ";
-	PatrolBoatImage = new Texture("PatrolBoat.png");
+	BoatImage = new Texture("PatrolBoat.png");
 
 	name = "PatrolBoat";
 
@@ -36,7 +36,7 @@ Submarine::Submarine()
 	hit = false;
 
 	PiecePlaceText = "Enter The Coordinate For Your Submarine (3 spots): ";
-	SubmarineImage = new Texture("Submarine.png");
+	BoatImage = new Texture("Submarine.png");
 
 	name = "Submarine";
 
@@ -58,7 +58,7 @@ Cruiser::Cruiser()
 	hit = false;
 
 	PiecePlaceText = "Enter The Coordinate For Your Crusier (3 spots): ";
-	CruiserImage = new Texture("Cruiser.png");
+	BoatImage = new Texture("Cruiser.png");
 
 	name = "Cruiser";
 
@@ -81,7 +81,7 @@ AircraftCarrier::AircraftCarrier()
 	hit = false;
 
 	PiecePlaceText = "Enter The Coordinate For Your Aircraft Carrier (4 spots): ";
-	CarrierImage = new Texture("AircraftCarrier.png");
+	BoatImage = new Texture("AircraftCarrier.png");
 
 	name = "AircraftCarrier";
 
@@ -104,7 +104,7 @@ Battleship::Battleship()
 	hit = false;
 
 	PiecePlaceText = "Enter The Coordinate For Your Battleship (5 spots): ";
-	BattleshipImage = new Texture("BattleShip.png");
+	BoatImage = new Texture("BattleShip.png");
 
 	name = "Battleship";
 

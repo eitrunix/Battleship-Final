@@ -3,7 +3,7 @@
 #include "AnimatedTexture.h"
 using namespace SDLFramework;
 
-class Piece
+class Piece : GameEntity
 {
 public:
 	Piece();
@@ -16,10 +16,6 @@ public:
 	std::string PieceHitText;
 
 	virtual void OnHit();
-
-
-	AnimatedTexture* HitAnimm;
-
 };
 
 class PatrolBoat : public Piece
@@ -28,7 +24,7 @@ public:
 	PatrolBoat();
 	~PatrolBoat();
 	void OnHit() override;	
-	Texture* PatrolBoatImage;
+	Texture* BoatImage;
 
 };
 
@@ -38,7 +34,7 @@ public:
 	Submarine();
 	~Submarine();
 	void OnHit() override;
-	Texture* SubmarineImage;
+	Texture* BoatImage;
 };
 
 class Cruiser : public Piece
@@ -47,7 +43,7 @@ public:
 	Cruiser();
 	~Cruiser();
 	void OnHit() override;
-	Texture* CruiserImage;
+	Texture* BoatImage;
 };
 
 class AircraftCarrier : public Piece
@@ -56,7 +52,7 @@ public:
 	AircraftCarrier();
 	~AircraftCarrier();
 	void OnHit() override;
-	Texture* CarrierImage;
+	Texture* BoatImage;
 };
 
 class Battleship : public Piece
@@ -65,6 +61,6 @@ public:
 	Battleship();
 	~Battleship();
 	void OnHit() override;
-	Texture* BattleshipImage;
+	Texture* BoatImage;
 };
 
