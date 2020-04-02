@@ -13,7 +13,8 @@ class GameScreen : public GameEntity
 private:
 	Timer* mTimer;
 	InputManager* mInputManager;
-	Board* PBoard;
+	BattleshipBoard* pBoard;
+	BattleshipBoard* pRadar;
 	// Screen Entities 
 	ScoreBoard* mScoreBoard;
 	GameEntity* mPlayerOneArea;

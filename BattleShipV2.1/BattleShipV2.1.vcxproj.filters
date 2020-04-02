@@ -69,9 +69,6 @@
     <ClCompile Include="GameScreen.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Source Files\BattleShip</Filter>
-    </ClCompile>
     <ClCompile Include="AssetManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -99,6 +96,9 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files\BattleShip</Filter>
     </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -121,9 +121,6 @@
     </ClInclude>
     <ClInclude Include="StartScreen.h">
       <Filter>Header Files\Screens</Filter>
-    </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Header Files\BattleShip</Filter>
     </ClInclude>
     <ClInclude Include="AssetManager.h">
       <Filter>Header Files\Managers</Filter>
@@ -150,6 +147,9 @@
       <Filter>Header Files\BattleShip</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
+      <Filter>Header Files\BattleShip</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
       <Filter>Header Files\BattleShip</Filter>
     </ClInclude>
   </ItemGroup>

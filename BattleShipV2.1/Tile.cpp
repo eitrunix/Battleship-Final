@@ -1,10 +1,18 @@
 #include "Tile.h"
 
-Tile::Tile()
+Tile::Tile(int TileRow, int TileCol, TileType type)
 {
-	TileTex = new Texture("Water.png");
-	type = TileType::Water;
+	//Get the offsets
+	mBox.x = TileRow;
+	mBox.y = TileCol;
 
+	//Set the collision box
+	mBox.w = TILE_WIDTH;
+	mBox.h = TILE_HEIGHT;
+
+	//Get the tile type
+	mType = type;
+	
 }
 
 Tile::~Tile()
@@ -13,6 +21,10 @@ Tile::~Tile()
 	TileTex = nullptr;
 }
 
+void Tile::ChangeType(TileType _type)
+{
+	mType = _type;
+}
 void Tile::Render()
 {
 

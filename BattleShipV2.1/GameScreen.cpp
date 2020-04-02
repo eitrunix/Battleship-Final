@@ -6,6 +6,8 @@ GameScreen::GameScreen()
 	mInputManager = InputManager::Instance();
 	mScoreBoard = ScoreBoard::Instance();
 
+	pBoard = new BattleshipBoard();
+	pRadar = new BattleshipBoard();
 	/// Play Area ///
 	mPlayerOneArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
 	mPlayerTwoArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
@@ -18,10 +20,13 @@ GameScreen::GameScreen()
 	Board->Parent(mPlayerOneArea);
 	Radar->Parent(mPlayerTwoArea);
 
-	// Positions 
+	pRadar->BoardPosSet(297.0f, 550.0f);
+	pBoard->BoardPosSet(297.0f, 91.5f);
 
+	// Positions 
 	Board->Position(-230.0f, 40.0f);
 	Radar->Position(230.0f, 40.0f);
+
 
 }
 
@@ -33,13 +38,16 @@ GameScreen::~GameScreen()
 	delete Board;
 	delete Radar;
 	delete mScoreBoard;
+	delete pBoard;
+	delete pRadar;
 
 	mScoreBoard = nullptr;
 	mPlayerOneArea = nullptr;
 	mPlayerTwoArea = nullptr;
 	Board = nullptr;
 	Radar = nullptr;
-
+	pBoard = nullptr;
+	pRadar = nullptr;
 }
 
 void GameScreen::Update()
@@ -53,5 +61,7 @@ void GameScreen::Render()
 	mPlayerTwoArea->Render();
 	Board->Render();
 	Radar->Render();
+	pBoard->Render();
+	pRadar->Render();
 
 }

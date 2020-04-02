@@ -1,26 +1,29 @@
 #pragma once
 #include "Tile.h"
-#include "Piece.h"
+#include <random>
+#ifndef __BATTLESHIPBOARD_H 
+#define __BATTLESHIPBOARD_H
+#define BOARDWIDTH 10
+#define BOARDHEIGHT 10
+#define TILEOFFSET 43
 
-class Board : GameEntity
+
+class BattleshipBoard : public GameEntity
 {
 private:
 
 public:
-	Board() {};
-	~Board();
+	BattleshipBoard();
+	~BattleshipBoard();
+
+	float x;
+	float y;
 
 	void Update() override;
 	void Render() override;
+	Tile* gameBoard[BOARDWIDTH][BOARDHEIGHT];
+	Vector2 BoardPos;
 
-	static void Release();
-	int Row;
-	int Col;
-
-	Texture* boardTex;
-	Tile* board[10][10];
+	void BoardPosSet(float _y, float _x);
 };
-	
-
-//Row = sizeof board / sizeof board[0];
-//Col = sizeof board[0] / sizeof board[0][0];
+#endif // __BATTLESHIPBOARD_H
