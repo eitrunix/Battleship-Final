@@ -7,8 +7,13 @@ BattleshipBoard::BattleshipBoard()
 		for (int tCol = 0; tCol < BOARDHEIGHT; tCol++)
 		{
 			gameBoard[tRow][tCol] = new Tile(tRow, tCol, Tile::TileType::Water);;
-			gameBoard[tRow][tCol]->TileTex = new Texture("Water.png");
-			std::cout << tRow << std::endl;
+			gameBoard[tRow][tCol]->TileRow = tRow;
+			gameBoard[tRow][tCol]->TileCol = tCol;
+
+			std::cout << " " << std::endl;
+			std::cout << gameBoard[tRow][tCol]->TileRow;
+			std::cout << gameBoard[tRow][tCol]->TileCol;
+			gameBoard[5][7]->ChangeType(Tile::TileType::Hit);
 		}
 
 	}
@@ -28,15 +33,15 @@ void BattleshipBoard::Update()
 		{
 			if (gameBoard[tRow][tCol]->mType == Tile::TileType::Hit)
 			{
-				gameBoard[tRow][tCol]->TileTex = new Texture("Hit.png");
+				gameBoard[tRow][tCol]->TileTex = gameBoard[tRow][tCol]->Hittex;
 			}
 			else if (gameBoard[tRow][tCol]->mType == Tile::TileType::Miss)
 			{
-				gameBoard[tRow][tCol]->TileTex = new Texture("Miss.png");
+				gameBoard[tRow][tCol]->TileTex = gameBoard[tRow][tCol]->MissTex;
 			}
 			else
 			{
-				gameBoard[tRow][tCol]->TileTex = new Texture("Water.png");
+				gameBoard[tRow][tCol]->TileTex = gameBoard[tRow][tCol]->TileTex;
 			}
 		}
 
@@ -51,24 +56,8 @@ void BattleshipBoard::Render()
 	{
 		for (int tCol = 0; tCol < BOARDHEIGHT; tCol++)
 		{
-			if (random == 1) 
-			{
-				gameBoard[tRow][tCol]->TileTex = new Texture("Water.png");
-
-			}
-			else if (random == 3)
-			{
-				gameBoard[tRow][tCol]->TileTex = new Texture("Miss.png");
-
-			}
-			else
-			{
-				gameBoard[tRow][tCol]->TileTex = new Texture("Hit.png");
-
-			}
 			gameBoard[tRow][tCol]->TileTex->Render();
 			gameBoard[tRow][tCol]->TileTex->Position(x + (tRow * TILEOFFSET), y +(tCol * TILEOFFSET));
-			
 		}
 
 	}

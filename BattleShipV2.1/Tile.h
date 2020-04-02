@@ -18,22 +18,31 @@ public:
 		Ship,
 	};
 
-	Texture* TileTex;
 	bool isOccupied = false;
 
 	void Update() override;
 	void Render() override;
 
-	void ChangeType(TileType type);
-	Tile(int TileRow, int TileCol, TileType type);
+	void ChangeType(TileType _type);
+	Tile(int TileRow, int TileCol, TileType _type);
 	~Tile();
 
 	int TileRow;
 	int TileCol;
+
 	const int TILE_WIDTH = 80;
 	const int TILE_HEIGHT = 80;
-	TileType mType;
 
+	bool isHit;
+	bool isMiss;
+
+	TileType mType;
+	Texture* Hittex;
+	Texture* MissTex;
+	Texture* TileTex;
+
+	bool isMissf();
+	bool isHitf();
 private:
 	SDL_Rect mBox;
 
