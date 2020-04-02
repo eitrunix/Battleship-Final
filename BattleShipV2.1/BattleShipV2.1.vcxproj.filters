@@ -25,40 +25,31 @@
     <Filter Include="Header Files\BattleShip">
       <UniqueIdentifier>{bccd90ab-7abb-4f65-8ab9-1ca4a7b698f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\BattleShip\Managers">
-      <UniqueIdentifier>{6925a636-4fbc-4840-ba9a-e081ddeedd31}</UniqueIdentifier>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{4a0ad049-4790-4173-8dd6-fdb8bd37c3fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\BattleShip\Managers">
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{d889b15d-d648-415d-8649-d60862279071}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
       <UniqueIdentifier>{3485e476-85bb-4d04-afd9-8306ef496bcf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\BattleShip\Screens">
-      <UniqueIdentifier>{a804b328-d1f9-4770-a8d7-76987f9f3b8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\BattleShip\Screen">
+    <Filter Include="Source Files\Screen">
       <UniqueIdentifier>{91cdd44e-021a-43fd-8fc3-b81082c3dbbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{6925a636-4fbc-4840-ba9a-e081ddeedd31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screens">
+      <UniqueIdentifier>{a804b328-d1f9-4770-a8d7-76987f9f3b8c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MathHelper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameEntity.cpp">
       <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Entities</Filter>
@@ -66,58 +57,52 @@
     <ClCompile Include="AnimatedTexture.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardManager.cpp">
-      <Filter>Source Files\BattleShip\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="GameStateManager.cpp">
-      <Filter>Source Files\BattleShip\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthManager.cpp">
-      <Filter>Source Files\BattleShip\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>Source Files\BattleShip\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Piece.cpp">
       <Filter>Source Files\BattleShip</Filter>
     </ClCompile>
     <ClCompile Include="ScreenManager.cpp">
-      <Filter>Source Files\BattleShip\Managers</Filter>
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="StartScreen.cpp">
-      <Filter>Source Files\BattleShip\Screen</Filter>
+      <Filter>Source Files\Screen</Filter>
     </ClCompile>
     <ClCompile Include="GameScreen.cpp">
-      <Filter>Source Files\BattleShip\Screen</Filter>
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MathHelper.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreBoard.cpp">
+      <Filter>Source Files\BattleShip</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\BattleShip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MathHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameEntity.h">
       <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedTexture.h">
       <Filter>Header Files\Entities</Filter>
@@ -125,38 +110,47 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardManager.h">
-      <Filter>Header Files\BattleShip\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStateManager.h">
-      <Filter>Header Files\BattleShip\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthManager.h">
-      <Filter>Header Files\BattleShip\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>Header Files\BattleShip\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Piece.h">
       <Filter>Header Files\BattleShip</Filter>
     </ClInclude>
     <ClInclude Include="ScreenManager.h">
-      <Filter>Header Files\BattleShip\Managers</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameScreen.h">
-      <Filter>Header Files\BattleShip\Screens</Filter>
+      <Filter>Header Files\Screens</Filter>
     </ClInclude>
     <ClInclude Include="StartScreen.h">
-      <Filter>Header Files\BattleShip\Screens</Filter>
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Header Files\BattleShip</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="MathHelper.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreBoard.h">
+      <Filter>Header Files\BattleShip</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\BattleShip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,13 +3,8 @@
 #include <SDL.h>
 //#include "AnimatedTexture.h"
 //#include "ScreenManager.h"
-#include "GameStateManager.h"
-#include "PlayerManager.h"
-#include "HealthManager.h"
-#include "BoardManager.h"
 
 #include "GameScreen.h"
-
 #include "AudioManager.h" 
 
 namespace SDLFramework {
@@ -25,11 +20,6 @@ namespace SDLFramework {
 		AssetManager * mAssetManager;
 		InputManager * mInputManager;
 		AudioManager* mAudioManager;
-
-		BoardManager* mBoardManager;
-		GameStateManager* mGameStateManager;
-		HealthManager* mHealthManager;
-		PlayerManager* mPlayerManager;
 
 		//ScreenManager* mScreenManager;
 

@@ -76,12 +76,7 @@ namespace SDLFramework {
 		mAudioManager = AudioManager::Instance();
 		mInputManager = InputManager::Instance();
 		mAssetManager = AssetManager::Instance();
-		//////
-		mGameStateManager = GameStateManager::Instance();
-		mBoardManager = BoardManager::Instance();
-		mPlayerManager = PlayerManager::Instance();
-		mHealthManager = HealthManager::Instance();
-		/////
+
 		mTimer = Timer::Instance();
 		//mScreenManager = ScreenManager::Instance();
 
@@ -108,18 +103,6 @@ namespace SDLFramework {
 
 		AudioManager::Release();    
 		mAudioManager = nullptr;
-
-		GameStateManager::Release();
-		mGameStateManager = nullptr;
-
-		BoardManager::Release();
-		mBoardManager = nullptr;
-
-		PlayerManager::Release();
-		mPlayerManager = nullptr;
-
-		HealthManager::Release();
-		mHealthManager = nullptr;
 
 		// Quit SDL subsystems
 		SDL_Quit();

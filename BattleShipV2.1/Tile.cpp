@@ -1,18 +1,5 @@
 #include "Tile.h"
 
-
-void Tile::Update()
-{
-
-}
-
-void Tile::Render()
-{
-
-	TileTex->Render();
-
-}
-
 Tile::Tile()
 {
 	TileTex = new Texture("Water.png");
@@ -24,4 +11,16 @@ Tile::~Tile()
 {
 	delete TileTex;
 	TileTex = nullptr;
+}
+
+void Tile::Render()
+{
+
+	TileTex->Render();
+
+}
+
+void Tile::Update()
+{
+
 }

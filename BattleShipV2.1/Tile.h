@@ -24,9 +24,6 @@ public:
 	TileType type = TileType::Water;
 	bool isOccupied = false;
 
-	int tileRow = 0;
-	int tileCol = 0;
-
 	void Update() override;
 	void Render() override;
 
