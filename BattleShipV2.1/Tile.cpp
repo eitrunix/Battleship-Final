@@ -1,5 +1,10 @@
 #include "Tile.h"
 
+void Tile::ChangeType(TileType _type)
+{
+	mType = _type;
+}
+
 Tile::Tile(int TileRow, int TileCol, TileType _type)
 {
 	//Get the offsets
@@ -15,49 +20,56 @@ Tile::Tile(int TileRow, int TileCol, TileType _type)
 
 	isMiss = false;
 	isHit = false;
+
+	TileTex = new Texture("Water.png");
+	HitTex = new Texture("Hit.png");
+	MissTex = new Texture("Miss.png");
 }
 
 Tile::~Tile()
 {
 	delete TileTex;
 	TileTex = nullptr;
+	delete HitTex;
+	HitTex = nullptr;
+	delete MissTex;
+	MissTex = nullptr;
+
 }
 
-void Tile::ChangeType(TileType _type)
-{
-	mType = _type;
-}
 void Tile::Render()
 {
-	TileTex->Render();
+	if (!isHit && !isMiss)
+	{
+		TileTex->Render();
+		TileTex->Position(Position());
+	}
+	if (isHit)
+	{
+		HitTex->Render();
+		HitTex->Position(Position());
+	}
+	if (isMiss)
+	{
+		MissTex->Render();
+		MissTex->Position(Position());
+	}
+
 }
 
 void Tile::Update()
 {
-	if (!isHit)
-	{
-		TileTex = new Texture("Water.png");
-	}
-	if (isHit)
-	{
-		Hittex = new Texture("Hit.png");
-	}
-	if (isMiss) 
-	{
-		MissTex = new Texture("Miss.png");
-	}
 
 }
 
-bool Tile::isHitf()
+bool Tile::isHitf(bool hit)
 {
-	mType = TileType::Hit;
-	isHit = true;
+	isHit = hit;
 	return isHit;
 }
 
-bool Tile::isMissf()
+bool Tile::isMissf(bool miss)
 {
-	isMiss = true;
+	isMiss = miss;
 	return isMiss;
 }

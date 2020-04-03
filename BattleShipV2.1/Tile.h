@@ -5,7 +5,7 @@
 using namespace SDLFramework;
 
 
-class Tile : GameEntity
+class Tile : public GameEntity
 {
 
 public:
@@ -27,8 +27,8 @@ public:
 	Tile(int TileRow, int TileCol, TileType _type);
 	~Tile();
 
-	int TileRow;
-	int TileCol;
+	int TileRow = 0;
+	int TileCol = 0;
 
 	const int TILE_WIDTH = 80;
 	const int TILE_HEIGHT = 80;
@@ -37,12 +37,13 @@ public:
 	bool isMiss;
 
 	TileType mType;
-	Texture* Hittex;
+
+	Texture* HitTex;
 	Texture* MissTex;
 	Texture* TileTex;
 
-	bool isMissf();
-	bool isHitf();
+	bool isMissf(bool miss);
+	bool isHitf(bool hit);
 private:
 	SDL_Rect mBox;
 
