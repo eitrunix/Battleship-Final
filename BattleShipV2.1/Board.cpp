@@ -6,7 +6,7 @@ BattleshipBoard::BattleshipBoard()
 	{
 		for (int tCol = 0; tCol < BOARDHEIGHT; tCol++)
 		{
-			gameBoard[tRow][tCol] = new Tile(tRow, tCol, Tile::TileType::Water);
+			gameBoard[tRow][tCol] = new Tile(tRow, tCol, TileType::Water);
 			gameBoard[tRow][tCol]->TileRow = tRow;
 			gameBoard[tRow][tCol]->TileCol = tCol;
 
@@ -57,7 +57,7 @@ void BattleshipBoard::ChangeTile(int _x, int _y, bool _hit)
 		{
 			if (gameBoard[tRow][tCol] == gameBoard[_x][_y])
 			{
-				gameBoard[tRow][tCol]->isHit = _hit;
+				//gameBoard[tRow][tCol]->isHit = _hit;
 			}
 		}
 	}

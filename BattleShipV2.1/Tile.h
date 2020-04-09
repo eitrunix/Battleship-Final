@@ -4,19 +4,20 @@
 #include "AnimatedTexture.h" 
 using namespace SDLFramework;
 
+enum class TileType
+{
+	Water,
+	Hit,
+	Miss,
+	Ship,
+};
+
 
 class Tile : public GameEntity
 {
 
 public:
 
-	enum class TileType
-	{
-		Water,
-		Hit,
-		Miss,
-		Ship,
-	};
 
 	bool isOccupied = false;
 
@@ -33,8 +34,8 @@ public:
 	const int TILE_WIDTH = 80;
 	const int TILE_HEIGHT = 80;
 
-	bool isHit;
-	bool isMiss;
+	bool isHit = false;
+	bool isMiss = false;
 
 	TileType mType;
 

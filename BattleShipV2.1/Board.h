@@ -19,6 +19,11 @@ public:
 	float x;
 	float y;
 
+	//void SetTileType(TileType tiletype);
+	//AnimatedTexture* defTileTex;
+	//void UpdateTile(BattleshipBoard board[10][10]);
+
+
 	void Update() override;
 	void Render() override;
 	Tile* gameBoard[BOARDWIDTH][BOARDHEIGHT];
