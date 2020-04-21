@@ -28,6 +28,7 @@ public:
 	GameScreen();
 	~GameScreen();
 
+	bool onScreen = false;
 	void Update() override;
 	void Render() override;
 

@@ -10,7 +10,7 @@ StartScreen::StartScreen()
 
 	mTitleArea->Parent(this);
 	tTitle->Parent(mTitleArea);
-
+	onScreen = true;
 	tTitle->Position(-30.0f, 0.0f);
 }
 
@@ -28,6 +28,10 @@ StartScreen::~StartScreen()
 
 void StartScreen::Update()
 {
+	if (mInputManager->KeyPressed(SDL_SCANCODE_A))
+	{
+		onScreen = false;
+	}
 }
 
 void StartScreen::Render()

@@ -20,7 +20,7 @@ public:
 
 	void Update() override;
 	void Render() override;
-
+	bool onScreen = false;
 
 };
 

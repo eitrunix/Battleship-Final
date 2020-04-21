@@ -12,19 +12,21 @@ private:
 	static ScreenManager* sInstance;
 
 	enum Screens { Start, Play };
-	Screens mCurrentScreen;
+	//Screens mCurrentScreen;
 
 	InputManager* mInput;
-
-	//GameScreen* mGameScreen;
+	GameScreen* mGameScreen;
+	StartScreen* mStartScreen;
 
 public:
+
 	static ScreenManager* Instance();
 	static void Release();
+	Screens mCurrentScreen = Start;
 
 	void Update();
 	void Render();
-
+	void ChangeScreens(Screens screen);
 private:
 	ScreenManager();
 	~ScreenManager();

@@ -4,9 +4,8 @@
 //#include "AnimatedTexture.h"
 //#include "ScreenManager.h"
 
-#include "GameScreen.h"
 #include "AudioManager.h" 
-
+#include "ScreenManager.h"
 namespace SDLFramework {
 
 	class GameManager
@@ -21,12 +20,10 @@ namespace SDLFramework {
 		InputManager * mInputManager;
 		AudioManager* mAudioManager;
 
-		//ScreenManager* mScreenManager;
+		ScreenManager* mScreenManager;
 
 		Timer * mTimer;
 		SDL_Event mEvent;
-
-		GameScreen* mGameScreen;
 
 	public:
 
