@@ -55,7 +55,7 @@ void GameScreen::Update()
 {
 	if (mInputManager->MouseButtonPressed(mInputManager->Left))
 	{
-		mousePos = mInputManager->MousePosition();
+		mousePos = mInputManager->MousePosition() * boardSize;
 		std::cout << mousePos.x << " = X " << std::endl;
 		std::cout << mousePos.y << " = Y" << std::endl;
 	}

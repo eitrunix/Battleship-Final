@@ -31,6 +31,7 @@ public:
 	void Update() override;
 	void Render() override;
 
+	float boardSize = 10.0f;
 	Vector2 mousePos;
 	int mouseX;
 	int mouseY;
