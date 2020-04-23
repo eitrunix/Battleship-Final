@@ -21,9 +21,10 @@ Tile::Tile(int TileRow, int TileCol, TileType _type)
 	isMiss = false;
 	isHit = false;
 
-	TileTex = new Texture("Water.png");
 	HitTex = new Texture("Hit.png");
-	MissTex = new Texture("Miss.png");
+	MissTex = new Texture("Miss.png");	
+	TileTex = new Texture("Water.png");
+
 }
 
 Tile::~Tile()
@@ -39,20 +40,24 @@ Tile::~Tile()
 
 void Tile::Render()
 {
-	if (!isHit && !isMiss)
-	{
-		TileTex->Render();
-		TileTex->Position(Position());
-	}
 	if (isHit)
 	{
+		TileTex = HitTex;
 		HitTex->Render();
 		HitTex->Position(Position());
+		TileTex->Active(false);
 	}
 	if (isMiss)
 	{
+		TileTex = MissTex;
 		MissTex->Render();
 		MissTex->Position(Position());
+	}
+	else
+	{
+		TileTex->Render();
+		TileTex->Position(Position());
+
 	}
 
 }

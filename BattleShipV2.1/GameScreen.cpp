@@ -3,6 +3,7 @@
 GameScreen::GameScreen()
 {
 	mTimer = Timer::Instance();
+	//mMouse = MouseControl::Instance();
 	mInputManager = InputManager::Instance();
 	mScoreBoard = ScoreBoard::Instance();
 
@@ -52,15 +53,21 @@ GameScreen::~GameScreen()
 
 void GameScreen::Update()
 {
+	if (mInputManager->MouseButtonPressed(mInputManager->Left))
+	{
+		mousePos = mInputManager->MousePosition();
+		std::cout << mousePos.x << " = X " << std::endl;
+		std::cout << mousePos.y << " = Y" << std::endl;
+	}
+	if (mInputManager->KeyPressed(SDL_SCANCODE_A))
+	{
+		pBoard->ChangeTile(2, 2, true);
+	}
 }
 
 void GameScreen::Render()
 {
 	mScoreBoard->Render();
-	mPlayerOneArea->Render();
-	mPlayerTwoArea->Render();
-	Board->Render();
-	Radar->Render();
 	pBoard->Render();
 	pRadar->Render();
 

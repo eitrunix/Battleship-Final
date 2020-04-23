@@ -34,7 +34,7 @@ void ScreenManager::Release()
 
 void ScreenManager::Update()
 {
-	if (mStartScreen->onScreen == false)
+	if (mStartScreen->PlayGame == true)
 	{
 		mCurrentScreen = Play;
 	}

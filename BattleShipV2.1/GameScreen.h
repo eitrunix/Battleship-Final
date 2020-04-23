@@ -19,7 +19,7 @@ private:
 	ScoreBoard* mScoreBoard;
 	GameEntity* mPlayerOneArea;
 	GameEntity* mPlayerTwoArea;
-	
+	//MouseControl* mMouse;
 	// Images Boards Background
 	Texture* Board;
 	Texture* Radar;
@@ -28,10 +28,12 @@ public:
 	GameScreen();
 	~GameScreen();
 
-	bool onScreen = false;
 	void Update() override;
 	void Render() override;
 
+	Vector2 mousePos;
+	int mouseX;
+	int mouseY;
 };
 
 #endif // __GAMESCREEN_H

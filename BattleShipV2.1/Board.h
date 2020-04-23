@@ -1,11 +1,13 @@
 #pragma once
-#include "Tile.h"
 #include <random>
+//#include "MouseControl.h"
+#include "Tile.h"
 #ifndef __BATTLESHIPBOARD_H 
 #define __BATTLESHIPBOARD_H
 #define BOARDWIDTH 10
 #define BOARDHEIGHT 10
 #define TILEOFFSET 43
+#define BOARDSIZE 10;
 
 
 class BattleshipBoard : public GameEntity

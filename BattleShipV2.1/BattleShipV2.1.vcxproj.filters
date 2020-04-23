@@ -111,6 +111,9 @@
     <ClCompile Include="PlayerManager.cpp">
       <Filter>Source Files\BattleShip\BSGameManagers</Filter>
     </ClCompile>
+    <ClCompile Include="MouseControl.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>Header Files\BattleShip\BSGameManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseControl.h">
+      <Filter>Header Files\Screens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

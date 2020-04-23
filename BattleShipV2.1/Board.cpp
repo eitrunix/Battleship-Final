@@ -10,10 +10,10 @@ BattleshipBoard::BattleshipBoard()
 			gameBoard[tRow][tCol]->TileRow = tRow;
 			gameBoard[tRow][tCol]->TileCol = tCol;
 
-			//std::cout << " " << std::endl;
-			//std::cout << gameBoard[tRow][tCol]->TileRow;
-			//std::cout << gameBoard[tRow][tCol]->TileCol;
-			ChangeTile(5, 7, true);
+			std::cout << " " << std::endl;
+			std::cout << gameBoard[tRow][tCol]->TileRow;
+			std::cout << gameBoard[tRow][tCol]->TileCol;
+
 		}
 
 	}
@@ -38,7 +38,7 @@ void BattleshipBoard::Render()
 		{
 			gameBoard[tRow][tCol]->Render();
 			
-			//gameBoard[tRow][tCol]->TileTex->Position(x + (tRow * TILEOFFSET), y +(tCol * TILEOFFSET));
+			gameBoard[tRow][tCol]->TileTex->Position(x + (tRow * TILEOFFSET), y +(tCol * TILEOFFSET));
 			gameBoard[tRow][tCol]->Position(x + (tRow * TILEOFFSET), y + (tCol * TILEOFFSET));
 
 		}
@@ -57,7 +57,9 @@ void BattleshipBoard::ChangeTile(int _x, int _y, bool _hit)
 		{
 			if (gameBoard[tRow][tCol] == gameBoard[_x][_y])
 			{
-				//gameBoard[tRow][tCol]->isHit = _hit;
+				gameBoard[tRow][tCol]->TileTex->Update();
+
+				gameBoard[tRow][tCol]->isHit = _hit;
 			}
 		}
 	}
