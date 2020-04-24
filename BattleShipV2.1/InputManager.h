@@ -1,8 +1,6 @@
 #ifndef __INPUTMANAGER_H
 #define __INPUTMANAGER_H
 #include <SDL.h>
-// MacOS using XCode
-// #include <SDL2/SDL.h>
 #include <string>
 #include "MathHelper.h"
 

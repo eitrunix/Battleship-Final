@@ -16,6 +16,7 @@ public:
 	std::string PieceHitText;
 
 	virtual void OnHit();
+	virtual void AssignTile();
 };
 
 class PatrolBoat : public Piece
@@ -24,6 +25,7 @@ public:
 	PatrolBoat();
 	~PatrolBoat();
 	void OnHit() override;	
+	void AssignTile() override;
 	Texture* BoatImage;
 
 };
@@ -34,6 +36,7 @@ public:
 	Submarine();
 	~Submarine();
 	void OnHit() override;
+	void AssignTile() override;
 	Texture* BoatImage;
 };
 
@@ -43,6 +46,7 @@ public:
 	Cruiser();
 	~Cruiser();
 	void OnHit() override;
+	void AssignTile() override;
 	Texture* BoatImage;
 };
 
@@ -52,6 +56,7 @@ public:
 	AircraftCarrier();
 	~AircraftCarrier();
 	void OnHit() override;
+	void AssignTile() override;
 	Texture* BoatImage;
 };
 
@@ -61,6 +66,7 @@ public:
 	Battleship();
 	~Battleship();
 	void OnHit() override;
+	void AssignTile() override;
 	Texture* BoatImage;
 };
 

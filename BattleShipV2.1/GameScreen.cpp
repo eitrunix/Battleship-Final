@@ -3,7 +3,6 @@
 GameScreen::GameScreen()
 {
 	mTimer = Timer::Instance();
-	//mMouse = MouseControl::Instance();
 	mInputManager = InputManager::Instance();
 	mScoreBoard = ScoreBoard::Instance();
 
@@ -21,8 +20,8 @@ GameScreen::GameScreen()
 	Board->Parent(mPlayerOneArea);
 	Radar->Parent(mPlayerTwoArea);
 
-	pRadar->BoardPosSet(297.0f, 550.0f);
-	pBoard->BoardPosSet(297.0f, 91.5f);
+	pRadar->BoardPosSet(cBoatdYOffset, cBoardXOffset);
+	pBoard->BoardPosSet(pBoatdYOffset, pBoardXOffset);
 
 	// Positions 
 	Board->Position(-230.0f, 40.0f);
@@ -55,13 +54,37 @@ void GameScreen::Update()
 {
 	if (mInputManager->MouseButtonPressed(mInputManager->Left))
 	{
-		mousePos = mInputManager->MousePosition() * boardSize;
-		std::cout << mousePos.x << " = X " << std::endl;
-		std::cout << mousePos.y << " = Y" << std::endl;
+		mousePos = mInputManager->MousePosition() * (boardSize);
+
+		int xOffset = pOffsetX;
+		int yOffset = pOffsetY;
+		
+		int widthScreen = Graphics::SCREEN_WIDTH;
+		if (mousePos.x > 5100)
+		{
+			xOffset = rOffsetX;
+		}
+
+		float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
+		float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
+
+		int xIndex = (newPosX / (gridWidth * cols)) * cols;
+		int yIndex = (newPosY / (gridHeight * rows)) * rows;
+
+		std::cout << xIndex << " = X " << std::endl;
+		std::cout << yIndex << " = Y " << std::endl;
+
+		pBoard->ChangeTile(xIndex, yIndex, true);
 	}
 	if (mInputManager->KeyPressed(SDL_SCANCODE_A))
 	{
 		pBoard->ChangeTile(2, 2, true);
+		pBoard->ChangeTile(3, 2, true);
+		pBoard->ChangeTile(4, 2, true);
+		pBoard->ChangeTile(6, 2, true);
+		pBoard->ChangeTile(7, 2, true);
+		pBoard->ChangeTile(8, 2, true);
+		pBoard->ChangeTile(9, 2, true);
 	}
 }
 
