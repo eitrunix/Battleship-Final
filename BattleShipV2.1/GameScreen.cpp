@@ -5,9 +5,9 @@ GameScreen::GameScreen()
 	mTimer = Timer::Instance();
 	mInputManager = InputManager::Instance();
 	mScoreBoard = ScoreBoard::Instance();
-
 	pBoard = new BattleshipBoard();
 	pRadar = new BattleshipBoard();
+
 	/// Play Area ///
 	mPlayerOneArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
 	mPlayerTwoArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
@@ -27,7 +27,13 @@ GameScreen::GameScreen()
 	Board->Position(-230.0f, 40.0f);
 	Radar->Position(230.0f, 40.0f);
 
+	bState = BoardState::PlaceShips;
+}
 
+
+void GameScreen::changeBoardState(BoardState newState)
+{
+	bState = newState;
 }
 
 GameScreen::~GameScreen()
@@ -52,39 +58,68 @@ GameScreen::~GameScreen()
 
 void GameScreen::Update()
 {
-	if (mInputManager->MouseButtonPressed(mInputManager->Left))
+	switch (bState)
 	{
-		mousePos = mInputManager->MousePosition() * (boardSize);
+	//case BoardState::Title:
+	//	break;
+	case BoardState::PlaceShips:
 
-		int xOffset = pOffsetX;
-		int yOffset = pOffsetY;
-		
-		int widthScreen = Graphics::SCREEN_WIDTH;
-		if (mousePos.x > 5100)
+		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
-			xOffset = rOffsetX;
+
+			mousePos = mInputManager->MousePosition() * (boardSize);
+			if (mousePos.x < (Graphics::SCREEN_WIDTH * 0.5));
+			{
+			int xOffset = pOffsetX;
+			int yOffset = pOffsetY;
+
+			float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
+			float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
+
+			int xIndex = (newPosX / (gridWidth * cols)) * cols;
+			int yIndex = (newPosY / (gridHeight * rows)) * rows;
+
+			std::cout << xIndex << " = X " << std::endl;
+			std::cout << yIndex << " = Y " << std::endl;
+			if (bState == BoardState::PlaceShips)
+
+			{
+				pBoard->ChangeTile(xIndex, yIndex, true);
+
+			}
+			else
+			{
+				std::cout << "Cant attack that" << std::endl;
+			}
+
+			bState = BoardState::MakeAttack;
+			}
+		}
+	case BoardState::MakeAttack:
+
+		if (mInputManager->MouseButtonPressed(mInputManager->Left))
+		{
+			mousePos = mInputManager->MousePosition() * (boardSize);
+			if (mousePos.x > ((Graphics::SCREEN_WIDTH * 0.6) + gridWidth));
+			{
+				int xOffset = rOffsetX;
+				int yOffset = pOffsetY;
+
+				float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
+				float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
+
+				int xIndex = (newPosX / (gridWidth * cols)) * cols;
+				int yIndex = (newPosY / (gridHeight * rows)) * rows;
+
+				std::cout << xIndex << " = X " << std::endl;
+				std::cout << yIndex << " = Y " << std::endl;
+				if (bState == BoardState::MakeAttack)
+				{
+					pRadar->ChangeTile(xIndex, yIndex, true);
+				}
+			}
 		}
 
-		float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
-		float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
-
-		int xIndex = (newPosX / (gridWidth * cols)) * cols;
-		int yIndex = (newPosY / (gridHeight * rows)) * rows;
-
-		std::cout << xIndex << " = X " << std::endl;
-		std::cout << yIndex << " = Y " << std::endl;
-
-		pBoard->ChangeTile(xIndex, yIndex, true);
-	}
-	if (mInputManager->KeyPressed(SDL_SCANCODE_A))
-	{
-		pBoard->ChangeTile(2, 2, true);
-		pBoard->ChangeTile(3, 2, true);
-		pBoard->ChangeTile(4, 2, true);
-		pBoard->ChangeTile(6, 2, true);
-		pBoard->ChangeTile(7, 2, true);
-		pBoard->ChangeTile(8, 2, true);
-		pBoard->ChangeTile(9, 2, true);
 	}
 }
 

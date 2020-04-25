@@ -1,9 +1,6 @@
 #ifndef __GAMEMANAGER_H
 #define __GAMEMANAGER_H
 #include <SDL.h>
-//#include "AnimatedTexture.h"
-//#include "ScreenManager.h"
-
 #include "AudioManager.h" 
 #include "ScreenManager.h"
 namespace SDLFramework {
@@ -39,6 +36,7 @@ namespace SDLFramework {
 
 		GameManager();
 		~GameManager();
+
 	};
 }
 #endif

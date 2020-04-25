@@ -11,12 +11,17 @@ using namespace SDLFramework;
 class GameScreen : public GameEntity
 {
 private:
+	enum class BoardState
+	{
+		Title,
+		PlaceShips,
+		MakeAttack,
+	};
 
 	Timer* mTimer;
 	InputManager* mInputManager;
 	BattleshipBoard* pBoard;
 	BattleshipBoard* pRadar;
-
 	// Screen Entities 
 	ScoreBoard* mScoreBoard;
 	GameEntity* mPlayerOneArea;
@@ -26,13 +31,15 @@ private:
 	Texture* Board;
 	Texture* Radar;
 
+
 public:
 	GameScreen();
 	~GameScreen();
 
 	void Update() override;
 	void Render() override;
-
+	void changeBoardState(BoardState newState);
+	BoardState bState;
 	float boardSize = 10.0f;
 	Vector2 mousePos;
 	int mouseX;
@@ -52,6 +59,7 @@ public:
 	int pOffsetX = 690, pOffsetY = 2750;
 
 	int rOffsetX = 5280;
+
 };
 
 #endif // __GAMESCREEN_H

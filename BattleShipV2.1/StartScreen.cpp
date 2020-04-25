@@ -36,10 +36,10 @@ StartScreen::StartScreen()
 	tQuit->Parent(mTitleArea);
 
 	aBoat1->Position(0.0f, 0.0f);
-	aBoat2->Position(0.0f, 30.0f);
-	aBoat3->Position(0.0f, 60.0f);
-	aBoat4->Position(0.0f, 90.0f);
-	aBoat5->Position(0.0f, 120.0f);
+	aBoat2->Position(0.0f, 40.0f);
+	aBoat3->Position(0.0f, 80.0f);
+	aBoat4->Position(0.0f, 120.0f);
+	aBoat5->Position(0.0f, 160.0f);
 
 	tTitle->Position(0.0f, 0.0f);
 	tStart->Position(0.0f, 710.0f);
@@ -92,6 +92,7 @@ void StartScreen::Render()
 	tStart->Render();
 	tInstructs->Render();
 	tQuit->Render();
+
 	aBoat1->Render();
 	aBoat2->Render();
 	aBoat3->Render();

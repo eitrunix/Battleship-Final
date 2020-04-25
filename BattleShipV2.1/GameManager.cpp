@@ -101,4 +101,5 @@ namespace SDLFramework {
 		// Quit SDL subsystems
 		SDL_Quit();
 	}
+
 }

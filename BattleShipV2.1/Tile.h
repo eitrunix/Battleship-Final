@@ -37,6 +37,9 @@ public:
 	bool isHit = false;
 	bool isMiss = false;
 
+	bool tileChanged = false;
+	bool CheckIfChanged();
+	void TellSystemChange();
 	TileType mType;
 
 	Texture* HitTex;
