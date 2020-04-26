@@ -18,18 +18,11 @@ private:
 	Texture* tInstructs;
 	Texture* tQuit;
 
-
 	Texture* aBoat1;
 	Texture* aBoat2;
 	Texture* aBoat3;
 	Texture* aBoat4;
 	Texture* aBoat5;
-
-	//AnimatedTexture* aBoat1;
-	//AnimatedTexture* aBoat2;
-	//AnimatedTexture* aBoat3;
-	//AnimatedTexture* aBoat4;
-	//AnimatedTexture* aBoat5;
 
 public:
 	StartScreen();

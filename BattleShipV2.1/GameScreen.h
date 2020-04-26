@@ -38,12 +38,15 @@ public:
 
 	void Update() override;
 	void Render() override;
+
 	void changeBoardState(BoardState newState);
 	BoardState bState;
-	float boardSize = 10.0f;
+
 	Vector2 mousePos;
 	int mouseX;
 	int mouseY;
+
+	float boardSize = 10.0f;
 
 	float pBoardXOffset = 91.5f;
 	float pBoatdYOffset = 297.0f;
@@ -53,6 +56,7 @@ public:
 
 	float boardXPosOffset = 40.0f;
 	float boardYPosOffset = -230.0f;
+	float radarYPosOffset = 230.0f;
 
 	int gridWidth = 430, gridHeight = 430;
 	int rows = 10, cols = 10;

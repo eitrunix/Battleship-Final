@@ -24,10 +24,10 @@ GameScreen::GameScreen()
 	pBoard->BoardPosSet(pBoatdYOffset, pBoardXOffset);
 
 	// Positions 
-	Board->Position(-230.0f, 40.0f);
-	Radar->Position(230.0f, 40.0f);
+	Board->Position(boardYPosOffset, boardXPosOffset);
+	Radar->Position(radarYPosOffset, boardXPosOffset);
 
-	bState = BoardState::PlaceShips;
+	bState = BoardState::MakeAttack;
 }
 
 
@@ -60,49 +60,15 @@ void GameScreen::Update()
 {
 	switch (bState)
 	{
-	//case BoardState::Title:
-	//	break;
+		//case BoardState::Title:
+		//	break;
 	case BoardState::PlaceShips:
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
 
 			mousePos = mInputManager->MousePosition() * (boardSize);
-			if (mousePos.x < (Graphics::SCREEN_WIDTH * 0.5));
-			{
-			int xOffset = pOffsetX;
-			int yOffset = pOffsetY;
-
-			float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
-			float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
-
-			int xIndex = (newPosX / (gridWidth * cols)) * cols;
-			int yIndex = (newPosY / (gridHeight * rows)) * rows;
-
-			std::cout << xIndex << " = X " << std::endl;
-			std::cout << yIndex << " = Y " << std::endl;
-			if (bState == BoardState::PlaceShips)
-
-			{
-				pBoard->ChangeTile(xIndex, yIndex, true);
-
-			}
-			else
-			{
-				std::cout << "Cant attack that" << std::endl;
-			}
-
-			bState = BoardState::MakeAttack;
-			}
-		}
-	case BoardState::MakeAttack:
-
-		if (mInputManager->MouseButtonPressed(mInputManager->Left))
-		{
-			mousePos = mInputManager->MousePosition() * (boardSize);
-			if (mousePos.x > ((Graphics::SCREEN_WIDTH * 0.6) + gridWidth));
-			{
-				int xOffset = rOffsetX;
+				int xOffset = pOffsetX;
 				int yOffset = pOffsetY;
 
 				float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
@@ -113,14 +79,49 @@ void GameScreen::Update()
 
 				std::cout << xIndex << " = X " << std::endl;
 				std::cout << yIndex << " = Y " << std::endl;
+				if (bState == BoardState::PlaceShips)
+
+				{
+					pBoard->ChangeTile(xIndex, yIndex, true);
+
+				}
+				else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
+				{
+					std::cout << "Cant Place that there" << std::endl;
+				}
+
+				bState = BoardState::MakeAttack;
+		}
+	case BoardState::MakeAttack:
+
+		if (mInputManager->MouseButtonPressed(mInputManager->Left))
+		{
+			mousePos = mInputManager->MousePosition() * (boardSize);
+			int xOffset = rOffsetX;
+			int yOffset = pOffsetY;
+
+			float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
+			float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
+
+			int xIndex = (newPosX / (gridWidth * cols)) * cols;
+			int yIndex = (newPosY / (gridHeight * rows)) * rows;
+
+			std::cout << xIndex << " = X " << std::endl;
+			std::cout << yIndex << " = Y " << std::endl;
+			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
+			{
 				if (bState == BoardState::MakeAttack)
 				{
 					pRadar->ChangeTile(xIndex, yIndex, true);
 				}
 			}
+			else
+			{
+				std::cout << "Attack Again in a Valid Location" << std::endl;
+			}
 		}
-
 	}
+
 }
 
 void GameScreen::Render()
