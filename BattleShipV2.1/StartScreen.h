@@ -13,10 +13,19 @@ private:
 	// Title Area
 	GameEntity* mTitleArea;
 	GameEntity* mBoatsArea;
+	GameEntity* mInstructsArea;
+
 	Texture* tTitle;
 	Texture* tStart;
 	Texture* tInstructs;
 	Texture* tQuit;
+
+	Texture* tInstructions1;
+	Texture* tInstructions2;
+	Texture* tInstructions3;
+	Texture* tInstructions4;
+	Texture* tInstructions5;
+	Texture* tInstructions6;
 
 	Texture* aBoat1;
 	Texture* aBoat2;
@@ -31,7 +40,12 @@ public:
 	void Update() override;
 	void Render() override;
 	bool PlayGame = false;
+	bool displayInstructions = false;
 
+	std::string insText;
+	int TITLE_TEXT_SIZE = 64;
+	int TEXT_SIZE = 32;
+	int INST_TEXT_SIZE = 24;
 };
 
 #endif // __STARTSCREEN_H 

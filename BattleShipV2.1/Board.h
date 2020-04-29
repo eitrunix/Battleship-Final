@@ -19,6 +19,8 @@ public:
 
 	float x;
 	float y;
+	void SetTileOccupied(int x, int y, bool occupied);
+	bool GetIsOccupied(int x, int y);
 
 	void Update() override;
 	void Render() override;

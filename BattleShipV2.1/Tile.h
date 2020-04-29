@@ -35,19 +35,14 @@ public:
 	const int TILE_HEIGHT = 80;
 
 	bool isHit = false;
-	bool isMiss = false;
-
+	bool Attacked = false;
 	bool tileChanged = false;
-	bool CheckIfChanged();
-	void TellSystemChange();
 	TileType mType;
 
 	Texture* HitTex;
 	Texture* MissTex;
 	Texture* TileTex;
 
-	bool isMissf(bool miss);
-	bool isHitf(bool hit);
 private:
 	SDL_Rect mBox;
 

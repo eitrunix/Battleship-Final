@@ -60,6 +60,7 @@ void BattleshipBoard::ChangeTile(int _x, int _y, bool _hit)
 				gameBoard[tRow][tCol]->TileTex->Update();
 
 				gameBoard[tRow][tCol]->isHit = _hit;
+				gameBoard[tRow][tCol]->Attacked = true;
 			}
 		}
 	}
@@ -71,3 +72,40 @@ void BattleshipBoard::BoardPosSet(float _y, float _x)
 	y = _y;
 }
 
+void BattleshipBoard::SetTileOccupied(int x, int y, bool occupied)
+{
+	int tRow;
+	int tCol;
+
+	for (tRow = 0; tRow < BOARDWIDTH; tRow++)
+	{
+		for (tCol = 0; tCol < BOARDHEIGHT; tCol++)
+		{
+			if (gameBoard[tRow][tCol] == gameBoard[x][y])
+			{
+				gameBoard[tRow][tCol]->TileTex->Update();
+
+				gameBoard[tRow][tCol]->isOccupied = occupied;
+
+			}
+		}
+	}
+
+}
+
+bool BattleshipBoard::GetIsOccupied(int x, int y)
+{
+	int tRow;
+	int tCol;
+
+	for (tRow = 0; tRow < BOARDWIDTH; tRow++)
+	{
+		for (tCol = 0; tCol < BOARDHEIGHT; tCol++)
+		{
+			if (gameBoard[tRow][tCol] == gameBoard[x][y])
+			{
+				return gameBoard[tRow][tCol]->isOccupied;
+			}
+		}
+	}
+}

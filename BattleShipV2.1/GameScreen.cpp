@@ -112,7 +112,16 @@ void GameScreen::Update()
 			{
 				if (bState == BoardState::MakeAttack)
 				{
-					pRadar->ChangeTile(xIndex, yIndex, true);
+					bool tempOccu;
+					tempOccu = pRadar->GetIsOccupied(xIndex, yIndex);
+					if (tempOccu)
+					{
+						pRadar->ChangeTile(xIndex, yIndex, true);
+					}
+					else
+					{
+						pRadar->ChangeTile(xIndex, yIndex, false);
+					}
 				}
 			}
 			else
@@ -120,6 +129,33 @@ void GameScreen::Update()
 				std::cout << "Attack Again in a Valid Location" << std::endl;
 			}
 		}
+
+		if (mInputManager->MouseButtonPressed(mInputManager->Right))
+		{
+			mousePos = mInputManager->MousePosition() * (boardSize);
+			int xOffset = rOffsetX;
+			int yOffset = pOffsetY;
+
+			float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
+			float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
+
+			int xIndex = (newPosX / (gridWidth * cols)) * cols;
+			int yIndex = (newPosY / (gridHeight * rows)) * rows;
+
+			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
+			{
+				if (bState == BoardState::MakeAttack)
+				{
+					pRadar->SetTileOccupied(xIndex, yIndex, true);
+				}
+			}
+			else
+			{
+				std::cout << "Attack Again in a Valid Location" << std::endl;
+			}
+
+		}
+
 	}
 
 }

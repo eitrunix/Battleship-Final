@@ -63,7 +63,7 @@ public:
 	int pOffsetX = 690, pOffsetY = 2750;
 
 	int rOffsetX = 5280;
-
+	
 };
 
 #endif // __GAMESCREEN_H

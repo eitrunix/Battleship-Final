@@ -114,6 +114,9 @@
     <ClCompile Include="MouseControl.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -174,6 +177,9 @@
       <Filter>Header Files\BattleShip\BSGameManagers</Filter>
     </ClInclude>
     <ClInclude Include="MouseControl.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScreen.h">
       <Filter>Header Files\Screens</Filter>
     </ClInclude>
   </ItemGroup>

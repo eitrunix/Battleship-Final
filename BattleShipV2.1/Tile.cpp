@@ -18,7 +18,6 @@ Tile::Tile(int TileRow, int TileCol, TileType _type)
 	//Get the tile type
 	mType = _type;
 
-	isMiss = false;
 	isHit = false;
 
 	HitTex = new Texture("Hit.png");
@@ -40,41 +39,28 @@ Tile::~Tile()
 
 void Tile::Render()
 {
-	if (isHit)
-	{
-		TileTex = HitTex;
-		HitTex->Render();
-		HitTex->Position(Position());
-		TileTex->Active(false);
-	}
-	if (isMiss)
-	{
-		TileTex = MissTex;
-		MissTex->Render();
-		MissTex->Position(Position());
-	}
-	else
+	if (!Attacked)
 	{
 		TileTex->Render();
 		TileTex->Position(Position());
-
 	}
+	if (Attacked && isHit)
+	{
+		TileTex = HitTex;
+		HitTex->Position(Position());
+		HitTex->Render();
+	}
+	if (Attacked && !isHit)
+	{
+		TileTex = MissTex;
+		MissTex->Position(Position());
+		MissTex->Render();
+	}
+
 
 }
 
 void Tile::Update()
 {
 
-}
-
-bool Tile::isHitf(bool hit)
-{
-	isHit = hit;
-	return isHit;
-}
-
-bool Tile::isMissf(bool miss)
-{
-	isMiss = miss;
-	return isMiss;
 }
