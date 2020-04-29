@@ -30,15 +30,21 @@ private:
 	// Images Boards Background
 	Texture* Board;
 	Texture* Radar;
+	
+	// Input Area
+	GameEntity* mInputArea;
+	Texture* defaultText;
+	Texture* invalidAttack;
+	Texture* invalidPlacement;
+
 
 
 public:
 	GameScreen();
 	~GameScreen();
-
+	
 	void Update() override;
 	void Render() override;
-
 	void changeBoardState(BoardState newState);
 	BoardState bState;
 
@@ -63,7 +69,6 @@ public:
 	int pOffsetX = 690, pOffsetY = 2750;
 
 	int rOffsetX = 5280;
-	
 };
 
 #endif // __GAMESCREEN_H

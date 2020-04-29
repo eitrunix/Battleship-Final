@@ -1,5 +1,4 @@
 #include "ScoreBoard.h"
-
 ScoreBoard* ScoreBoard::sInstance = nullptr;
 
 ScoreBoard* ScoreBoard::Instance()
@@ -9,6 +8,14 @@ ScoreBoard* ScoreBoard::Instance()
 		sInstance = new ScoreBoard();
 	}
 	return sInstance;
+}
+void ScoreBoard::SetName()
+{
+	std::cin >> name;
+}
+std::string ScoreBoard::GetName()
+{
+	return name;
 }
 
 ScoreBoard::ScoreBoard()
@@ -36,18 +43,17 @@ ScoreBoard::ScoreBoard()
 	sbP2Submarine = new Texture("Submarine.png");
 	sbP2ACCarrier = new Texture("AircraftCarrier.png");
 	sbP2BattleShip = new Texture("BattleShip.png");
+	tPatrolBoathealth = new Texture(p1PBText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tSubhealth = new Texture(p1SubText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tCruiserhealth = new Texture(p1CruText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tACCarrierhealth = new Texture(p1ACText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tBattleshiphealth = new Texture(p1BSText, "ARCADE.ttf", 32, { 200, 0, 0 });
 
-	tPatrolBoathealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-	tSubhealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-	tCruiserhealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-	tACCarrierhealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-	tBattleshiphealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-
-	tP2PatrolBoathealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-	tP2Subhealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-	tP2Cruiserhealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-	tP2ACCarrierhealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
-	tP2Battleshiphealth = new Texture("0", "ARCADE.ttf", 32, { 200, 0, 0 });
+	tP2PatrolBoathealth = new Texture(p2PBText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tP2Subhealth = new Texture(p2SubText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tP2Cruiserhealth = new Texture(p2CruText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tP2ACCarrierhealth = new Texture(p2ACText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tP2Battleshiphealth = new Texture(p2BSText, "ARCADE.ttf", 32, { 200, 0, 0 });
 
 	mScoreBoard->Parent(this);
 
@@ -185,6 +191,7 @@ ScoreBoard::~ScoreBoard()
 
 void ScoreBoard::Update()
 {
+	
 }
 
 void ScoreBoard::Render()

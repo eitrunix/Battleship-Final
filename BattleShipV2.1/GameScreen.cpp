@@ -11,14 +11,21 @@ GameScreen::GameScreen()
 	/// Play Area ///
 	mPlayerOneArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
 	mPlayerTwoArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
+	mInputArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.8);
 	Board = new Texture("BShipGrid.jpg");
 	Radar = new Texture("BShipGrid.jpg");
-
+	defaultText = new Texture(" ", "ARCADE.ttf", 32, { 200, 0, 0 });
+	invalidAttack = new Texture("Attack Again in a Valid Location", "ARCADE.ttf", 32, { 200, 0, 0 });
+	invalidPlacement = new Texture("Place in a Valid Location", "ARCADE.ttf", 32, { 200, 0, 0 });
 	// Player Boards
 	mPlayerOneArea->Parent(this);
 	mPlayerTwoArea->Parent(this);
+	mInputArea->Parent(this);
+
 	Board->Parent(mPlayerOneArea);
 	Radar->Parent(mPlayerTwoArea);
+	invalidAttack->Parent(mInputArea);
+	invalidPlacement->Parent(mInputArea);
 
 	pRadar->BoardPosSet(cBoatdYOffset, cBoardXOffset);
 	pBoard->BoardPosSet(pBoatdYOffset, pBoardXOffset);
@@ -26,7 +33,8 @@ GameScreen::GameScreen()
 	// Positions 
 	Board->Position(boardYPosOffset, boardXPosOffset);
 	Radar->Position(radarYPosOffset, boardXPosOffset);
-
+	invalidAttack->Position(0.0f, 20.0f);
+	invalidPlacement->Position(0.0f, 20.0f);
 	bState = BoardState::MakeAttack;
 }
 
@@ -58,6 +66,7 @@ GameScreen::~GameScreen()
 
 void GameScreen::Update()
 {
+	mScoreBoard->GetName();
 	switch (bState)
 	{
 		//case BoardState::Title:
@@ -87,6 +96,7 @@ void GameScreen::Update()
 				}
 				else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
 				{
+					defaultText = invalidPlacement;
 					std::cout << "Cant Place that there" << std::endl;
 				}
 
@@ -126,6 +136,7 @@ void GameScreen::Update()
 			}
 			else
 			{
+				defaultText = invalidAttack;
 				std::cout << "Attack Again in a Valid Location" << std::endl;
 			}
 		}
@@ -151,7 +162,9 @@ void GameScreen::Update()
 			}
 			else
 			{
+				defaultText = invalidAttack;
 				std::cout << "Attack Again in a Valid Location" << std::endl;
+				
 			}
 
 		}
@@ -165,5 +178,6 @@ void GameScreen::Render()
 	mScoreBoard->Render();
 	pBoard->Render();
 	pRadar->Render();
-
+	defaultText->Render();
 }
+

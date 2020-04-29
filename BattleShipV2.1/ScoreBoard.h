@@ -16,7 +16,7 @@ private:
 	GameEntity* mP1Score;
 	GameEntity* mP2Score;
 
-	Texture* scBackground;
+	//Texture* scBackground;
 
 	//Text Names
 	Texture* P1Name;
@@ -50,6 +50,26 @@ private:
 	Texture* tP2ACCarrierhealth;
 	Texture* tP2Battleshiphealth;
 
+	int p1PBH = 2, p2PBH = 2;
+	int p1SubH = 3, p2SubH = 3;
+	int p1CruH = 3, p2CruH = 3;
+	int p1ACH = 4, p2ACH = 4;
+	int p1BSH = 5, p2BSH = 5;
+
+	std::string p1PBText = std::to_string(p1PBH);
+	std::string p1SubText = std::to_string(p1SubH);
+	std::string p1CruText = std::to_string(p1CruH);
+	std::string p1ACText = std::to_string(p1ACH);
+	std::string p1BSText = std::to_string(p1BSH);
+
+	std::string p2PBText = std::to_string(p2PBH);
+	std::string p2SubText = std::to_string(p2SubH);
+	std::string p2CruText = std::to_string(p2CruH);
+	std::string p2ACText = std::to_string(p2ACH);
+	std::string p2BSText = std::to_string(p2BSH);
+
+	std::string name;
+
 public:
 	ScoreBoard();
 	~ScoreBoard();
@@ -60,6 +80,8 @@ public:
 	static ScoreBoard* Instance();
 	static void Release();
 
+	void SetName();
+	std::string GetName();
 };
 
 #endif // __SCOREBOARD_H
