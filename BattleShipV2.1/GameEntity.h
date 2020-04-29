@@ -1,7 +1,7 @@
 #ifndef __GAMEENTITY_H
 #define __GAMEENTITY_H
 #include "MathHelper.h"
-
+#include "LinkList.h"
 namespace SDLFramework {
 
 	class GameEntity

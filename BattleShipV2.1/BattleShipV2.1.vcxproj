@@ -186,6 +186,7 @@ xcopy "$(ProjectDir)..\Assets\*" "$(OutDir)Assets\" /y /s</Command>
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LinkList.h" />
     <ClInclude Include="MathHelper.h" />
     <ClInclude Include="MouseControl.h" />
     <ClInclude Include="Piece.h" />

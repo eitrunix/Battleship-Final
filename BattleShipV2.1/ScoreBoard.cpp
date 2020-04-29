@@ -9,19 +9,12 @@ ScoreBoard* ScoreBoard::Instance()
 	}
 	return sInstance;
 }
-void ScoreBoard::SetName()
-{
-	std::cin >> name;
-}
-std::string ScoreBoard::GetName()
-{
-	return name;
-}
 
 ScoreBoard::ScoreBoard()
 {
 
 	/// Scoreboard ///
+	mPlayerManager = PlayerManager::Instance();
 
 	mScoreBoard = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, 80.0f);
 	mP1Score = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
@@ -124,6 +117,57 @@ ScoreBoard::ScoreBoard()
 
 }
 
+void ScoreBoard::UpdateHealth()
+{
+	mPlayerManager->ResetItr_Player();
+	mPlayerManager->itr = mPlayerManager->pieces.begin();
+	Piece* p = *mPlayerManager->itr;
+
+	for (mPlayerManager->itr; mPlayerManager->itr != nullptr; mPlayerManager->itr++)
+	{
+		if (p->ID == 1)
+		{
+			std::cout << p->name << std::endl;
+			std::cout << p->health << std::endl;
+			std::cout << p->ID << std::endl;
+
+		    int tempNum = p->health;
+			std::to_string(tempNum) = p1PBText;
+		}
+		if (p->ID == 2)
+		{
+			std::cout << p->name << std::endl;
+			std::cout << p->health << std::endl;
+			std::cout << p->ID << std::endl;
+			p1SubText = p->health;
+		}
+		if (p->ID == 3)
+		{
+			std::cout << p->name << std::endl;
+			std::cout << p->health << std::endl;
+			std::cout << p->ID << std::endl;
+
+			p1CruText = p->health;
+		}
+		if (p->ID == 4)
+		{
+			std::cout << p->name << std::endl;
+			std::cout << p->health << std::endl;
+			std::cout << p->ID << std::endl;
+
+			p1ACText = p->health;
+		}
+		if (p->ID == 5)
+		{
+			std::cout << p->name << std::endl;
+			std::cout << p->health << std::endl;
+			std::cout << p->ID << std::endl;
+
+			p1BSText = p->health;
+		}
+
+	}
+}
 ScoreBoard::~ScoreBoard()
 {
 	delete mScoreBoard;
@@ -156,6 +200,9 @@ ScoreBoard::~ScoreBoard()
 
 	delete P1Name;
 	delete P2Name;
+	delete mPlayerManager;
+
+	mPlayerManager = nullptr;
 
 	P1Name = nullptr;
 	P2Name = nullptr;
@@ -191,7 +238,6 @@ ScoreBoard::~ScoreBoard()
 
 void ScoreBoard::Update()
 {
-	
 }
 
 void ScoreBoard::Render()
@@ -227,8 +273,4 @@ void ScoreBoard::Render()
 	tP2Battleshiphealth->Render();
 
 }
-void ScoreBoard::Release()
-{
-	delete sInstance;
-	sInstance = nullptr;
-}
+

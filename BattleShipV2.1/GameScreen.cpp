@@ -7,7 +7,6 @@ GameScreen::GameScreen()
 	mScoreBoard = ScoreBoard::Instance();
 	pBoard = new BattleshipBoard();
 	pRadar = new BattleshipBoard();
-
 	/// Play Area ///
 	mPlayerOneArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
 	mPlayerTwoArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
@@ -17,6 +16,8 @@ GameScreen::GameScreen()
 	defaultText = new Texture(" ", "ARCADE.ttf", 32, { 200, 0, 0 });
 	invalidAttack = new Texture("Attack Again in a Valid Location", "ARCADE.ttf", 32, { 200, 0, 0 });
 	invalidPlacement = new Texture("Place in a Valid Location", "ARCADE.ttf", 32, { 200, 0, 0 });
+
+
 	// Player Boards
 	mPlayerOneArea->Parent(this);
 	mPlayerTwoArea->Parent(this);
@@ -54,7 +55,6 @@ GameScreen::~GameScreen()
 	delete mScoreBoard;
 	delete pBoard;
 	delete pRadar;
-
 	mScoreBoard = nullptr;
 	mPlayerOneArea = nullptr;
 	mPlayerTwoArea = nullptr;
@@ -66,7 +66,6 @@ GameScreen::~GameScreen()
 
 void GameScreen::Update()
 {
-	mScoreBoard->GetName();
 	switch (bState)
 	{
 		//case BoardState::Title:
@@ -102,6 +101,8 @@ void GameScreen::Update()
 
 				bState = BoardState::MakeAttack;
 		}
+	
+
 	case BoardState::MakeAttack:
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
@@ -139,6 +140,8 @@ void GameScreen::Update()
 				defaultText = invalidAttack;
 				std::cout << "Attack Again in a Valid Location" << std::endl;
 			}
+			mScoreBoard->UpdateHealth();
+			mScoreBoard->Update();
 		}
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Right))
@@ -170,7 +173,6 @@ void GameScreen::Update()
 		}
 
 	}
-
 }
 
 void GameScreen::Render()

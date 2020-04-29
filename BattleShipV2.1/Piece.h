@@ -10,7 +10,7 @@ public:
 	~Piece();
 	int health = 0;
 	bool hit = false;
-
+	int ID = 0;
 	std::string name;
 	std::string PiecePlaceText;
 	std::string PieceHitText;
@@ -28,6 +28,7 @@ public:
 	void AssignTile() override;
 	Texture* BoatImage;
 
+
 };
 
 class Submarine : public Piece
@@ -38,6 +39,8 @@ public:
 	void OnHit() override;
 	void AssignTile() override;
 	Texture* BoatImage;
+
+
 };
 
 class Cruiser : public Piece
@@ -48,6 +51,8 @@ public:
 	void OnHit() override;
 	void AssignTile() override;
 	Texture* BoatImage;
+
+
 };
 
 class AircraftCarrier : public Piece
@@ -58,6 +63,8 @@ public:
 	void OnHit() override;
 	void AssignTile() override;
 	Texture* BoatImage;
+
+
 };
 
 class Battleship : public Piece
@@ -68,5 +75,7 @@ public:
 	void OnHit() override;
 	void AssignTile() override;
 	Texture* BoatImage;
+
+
 };
 

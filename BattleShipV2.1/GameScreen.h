@@ -5,7 +5,6 @@
 #include "InputManager.h"
 #include "ScoreBoard.h"
 #include "Board.h"
-
 using namespace SDLFramework;
 
 class GameScreen : public GameEntity
@@ -22,6 +21,7 @@ private:
 	InputManager* mInputManager;
 	BattleshipBoard* pBoard;
 	BattleshipBoard* pRadar;
+
 	// Screen Entities 
 	ScoreBoard* mScoreBoard;
 	GameEntity* mPlayerOneArea;
@@ -46,6 +46,9 @@ public:
 	void Update() override;
 	void Render() override;
 	void changeBoardState(BoardState newState);
+	void PlayerPlaceShips();
+	void AIPlaceShips();
+
 	BoardState bState;
 
 	Vector2 mousePos;
