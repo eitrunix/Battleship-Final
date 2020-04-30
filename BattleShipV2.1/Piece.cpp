@@ -5,8 +5,6 @@
 
 using namespace SDLFramework;
 
-//// !!!!!!!!!!! Sprites/Images are not set up, I dont have the asset yet, right now each hitpoint texture is an entire sprite sheet for placeholder stuff !!!!!!!!!!!
-
 
 PatrolBoat::PatrolBoat()
 {
@@ -143,6 +141,11 @@ void Battleship::AssignTile()
 {
 }
 
+
+int Piece::GetHealth()
+{
+	return health;
+}
 
 void Piece::OnHit()
 {

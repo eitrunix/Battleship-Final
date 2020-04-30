@@ -36,6 +36,7 @@ ScoreBoard::ScoreBoard()
 	sbP2Submarine = new Texture("Submarine.png");
 	sbP2ACCarrier = new Texture("AircraftCarrier.png");
 	sbP2BattleShip = new Texture("BattleShip.png");
+
 	tPatrolBoathealth = new Texture(p1PBText, "ARCADE.ttf", 32, { 200, 0, 0 });
 	tSubhealth = new Texture(p1SubText, "ARCADE.ttf", 32, { 200, 0, 0 });
 	tCruiserhealth = new Texture(p1CruText, "ARCADE.ttf", 32, { 200, 0, 0 });
@@ -50,6 +51,17 @@ ScoreBoard::ScoreBoard()
 
 	mScoreBoard->Parent(this);
 
+	p1PBText = std::to_string(p1PBH);
+	p1SubText = std::to_string(p1SubH);
+	p1CruText = std::to_string(p1CruH);
+	p1ACText = std::to_string(p1ACH);
+	p1BSText = std::to_string(p1BSH);
+
+	p2PBText = std::to_string(p2PBH);
+	p2SubText = std::to_string(p2SubH);
+	p2CruText = std::to_string(p2CruH);
+	p2ACText = std::to_string(p2ACH);
+	p2BSText = std::to_string(p2BSH);
 	mP1Score->Parent(mScoreBoard);
 	mP2Score->Parent(mScoreBoard);
 
@@ -119,54 +131,29 @@ ScoreBoard::ScoreBoard()
 
 void ScoreBoard::UpdateHealth()
 {
-	mPlayerManager->ResetItr_Player();
-	mPlayerManager->itr = mPlayerManager->pieces.begin();
-	Piece* p = *mPlayerManager->itr;
+	p1PBH = mPlayerManager->patrolBoat->GetHealth();
+	p1SubH = mPlayerManager->submarine->GetHealth();
+	p1CruH = mPlayerManager->cruiser->GetHealth();
+	p1ACH = mPlayerManager->aircraftCarrier->GetHealth();
+	p1BSH = mPlayerManager->battleship->GetHealth();
 
-	for (mPlayerManager->itr; mPlayerManager->itr != nullptr; mPlayerManager->itr++)
-	{
-		if (p->ID == 1)
-		{
-			std::cout << p->name << std::endl;
-			std::cout << p->health << std::endl;
-			std::cout << p->ID << std::endl;
+	p2PBH = mPlayerManager->aipatrolBoat->GetHealth();
+	p2SubH = mPlayerManager->aisubmarine->GetHealth();
+	p2CruH = mPlayerManager->aicruiser->GetHealth();
+	p2ACH = mPlayerManager->aiaircraftCarrier->GetHealth();
+	p2BSH = mPlayerManager->aibattleship->GetHealth();
 
-		    int tempNum = p->health;
-			std::to_string(tempNum) = p1PBText;
-		}
-		if (p->ID == 2)
-		{
-			std::cout << p->name << std::endl;
-			std::cout << p->health << std::endl;
-			std::cout << p->ID << std::endl;
-			p1SubText = p->health;
-		}
-		if (p->ID == 3)
-		{
-			std::cout << p->name << std::endl;
-			std::cout << p->health << std::endl;
-			std::cout << p->ID << std::endl;
 
-			p1CruText = p->health;
-		}
-		if (p->ID == 4)
-		{
-			std::cout << p->name << std::endl;
-			std::cout << p->health << std::endl;
-			std::cout << p->ID << std::endl;
-
-			p1ACText = p->health;
-		}
-		if (p->ID == 5)
-		{
-			std::cout << p->name << std::endl;
-			std::cout << p->health << std::endl;
-			std::cout << p->ID << std::endl;
-
-			p1BSText = p->health;
-		}
-
-	}
+	std::cout << p1PBText << std::endl;
+	std::cout << p1SubText << std::endl;
+	std::cout << p1CruText << std::endl;
+	std::cout << p1ACText << std::endl;
+	std::cout << p1BSText << std::endl;
+	std::cout << p2PBText << std::endl;
+	std::cout << p2SubText << std::endl;
+	std::cout << p2CruText << std::endl;
+	std::cout << p2ACText << std::endl;
+	std::cout << p2BSText << std::endl;
 }
 ScoreBoard::~ScoreBoard()
 {
@@ -238,6 +225,8 @@ ScoreBoard::~ScoreBoard()
 
 void ScoreBoard::Update()
 {
+		UpdateHealth();
+
 }
 
 void ScoreBoard::Render()

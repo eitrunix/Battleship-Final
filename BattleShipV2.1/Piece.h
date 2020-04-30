@@ -15,6 +15,7 @@ public:
 	std::string PiecePlaceText;
 	std::string PieceHitText;
 
+	int GetHealth();
 	virtual void OnHit();
 	virtual void AssignTile();
 };

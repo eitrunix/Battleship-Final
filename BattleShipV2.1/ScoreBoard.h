@@ -53,26 +53,25 @@ private:
 	Texture* tP2ACCarrierhealth;
 	Texture* tP2Battleshiphealth;
 
-	int p1PBH = 00, p2PBH = 00;
-	int p1SubH = 00, p2SubH = 00;
-	int p1CruH = 00, p2CruH = 00;
-	int p1ACH = 00, p2ACH = 00;
-	int p1BSH = 00, p2BSH = 00;
+	int p1PBH, p2PBH;
+	int p1SubH, p2SubH;
+	int p1CruH, p2CruH;
+	int p1ACH, p2ACH;
+	int p1BSH, p2BSH;
 public:
 
-	std::string p1PBText = std::to_string(p1PBH);
-	std::string p1SubText = std::to_string(p1SubH);
-	std::string p1CruText = std::to_string(p1CruH);
-	std::string p1ACText = std::to_string(p1ACH);
-	std::string p1BSText = std::to_string(p1BSH);
+	std::string p1PBText;
+	std::string p1SubText;
+	std::string p1CruText;
+	std::string p1ACText;
+	std::string p1BSText;
 
-	std::string p2PBText = std::to_string(p2PBH);
-	std::string p2SubText = std::to_string(p2SubH);
-	std::string p2CruText = std::to_string(p2CruH);
-	std::string p2ACText = std::to_string(p2ACH);
-	std::string p2BSText = std::to_string(p2BSH);
-
-
+	std::string p2PBText;
+	std::string p2SubText;
+	std::string p2CruText;
+	std::string p2ACText;
+	std::string p2BSText;
+		
 
 	ScoreBoard();
 	~ScoreBoard();

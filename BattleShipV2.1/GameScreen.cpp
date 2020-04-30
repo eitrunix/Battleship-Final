@@ -66,6 +66,7 @@ GameScreen::~GameScreen()
 
 void GameScreen::Update()
 {
+	mScoreBoard->Update();
 	switch (bState)
 	{
 		//case BoardState::Title:
@@ -107,6 +108,7 @@ void GameScreen::Update()
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
+			mScoreBoard->UpdateHealth();
 			mousePos = mInputManager->MousePosition() * (boardSize);
 			int xOffset = rOffsetX;
 			int yOffset = pOffsetY;
@@ -140,8 +142,6 @@ void GameScreen::Update()
 				defaultText = invalidAttack;
 				std::cout << "Attack Again in a Valid Location" << std::endl;
 			}
-			mScoreBoard->UpdateHealth();
-			mScoreBoard->Update();
 		}
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Right))
