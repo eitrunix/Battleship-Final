@@ -117,6 +117,9 @@
     <ClCompile Include="GameOverScreen.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Source Files\BattleShip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEntity.h">
@@ -184,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="LinkList.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Header Files\BattleShip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

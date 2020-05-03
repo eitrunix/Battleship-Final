@@ -37,31 +37,20 @@ ScoreBoard::ScoreBoard()
 	sbP2ACCarrier = new Texture("AircraftCarrier.png");
 	sbP2BattleShip = new Texture("BattleShip.png");
 
-	tPatrolBoathealth = new Texture(p1PBText, "ARCADE.ttf", 32, { 200, 0, 0 });
-	tSubhealth = new Texture(p1SubText, "ARCADE.ttf", 32, { 200, 0, 0 });
-	tCruiserhealth = new Texture(p1CruText, "ARCADE.ttf", 32, { 200, 0, 0 });
-	tACCarrierhealth = new Texture(p1ACText, "ARCADE.ttf", 32, { 200, 0, 0 });
-	tBattleshiphealth = new Texture(p1BSText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tPatrolBoathealth = new Health();
+	tSubhealth = new Health();
+	tCruiserhealth = new Health();
+	tACCarrierhealth = new Health();
+	tBattleshiphealth = new Health();
 
-	tP2PatrolBoathealth = new Texture(p2PBText, "ARCADE.ttf", 32, { 200, 0, 0 });
-	tP2Subhealth = new Texture(p2SubText, "ARCADE.ttf", 32, { 200, 0, 0 });
-	tP2Cruiserhealth = new Texture(p2CruText, "ARCADE.ttf", 32, { 200, 0, 0 });
-	tP2ACCarrierhealth = new Texture(p2ACText, "ARCADE.ttf", 32, { 200, 0, 0 });
-	tP2Battleshiphealth = new Texture(p2BSText, "ARCADE.ttf", 32, { 200, 0, 0 });
+	tP2PatrolBoathealth = new Health();
+	tP2Subhealth = new Health();
+	tP2Cruiserhealth = new Health();
+	tP2ACCarrierhealth = new Health();
+	tP2Battleshiphealth = new Health();
 
 	mScoreBoard->Parent(this);
 
-	p1PBText = std::to_string(p1PBH);
-	p1SubText = std::to_string(p1SubH);
-	p1CruText = std::to_string(p1CruH);
-	p1ACText = std::to_string(p1ACH);
-	p1BSText = std::to_string(p1BSH);
-
-	p2PBText = std::to_string(p2PBH);
-	p2SubText = std::to_string(p2SubH);
-	p2CruText = std::to_string(p2CruH);
-	p2ACText = std::to_string(p2ACH);
-	p2BSText = std::to_string(p2BSH);
 	mP1Score->Parent(mScoreBoard);
 	mP2Score->Parent(mScoreBoard);
 
@@ -126,7 +115,7 @@ ScoreBoard::ScoreBoard()
 	tP2Cruiserhealth->Position(-150.0f, 5);
 	tP2ACCarrierhealth->Position(-150.0f, 5);
 	tP2Battleshiphealth->Position(-150.0f, 5);
-
+	UpdateHealth();
 }
 
 void ScoreBoard::UpdateHealth()
@@ -143,17 +132,17 @@ void ScoreBoard::UpdateHealth()
 	p2ACH = mPlayerManager->aiaircraftCarrier->GetHealth();
 	p2BSH = mPlayerManager->aibattleship->GetHealth();
 
+	tPatrolBoathealth->SetHealth(p1PBH);
+	tSubhealth->SetHealth(p1SubH);
+	tCruiserhealth->SetHealth(p1CruH);
+	tACCarrierhealth->SetHealth(p1ACH);
+	tBattleshiphealth->SetHealth(p1BSH);
 
-	std::cout << p1PBText << std::endl;
-	std::cout << p1SubText << std::endl;
-	std::cout << p1CruText << std::endl;
-	std::cout << p1ACText << std::endl;
-	std::cout << p1BSText << std::endl;
-	std::cout << p2PBText << std::endl;
-	std::cout << p2SubText << std::endl;
-	std::cout << p2CruText << std::endl;
-	std::cout << p2ACText << std::endl;
-	std::cout << p2BSText << std::endl;
+	tP2PatrolBoathealth->SetHealth(p2PBH);
+	tP2Subhealth->SetHealth(p2SubH);
+	tP2Cruiserhealth->SetHealth(p2CruH);
+	tP2ACCarrierhealth->SetHealth(p2ACH);
+	tP2Battleshiphealth->SetHealth(p2BSH);
 }
 ScoreBoard::~ScoreBoard()
 {
@@ -225,8 +214,6 @@ ScoreBoard::~ScoreBoard()
 
 void ScoreBoard::Update()
 {
-		UpdateHealth();
-
 }
 
 void ScoreBoard::Render()

@@ -3,8 +3,8 @@
 #define __SCOREBOARD_H
 
 #include "AnimatedTexture.h" 
+#include "Health.h"
 #include "PlayerManager.h"
-
 using namespace SDLFramework;
 
 class ScoreBoard : public GameEntity
@@ -40,18 +40,18 @@ private:
 	Texture* sbP2BattleShip;
 
 	// Text Player Boats Health
-	Texture* tPatrolBoathealth;
-	Texture* tSubhealth;
-	Texture* tCruiserhealth;
-	Texture* tACCarrierhealth;
-	Texture* tBattleshiphealth;
+	Health* tPatrolBoathealth;
+	Health* tSubhealth;
+	Health* tCruiserhealth;
+	Health* tACCarrierhealth;
+	Health* tBattleshiphealth;
 
 	// Text AI Boats Health
-	Texture* tP2PatrolBoathealth;
-	Texture* tP2Subhealth;
-	Texture* tP2Cruiserhealth;
-	Texture* tP2ACCarrierhealth;
-	Texture* tP2Battleshiphealth;
+	Health* tP2PatrolBoathealth;
+	Health* tP2Subhealth;
+	Health* tP2Cruiserhealth;
+	Health* tP2ACCarrierhealth;
+	Health* tP2Battleshiphealth;
 
 	int p1PBH, p2PBH;
 	int p1SubH, p2SubH;
