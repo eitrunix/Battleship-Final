@@ -12,7 +12,6 @@ class ScoreBoard : public GameEntity
 private:
 	static ScoreBoard* sInstance;
 
-	PlayerManager* mPlayerManager;
 
 	GameEntity* mScoreBoard;
 
@@ -59,25 +58,14 @@ private:
 	int p1ACH, p2ACH;
 	int p1BSH, p2BSH;
 public:
-
-	std::string p1PBText;
-	std::string p1SubText;
-	std::string p1CruText;
-	std::string p1ACText;
-	std::string p1BSText;
-
-	std::string p2PBText;
-	std::string p2SubText;
-	std::string p2CruText;
-	std::string p2ACText;
-	std::string p2BSText;
-		
+	PlayerManager* mPlayerManager;
 
 	ScoreBoard();
 	~ScoreBoard();
 
 	void Update() override;
 	void Render() override;
+	void SetHealth();
 	void UpdateHealth();
 	static ScoreBoard* Instance();
 	static void Release();

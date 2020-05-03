@@ -16,6 +16,7 @@ public:
 
 	void SetHealth(int health);
 	void Render();
+
 private:
 	void ClearHealth();
 

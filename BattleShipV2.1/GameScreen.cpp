@@ -66,7 +66,6 @@ GameScreen::~GameScreen()
 
 void GameScreen::Update()
 {
-	mScoreBoard->Update();
 	switch (bState)
 	{
 		//case BoardState::Title:
@@ -108,7 +107,6 @@ void GameScreen::Update()
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
-			mScoreBoard->UpdateHealth();
 			mousePos = mInputManager->MousePosition() * (boardSize);
 			int xOffset = rOffsetX;
 			int yOffset = pOffsetY;
@@ -160,7 +158,8 @@ void GameScreen::Update()
 			{
 				if (bState == BoardState::MakeAttack)
 				{
-					pRadar->SetTileOccupied(xIndex, yIndex, true);
+					mScoreBoard->mPlayerManager->aipatrolBoat->OnHit();
+					std::cout << mScoreBoard->mPlayerManager->aipatrolBoat->health << std::endl;
 				}
 			}
 			else

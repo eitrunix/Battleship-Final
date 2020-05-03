@@ -37,6 +37,8 @@ private:
 	Texture* invalidAttack;
 	Texture* invalidPlacement;
 
+	//Board Icons
+	Texture* boat1;
 
 
 public:
@@ -46,8 +48,10 @@ public:
 	void Update() override;
 	void Render() override;
 	void changeBoardState(BoardState newState);
-	void PlayerPlaceShips();
-	void AIPlaceShips();
+	void PlayerPlaceShips(int x, int y);
+	void AIPlaceShips(int x, int y);
+	void HorzorVert();
+
 
 	BoardState bState;
 

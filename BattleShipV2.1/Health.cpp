@@ -58,3 +58,4 @@ void Health::ClearHealth()
 	}
 	mScore.clear();
 }
+
