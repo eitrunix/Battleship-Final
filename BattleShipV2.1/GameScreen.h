@@ -15,6 +15,7 @@ private:
 		Title,
 		PlaceShips,
 		MakeAttack,
+		AIAttack,
 	};
 
 	Timer* mTimer;
@@ -39,15 +40,16 @@ private:
 
 	//Board Icons
 	Texture* boat1;
-	bool validAttack;
-
+	bool validAttack = false;
+	bool allShipsPlaced = false;
+	int playerShips = 0;
 public:
 	GameScreen();
 	~GameScreen();
 	
 	void Update() override;
 	void Render() override;
-	void changeBoardState(BoardState newState);
+	void ChangeBoardState(BoardState newState);
 	void PlayerPlaceShips(int x, int y);
 	void AIPlaceShips(int x, int y);
 	void HorzorVert();

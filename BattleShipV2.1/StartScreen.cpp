@@ -120,7 +120,7 @@ StartScreen::~StartScreen()
 
 void StartScreen::Update()
 {
-	if (mInputManager->KeyPressed(SDL_SCANCODE_RETURN))
+	if (mInputManager->KeyPressed(SDL_SCANCODE_RETURN) && displayInstructions == false)
 	{
 		PlayGame = true;
 	}

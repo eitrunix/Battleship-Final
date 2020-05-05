@@ -17,6 +17,9 @@ GameScreen::GameScreen()
 	invalidAttack = new Texture("Attack Again in a Valid Location", "ARCADE.ttf", 32, { 200, 0, 0 });
 	invalidPlacement = new Texture("Place in a Valid Location", "ARCADE.ttf", 32, { 200, 0, 0 });
 
+	validAttack = false;
+	allShipsPlaced = false;
+	playerShips = 0;
 
 	// Player Boards
 	mPlayerOneArea->Parent(this);
@@ -36,11 +39,11 @@ GameScreen::GameScreen()
 	Radar->Position(radarYPosOffset, boardXPosOffset);
 	invalidAttack->Position(0.0f, 20.0f);
 	invalidPlacement->Position(0.0f, 20.0f);
-	bState = BoardState::PlaceShips;
+	ChangeBoardState(BoardState::PlaceShips);
 }
 
 
-void GameScreen::changeBoardState(BoardState newState)
+void GameScreen::ChangeBoardState(BoardState newState)
 {
 	bState = newState;
 }
@@ -83,6 +86,11 @@ GameScreen::~GameScreen()
 
 void GameScreen::Update()
 {
+	if (playerShips == 5)
+	{
+		allShipsPlaced = true;
+	}
+
 	switch (bState)
 	{
 		//case BoardState::Title:
@@ -95,12 +103,11 @@ void GameScreen::Update()
 			MousePos(pOffsetX);
 			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
 			{
-				if (bState == BoardState::PlaceShips)
-
+				if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
 				{
 					pBoard->ChangeTile(xIndex, yIndex, true);
-					validAttack = true;
-
+					playerShips++;
+					std::cout << playerShips << std::endl;
 				}
 				else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
 				{
@@ -108,16 +115,15 @@ void GameScreen::Update()
 					std::cout << "Cant Place that there" << std::endl;
 				}
 			}
-				
-		}
-		if (validAttack == true)
-		{
-			bState = BoardState::MakeAttack;
-			validAttack = false;
-			break;
-		}
-		
 
+		}
+		if (allShipsPlaced)
+		{
+			ChangeBoardState(BoardState::MakeAttack);
+			allShipsPlaced = false;
+		}
+
+		break;
 	case BoardState::MakeAttack:
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
@@ -148,12 +154,19 @@ void GameScreen::Update()
 		}
 		if (validAttack == true)
 		{
-			bState = BoardState::PlaceShips;
+			ChangeBoardState(BoardState::AIAttack);
 			validAttack = false;
-			break;
 
 		}
+		break;
+
+	case BoardState::AIAttack:
+		std::cout << "AI Attacked randomly" << std::endl; 
+		ChangeBoardState(BoardState::MakeAttack);
+		break;
+
 	}
+
 }
 
 void GameScreen::Render()
