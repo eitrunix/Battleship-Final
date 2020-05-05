@@ -22,7 +22,7 @@ private:
 	InputManager* mInputManager;
 	BattleshipBoard* pBoard;
 	BattleshipBoard* pRadar;
-
+	PlayerManager* mPlayerManager;
 	// Screen Entities 
 	ScoreBoard* mScoreBoard;
 	GameEntity* mPlayerOneArea;
@@ -40,9 +40,17 @@ private:
 
 	//Board Icons
 	Texture* boat1;
-	bool validAttack = false;
+
+	// Plaing Ships Vairables
 	bool allShipsPlaced = false;
 	int playerShips = 0;
+	bool horizontal = false;
+
+	// Attacking Variables
+	bool validAttack = false;
+
+	// AI Variables
+
 public:
 	GameScreen();
 	~GameScreen();
@@ -57,6 +65,9 @@ public:
 	bool sGameOver = false;
 	BoardState bState;
 
+	LinkList<Piece*>::Iterator Itr;
+
+	// Mouse Grid Position Varables
 	Vector2 mousePos;
 	int mouseX;
 	int mouseY;
@@ -74,12 +85,11 @@ public:
 	float radarYPosOffset = 230.0f;
 	int xIndex;
 	int yIndex;
+
 	int gridWidth = 430, gridHeight = 430;
 	int rows = 10, cols = 10;
 
-	int pOffsetX = 690, pOffsetY = 2750;
-
-	int rOffsetX = 5280;
+	int pOffsetX = 690, pOffsetY = 2750, rOffsetX = 5280;
 };
 
 #endif // __GAMESCREEN_H

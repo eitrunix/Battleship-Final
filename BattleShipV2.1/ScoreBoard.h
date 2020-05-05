@@ -48,6 +48,9 @@ private:
 	Health* tP2Cruiserhealth;
 	Health* tP2ACCarrierhealth;
 	Health* tP2Battleshiphealth;
+
+	LinkList<Piece*>::Iterator scoreboardItr;
+
 public:
 	PlayerManager* mPlayerManager;
 

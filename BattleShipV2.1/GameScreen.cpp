@@ -42,48 +42,6 @@ GameScreen::GameScreen()
 	ChangeBoardState(BoardState::PlaceShips);
 }
 
-
-void GameScreen::ChangeBoardState(BoardState newState)
-{
-	bState = newState;
-}
-
-void GameScreen::MousePos(int offset)
-{
-	mousePos = mInputManager->MousePosition() * (boardSize);
-	int xOffset = offset;
-	int yOffset = pOffsetY;
-
-	float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
-	float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
-
-	xIndex = (newPosX / (gridWidth * cols)) * cols;
-	yIndex = (newPosY / (gridHeight * rows)) * rows;
-
-	std::cout << xIndex << " = X " << std::endl;
-	std::cout << yIndex << " = Y " << std::endl;
-
-}
-
-GameScreen::~GameScreen()
-{
-
-	delete mPlayerOneArea;
-	delete mPlayerTwoArea;
-	delete Board;
-	delete Radar;
-	delete mScoreBoard;
-	delete pBoard;
-	delete pRadar;
-	mScoreBoard = nullptr;
-	mPlayerOneArea = nullptr;
-	mPlayerTwoArea = nullptr;
-	Board = nullptr;
-	Radar = nullptr;
-	pBoard = nullptr;
-	pRadar = nullptr;
-}
-
 void GameScreen::Update()
 {
 	if (playerShips == 5)
@@ -99,21 +57,10 @@ void GameScreen::Update()
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
-
 			MousePos(pOffsetX);
 			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
 			{
-				if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
-				{
-					pBoard->ChangeTile(xIndex, yIndex, true);
-					playerShips++;
-					std::cout << playerShips << std::endl;
-				}
-				else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
-				{
-					defaultText = invalidPlacement;
-					std::cout << "Cant Place that there" << std::endl;
-				}
+				PlayerPlaceShips(xIndex, yIndex);
 			}
 
 		}
@@ -169,6 +116,64 @@ void GameScreen::Update()
 
 }
 
+void GameScreen::PlayerPlaceShips(int x, int y)
+{
+
+	if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
+	{
+		int pieceHealth = 5;
+		if (horizontal)
+		{
+			for (int i = 0; i < pieceHealth; i++)
+			{
+				pBoard->SetTileOccupied(xIndex, yIndex, true);
+				pBoard->ChangeTile(xIndex, yIndex, true);
+				xIndex++;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < pieceHealth; i++)
+			{
+				pBoard->SetTileOccupied(xIndex, yIndex, true);
+				pBoard->ChangeTile(xIndex, yIndex, true);
+				yIndex++;
+			}
+
+		}
+		playerShips++;
+		horizontal = true;
+		std::cout << playerShips << std::endl;
+	}
+	else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
+	{
+		defaultText = invalidPlacement;
+		std::cout << "Cant Place that there" << std::endl;
+	}
+}
+
+void GameScreen::ChangeBoardState(BoardState newState)
+{
+	bState = newState;
+}
+
+void GameScreen::MousePos(int offset)
+{
+	mousePos = mInputManager->MousePosition() * (boardSize);
+	int xOffset = offset;
+	int yOffset = pOffsetY;
+
+	float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
+	float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
+
+	xIndex = (newPosX / (gridWidth * cols)) * cols;
+	yIndex = (newPosY / (gridHeight * rows)) * rows;
+
+	std::cout << xIndex << " = X " << std::endl;
+	std::cout << yIndex << " = Y " << std::endl;
+
+}
+
 void GameScreen::Render()
 {
 	mScoreBoard->Render();
@@ -177,3 +182,21 @@ void GameScreen::Render()
 	defaultText->Render();
 }
 
+GameScreen::~GameScreen()
+{
+
+	delete mPlayerOneArea;
+	delete mPlayerTwoArea;
+	delete Board;
+	delete Radar;
+	delete mScoreBoard;
+	delete pBoard;
+	delete pRadar;
+	mScoreBoard = nullptr;
+	mPlayerOneArea = nullptr;
+	mPlayerTwoArea = nullptr;
+	Board = nullptr;
+	Radar = nullptr;
+	pBoard = nullptr;
+	pRadar = nullptr;
+}

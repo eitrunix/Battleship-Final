@@ -109,18 +109,60 @@ ScoreBoard::ScoreBoard()
 }
 void ScoreBoard::SetHealth()
 {
+	scoreboardItr = mPlayerManager->pieces.begin();
+	for (scoreboardItr; scoreboardItr != nullptr; scoreboardItr++)
+	{
+		Piece* p = *scoreboardItr;
+		if (p->name == "PatrolBoat")
+		{
+			tPatrolBoathealth->SetHealth(p->GetHealth());
+		}
+		if (p->name == "Submarine")
+		{
+			tSubhealth->SetHealth(p->health); ;
+		}
+		if (p->name == "Cruiser")
+		{
+			tCruiserhealth->SetHealth(p->GetHealth());
 
-	tPatrolBoathealth->SetHealth(mPlayerManager->patrolBoat->GetHealth());
-	tSubhealth->SetHealth(mPlayerManager->submarine->GetHealth());
-	tCruiserhealth->SetHealth(mPlayerManager->cruiser->GetHealth());
-	tACCarrierhealth->SetHealth(mPlayerManager->aircraftCarrier->GetHealth());
-	tBattleshiphealth->SetHealth(mPlayerManager->battleship->GetHealth());
+		}
+		if (p->name == "AircraftCarrier")
+		{
+			tACCarrierhealth->SetHealth(p->GetHealth());
+		}
+		if (p->name == "Battleship")
+		{
+			tBattleshiphealth->SetHealth(p->GetHealth());
+		}
 
-	tP2PatrolBoathealth->SetHealth(mPlayerManager->aipatrolBoat->GetHealth());
-	tP2Subhealth->SetHealth(mPlayerManager->aisubmarine->GetHealth());
-	tP2Cruiserhealth->SetHealth(mPlayerManager->aicruiser->GetHealth());
-	tP2ACCarrierhealth->SetHealth(mPlayerManager->aiaircraftCarrier->GetHealth());
-	tP2Battleshiphealth->SetHealth(mPlayerManager->aibattleship->GetHealth());
+	}
+	scoreboardItr = mPlayerManager->Aipieces.begin();
+	for (scoreboardItr; scoreboardItr != nullptr; scoreboardItr++)
+	{
+		Piece* p = *scoreboardItr;
+		if (p->name == "PatrolBoat")
+		{
+			tP2PatrolBoathealth->SetHealth(p->GetHealth());
+		}
+		if (p->name == "Submarine")
+		{
+			tP2Subhealth->SetHealth(p->GetHealth());
+		}
+		if (p->name == "Cruiser")
+		{
+			tP2Cruiserhealth->SetHealth(p->GetHealth());
+
+		}
+		if (p->name == "AircraftCarrier")
+		{
+			tP2ACCarrierhealth->SetHealth(p->GetHealth());
+		}
+		if (p->name == "Battleship")
+		{
+			tP2Battleshiphealth->SetHealth(p->GetHealth());
+		}
+
+	}
 }
 
 ScoreBoard::~ScoreBoard()
