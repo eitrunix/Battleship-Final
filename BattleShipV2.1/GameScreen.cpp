@@ -4,7 +4,7 @@ GameScreen::GameScreen()
 {
 	mTimer = Timer::Instance();
 	mInputManager = InputManager::Instance();
-	mScoreBoard = ScoreBoard::Instance();
+	mScoreBoard = new ScoreBoard();
 	pBoard = new BattleshipBoard();
 	pRadar = new BattleshipBoard();
 	/// Play Area ///
@@ -160,6 +160,7 @@ void GameScreen::Update()
 				{
 					mScoreBoard->mPlayerManager->aipatrolBoat->OnHit();
 					std::cout << mScoreBoard->mPlayerManager->aipatrolBoat->health << std::endl;
+					mScoreBoard->SetHealth();
 				}
 			}
 			else

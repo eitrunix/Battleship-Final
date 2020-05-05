@@ -10,9 +10,6 @@ using namespace SDLFramework;
 class ScoreBoard : public GameEntity
 {
 private:
-	static ScoreBoard* sInstance;
-
-
 	GameEntity* mScoreBoard;
 
 	GameEntity* mP1Score;
@@ -51,12 +48,6 @@ private:
 	Health* tP2Cruiserhealth;
 	Health* tP2ACCarrierhealth;
 	Health* tP2Battleshiphealth;
-
-	int p1PBH, p2PBH;
-	int p1SubH, p2SubH;
-	int p1CruH, p2CruH;
-	int p1ACH, p2ACH;
-	int p1BSH, p2BSH;
 public:
 	PlayerManager* mPlayerManager;
 
@@ -66,8 +57,6 @@ public:
 	void Update() override;
 	void Render() override;
 	void SetHealth();
-	void UpdateHealth();
-	static ScoreBoard* Instance();
 	static void Release();
 
 };
