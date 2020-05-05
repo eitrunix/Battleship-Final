@@ -36,13 +36,30 @@ GameScreen::GameScreen()
 	Radar->Position(radarYPosOffset, boardXPosOffset);
 	invalidAttack->Position(0.0f, 20.0f);
 	invalidPlacement->Position(0.0f, 20.0f);
-	bState = BoardState::MakeAttack;
+	bState = BoardState::PlaceShips;
 }
 
 
 void GameScreen::changeBoardState(BoardState newState)
 {
 	bState = newState;
+}
+
+void GameScreen::MousePos(int offset)
+{
+	mousePos = mInputManager->MousePosition() * (boardSize);
+	int xOffset = offset;
+	int yOffset = pOffsetY;
+
+	float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
+	float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
+
+	xIndex = (newPosX / (gridWidth * cols)) * cols;
+	yIndex = (newPosY / (gridHeight * rows)) * rows;
+
+	std::cout << xIndex << " = X " << std::endl;
+	std::cout << yIndex << " = Y " << std::endl;
+
 }
 
 GameScreen::~GameScreen()
@@ -75,22 +92,14 @@ void GameScreen::Update()
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
 
-			mousePos = mInputManager->MousePosition() * (boardSize);
-				int xOffset = pOffsetX;
-				int yOffset = pOffsetY;
-
-				float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
-				float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
-
-				int xIndex = (newPosX / (gridWidth * cols)) * cols;
-				int yIndex = (newPosY / (gridHeight * rows)) * rows;
-
-				std::cout << xIndex << " = X " << std::endl;
-				std::cout << yIndex << " = Y " << std::endl;
+			MousePos(pOffsetX);
+			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
+			{
 				if (bState == BoardState::PlaceShips)
 
 				{
 					pBoard->ChangeTile(xIndex, yIndex, true);
+					validAttack = true;
 
 				}
 				else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
@@ -98,27 +107,22 @@ void GameScreen::Update()
 					defaultText = invalidPlacement;
 					std::cout << "Cant Place that there" << std::endl;
 				}
-
-				bState = BoardState::MakeAttack;
+			}
+				
 		}
-	
+		if (validAttack == true)
+		{
+			bState = BoardState::MakeAttack;
+			validAttack = false;
+			break;
+		}
+		
 
 	case BoardState::MakeAttack:
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
-			mousePos = mInputManager->MousePosition() * (boardSize);
-			int xOffset = rOffsetX;
-			int yOffset = pOffsetY;
-
-			float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
-			float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
-
-			int xIndex = (newPosX / (gridWidth * cols)) * cols;
-			int yIndex = (newPosY / (gridHeight * rows)) * rows;
-
-			std::cout << xIndex << " = X " << std::endl;
-			std::cout << yIndex << " = Y " << std::endl;
+			MousePos(rOffsetX);
 			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
 			{
 				if (bState == BoardState::MakeAttack)
@@ -133,6 +137,7 @@ void GameScreen::Update()
 					{
 						pRadar->ChangeTile(xIndex, yIndex, false);
 					}
+					validAttack = true;
 				}
 			}
 			else
@@ -141,37 +146,13 @@ void GameScreen::Update()
 				std::cout << "Attack Again in a Valid Location" << std::endl;
 			}
 		}
-
-		if (mInputManager->MouseButtonPressed(mInputManager->Right))
+		if (validAttack == true)
 		{
-			mousePos = mInputManager->MousePosition() * (boardSize);
-			int xOffset = rOffsetX;
-			int yOffset = pOffsetY;
-
-			float newPosX = ((mousePos.x / gridWidth) * gridWidth) - xOffset;
-			float newPosY = ((mousePos.y / gridHeight) * gridHeight) - yOffset;
-
-			int xIndex = (newPosX / (gridWidth * cols)) * cols;
-			int yIndex = (newPosY / (gridHeight * rows)) * rows;
-
-			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
-			{
-				if (bState == BoardState::MakeAttack)
-				{
-					mScoreBoard->mPlayerManager->aipatrolBoat->OnHit();
-					std::cout << mScoreBoard->mPlayerManager->aipatrolBoat->health << std::endl;
-					mScoreBoard->SetHealth();
-				}
-			}
-			else
-			{
-				defaultText = invalidAttack;
-				std::cout << "Attack Again in a Valid Location" << std::endl;
-				
-			}
+			bState = BoardState::PlaceShips;
+			validAttack = false;
+			break;
 
 		}
-
 	}
 }
 

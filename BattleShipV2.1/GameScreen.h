@@ -39,7 +39,7 @@ private:
 
 	//Board Icons
 	Texture* boat1;
-
+	bool validAttack;
 
 public:
 	GameScreen();
@@ -51,8 +51,8 @@ public:
 	void PlayerPlaceShips(int x, int y);
 	void AIPlaceShips(int x, int y);
 	void HorzorVert();
-
-
+	void MousePos(int offset);
+	bool sGameOver = false;
 	BoardState bState;
 
 	Vector2 mousePos;
@@ -70,9 +70,11 @@ public:
 	float boardXPosOffset = 40.0f;
 	float boardYPosOffset = -230.0f;
 	float radarYPosOffset = 230.0f;
-
+	int xIndex;
+	int yIndex;
 	int gridWidth = 430, gridHeight = 430;
 	int rows = 10, cols = 10;
+
 	int pOffsetX = 690, pOffsetY = 2750;
 
 	int rOffsetX = 5280;

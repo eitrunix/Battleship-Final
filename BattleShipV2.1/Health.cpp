@@ -24,7 +24,7 @@ void Health::SetHealth(int health)
 		{
 			mScore.push_back(new Texture("0", "ARCADE.ttf", 32, { 200, 0,0 }));
 			mScore[i]->Parent(this);
-			mScore[i]->Position(Vector2(-32.0f * i, 0.0f));
+			mScore[i]->Position(Vector2(32.0f * i, 0.0f));
 		}
 	}
 	else
@@ -53,7 +53,6 @@ void Health::ClearHealth()
 {
 	for (unsigned i = 0; i < mScore.size(); i++)
 	{
-		delete mScore[i];
 		mScore[i] = nullptr;
 	}
 	mScore.clear();

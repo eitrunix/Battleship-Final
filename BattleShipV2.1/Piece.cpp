@@ -23,15 +23,6 @@ PatrolBoat::~PatrolBoat()
 
 }
 
-void PatrolBoat::OnHit()
-{
-	health -= 1;
-}
-
-void PatrolBoat::AssignTile()
-{
-}
-
 Submarine::Submarine()
 {
 	health = 3;
@@ -48,15 +39,6 @@ Submarine::Submarine()
 Submarine::~Submarine()
 {
 
-}
-
-void Submarine::OnHit()
-{
-	health -= 1;
-}
-
-void Submarine::AssignTile()
-{
 }
 
 Cruiser::Cruiser()
@@ -77,15 +59,6 @@ Cruiser::~Cruiser()
 
 }
 
-void Cruiser::OnHit()
-{
-	health -= 1;
-
-}
-
-void Cruiser::AssignTile()
-{
-}
 
 AircraftCarrier::AircraftCarrier()
 {
@@ -105,15 +78,7 @@ AircraftCarrier::~AircraftCarrier()
 
 }
 
-void AircraftCarrier::OnHit()
-{
-	health -= 1;
 
-}
-
-void AircraftCarrier::AssignTile()
-{
-}
 
 Battleship::Battleship()
 {
@@ -132,16 +97,6 @@ Battleship::~Battleship()
 {
 }
 
-void Battleship::OnHit()
-{
-	health -= 1;
-}
-
-void Battleship::AssignTile()
-{
-}
-
-
 int Piece::GetHealth()
 {
 	return health;
@@ -149,11 +104,14 @@ int Piece::GetHealth()
 
 void Piece::OnHit()
 {
-	// tell the tile its been hit
-		// tile will change to Hit or Miss
+	health -= 1;
+	if (health <= 0)
+	{
+		health = 0;
+	}
+
 
 }
-
 void Piece::AssignTile()
 {
 	// Check the Tile its placed on, then tell the tile its occupied by x ship piece

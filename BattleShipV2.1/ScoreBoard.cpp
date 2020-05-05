@@ -109,6 +109,7 @@ ScoreBoard::ScoreBoard()
 }
 void ScoreBoard::SetHealth()
 {
+
 	tPatrolBoathealth->SetHealth(mPlayerManager->patrolBoat->GetHealth());
 	tSubhealth->SetHealth(mPlayerManager->submarine->GetHealth());
 	tCruiserhealth->SetHealth(mPlayerManager->cruiser->GetHealth());
@@ -120,7 +121,6 @@ void ScoreBoard::SetHealth()
 	tP2Cruiserhealth->SetHealth(mPlayerManager->aicruiser->GetHealth());
 	tP2ACCarrierhealth->SetHealth(mPlayerManager->aiaircraftCarrier->GetHealth());
 	tP2Battleshiphealth->SetHealth(mPlayerManager->aibattleship->GetHealth());
-
 }
 
 ScoreBoard::~ScoreBoard()
@@ -193,17 +193,7 @@ ScoreBoard::~ScoreBoard()
 
 void ScoreBoard::Update()
 {
-	tPatrolBoathealth->SetHealth(mPlayerManager->patrolBoat->GetHealth());
-	tSubhealth->SetHealth(mPlayerManager->submarine->GetHealth());
-	tCruiserhealth->SetHealth(mPlayerManager->cruiser->GetHealth());
-	tACCarrierhealth->SetHealth(mPlayerManager->aircraftCarrier->GetHealth());
-	tBattleshiphealth->SetHealth(mPlayerManager->battleship->GetHealth());
 
-	tP2PatrolBoathealth->SetHealth(mPlayerManager->aipatrolBoat->GetHealth());
-	tP2Subhealth->SetHealth(mPlayerManager->aisubmarine->GetHealth());
-	tP2Cruiserhealth->SetHealth(mPlayerManager->aicruiser->GetHealth());
-	tP2ACCarrierhealth->SetHealth(mPlayerManager->aiaircraftCarrier->GetHealth());
-	tP2Battleshiphealth->SetHealth(mPlayerManager->aibattleship->GetHealth());
 }
 
 void ScoreBoard::Render()
@@ -211,8 +201,6 @@ void ScoreBoard::Render()
 	P1Name->Render();
 	P2Name->Render();
 	mScoreBoard->Render();
-	mP1Score->Render();
-	mP2Score->Render();
 
 	sbPatrolBoat->Render();
 	sbCruiser->Render();
