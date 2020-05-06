@@ -58,7 +58,7 @@ public:
 	void Update() override;
 	void Render() override;
 	void ChangeBoardState(BoardState newState);
-	void PlayerPlaceShips(int x, int y);
+	void PlayerPlaceShips(int x, int y, LinkList<Piece*> PlayerList);
 	void AIPlaceShips(int x, int y);
 	void HorzorVert();
 	void MousePos(int offset);

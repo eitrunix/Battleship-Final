@@ -60,7 +60,7 @@ void GameScreen::Update()
 			MousePos(pOffsetX);
 			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
 			{
-				PlayerPlaceShips(xIndex, yIndex);
+				PlayerPlaceShips(xIndex, yIndex, mPlayerManager->pieces);
 			}
 
 		}
@@ -116,39 +116,45 @@ void GameScreen::Update()
 
 }
 
-void GameScreen::PlayerPlaceShips(int x, int y)
+void GameScreen::PlayerPlaceShips(int x, int y, LinkList<Piece* > playerList)
 {
+	Itr = mPlayerManager->pieces.begin();
 
-	if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
-	{
-		int pieceHealth = 5;
-		if (horizontal)
-		{
-			for (int i = 0; i < pieceHealth; i++)
-			{
-				pBoard->SetTileOccupied(xIndex, yIndex, true);
-				pBoard->ChangeTile(xIndex, yIndex, true);
-				xIndex++;
-			}
-		}
-		else
-		{
-			for (int i = 0; i < pieceHealth; i++)
-			{
-				pBoard->SetTileOccupied(xIndex, yIndex, true);
-				pBoard->ChangeTile(xIndex, yIndex, true);
-				yIndex++;
-			}
+	Piece* p = *Itr;
 
-		}
-		playerShips++;
-		horizontal = true;
-		std::cout << playerShips << std::endl;
-	}
-	else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
+	for (Itr; Itr != nullptr; Itr++) 
 	{
-		defaultText = invalidPlacement;
-		std::cout << "Cant Place that there" << std::endl;
+		if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
+		{
+				int pieceHealth = p->health;
+			if (horizontal)
+			{
+				for (int i = 0; i < pieceHealth; i++)
+				{
+					pBoard->SetTileOccupied(xIndex, yIndex, true);
+					pBoard->ChangeTile(xIndex, yIndex, true);
+					xIndex++;
+				}
+			}
+			else
+			{
+				for (int i = 0; i < pieceHealth; i++)
+				{
+					pBoard->SetTileOccupied(xIndex, yIndex, true);
+					pBoard->ChangeTile(xIndex, yIndex, true);
+					yIndex++;
+				}
+
+			}
+			playerShips++;
+			horizontal = true;
+			std::cout << playerShips << std::endl;
+		}
+		else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
+		{
+			defaultText = invalidPlacement;
+			std::cout << "Cant Place that there" << std::endl;
+		}
 	}
 }
 

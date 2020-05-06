@@ -60,7 +60,6 @@ public:
 	void Update() override;
 	void Render() override;
 	void SetHealth();
-	static void Release();
 
 };
 
