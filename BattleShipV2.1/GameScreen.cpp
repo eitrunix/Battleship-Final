@@ -16,8 +16,11 @@ GameScreen::GameScreen()
 	Board = new Texture("BShipGrid.jpg");
 	Radar = new Texture("BShipGrid.jpg");
 	defaultText = new Texture(" ", "ARCADE.ttf", 32, { 200, 0, 0 });
+	blankText = new Texture(" ", "ARCADE.ttf", 32, { 200, 0, 0 });
 	invalidAttack = new Texture("Attack Again in a Valid Location", "ARCADE.ttf", 32, { 200, 0, 0 });
 	invalidPlacement = new Texture("Place in a Valid Location", "ARCADE.ttf", 32, { 200, 0, 0 });
+	Horizontal = new Texture("Horizontal", "ARCADE.ttf", 32, { 200, 0, 0 });
+	Vertical = new Texture("Vertical", "ARCADE.ttf", 32, { 200, 0, 0 });
 
 	validAttack = false;
 	allShipsPlaced = false;
@@ -31,6 +34,9 @@ GameScreen::GameScreen()
 	Radar->Parent(mPlayerTwoArea);
 	invalidAttack->Parent(mInputArea);
 	invalidPlacement->Parent(mInputArea);
+	blankText->Parent(mInputArea);
+	Horizontal->Parent(mInputArea);
+	Vertical->Parent(mInputArea);
 
 	pRadar->BoardPosSet(cBoatdYOffset, cBoardXOffset);
 	pBoard->BoardPosSet(pBoatdYOffset, pBoardXOffset);
@@ -40,6 +46,11 @@ GameScreen::GameScreen()
 	Radar->Position(radarYPosOffset, boardXPosOffset);
 	invalidAttack->Position(0.0f, 20.0f);
 	invalidPlacement->Position(0.0f, 20.0f);
+	Horizontal->Position(0.0f, 20.0f);
+	Vertical->Position(0.0f, 20.0f);
+	blankText->Position(0.0f, 20.0f);
+
+
 	ChangeBoardState(BoardState::PlaceShips);
 
 
@@ -55,31 +66,49 @@ void GameScreen::Update()
 
 	switch (bState)
 	{
-		//case BoardState::Title:
-		//	break;
 	case BoardState::PlaceShips:
+		std::cout << "PlaceShips" << std::endl;
+		if (mInputManager->KeyPressed(SDL_SCANCODE_TAB) && !horizontal)
+		{
+			horizontal = true;
+			defaultText = Horizontal;
+
+		}
+		else if (mInputManager->KeyPressed(SDL_SCANCODE_TAB) && horizontal)
+		{
+			horizontal = false;
+			defaultText = Vertical;
+		}
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
 			MousePos(pOffsetX);
 			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
 			{
-				PlayerPlaceShips(xIndex, yIndex);
+				defaultText = blankText;
+				PlayerPlaceShips();
+			}
+			else
+			{
+				defaultText = invalidPlacement;
+				std::cout << "Place Again in a Valid Location" << std::endl;
 			}
 
 		}
 		if (allShipsPlaced)
 		{
-			ChangeBoardState(BoardState::MakeAttack);
+			ChangeBoardState(BoardState::AIPlaceShips);
 			allShipsPlaced = false;
 		}
 
 		break;
 	case BoardState::MakeAttack:
+		std::cout << "MakeAttack" << std::endl;
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
 			MousePos(rOffsetX);
+			defaultText = blankText;
 			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
 			{
 				if (bState == BoardState::MakeAttack)
@@ -112,15 +141,30 @@ void GameScreen::Update()
 		break;
 
 	case BoardState::AIAttack:
-		std::cout << "AI Attacked randomly" << std::endl; 
-		ChangeBoardState(BoardState::MakeAttack);
-		break;
+		std::cout << "AIAttack" << std::endl;
 
+		std::cout << "AI Attacked randomly" << std::endl; 
+		AIAttack();
+		if (validAttack)
+		{
+			ChangeBoardState(BoardState::MakeAttack);
+			validAttack = false;
+		}
+		break;
+	case BoardState::AIPlaceShips:
+		std::cout << "AIPlaceShips" << std::endl;
+
+		AIPlaceShips();
+		if (aiShips >= 5)
+		{
+			ChangeBoardState(BoardState::MakeAttack);
+		}
+		break;
 	}
 
 }
 
-void GameScreen::PlayerPlaceShips(int x, int y)
+void GameScreen::PlayerPlaceShips()
 {
 	if (Itr == nullptr)
 		Itr = mPlayerManager->pieces.begin();
@@ -141,8 +185,20 @@ void GameScreen::PlayerPlaceShips(int x, int y)
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
 						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
-						xIndex++;
-						TexItr++;
+
+						if (pBoard->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
+						{
+							xIndex++;
+							TexItr++;
+							validPlace = true;
+						}
+						else
+						{
+							defaultText = invalidPlacement;
+							validPlace = false;
+							pBoard->gameBoard[xIndex][yIndex]->isOccupied = false;
+							pBoard->ChangeTile(xIndex, yIndex, TileType::Water);
+						}
 					}
 				}
 				else
@@ -151,31 +207,132 @@ void GameScreen::PlayerPlaceShips(int x, int y)
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
-						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr; 
-						yIndex++;
-						TexItr++;
+						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
+						if (pBoard->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
+						{
+							yIndex++;
+							TexItr++;
+							validPlace = true;
+						}
+						else
+						{
+							defaultText = invalidPlacement;
+							validPlace = false;							
+							pBoard->gameBoard[xIndex][yIndex]->isOccupied = false;
+							pBoard->ChangeTile(xIndex, yIndex, TileType::Water);
+						}
+
 					}
 
 				}
-				//Itr++;
-
-				//p->placed = true;
 				std::cout << "Number of Player Ships, I check this vs the Ships ID, if they are the same thats the ship that is placed." << std::endl;
 				std::cout << "shipNumber = " + std::to_string(playerShips) << std::endl;
 				std::cout << "Ship ID = " + std::to_string(p->ID) << std::endl;
 			}
-			else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
+			if (validPlace)
 			{
-				defaultText = invalidPlacement;
-				std::cout << "Cant Place that there" << std::endl;
-			}
 			Itr++;
 			playerShips++;
+			}
 
 		}
-		//Itr++;
-		//playerShips++;
-	//}
+
+}
+
+void GameScreen::AIPlaceShips()
+{	
+	int x = (rand() % 10) + 1;
+	int y = (rand() % 10) + 1;  
+	
+	if (Itr == nullptr)
+		Itr = mPlayerManager->Aipieces.begin();
+	Piece* p = *Itr;
+	if (p->ID == aiShips && aiShips < 5)
+	{
+		if (TexItr == nullptr)
+			TexItr = p->parts.begin();
+
+		if (bState == BoardState::AIPlaceShips && !pRadar->GetIsOccupied(x, y) && !pRadar->GetIsOccupied(x + p->health, y + p->health))
+		{
+			int pieceHealth = p->health;
+			if (!horizontal)
+			{
+
+				for (int i = 0; i < pieceHealth; i++)
+				{
+					x - p->health;
+					pRadar->SetTileOccupied(x, y, true);
+					pRadar->ChangeTile(x, y, TileType::Hit);
+					//pRadar->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
+
+					//if (pRadar->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
+					//{
+						x++;
+						//TexItr++;
+						validPlace = true;
+					//}
+					//else
+					//{
+					//	defaultText = invalidPlacement;
+					//	validPlace = false;
+					//	pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
+					//	pRadar->ChangeTile(xIndex, yIndex, TileType::Water);
+					//}
+				}
+			}
+			else
+			{
+				for (int i = 0; i < pieceHealth; i++)
+				{
+					y - p->health;
+					pRadar->SetTileOccupied(x, y, true);
+					pRadar->ChangeTile(x, y, TileType::Ship);
+					//pRadar->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
+					//if (pRadar->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
+					//{
+						y++;
+						//TexItr++;
+						validPlace = true;
+					//}
+					//else
+					//{
+					//	defaultText = invalidPlacement;
+					//	validPlace = false;
+					//	pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
+					//	pRadar->ChangeTile(xIndex, yIndex, TileType::Water);
+					//}
+
+				}
+
+			}
+
+		}
+		if (validPlace)
+		{
+			Itr++;
+			aiShips++;
+		}
+
+	}
+}
+
+void GameScreen::AIAttack()
+{
+	int x = (rand() % 10) + 1;
+	int y = (rand() % 10) + 1;
+	xIndex = x;
+	yIndex = y;
+	bool tempOccu;
+	tempOccu = pBoard->GetIsOccupied(xIndex, yIndex);
+	if (tempOccu)
+	{
+		pBoard->ChangeTile(xIndex, yIndex, TileType::Hit);
+	}
+	else
+	{
+		pBoard->ChangeTile(xIndex, yIndex, TileType::Miss);
+	}
+	validAttack = true;
 
 }
 

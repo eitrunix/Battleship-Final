@@ -16,6 +16,7 @@ private:
 		PlaceShips,
 		MakeAttack,
 		AIAttack,
+		AIPlaceShips,
 	};
 
 	Timer* mTimer;
@@ -37,6 +38,9 @@ private:
 	Texture* defaultText;
 	Texture* invalidAttack;
 	Texture* invalidPlacement;
+	Texture* Vertical;
+	Texture* Horizontal;
+	Texture* blankText;
 
 	//Board Icons
 	Texture* boat1;
@@ -44,11 +48,13 @@ private:
 	// Plaing Ships Vairables
 	bool allShipsPlaced = false;
 	int playerShips = 0;
+	int aiShips = 0;
 	bool horizontal = false;
 
 	// Attacking Variables
 	bool validAttack = false;
-
+	bool validPlace;
+	bool aiDone;
 	// AI Variables
 
 public:
@@ -58,9 +64,9 @@ public:
 	void Update() override;
 	void Render() override;
 	void ChangeBoardState(BoardState newState);
-	void PlayerPlaceShips(int x, int y);
-	void AIPlaceShips(int x, int y);
-	void HorzorVert();
+	void PlayerPlaceShips();
+	void AIPlaceShips();
+	void AIAttack();
 	void MousePos(int offset);
 	bool sGameOver = false;
 	BoardState bState;
