@@ -7,6 +7,8 @@ GameScreen::GameScreen()
 	mScoreBoard = new ScoreBoard();
 	pBoard = new BattleshipBoard();
 	pRadar = new BattleshipBoard();
+	mPlayerManager = PlayerManager::Instance();
+
 	/// Play Area ///
 	mPlayerOneArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
 	mPlayerTwoArea = new GameEntity(Graphics::SCREEN_WIDTH * 0.5, Graphics::SCREEN_HEIGHT * 0.5);
@@ -19,7 +21,7 @@ GameScreen::GameScreen()
 
 	validAttack = false;
 	allShipsPlaced = false;
-	playerShips = 0;
+	playerShips = 1;
 
 	// Player Boards
 	mPlayerOneArea->Parent(this);
@@ -40,6 +42,9 @@ GameScreen::GameScreen()
 	invalidAttack->Position(0.0f, 20.0f);
 	invalidPlacement->Position(0.0f, 20.0f);
 	ChangeBoardState(BoardState::PlaceShips);
+
+
+
 }
 
 void GameScreen::Update()
@@ -60,7 +65,7 @@ void GameScreen::Update()
 			MousePos(pOffsetX);
 			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
 			{
-				PlayerPlaceShips(xIndex, yIndex, mPlayerManager->pieces);
+				PlayerPlaceShips(xIndex, yIndex);
 			}
 
 		}
@@ -116,46 +121,59 @@ void GameScreen::Update()
 
 }
 
-void GameScreen::PlayerPlaceShips(int x, int y, LinkList<Piece* > playerList)
+void GameScreen::PlayerPlaceShips(int x, int y)
 {
 	Itr = mPlayerManager->pieces.begin();
 
 	Piece* p = *Itr;
 
-	for (Itr; Itr != nullptr; Itr++) 
-	{
-		if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
+	//for (Itr; Itr != nullptr; Itr++)
+	//{
+		if (p->ID == playerShips && playerShips < 5)
 		{
-				int pieceHealth = p->health;
-			if (horizontal)
-			{
-				for (int i = 0; i < pieceHealth; i++)
-				{
-					pBoard->SetTileOccupied(xIndex, yIndex, true);
-					pBoard->ChangeTile(xIndex, yIndex, true);
-					xIndex++;
-				}
-			}
-			else
-			{
-				for (int i = 0; i < pieceHealth; i++)
-				{
-					pBoard->SetTileOccupied(xIndex, yIndex, true);
-					pBoard->ChangeTile(xIndex, yIndex, true);
-					yIndex++;
-				}
 
+			if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
+			{
+				int pieceHealth = p->health;
+				if (horizontal)
+				{
+					for (int i = 0; i < pieceHealth; i++)
+					{
+						pBoard->SetTileOccupied(xIndex, yIndex, true);
+						pBoard->ChangeTile(xIndex, yIndex, true);
+						xIndex++;
+					}
+				}
+				else
+				{
+					for (int i = 0; i < pieceHealth; i++)
+					{
+						pBoard->SetTileOccupied(xIndex, yIndex, true);
+						pBoard->ChangeTile(xIndex, yIndex, true);
+						yIndex++;
+					}
+
+				}
+				//Itr++;
+
+				//p->placed = true;
+				std::cout << "Number of Player Ships, I check this vs the Ships ID, if they are the same thats the ship that is placed." << std::endl;
+				std::cout << "shipNumber = " + std::to_string(playerShips) << std::endl;
+				std::cout << "Ship ID = " + std::to_string(p->ID) << std::endl;
 			}
+			else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
+			{
+				defaultText = invalidPlacement;
+				std::cout << "Cant Place that there" << std::endl;
+			}
+			Itr++;
 			playerShips++;
-			horizontal = true;
-			std::cout << playerShips << std::endl;
+
 		}
-		else if (bState != BoardState::PlaceShips && mousePos.x < (Graphics::SCREEN_WIDTH * 0.5))
-		{
-			defaultText = invalidPlacement;
-			std::cout << "Cant Place that there" << std::endl;
-		}
-	}
+		//Itr++;
+		//playerShips++;
+	//}
+
 }
 
 void GameScreen::ChangeBoardState(BoardState newState)
@@ -175,8 +193,8 @@ void GameScreen::MousePos(int offset)
 	xIndex = (newPosX / (gridWidth * cols)) * cols;
 	yIndex = (newPosY / (gridHeight * rows)) * rows;
 
-	std::cout << xIndex << " = X " << std::endl;
-	std::cout << yIndex << " = Y " << std::endl;
+	//std::cout << xIndex << " = X " << std::endl;
+	//std::cout << yIndex << " = Y " << std::endl;
 
 }
 
@@ -198,6 +216,7 @@ GameScreen::~GameScreen()
 	delete mScoreBoard;
 	delete pBoard;
 	delete pRadar;
+
 	mScoreBoard = nullptr;
 	mPlayerOneArea = nullptr;
 	mPlayerTwoArea = nullptr;

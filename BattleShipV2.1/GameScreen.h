@@ -43,7 +43,7 @@ private:
 
 	// Plaing Ships Vairables
 	bool allShipsPlaced = false;
-	int playerShips = 0;
+	int playerShips = 1;
 	bool horizontal = false;
 
 	// Attacking Variables
@@ -58,7 +58,7 @@ public:
 	void Update() override;
 	void Render() override;
 	void ChangeBoardState(BoardState newState);
-	void PlayerPlaceShips(int x, int y, LinkList<Piece*> PlayerList);
+	void PlayerPlaceShips(int x, int y);
 	void AIPlaceShips(int x, int y);
 	void HorzorVert();
 	void MousePos(int offset);

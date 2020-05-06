@@ -10,6 +10,8 @@ public:
 	~Piece();
 	int health = 0;
 	bool hit = false;
+	bool placed = false;
+	bool shipQueued = false;
 	int ID = 0;
 	std::string name;
 	std::string PiecePlaceText;
