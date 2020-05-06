@@ -2,6 +2,7 @@
 #ifndef __TILE_H 
 #define __TILE_H
 #include "AnimatedTexture.h" 
+#include "PlayerManager.h"
 using namespace SDLFramework;
 
 enum class TileType
@@ -18,7 +19,7 @@ class Tile : public GameEntity
 
 public:
 
-
+	PlayerManager* mPlayerManager;
 	bool isOccupied = false;
 
 	void Update() override;
@@ -42,6 +43,7 @@ public:
 	Texture* HitTex;
 	Texture* MissTex;
 	Texture* TileTex;
+	Texture* ShipTex;
 
 private:
 	SDL_Rect mBox;

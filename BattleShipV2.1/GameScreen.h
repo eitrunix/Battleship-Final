@@ -43,7 +43,7 @@ private:
 
 	// Plaing Ships Vairables
 	bool allShipsPlaced = false;
-	int playerShips = 1;
+	int playerShips = 0;
 	bool horizontal = false;
 
 	// Attacking Variables
@@ -66,6 +66,7 @@ public:
 	BoardState bState;
 
 	LinkList<Piece*>::Iterator Itr;
+	LinkList<Texture*>::Iterator TexItr;
 
 	// Mouse Grid Position Varables
 	Vector2 mousePos;

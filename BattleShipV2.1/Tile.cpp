@@ -23,6 +23,7 @@ Tile::Tile(int TileRow, int TileCol, TileType _type)
 	HitTex = new Texture("Hit.png");
 	MissTex = new Texture("Miss.png");	
 	TileTex = new Texture("Water.png");
+	mPlayerManager = PlayerManager::Instance();
 
 }
 
@@ -39,22 +40,29 @@ Tile::~Tile()
 
 void Tile::Render()
 {
-	if (!Attacked)
+	switch (mType)
 	{
-		TileTex->Render();
-		TileTex->Position(Position());
-	}
-	if (Attacked && isHit)
-	{
+	case TileType::Hit:
 		TileTex = HitTex;
 		HitTex->Position(Position());
 		HitTex->Render();
-	}
-	if (Attacked && !isHit)
-	{
+
+		break;
+	case TileType::Miss:
 		TileTex = MissTex;
 		MissTex->Position(Position());
 		MissTex->Render();
+
+		break;
+	case TileType::Water:
+		TileTex->Render();
+		TileTex->Position(Position());
+		break;
+	case TileType::Ship:
+		TileTex = ShipTex;
+		TileTex->Render();
+		TileTex->Position(Position());
+		break;
 	}
 
 

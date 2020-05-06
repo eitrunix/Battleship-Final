@@ -46,7 +46,7 @@ void BattleshipBoard::Render()
 	}
 }
 
-void BattleshipBoard::ChangeTile(int _x, int _y, bool _hit)
+void BattleshipBoard::ChangeTile(int _x, int _y, TileType type)
 {
 	int tRow;
 	int tCol;
@@ -59,8 +59,7 @@ void BattleshipBoard::ChangeTile(int _x, int _y, bool _hit)
 			{
 				gameBoard[tRow][tCol]->TileTex->Update();
 
-				gameBoard[tRow][tCol]->isHit = _hit;
-				gameBoard[tRow][tCol]->Attacked = true;
+				gameBoard[tRow][tCol]->mType = type;
 			}
 		}
 	}

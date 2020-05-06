@@ -21,7 +21,6 @@ GameScreen::GameScreen()
 
 	validAttack = false;
 	allShipsPlaced = false;
-	playerShips = 1;
 
 	// Player Boards
 	mPlayerOneArea->Parent(this);
@@ -89,11 +88,11 @@ void GameScreen::Update()
 					tempOccu = pRadar->GetIsOccupied(xIndex, yIndex);
 					if (tempOccu)
 					{
-						pRadar->ChangeTile(xIndex, yIndex, true);
+						pRadar->ChangeTile(xIndex, yIndex, TileType::Hit);
 					}
 					else
 					{
-						pRadar->ChangeTile(xIndex, yIndex, false);
+						pRadar->ChangeTile(xIndex, yIndex, TileType::Miss);
 					}
 					validAttack = true;
 				}
@@ -123,25 +122,27 @@ void GameScreen::Update()
 
 void GameScreen::PlayerPlaceShips(int x, int y)
 {
-	Itr = mPlayerManager->pieces.begin();
-
+	if (Itr == nullptr)
+		Itr = mPlayerManager->pieces.begin();
 	Piece* p = *Itr;
-
-	//for (Itr; Itr != nullptr; Itr++)
-	//{
 		if (p->ID == playerShips && playerShips < 5)
 		{
+			if (TexItr == nullptr)
+				TexItr = p->parts.begin();
 
 			if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
 			{
 				int pieceHealth = p->health;
-				if (horizontal)
+				if (!horizontal)
 				{
+
 					for (int i = 0; i < pieceHealth; i++)
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
-						pBoard->ChangeTile(xIndex, yIndex, true);
+						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
+						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
 						xIndex++;
+						TexItr++;
 					}
 				}
 				else
@@ -149,8 +150,10 @@ void GameScreen::PlayerPlaceShips(int x, int y)
 					for (int i = 0; i < pieceHealth; i++)
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
-						pBoard->ChangeTile(xIndex, yIndex, true);
+						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
+						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr; 
 						yIndex++;
+						TexItr++;
 					}
 
 				}

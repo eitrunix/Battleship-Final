@@ -16,6 +16,7 @@ public:
 	std::string name;
 	std::string PiecePlaceText;
 	std::string PieceHitText;
+	DataStructuresAndAI::LinkList<Texture*> parts;
 
 	int GetHealth();
 	void OnHit();
@@ -27,9 +28,8 @@ class PatrolBoat : public Piece
 public:
 	PatrolBoat();
 	~PatrolBoat();
-	Texture* BoatImage;
-
-
+	Texture* StartPiece;
+	Texture* EndPiece;
 };
 
 class Submarine : public Piece
@@ -37,9 +37,9 @@ class Submarine : public Piece
 public:
 	Submarine();
 	~Submarine();
-	Texture* BoatImage;
-
-
+	Texture* StartPiece;
+	Texture* Part2;
+	Texture* EndPiece;
 };
 
 class Cruiser : public Piece
@@ -47,9 +47,9 @@ class Cruiser : public Piece
 public:
 	Cruiser();
 	~Cruiser();
-	Texture* BoatImage;
-
-
+	Texture* StartPiece;
+	Texture* Part2;
+	Texture* EndPiece;
 };
 
 class AircraftCarrier : public Piece
@@ -57,9 +57,10 @@ class AircraftCarrier : public Piece
 public:
 	AircraftCarrier();
 	~AircraftCarrier();
-	Texture* BoatImage;
-
-
+	Texture* StartPiece;
+	Texture* Part2;
+	Texture* Part3;
+	Texture* EndPiece;
 };
 
 class Battleship : public Piece
@@ -67,8 +68,10 @@ class Battleship : public Piece
 public:
 	Battleship();
 	~Battleship();
-	Texture* BoatImage;
-
-
+	Texture* StartPiece;
+	Texture* Part2;
+	Texture* Part3;
+	Texture* Part4;
+	Texture* EndPiece;
 };
 

@@ -27,7 +27,7 @@ public:
 	Tile* gameBoard[BOARDWIDTH][BOARDHEIGHT];
 	Vector2 BoardPos;
 
-	void ChangeTile(int _x, int _y, bool _hit);
+	void ChangeTile(int _x, int _y, TileType type);
 	void BoardPosSet(float _y, float _x);
 };
 #endif // __BATTLESHIPBOARD_H

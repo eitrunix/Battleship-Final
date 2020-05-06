@@ -10,11 +10,14 @@ PatrolBoat::PatrolBoat()
 {
 	health = 2;
 	hit = false;
-	ID = 1;
+	ID = 0;
 	PiecePlaceText = "Enter The Coordinate For Your Patrol Boat(2 spots) : ";
-	BoatImage = new Texture("PatrolBoat.png");
-
+	StartPiece = new Texture("PBStart.png");
+	EndPiece = new Texture("PBPart2.png");
 	name = "PatrolBoat";
+	parts.push_back(StartPiece);
+	parts.push_back(EndPiece);
+	parts.begin();
 
 }
 
@@ -27,12 +30,18 @@ Submarine::Submarine()
 {
 	health = 3;
 	hit = false;
-	ID = 2;
+	ID = 1;
 
 	PiecePlaceText = "Enter The Coordinate For Your Submarine (3 spots): ";
-	BoatImage = new Texture("Submarine.png");
+	StartPiece = new Texture("SubStart.png");
+	Part2 = new Texture("SubPart2.png");
+	EndPiece = new Texture("SubPart3.png");
+	parts.push_back(StartPiece);
+	parts.push_back(Part2);
+	parts.push_back(EndPiece);
 
 	name = "Submarine";
+	parts.begin();
 
 }
 
@@ -45,12 +54,18 @@ Cruiser::Cruiser()
 {
 	health = 3;
 	hit = false;
-	ID = 3;
+	ID = 2;
 
 	PiecePlaceText = "Enter The Coordinate For Your Crusier (3 spots): ";
-	BoatImage = new Texture("Cruiser.png");
+	StartPiece = new Texture("CruStart.png");
+	Part2 = new Texture("CruPart2.png");
+	EndPiece = new Texture("CruPart3.png");
+	parts.push_back(StartPiece);
+	parts.push_back(Part2);
+	parts.push_back(EndPiece);
 
 	name = "Cruiser";
+	parts.begin();
 
 }
 
@@ -64,12 +79,20 @@ AircraftCarrier::AircraftCarrier()
 {
 	health = 4;
 	hit = false;
-	ID = 4;
+	ID = 3;
 
 	PiecePlaceText = "Enter The Coordinate For Your Aircraft Carrier (4 spots): ";
-	BoatImage = new Texture("AircraftCarrier.png");
+	StartPiece = new Texture("ACStart.png");
+	Part2 = new Texture("ACPart2.png");
+	Part3 = new Texture("ACPart3.png");
+	EndPiece = new Texture("ACPart4.png");
+	parts.push_back(StartPiece);
+	parts.push_back(Part2);
+	parts.push_back(Part3);
+	parts.push_back(EndPiece);
 
 	name = "AircraftCarrier";
+	parts.begin();
 
 }
 
@@ -84,13 +107,22 @@ Battleship::Battleship()
 {
 	health = 5;
 	hit = false;
-	ID = 5;
+	ID = 4;
 
 	PiecePlaceText = "Enter The Coordinate For Your Battleship (5 spots): ";
-	BoatImage = new Texture("BattleShip.png");
+	StartPiece = new Texture("BSStart.png");
+	Part2 = new Texture("BSPart2.png");
+	Part3 = new Texture("BSPart3.png");
+	Part4 = new Texture("BSPart4.png");
+	EndPiece = new Texture("BSPart5.png");
+	parts.push_back(StartPiece);
+	parts.push_back(Part2);
+	parts.push_back(Part3);
+	parts.push_back(Part4);
+	parts.push_back(EndPiece);
 
 	name = "Battleship";
-
+	parts.begin();
 }
 
 Battleship::~Battleship()
