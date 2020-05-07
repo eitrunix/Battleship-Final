@@ -48,21 +48,10 @@ void BattleshipBoard::Render()
 
 void BattleshipBoard::ChangeTile(int _x, int _y, TileType type)
 {
-	int tRow;
-	int tCol;
+	gameBoard[_x][_y]->TileTex->Update();
 
-	for (tRow = 0; tRow < BOARDWIDTH; tRow++)
-	{
-		for (tCol = 0; tCol < BOARDHEIGHT; tCol++)
-		{
-			if (gameBoard[tRow][tCol] == gameBoard[_x][_y])
-			{
-				gameBoard[tRow][tCol]->TileTex->Update();
+	gameBoard[_x][_y]->mType = type;
 
-				gameBoard[tRow][tCol]->mType = type;
-			}
-		}
-	}
 }
 
 void BattleshipBoard::BoardPosSet(float _y, float _x)
@@ -73,22 +62,9 @@ void BattleshipBoard::BoardPosSet(float _y, float _x)
 
 void BattleshipBoard::SetTileOccupied(int x, int y, bool occupied)
 {
-	int tRow;
-	int tCol;
+	gameBoard[x][y]->TileTex->Update();
 
-	for (tRow = 0; tRow < BOARDWIDTH; tRow++)
-	{
-		for (tCol = 0; tCol < BOARDHEIGHT; tCol++)
-		{
-			if (gameBoard[tRow][tCol] == gameBoard[x][y])
-			{
-				gameBoard[tRow][tCol]->TileTex->Update();
-
-				gameBoard[tRow][tCol]->isOccupied = occupied;
-
-			}
-		}
-	}
+	gameBoard[x][y]->isOccupied = occupied;
 
 }
 

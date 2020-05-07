@@ -147,7 +147,7 @@ void GameScreen::PlayerPlaceShips()
 	if (Itr == nullptr)
 		Itr = mPlayerManager->pieces.begin();
 	Piece* p = *Itr;
-		if (p->ID == playerShips && playerShips < 5)
+		if (p->ID == playerShips && playerShips <= 5)
 		{
 
 			if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
@@ -157,7 +157,7 @@ void GameScreen::PlayerPlaceShips()
 				{
 					if (TexItr == nullptr)
 						TexItr = p->hParts.begin();
-					for (int i = 0; i < pieceHealth - 1; i++)
+					for (int i = 0; i < pieceHealth; i++)
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
@@ -171,8 +171,8 @@ void GameScreen::PlayerPlaceShips()
 							xIndex++;
 							TexItr++;
 							validPlace = true;
-							std::cout << p->xPos << std::endl;
-							std::cout << p->yPos << std::endl;
+							//std::cout << p->xPos << std::endl;
+							//std::cout << p->yPos << std::endl;
 
 						}
 						else
@@ -189,7 +189,7 @@ void GameScreen::PlayerPlaceShips()
 					if (TexItr == nullptr)
 						TexItr = p->vParts.begin();
 
-					for (int i = 0; i < pieceHealth -1 ; i++)
+					for (int i = 0; i < pieceHealth; i++)
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
@@ -203,9 +203,9 @@ void GameScreen::PlayerPlaceShips()
 							yIndex++;
 							TexItr++;
 							validPlace = true;
-							std::cout << p->xPos << std::endl;
-							std::cout << p->yPos << std::endl;
-							
+							//std::cout << p->xPos << std::endl;
+							//std::cout << p->yPos << std::endl;
+
 						}
 						else
 						{
@@ -214,22 +214,15 @@ void GameScreen::PlayerPlaceShips()
 							pBoard->gameBoard[xIndex][yIndex]->isOccupied = false;
 							pBoard->ChangeTile(xIndex, yIndex, TileType::Water);
 						}
-
 					}
-
 				}
-				std::cout << "Number of Player Ships, I check this vs the Ships ID, if they are the same thats the ship that is placed." << std::endl;
-				std::cout << "shipNumber = " + std::to_string(playerShips) << std::endl;
-				std::cout << "Ship ID = " + std::to_string(p->ID) << std::endl;
 			}
-			if (validPlace)
+			if (validPlace && playerShips <=5)
 			{
 			Itr++;
 			playerShips++;
 			}
-
 		}
-
 }
 
 void GameScreen::AIPlaceShips()
@@ -253,60 +246,48 @@ void GameScreen::AIPlaceShips()
 
 				for (int i = 0; i < pieceHealth; i++)
 				{
-					x - p->health;
-					pRadar->SetTileOccupied(x, y, true);
-					pRadar->ChangeTile(x, y, TileType::Hit);
-					//pRadar->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
-
-					//if (pRadar->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
-					//{
-					p->xPos = x;
-					p->yPos = y;
+					if (x + p->health <= 9)
+					{
+						x - p->health;
+						pRadar->SetTileOccupied(x, y, true);
+						p->xPos = x;
+						p->yPos = y;
 						x++;
-						//TexItr++;
 						validPlace = true;
 						std::cout << p->xPos << std::endl;
 						std::cout << p->yPos << std::endl;
-						pRadar->SetTileOccupied(true, x,y);
-
-
-					//}
-					//else
-					//{
-					//	defaultText = invalidPlacement;
-					//	validPlace = false;
-					//	pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
-					//	pRadar->ChangeTile(xIndex, yIndex, TileType::Water);
-					//}
+					}
+					else
+					{
+						defaultText = invalidPlacement;
+						validPlace = false;
+						pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
+						pRadar->ChangeTile(xIndex, yIndex, TileType::Water);
+					}
 				}
 			}
 			else
 			{
 				for (int i = 0; i < pieceHealth; i++)
 				{
-					y - p->health;
-					pRadar->SetTileOccupied(x, y, true);
-					pRadar->ChangeTile(x, y, TileType::Ship);
-					//pRadar->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
-					//if (pRadar->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
-					//{
-					p->xPos = x;
-					p->yPos = y;
+					if (y + p->health <= 9)
+					{
+						y - p->health;
+						pRadar->SetTileOccupied(x, y, true);
+						p->xPos = x;
+						p->yPos = y;
 						y++;
-						//TexItr++;
 						validPlace = true;
 						std::cout << p->xPos << std::endl;
 						std::cout << p->yPos << std::endl;
-						pRadar->SetTileOccupied(true, x, y);
 
-					//}
-					//else
-					//{
-					//	defaultText = invalidPlacement;
-					//	validPlace = false;
-					//	pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
-					//	pRadar->ChangeTile(xIndex, yIndex, TileType::Water);
-					//}
+					}
+					else
+					{
+						defaultText = invalidPlacement;
+						validPlace = false;
+						pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
+					}
 
 				}
 
@@ -325,33 +306,41 @@ void GameScreen::AIPlaceShips()
 void GameScreen::AIAttack()
 {
 
-	int x = (rand() % 10) + 1;
-	int y = (rand() % 10) + 1;
+	int x = rand() % 10;
+	int y = rand() % 10;
 	xIndex = x;
 	yIndex = y;
 	bool tempOccu;
 	tempOccu = pBoard->GetIsOccupied(xIndex, yIndex);
-	if (tempOccu)
+	if (pBoard->gameBoard[x][y]->ReturnTileType() != TileType::Hit || pBoard->gameBoard[x][y]->ReturnTileType() != TileType::Miss)
 	{
-		if (Itr == nullptr)
-			Itr = mPlayerManager->pieces.begin();
-		Piece* p = *Itr;
-		pBoard->ChangeTile(xIndex, yIndex, TileType::Hit);
-
-		for (Itr; Itr != nullptr; Itr++)
+		if (tempOccu)
 		{
-			if (xIndex == p->getTileXPos() && yIndex == p->getTileYPos())
+			if (Itr == nullptr)
+				Itr = mPlayerManager->pieces.begin();
+			Piece* p = *Itr;
+			pBoard->ChangeTile(xIndex, yIndex, TileType::Hit);
+
+			for (Itr; Itr != nullptr; Itr++)
 			{
-				p->health - 1;
+				if (xIndex == p->getTileXPos() && yIndex == p->getTileYPos())
+				{
+					p->health - 1;
+				}
 			}
 		}
+		else
+		{
+			pBoard->ChangeTile(xIndex, yIndex, TileType::Miss);
+		}
+		validAttack = true;
+		mScoreBoard->SetHealth();
 	}
 	else
 	{
-		pBoard->ChangeTile(xIndex, yIndex, TileType::Miss);
+		std::cout << "Invalid AI Attack" << std::endl;
+		validAttack = false;
 	}
-	validAttack = true;
-	mScoreBoard->SetHealth();
 }
 
 void GameScreen::PlayerAttack()
@@ -377,7 +366,9 @@ void GameScreen::PlayerAttack()
 						pRadar->ChangeTile(xIndex, yIndex, TileType::Hit);
 						p->OnHit();
 					}
+
 				}
+
 			}
 			else
 			{

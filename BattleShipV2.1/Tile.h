@@ -26,6 +26,7 @@ public:
 	void Render() override;
 
 	void ChangeType(TileType _type);
+	TileType ReturnTileType();
 	Tile(int TileRow, int TileCol, TileType _type);
 	~Tile();
 
