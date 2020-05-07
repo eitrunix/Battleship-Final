@@ -14,10 +14,16 @@ PatrolBoat::PatrolBoat()
 	PiecePlaceText = "Enter The Coordinate For Your Patrol Boat(2 spots) : ";
 	StartPiece = new Texture("PBStart.png");
 	EndPiece = new Texture("PBPart2.png");
+	hParts.push_back(StartPiece);
+	hParts.push_back(EndPiece);
+	hParts.begin();
+
+	vStartPiece = new Texture("vPBStart.png");
+	vEndPiece = new Texture("vPBPart2.png");
+	vParts.push_back(vStartPiece);
+	vParts.push_back(vEndPiece);
+	vParts.begin();
 	name = "PatrolBoat";
-	parts.push_back(StartPiece);
-	parts.push_back(EndPiece);
-	parts.begin();
 
 }
 
@@ -36,12 +42,21 @@ Submarine::Submarine()
 	StartPiece = new Texture("SubStart.png");
 	Part2 = new Texture("SubPart2.png");
 	EndPiece = new Texture("SubPart3.png");
-	parts.push_back(StartPiece);
-	parts.push_back(Part2);
-	parts.push_back(EndPiece);
+	hParts.push_back(StartPiece);
+	hParts.push_back(Part2);
+	hParts.push_back(EndPiece);
 
+	hParts.begin();
+
+	vStartPiece = new Texture("vSubStart.png");
+	vPart2 = new Texture("vSubPart2.png");
+	vEndPiece = new Texture("vSubPart3.png");
+	vParts.push_back(vStartPiece);
+	vParts.push_back(vPart2);
+	vParts.push_back(vEndPiece);
+
+	vParts.begin();
 	name = "Submarine";
-	parts.begin();
 
 }
 
@@ -60,12 +75,21 @@ Cruiser::Cruiser()
 	StartPiece = new Texture("CruStart.png");
 	Part2 = new Texture("CruPart2.png");
 	EndPiece = new Texture("CruPart3.png");
-	parts.push_back(StartPiece);
-	parts.push_back(Part2);
-	parts.push_back(EndPiece);
+	hParts.push_back(StartPiece);
+	hParts.push_back(Part2);
+	hParts.push_back(EndPiece);
 
+	hParts.begin();
+
+	vStartPiece = new Texture("vCruStart.png");
+	vPart2 = new Texture("vCruPart2.png");
+	vEndPiece = new Texture("vCruPart3.png");
+	vParts.push_back(vStartPiece);
+	vParts.push_back(vPart2);
+	vParts.push_back(vEndPiece);
+
+	hParts.begin();
 	name = "Cruiser";
-	parts.begin();
 
 }
 
@@ -86,13 +110,26 @@ AircraftCarrier::AircraftCarrier()
 	Part2 = new Texture("ACPart2.png");
 	Part3 = new Texture("ACPart3.png");
 	EndPiece = new Texture("ACPart4.png");
-	parts.push_back(StartPiece);
-	parts.push_back(Part2);
-	parts.push_back(Part3);
-	parts.push_back(EndPiece);
 
+	hParts.push_back(StartPiece);
+	hParts.push_back(Part2);
+	hParts.push_back(Part3);
+	hParts.push_back(EndPiece);
+
+	hParts.begin();
+
+	vStartPiece = new Texture("vACStart.png");
+	vPart2 = new Texture("vACPart2.png");
+	vPart3 = new Texture("vACPart3.png");
+	vEndPiece = new Texture("vACPart4.png");
+ 
+	vParts.push_back(vStartPiece);
+	vParts.push_back(vPart2);
+	vParts.push_back(vPart3);
+	vParts.push_back(vEndPiece);
+
+	vParts.begin();
 	name = "AircraftCarrier";
-	parts.begin();
 
 }
 
@@ -110,19 +147,35 @@ Battleship::Battleship()
 	ID = 4;
 
 	PiecePlaceText = "Enter The Coordinate For Your Battleship (5 spots): ";
+
 	StartPiece = new Texture("BSStart.png");
 	Part2 = new Texture("BSPart2.png");
 	Part3 = new Texture("BSPart3.png");
 	Part4 = new Texture("BSPart4.png");
 	EndPiece = new Texture("BSPart5.png");
-	parts.push_back(StartPiece);
-	parts.push_back(Part2);
-	parts.push_back(Part3);
-	parts.push_back(Part4);
-	parts.push_back(EndPiece);
+	hParts.push_back(StartPiece);
+	hParts.push_back(Part2);
+	hParts.push_back(Part3);
+	hParts.push_back(Part4);
+	hParts.push_back(EndPiece);
+
+	hParts.begin();
+
+	vStartPiece = new Texture("vBSStart.png");
+	vPart2 = new Texture("vBSPart2.png");
+	vPart3 = new Texture("vBSPart3.png");
+	vPart4 = new Texture("vBSPart4.png");
+	vEndPiece = new Texture("vBSPart5.png");
+
+	vParts.push_back(vStartPiece);
+	vParts.push_back(vPart2);
+	vParts.push_back(vPart3);
+	vParts.push_back(vPart4);
+	vParts.push_back(vEndPiece);
+
+	vParts.begin();
 
 	name = "Battleship";
-	parts.begin();
 }
 
 Battleship::~Battleship()

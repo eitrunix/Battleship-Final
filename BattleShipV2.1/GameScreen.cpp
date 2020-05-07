@@ -149,20 +149,18 @@ void GameScreen::PlayerPlaceShips()
 	Piece* p = *Itr;
 		if (p->ID == playerShips && playerShips < 5)
 		{
-			if (TexItr == nullptr)
-				TexItr = p->parts.begin();
 
 			if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
 			{
 				int pieceHealth = p->health;
 				if (!horizontal)
 				{
-
-					for (int i = 0; i < pieceHealth; i++)
+					if (TexItr == nullptr)
+						TexItr = p->hParts.begin();
+					for (int i = 0; i < pieceHealth - 1; i++)
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
-						pBoard->SetTileOccupied(true, xIndex, yIndex);
 
 						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
 
@@ -188,12 +186,16 @@ void GameScreen::PlayerPlaceShips()
 				}
 				else
 				{
-					for (int i = 0; i < pieceHealth; i++)
+					if (TexItr == nullptr)
+						TexItr = p->vParts.begin();
+
+					for (int i = 0; i < pieceHealth -1 ; i++)
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
-						pBoard->SetTileOccupied(xIndex, yIndex, true);
+
 						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
+
 						if (pBoard->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
 						{
 							p->xPos = xIndex;
@@ -203,7 +205,7 @@ void GameScreen::PlayerPlaceShips()
 							validPlace = true;
 							std::cout << p->xPos << std::endl;
 							std::cout << p->yPos << std::endl;
-
+							
 						}
 						else
 						{
@@ -241,7 +243,7 @@ void GameScreen::AIPlaceShips()
 	if (p->ID == aiShips && aiShips < 5)
 	{
 		if (TexItr == nullptr)
-			TexItr = p->parts.begin();
+			TexItr = p->hParts.begin();
 
 		if (bState == BoardState::AIPlaceShips && !pRadar->GetIsOccupied(x, y) && !pRadar->GetIsOccupied(x + p->health, y + p->health))
 		{
@@ -375,9 +377,7 @@ void GameScreen::PlayerAttack()
 						pRadar->ChangeTile(xIndex, yIndex, TileType::Hit);
 						p->OnHit();
 					}
-
 				}
-
 			}
 			else
 			{

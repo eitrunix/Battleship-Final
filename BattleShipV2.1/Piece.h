@@ -16,7 +16,8 @@ public:
 	std::string name;
 	std::string PiecePlaceText;
 	std::string PieceHitText;
-	DataStructuresAndAI::LinkList<Texture*> parts;
+	DataStructuresAndAI::LinkList<Texture*> hParts;
+	DataStructuresAndAI::LinkList<Texture*> vParts;
 	int xPos;
 	int yPos;
 	int GetHealth();
@@ -33,6 +34,9 @@ public:
 	~PatrolBoat();
 	Texture* StartPiece;
 	Texture* EndPiece;
+
+	Texture* vStartPiece;
+	Texture* vEndPiece;
 };
 
 class Submarine : public Piece
@@ -43,6 +47,10 @@ public:
 	Texture* StartPiece;
 	Texture* Part2;
 	Texture* EndPiece;
+
+	Texture* vStartPiece;
+	Texture* vPart2;
+	Texture* vEndPiece;
 };
 
 class Cruiser : public Piece
@@ -53,6 +61,10 @@ public:
 	Texture* StartPiece;
 	Texture* Part2;
 	Texture* EndPiece;
+
+	Texture* vStartPiece;
+	Texture* vPart2;
+	Texture* vEndPiece;
 };
 
 class AircraftCarrier : public Piece
@@ -64,6 +76,11 @@ public:
 	Texture* Part2;
 	Texture* Part3;
 	Texture* EndPiece;
+
+	Texture* vStartPiece;
+	Texture* vPart2;
+	Texture* vPart3;
+	Texture* vEndPiece;
 };
 
 class Battleship : public Piece
@@ -76,5 +93,11 @@ public:
 	Texture* Part3;
 	Texture* Part4;
 	Texture* EndPiece;
+
+	Texture* vStartPiece;
+	Texture* vPart2;
+	Texture* vPart3;
+	Texture* vPart4;
+	Texture* vEndPiece;
 };
 
