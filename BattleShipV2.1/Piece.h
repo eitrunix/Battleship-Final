@@ -8,19 +8,22 @@ class Piece : GameEntity
 public:
 	Piece();
 	~Piece();
-	int health = 0;
+	int health;
 	bool hit = false;
 	bool placed = false;
 	bool shipQueued = false;
-	int ID = 0;
+	int ID;
 	std::string name;
 	std::string PiecePlaceText;
 	std::string PieceHitText;
 	DataStructuresAndAI::LinkList<Texture*> parts;
-
+	int xPos;
+	int yPos;
 	int GetHealth();
 	void OnHit();
-	void AssignTile();
+	void AssignTile(int x, int y);
+	int getTileXPos();
+	int getTileYPos();
 };
 
 class PatrolBoat : public Piece

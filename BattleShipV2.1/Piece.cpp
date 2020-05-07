@@ -141,19 +141,28 @@ void Piece::OnHit()
 	{
 		health = 0;
 	}
-
+	std::cout << health << std::endl;
 
 }
-void Piece::AssignTile()
+void Piece::AssignTile(int x, int y)
 {
-	// Check the Tile its placed on, then tell the tile its occupied by x ship piece
+	xPos = x;
+	yPos = y;
 
+}
+
+int Piece::getTileXPos()
+{
+	return xPos;
+}
+
+int Piece::getTileYPos()
+{
+	return yPos;
 }
 
 Piece::Piece()
 {
-	health = 0;
-
 }
 
 Piece::~Piece()

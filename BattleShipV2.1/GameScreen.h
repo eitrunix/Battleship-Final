@@ -65,6 +65,7 @@ public:
 	void Render() override;
 	void ChangeBoardState(BoardState newState);
 	void PlayerPlaceShips();
+	void PlayerAttack();
 	void AIPlaceShips();
 	void AIAttack();
 	void MousePos(int offset);

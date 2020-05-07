@@ -67,7 +67,7 @@ void GameScreen::Update()
 	switch (bState)
 	{
 	case BoardState::PlaceShips:
-		std::cout << "PlaceShips" << std::endl;
+		//std::cout << "PlaceShips" << std::endl;
 		if (mInputManager->KeyPressed(SDL_SCANCODE_TAB) && !horizontal)
 		{
 			horizontal = true;
@@ -103,34 +103,11 @@ void GameScreen::Update()
 
 		break;
 	case BoardState::MakeAttack:
-		std::cout << "MakeAttack" << std::endl;
+		//std::cout << "MakeAttack" << std::endl;
 
 		if (mInputManager->MouseButtonPressed(mInputManager->Left))
 		{
-			MousePos(rOffsetX);
-			defaultText = blankText;
-			if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
-			{
-				if (bState == BoardState::MakeAttack)
-				{
-					bool tempOccu;
-					tempOccu = pRadar->GetIsOccupied(xIndex, yIndex);
-					if (tempOccu)
-					{
-						pRadar->ChangeTile(xIndex, yIndex, TileType::Hit);
-					}
-					else
-					{
-						pRadar->ChangeTile(xIndex, yIndex, TileType::Miss);
-					}
-					validAttack = true;
-				}
-			}
-			else
-			{
-				defaultText = invalidAttack;
-				std::cout << "Attack Again in a Valid Location" << std::endl;
-			}
+			PlayerAttack();
 		}
 		if (validAttack == true)
 		{
@@ -141,10 +118,11 @@ void GameScreen::Update()
 		break;
 
 	case BoardState::AIAttack:
-		std::cout << "AIAttack" << std::endl;
+		//std::cout << "AIAttack" << std::endl;
 
-		std::cout << "AI Attacked randomly" << std::endl; 
+		//std::cout << "AI Attacked randomly" << std::endl; 
 		AIAttack();
+
 		if (validAttack)
 		{
 			ChangeBoardState(BoardState::MakeAttack);
@@ -152,7 +130,7 @@ void GameScreen::Update()
 		}
 		break;
 	case BoardState::AIPlaceShips:
-		std::cout << "AIPlaceShips" << std::endl;
+		//std::cout << "AIPlaceShips" << std::endl;
 
 		AIPlaceShips();
 		if (aiShips >= 5)
@@ -184,13 +162,20 @@ void GameScreen::PlayerPlaceShips()
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
+						pBoard->SetTileOccupied(true, xIndex, yIndex);
+
 						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
 
 						if (pBoard->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
 						{
+							p->xPos = xIndex;
+							p->yPos = yIndex;
 							xIndex++;
 							TexItr++;
 							validPlace = true;
+							std::cout << p->xPos << std::endl;
+							std::cout << p->yPos << std::endl;
+
 						}
 						else
 						{
@@ -207,12 +192,18 @@ void GameScreen::PlayerPlaceShips()
 					{
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
+						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
 						if (pBoard->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
 						{
+							p->xPos = xIndex;
+							p->yPos = yIndex;
 							yIndex++;
 							TexItr++;
 							validPlace = true;
+							std::cout << p->xPos << std::endl;
+							std::cout << p->yPos << std::endl;
+
 						}
 						else
 						{
@@ -267,9 +258,16 @@ void GameScreen::AIPlaceShips()
 
 					//if (pRadar->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
 					//{
+					p->xPos = x;
+					p->yPos = y;
 						x++;
 						//TexItr++;
 						validPlace = true;
+						std::cout << p->xPos << std::endl;
+						std::cout << p->yPos << std::endl;
+						pRadar->SetTileOccupied(true, x,y);
+
+
 					//}
 					//else
 					//{
@@ -290,9 +288,15 @@ void GameScreen::AIPlaceShips()
 					//pRadar->gameBoard[xIndex][yIndex]->ShipTex = *TexItr;
 					//if (pRadar->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
 					//{
+					p->xPos = x;
+					p->yPos = y;
 						y++;
 						//TexItr++;
 						validPlace = true;
+						std::cout << p->xPos << std::endl;
+						std::cout << p->yPos << std::endl;
+						pRadar->SetTileOccupied(true, x, y);
+
 					//}
 					//else
 					//{
@@ -318,6 +322,7 @@ void GameScreen::AIPlaceShips()
 
 void GameScreen::AIAttack()
 {
+
 	int x = (rand() % 10) + 1;
 	int y = (rand() % 10) + 1;
 	xIndex = x;
@@ -326,13 +331,67 @@ void GameScreen::AIAttack()
 	tempOccu = pBoard->GetIsOccupied(xIndex, yIndex);
 	if (tempOccu)
 	{
+		if (Itr == nullptr)
+			Itr = mPlayerManager->pieces.begin();
+		Piece* p = *Itr;
 		pBoard->ChangeTile(xIndex, yIndex, TileType::Hit);
+
+		for (Itr; Itr != nullptr; Itr++)
+		{
+			if (xIndex == p->getTileXPos() && yIndex == p->getTileYPos())
+			{
+				p->health - 1;
+			}
+		}
 	}
 	else
 	{
 		pBoard->ChangeTile(xIndex, yIndex, TileType::Miss);
 	}
 	validAttack = true;
+	mScoreBoard->SetHealth();
+}
+
+void GameScreen::PlayerAttack()
+{
+	if (Itr == nullptr)
+		Itr = mPlayerManager->Aipieces.begin();
+	Piece* p = *Itr;
+
+	MousePos(rOffsetX);
+	defaultText = blankText;
+	if (xIndex <= 9 && yIndex <= 9 && xIndex >= 0 && yIndex >= 0)
+	{
+		if (bState == BoardState::MakeAttack)
+		{
+			bool tempOccu;
+			tempOccu = pRadar->GetIsOccupied(xIndex, yIndex);
+			if (tempOccu)
+			{
+				for (Itr; Itr != nullptr; Itr++)
+				{
+					if (xIndex == p->xPos && yIndex == p->yPos)
+					{
+						pRadar->ChangeTile(xIndex, yIndex, TileType::Hit);
+						p->OnHit();
+					}
+
+				}
+
+			}
+			else
+			{
+				pRadar->ChangeTile(xIndex, yIndex, TileType::Miss);
+			}
+			validAttack = true;
+		}
+	}
+	else
+	{
+		defaultText = invalidAttack;
+		std::cout << "Attack Again in a Valid Location" << std::endl;
+	}
+	mScoreBoard->SetHealth();
 
 }
 
