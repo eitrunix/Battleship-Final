@@ -26,6 +26,7 @@ public:
 	void Render() override;
 	Tile* gameBoard[BOARDWIDTH][BOARDHEIGHT];
 	Vector2 BoardPos;
+	TileType ReturnTileType(int x, int y);
 
 	void ChangeTile(int _x, int _y, TileType type);
 	void BoardPosSet(float _y, float _x);

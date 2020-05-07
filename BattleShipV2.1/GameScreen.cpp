@@ -145,20 +145,29 @@ void GameScreen::Update()
 void GameScreen::PlayerPlaceShips()
 {
 	if (Itr == nullptr)
+	{
 		Itr = mPlayerManager->pieces.begin();
-	Piece* p = *Itr;
-		if (p->ID == playerShips && playerShips <= 5)
-		{
+	}
 
-			if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
+	Piece* p = *Itr;
+
+	if (p->ID == playerShips && playerShips <= 5)
+	{
+		if (bState == BoardState::PlaceShips && !pBoard->GetIsOccupied(xIndex, yIndex))
+		{
+			int pieceHealth = p->health;
+			if (horizontal)
 			{
-				int pieceHealth = p->health;
-				if (!horizontal)
+				if (xIndex + p->health <= 10)
 				{
-					if (TexItr == nullptr)
-						TexItr = p->hParts.begin();
+
 					for (int i = 0; i < pieceHealth; i++)
 					{
+						if (TexItr == nullptr)
+						{
+							TexItr = p->hParts.begin();
+						}
+
 						pBoard->SetTileOccupied(xIndex, yIndex, true);
 						pBoard->ChangeTile(xIndex, yIndex, TileType::Ship);
 
@@ -166,6 +175,7 @@ void GameScreen::PlayerPlaceShips()
 
 						if (pBoard->gameBoard[xIndex][yIndex]->ShipTex != nullptr)
 						{
+
 							p->xPos = xIndex;
 							p->yPos = yIndex;
 							xIndex++;
@@ -175,19 +185,24 @@ void GameScreen::PlayerPlaceShips()
 							//std::cout << p->yPos << std::endl;
 
 						}
-						else
-						{
-							defaultText = invalidPlacement;
-							validPlace = false;
-							pBoard->gameBoard[xIndex][yIndex]->isOccupied = false;
-							pBoard->ChangeTile(xIndex, yIndex, TileType::Water);
-						}
 					}
 				}
 				else
 				{
-					if (TexItr == nullptr)
-						TexItr = p->vParts.begin();
+					defaultText = invalidPlacement;
+					validPlace = false;
+					pBoard->gameBoard[xIndex][yIndex]->isOccupied = false;
+					pBoard->ChangeTile(xIndex, yIndex, TileType::Water);
+				}
+			}
+			else if (!horizontal)
+			{
+				if (TexItr == nullptr)
+				{
+					TexItr = p->vParts.begin();
+				}
+				if (yIndex + p->health <= 10)
+				{
 
 					for (int i = 0; i < pieceHealth; i++)
 					{
@@ -205,31 +220,34 @@ void GameScreen::PlayerPlaceShips()
 							validPlace = true;
 							//std::cout << p->xPos << std::endl;
 							//std::cout << p->yPos << std::endl;
-
-						}
-						else
-						{
-							defaultText = invalidPlacement;
-							validPlace = false;							
-							pBoard->gameBoard[xIndex][yIndex]->isOccupied = false;
-							pBoard->ChangeTile(xIndex, yIndex, TileType::Water);
 						}
 					}
+					
+				}
+				else
+				{
+					defaultText = invalidPlacement;
+					validPlace = false;
+					pBoard->gameBoard[xIndex][yIndex]->isOccupied = false;
+					pBoard->ChangeTile(xIndex, yIndex, TileType::Water);
 				}
 			}
-			if (validPlace && playerShips <=5)
-			{
+		}
+		if (validPlace && playerShips <= 5)
+		{
 			Itr++;
 			playerShips++;
-			}
 		}
+	}
 }
+	
+
 
 void GameScreen::AIPlaceShips()
-{	
+{
 	int x = (rand() % 10) + 1;
-	int y = (rand() % 10) + 1;  
-	
+	int y = (rand() % 10) + 1;
+
 	if (Itr == nullptr)
 		Itr = mPlayerManager->Aipieces.begin();
 	Piece* p = *Itr;
@@ -238,17 +256,15 @@ void GameScreen::AIPlaceShips()
 		if (TexItr == nullptr)
 			TexItr = p->hParts.begin();
 
-		if (bState == BoardState::AIPlaceShips && !pRadar->GetIsOccupied(x, y) && !pRadar->GetIsOccupied(x + p->health, y + p->health))
+		if (bState == BoardState::AIPlaceShips && !pRadar->GetIsOccupied(x, y)/* && !pRadar->GetIsOccupied(x + p->health, y + p->health)*/)
 		{
 			int pieceHealth = p->health;
-			if (!horizontal)
+			if (horizontal)
 			{
-
-				for (int i = 0; i < pieceHealth; i++)
+				if (x + p->health <= 9)
 				{
-					if (x + p->health <= 9)
+					for (int i = 0; i < pieceHealth; i++)
 					{
-						x - p->health;
 						pRadar->SetTileOccupied(x, y, true);
 						p->xPos = x;
 						p->yPos = y;
@@ -257,22 +273,21 @@ void GameScreen::AIPlaceShips()
 						std::cout << p->xPos << std::endl;
 						std::cout << p->yPos << std::endl;
 					}
-					else
-					{
-						defaultText = invalidPlacement;
-						validPlace = false;
-						pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
-						pRadar->ChangeTile(xIndex, yIndex, TileType::Water);
-					}
+				}
+				else
+				{
+					defaultText = invalidPlacement;
+					validPlace = false;
+					pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
+					pRadar->ChangeTile(xIndex, yIndex, TileType::Water);
 				}
 			}
-			else
+			else if (!horizontal)
 			{
-				for (int i = 0; i < pieceHealth; i++)
+				if (y + p->health <= 9)
 				{
-					if (y + p->health <= 9)
+					for (int i = 0; i < pieceHealth; i++)
 					{
-						y - p->health;
 						pRadar->SetTileOccupied(x, y, true);
 						p->xPos = x;
 						p->yPos = y;
@@ -280,26 +295,22 @@ void GameScreen::AIPlaceShips()
 						validPlace = true;
 						std::cout << p->xPos << std::endl;
 						std::cout << p->yPos << std::endl;
-
 					}
-					else
-					{
-						defaultText = invalidPlacement;
-						validPlace = false;
-						pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
-					}
-
 				}
-
+				else
+				{
+					defaultText = invalidPlacement;
+					validPlace = false;
+					pRadar->gameBoard[xIndex][yIndex]->isOccupied = false;
+				}
+			}
+			if (validPlace)
+			{
+				Itr++;
+				aiShips++;
 			}
 
 		}
-		if (validPlace)
-		{
-			Itr++;
-			aiShips++;
-		}
-
 	}
 }
 
@@ -312,7 +323,7 @@ void GameScreen::AIAttack()
 	yIndex = y;
 	bool tempOccu;
 	tempOccu = pBoard->GetIsOccupied(xIndex, yIndex);
-	if (pBoard->gameBoard[x][y]->ReturnTileType() != TileType::Hit || pBoard->gameBoard[x][y]->ReturnTileType() != TileType::Miss)
+	if (pBoard->ReturnTileType(x,y) == TileType::Water || pBoard->ReturnTileType(x,y) == TileType::Ship)
 	{
 		if (tempOccu)
 		{
@@ -356,34 +367,36 @@ void GameScreen::PlayerAttack()
 		if (bState == BoardState::MakeAttack)
 		{
 			bool tempOccu;
-			tempOccu = pRadar->GetIsOccupied(xIndex, yIndex);
-			if (tempOccu)
+			if (pRadar->ReturnTileType(xIndex, yIndex) == TileType::Water || pRadar->ReturnTileType(xIndex, yIndex) == TileType::Ship)
 			{
-				for (Itr; Itr != nullptr; Itr++)
+
+				tempOccu = pRadar->GetIsOccupied(xIndex, yIndex);
+				if (tempOccu)
 				{
-					if (xIndex == p->xPos && yIndex == p->yPos)
-					{
-						pRadar->ChangeTile(xIndex, yIndex, TileType::Hit);
-						p->OnHit();
-					}
-
+					pRadar->ChangeTile(xIndex, yIndex, TileType::Hit);
 				}
-
+				else
+				{
+					pRadar->ChangeTile(xIndex, yIndex, TileType::Miss);
+				}
+				validAttack = true;
+				mScoreBoard->SetHealth();
 			}
 			else
 			{
-				pRadar->ChangeTile(xIndex, yIndex, TileType::Miss);
+				validAttack = false;
+				defaultText = invalidAttack;
+				std::cout << "Attack Again in a Valid Location" << std::endl;
 			}
-			validAttack = true;
 		}
+
 	}
 	else
 	{
+		validAttack = false;
 		defaultText = invalidAttack;
 		std::cout << "Attack Again in a Valid Location" << std::endl;
 	}
-	mScoreBoard->SetHealth();
-
 }
 
 void GameScreen::ChangeBoardState(BoardState newState)

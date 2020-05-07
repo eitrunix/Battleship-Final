@@ -5,11 +5,6 @@ void Tile::ChangeType(TileType _type)
 	mType = _type;
 }
 
-TileType Tile::ReturnTileType()
-{
-	return mType;
-}
-
 Tile::Tile(int TileRow, int TileCol, TileType _type)
 {
 	//Get the offsets

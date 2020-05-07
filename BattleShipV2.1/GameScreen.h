@@ -75,6 +75,8 @@ public:
 	LinkList<Piece*>::Iterator Itr;
 	LinkList<Texture*>::Iterator TexItr;
 
+	bool validCheck = false;
+
 	// Mouse Grid Position Varables
 	Vector2 mousePos;
 	int mouseX;

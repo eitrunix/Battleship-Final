@@ -46,6 +46,11 @@ void BattleshipBoard::Render()
 	}
 }
 
+TileType BattleshipBoard::ReturnTileType(int x, int y)
+{
+	return gameBoard[x][y]->mType;
+}
+
 void BattleshipBoard::ChangeTile(int _x, int _y, TileType type)
 {
 	gameBoard[_x][_y]->TileTex->Update();
