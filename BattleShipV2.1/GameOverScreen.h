@@ -12,13 +12,20 @@ private:
 	InputManager* mInputManager;
 	GameEntity* gameScreen;
 	Texture* winLoss;
+	Texture* win;
+	Texture* loss;
+	Texture* uh;
 	Texture* backToStart;
 
 
-public:
-
+public:	
+	
 	GameOverScreen();
 	~GameOverScreen();
+
+	bool aiWin;
+	bool playerWin;
+	bool howThisHappen;
 	bool sTitle = false;
 	void Update() override;
 	void Render() override;

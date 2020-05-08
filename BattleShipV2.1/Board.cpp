@@ -9,11 +9,6 @@ BattleshipBoard::BattleshipBoard()
 			gameBoard[tRow][tCol] = new Tile(tRow, tCol, TileType::Water);
 			gameBoard[tRow][tCol]->TileRow = tRow;
 			gameBoard[tRow][tCol]->TileCol = tCol;
-
-			std::cout << " " << std::endl;
-			std::cout << gameBoard[tRow][tCol]->TileRow;
-			std::cout << gameBoard[tRow][tCol]->TileCol;
-
 		}
 
 	}

@@ -7,7 +7,8 @@ using namespace SDLFramework;
 
 class StartScreen : public GameEntity 
 {
-private:    
+private:	
+    
 	Timer* mTimer;    
 	InputManager* mInputManager;
 	// Title Area

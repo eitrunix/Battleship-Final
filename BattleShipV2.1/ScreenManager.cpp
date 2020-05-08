@@ -37,23 +37,53 @@ void ScreenManager::Release()
 
 void ScreenManager::Update()
 {
-	if (mStartScreen->PlayGame == true)
+	switch (mCurrentScreen)
 	{
-		mCurrentScreen = Play;
-		mGameScreen->sGameOver = false;
-		mGameOverScreen->sTitle = false;
-	}
-	if (mGameScreen->sGameOver == true)
-	{
-		mCurrentScreen = GameOver;
-		mStartScreen->PlayGame = false;
-		mGameOverScreen->sTitle = false;
-	}
-	if (mGameOverScreen->sTitle == true)
-	{
+	case Start:
+		if (mStartScreen->PlayGame == true)
+		{
+			mCurrentScreen = Play;
+			mGameScreen->active = true;
+			mGameScreen->sGameOver = false;
+			mGameOverScreen->sTitle = false;
+		}
+		break;
+	case Play:
+		if (mGameScreen->sGameOver == true)
+		{
+			mCurrentScreen = GameOver;
+			mStartScreen->PlayGame = false;
+			mGameOverScreen->sTitle = false;
+
+			if (mGameScreen->playerWin)
+			{
+				mGameOverScreen->playerWin = true;
+			}
+			else if (mGameScreen->aiWin)
+			{
+				mGameOverScreen->aiWin = true;
+			}
+			else
+			{
+				mGameOverScreen->howThisHappen = true;
+			}
+		}
+		break;
+	case GameOver:
+		if (mGameOverScreen->sTitle == true)
+		{
+			mCurrentScreen = CleanUp;
+			mGameScreen->sGameOver = false;
+			mGameScreen->active = false;
+			mStartScreen->PlayGame = false;
+		}
+		break;
+
+	case CleanUp:
 		mCurrentScreen = Start;
-		mGameScreen->sGameOver = false;
-		mStartScreen->PlayGame = false;
+		mGameScreen->aiWin = false;
+		mGameScreen->playerWin = false;
+		break;
 	}
 
 	switch (mCurrentScreen) 
@@ -61,12 +91,13 @@ void ScreenManager::Update()
 	case Start:
 		mStartScreen->Update();
 		break;
+	case GameOver:
+		mGameOverScreen->Update();
+		break;		
 	case Play:
 		mGameScreen->Update();
 		break;
-	case GameOver:
-		mGameOverScreen->Update();
-		break;
+
 	}
 
 	if (mInput->KeyPressed(SDL_SCANCODE_P))
@@ -100,10 +131,5 @@ void ScreenManager::Render()
 	case GameOver:
 		mGameOverScreen->Render();
 	}
-}
-
-void ScreenManager::ChangeScreens(Screens screen)
-{
-	mCurrentScreen = screen;
 }
 

@@ -17,6 +17,7 @@ private:
 		MakeAttack,
 		AIAttack,
 		AIPlaceShips,
+		GameOver,
 	};
 
 	Timer* mTimer;
@@ -47,6 +48,7 @@ private:
 
 	// Plaing Ships Vairables
 	bool allShipsPlaced = false;
+	bool aiShipsPlaced = false;
 	int playerShips = 0;
 	int aiShips = 0;
 	bool horizontal = false;
@@ -60,7 +62,11 @@ private:
 public:
 	GameScreen();
 	~GameScreen();
-	
+
+	bool active;
+
+	int playerHealth = 0;
+	int aiHealth = 0;
 	void Update() override;
 	void Render() override;
 	void ChangeBoardState(BoardState newState);
@@ -69,7 +75,11 @@ public:
 	void AIPlaceShips();
 	void AIAttack();
 	void MousePos(int offset);
+	void CheckWinCon();
+
 	bool sGameOver = false;
+	bool playerWin;
+	bool aiWin;
 	BoardState bState;
 
 	LinkList<Piece*>::Iterator Itr;

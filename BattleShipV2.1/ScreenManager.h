@@ -27,7 +27,6 @@ public:
 
 	void Update();
 	void Render();
-	void ChangeScreens(Screens screen);
 private:
 	ScreenManager();
 	~ScreenManager();
